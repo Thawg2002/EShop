@@ -1,25 +1,45 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { getAllCategories } from "../../services/ProductServices";
 
 const NavBar2 = () => {
-  const renderContent = (type, options) => {
-    switch (type) {
-      case "text":
-        return options.map((item, index) => {
-          return <li key={index}>{item}</li>;
-        });
-      default:
-        return {};
-    }
+  // const renderContent = (type, options) => {
+  //   switch (type) {
+  //     case "text":
+  //       return options.map((item, index) => {
+  //         return <li key={index}>{item}</li>;
+  //       });
+  //     default:
+  //       return {};
+  //   }
+  // };
+  const getAllCategory = async () => {
+    const data = await getAllCategories();
+    return data;
   };
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getAllCategory,
+  });
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
-    <div className="p-2" data-aos="fade-up">
+    <div className="p-2">
       <div className="">
         <div>
           <div>
             <h4 className="font-medium text-xl ">Danh mục sản phẩm</h4>
           </div>
           <ul className="leading-7 pl-2 cursor-pointer">
-            {renderContent("text", ["Tai nghe", "Máy tính", "Bàn phím"])}
+            {/* {renderContent("text", ["Tai nghe", "Máy tính", "Bàn phím"])} */}
+            {data.data.map((item, index) => {
+              return (
+                <a href="" key={index}>
+                  <li key={index}>{item}</li>
+                </a>
+              );
+            })}
           </ul>
         </div>
         {/*  Dịch vụ*/}

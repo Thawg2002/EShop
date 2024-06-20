@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image1 from "../../assets/product/p-1.jpg";
 import { PiStarThin } from "react-icons/pi";
 import { LuMinus } from "react-icons/lu";
@@ -8,13 +8,14 @@ import { getDetailProduct } from "../../services/ProductServices";
 import { useQuery } from "@tanstack/react-query";
 import Slider from "react-slick";
 import Loading from "../loading/loading";
-// import { baseUrl } from "./config";
+import { Rate } from "antd";
 const ProductDeltaiComponent = () => {
+  const [quantity, setQuantity] = useState(1);
   const settings = {
     customPaging: function (i) {
       return (
         <a>
-          <img className="w-[100%]" src={"https://picsum.photos/200"} />
+          <img className="" src={"https://picsum.photos/200"} />
         </a>
       );
     },
@@ -40,21 +41,18 @@ const ProductDeltaiComponent = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   const onHandleChangeQuantity = (event) => {
-    // Get the new quantity value from the input
-    const newQuantity = event.target.value;
-
-    // Update the quantity state or do something with the new quantity value
-    // ...
-  };
-
-  const renderStars = (number) => {
-    const stars = [];
-    for (let i = 0; i < number; i++) {
-      stars.push(<PiStarThin key={i} className="text-yellow-500" />);
+    if (event === "increase") {
+      setQuantity(quantity + 1);
     }
-    return stars;
+    if (event === "decreate") {
+      setQuantity(quantity - 1);
+    }
   };
-
+  // hàm này để giá trị input không thể nhỏ hơn 1
+  const handleInputChange = (e) => {
+    const value = Math.max(1, Number(e.target.value));
+    setQuantity(value);
+  };
   return (
     <Loading isLoading={isLoading}>
       <div className="container">
@@ -97,12 +95,13 @@ const ProductDeltaiComponent = () => {
               {data.name}
             </h2>
             <div className="flex my-2 align-center">
-              {renderStars(data.rating)} <span className="ml-2">| đã bán 1000+</span>
+              <Rate allowHalf defaultValue={data.rating} />
+              <span className="ml-2">| đã bán 1000+</span>
             </div>
             {/* Mô tả */}
             <div className="mb-2">
               <h4 className="capitalize text-xl font-bold text-[#324d67] dark:text-white">
-                Details:
+                description:
               </h4>
               <p className="text-gray-600">{data.description}</p>
             </div>
@@ -121,18 +120,24 @@ const ProductDeltaiComponent = () => {
                 Quantity:
               </h4>
               <div className="flex mt-[10px] ml-[10px]">
-                <span className="mt-1">
-                  <FiPlus />
-                </span>
+                <button
+                  className="mt-1"
+                  onClick={() => onHandleChangeQuantity("decreate")}
+                >
+                  <LuMinus />
+                </button>
                 <input
                   type="text"
-                  value={4}
-                  onChange={onHandleChangeQuantity}
+                  value={quantity}
+                  onChange={handleInputChange}
                   className="w-10 mx-2 border border-black-600 text-center"
                 />
-                <span className="mt-1">
-                  <LuMinus />
-                </span>
+                <button
+                  className="mt-1"
+                  onClick={() => onHandleChangeQuantity("increase")}
+                >
+                  <FiPlus />
+                </button>
               </div>
             </div>
             {/* Buton order */}

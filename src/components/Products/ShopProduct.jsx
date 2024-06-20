@@ -1,75 +1,54 @@
-import React, { useEffect, useState } from "react";
-import Heading from "../Shared/Heading";
-import { Pagination } from "antd";
-import ProductCard from "./ProductCard";
-import Img1 from "../../assets/product/p-1.jpg";
-import Img2 from "../../assets/product/p-2.jpg";
-import Img3 from "../../assets/product/p-3.jpg";
-import Img4 from "../../assets/product/p-4.jpg";
-import Img5 from "../../assets/product/p-5.jpg";
-import Img7 from "../../assets/product/p-7.jpg";
-import Img9 from "../../assets/product/p-9.jpg";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { Link } from "react-router-dom";
+import { getAllProduct } from "../../services/ProductServices";
 
-const ProductsData = [
-  {
-    id: 1,
-    img: Img1,
-    title: "Boat Headphones",
-    price: "$120",
-    asoDelay: "0",
-  },
-  {
-    id: 2,
-    img: Img2,
-    title: "Rocky Mountain",
-    price: "$420",
-    asoDelay: "200",
-  },
-  {
-    id: 3,
-    img: Img3,
-    title: "Goggles",
-    price: "$320",
-    asoDelay: "300",
-  },
-  {
-    id: 4,
-    img: Img4,
-    title: "Printed",
-    price: "$220",
-    asoDelay: "600",
-  },
-  {
-    id: 5,
-    img: Img5,
-    title: "Printed",
-    price: "$220",
-    asoDelay: "600",
-  },
-  {
-    id: 6,
-    img: Img7,
-    title: "Printed",
-    price: "$220",
-    asoDelay: "600",
-  },
-  {
-    id: 7,
-    img: Img9,
-    title: "Printed",
-    price: "$220",
-    asoDelay: "600",
-  },
-];
 const ShopProduct = () => {
+  const fetchProductAll = async () => {
+    const res = await getAllProduct();
+    return res.data;
+  };
 
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProductAll,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
   return (
     <div>
-      <div data-aos="fade-up" className="container ">
-        {/* Header section */}
-        {/* <Heading title="Our Products" subtitle="Explore Our Products" /> */}
-        {/* Body section */}
-        <ProductCard data={ProductsData} />
+      <div className="container ">
+        <div className="mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 place-items-center">
+            {/* Cart section */}
+            {data.map((item, index) => (
+              <div className="group" key={index}>
+                <div className="relative ">
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="h-[180px] w-[260px] object-cover rounded-md "
+                  />
+                  {/* hover button */}
+                  <Link
+                    to={`/product-detail/${item._id}`}
+                    className=" hidden group-hover:flex absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 h-full w-full text-center group-hover:backdrop-blur-sm justify-center items-center duration-200"
+                  >
+                    <button
+                      className={` cursor-pointer hover:scale-105 duration-300 py-2 px-8 rounded-full relative z-10 text-white `}
+                    >
+                      Chi tiết
+                    </button>
+                  </Link>
+                </div>
+                <div className="leading-7">
+                  <h2 className="font-bold">{item.name}</h2>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

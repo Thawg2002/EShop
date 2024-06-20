@@ -28,8 +28,6 @@ const ProductCard = ({ data }) => {
             </div>
             <div className="leading-7">
               <h2 className="font-bold">{item.name}</h2>
-              <h2 className="font-semibold">{item.price}</h2>
-              <h2 className="font-semibold">{item.price}</h2>
             </div>
           </div>
         ))}
