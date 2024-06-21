@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { getAllCategories } from "../../services/ProductServices";
+import { Link } from "react-router-dom";
 
 const NavBar2 = () => {
   // const renderContent = (type, options) => {
@@ -29,15 +30,17 @@ const NavBar2 = () => {
       <div className="">
         <div>
           <div>
-            <h4 className="font-medium text-xl ">Danh mục sản phẩm</h4>
+            <h4 className="font-medium text-xl ">
+              <Link to={"/shop/all"}>Danh mục sản phẩm</Link>
+            </h4>
           </div>
           <ul className="leading-7 pl-2 cursor-pointer">
             {/* {renderContent("text", ["Tai nghe", "Máy tính", "Bàn phím"])} */}
             {data.data.map((item, index) => {
               return (
-                <a href="" key={index}>
+                <Link to={`/shop/${item}`} key={index}>
                   <li key={index}>{item}</li>
-                </a>
+                </Link>
               );
             })}
           </ul>
@@ -53,9 +56,10 @@ const NavBar2 = () => {
                 defaultValue
                 id="flexCheckDefault"
               />
-              <label className="form-check-label" htmlFor="flexCheckDefault">
-                Default checkbox
-              </label>
+              <label
+                className="form-check-label"
+                htmlFor="flexCheckDefault"
+              ></label>
             </div>
           </div>
         </div>

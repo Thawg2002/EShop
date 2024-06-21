@@ -3,19 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getAllProduct } from "../../services/ProductServices";
 
-const ShopProduct = () => {
-  const fetchProductAll = async () => {
-    const res = await getAllProduct();
-    return res.data;
-  };
-
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["products"],
-    queryFn: fetchProductAll,
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+const ShopProduct = ({ products: data }) => {
   return (
     <div>
       <div className="container ">

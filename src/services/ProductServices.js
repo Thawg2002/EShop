@@ -4,6 +4,14 @@ export const getAllProduct = async () => {
   const res = await axios.get(`http://localhost:8080/api/products`);
   return res.data;
 };
+export const getProductType = async (type) => {
+  if (type) {
+    const res = await axios.get(
+      `http://localhost:8080/api/products?filter=categories&filter=${type}`
+    );
+    return res.data;
+  }
+};
 export const getAllCategories = async () => {
   const res = await axios.get(`http://localhost:8080/api/categories`);
   return res.data;
