@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../Shared/Button";
 import Slider from "react-slick";
+import { Pagination } from "antd";
 const ProductCard = ({ data }) => {
   var settings = {
     dots: true,
@@ -70,11 +71,6 @@ const ProductCard = ({ data }) => {
           </Slider>
         </div>
       </div>
-      {/* <div className="text-center my-4">
-        <button className="border-2 border-sky-500 font-light p-2 rounded-xl w-[200px] hover:bg-sky-500 hover:text-white">
-          Xem Thêm
-        </button>
-      </div> */}
     </div>
   );
 };

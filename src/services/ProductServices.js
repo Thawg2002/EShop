@@ -1,21 +1,34 @@
 import axios from "axios";
 
-export const getAllProduct = async () => {
-  const res = await axios.get(`http://localhost:8080/api/products`);
+// export const getAllProduct = async () => {
+//   const res = await axios.get(`http://localhost:8080/api/products`);
+//   return res.data;
+// };
+// export const getProductType = async (type) => {
+//   if (type) {
+//     const res = await axios.get(
+//       `http://localhost:8080/api/products?filter=categories&filter=${type}`
+//     );
+//     return res.data;
+//   }
+// };
+export const getProductType = async (type, page = 0, limit = 8) => {
+  const res = await axios.get(
+    `http://localhost:8080/api/products?filter=categories&filter=${type}&page=${page}&limit=${limit}`
+  );
   return res.data;
 };
-export const getProductType = async (type) => {
-  if (type) {
-    const res = await axios.get(
-      `http://localhost:8080/api/products?filter=categories&filter=${type}`
-    );
-    return res.data;
-  }
+export const getAllProduct = async (page = 0, limit = 8) => {
+  const res = await axios.get(
+    `http://localhost:8080/api/products?page=${page}&limit=${limit}`
+  );
+  return res.data;
 };
 export const getAllCategories = async () => {
   const res = await axios.get(`http://localhost:8080/api/categories`);
   return res.data;
 };
+
 export const addProduct = async (item) => {
   const res = await axios.post(`http://localhost:8080/api/products`, item);
   return res.data;

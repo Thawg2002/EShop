@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
 import { getAllProduct } from "../../services/ProductServices";
+import { Pagination } from "antd";
 
-const ShopProduct = ({ products: data }) => {
+const ShopProduct = ({ products: data, panigation, onPageChange }) => {
+  // console.log("panigation", panigation);
   return (
     <div>
-      <div className="container ">
+      <div className="container my-4">
         <div className="mb-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 place-items-center">
             {/* Cart section */}
@@ -37,6 +39,17 @@ const ShopProduct = ({ products: data }) => {
             ))}
           </div>
         </div>
+        {panigation?.total > panigation?.limit && (
+          <div className="text-center my-4">
+            <Pagination
+              defaultCurrent={1}
+              total={panigation?.total}
+              current={panigation?.page}
+              pageSize={panigation?.limit}
+              onChange={onPageChange}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
