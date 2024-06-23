@@ -38,6 +38,16 @@ export const orderSlider = createSlice({
         state.orderItems = itemOrder;
       }
     },
+    removeAllOrder: (state, action) => {
+      if (confirm("Bạn có chắc muốn xóa tất cả sản phẩm này không?")) {
+        const listchecked = action.payload;
+        console.log("listchecked", listchecked);
+        const itemOrder = state.orderItems.filter(
+          (item) => !listchecked.includes(item.product)
+        );
+        state.orderItems = itemOrder;
+      }
+    },
     increaseAmount: (state, action) => {
       const idProduct = action.payload;
       console.log("action.payload", action.payload);
@@ -59,7 +69,12 @@ export const orderSlider = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addOrderProduct, removeOrder, increaseAmount, decreaseAmount } =
-  orderSlider.actions;
+export const {
+  addOrderProduct,
+  removeOrder,
+  increaseAmount,
+  decreaseAmount,
+  removeAllOrder,
+} = orderSlider.actions;
 
 export default orderSlider.reducer;

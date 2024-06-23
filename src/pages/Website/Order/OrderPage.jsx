@@ -6,9 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decreaseAmount,
   increaseAmount,
+  removeAllOrder,
   removeOrder,
 } from "../../../redux/slides/orderSlide";
+import { Checkbox } from "antd";
 const OrderPage = () => {
+  const [listChecked, setListChecked] = useState([]);
   const order = useSelector((state) => state.order);
   const dispatch = useDispatch();
   const onHandleChangeQuantity = (event, idProduct) => {
@@ -22,33 +25,79 @@ const OrderPage = () => {
   const handleDeleteOrder = (idProduct) => {
     dispatch(removeOrder(idProduct));
   };
+  const onhandleRemoveAllOrder = () => {
+    if (Array.isArray(listChecked) && listChecked.length > 0) {
+      dispatch(removeAllOrder(listChecked));
+      setListChecked([]);
+    }
+  };
   // hàm này để giá trị input không thể nhỏ hơn 1
   const handleInputChange = (e) => {
     const value = Math.max(1, Number(e.target.value));
     setQuantity(value);
   };
-  console.log("order", order);
+
+  const onchange = (e) => {
+    if (listChecked.includes(e.target.value)) {
+      const newList = listChecked.filter((item) => item !== e.target.value);
+      setListChecked(newList);
+    } else {
+      setListChecked([...listChecked, e.target.value]);
+    }
+  };
+  // console.log("listChecked", listChecked);
+  const onhandleOnchangeCheckAll = (e) => {
+    const newListCheck = [];
+    if (e.target.checked) {
+      const newList = order.orderItems.forEach((item) =>
+        newListCheck.push(item.product)
+      );
+      setListChecked(newListCheck);
+    } else {
+      setListChecked([]);
+    }
+  };
   return (
     <div className="container mt-5 mb-16">
       <div className="mx-6">
         <h1 className="text-lg font-medium mb-3 ">Your Car</h1>
         <div className="w-full flex gap-8 mx-3">
-          <div className="w-2/3 border-separate border-spacing-2 border border-slate-400 drop-shadow-2xl">
+          <div className="w-2/3 drop-shadow-2xl">
             <table className="table-fixed w-full text-center">
               <thead>
                 <tr>
-                  <th className="border border-slate-300"></th>
+                  <th className="border border-slate-300 flex pl-2">
+                    <Checkbox
+                      onChange={onhandleOnchangeCheckAll}
+                      checked={listChecked?.length === order?.orderItems.length}
+                    />
+                    <span className="text-sm ml-3 ">
+                      Tất cả {order.orderItems.length} sp{" "}
+                    </span>
+                  </th>
                   <th className="border border-slate-300">Name</th>
                   <th className="border border-slate-300">Price</th>
                   <th className="border border-slate-300">Quantity</th>
                   <th className="border border-slate-300">TotalPrice</th>
-                  <th className="border border-slate-300">...</th>
+                  <th className="border border-slate-300">
+                    {" "}
+                    <AiOutlineDelete
+                      className="mx-auto text-xl cursor-pointer"
+                      onClick={() => onhandleRemoveAllOrder()}
+                    />
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {order.orderItems.map((item, index) => (
                   <tr key={index}>
-                    <td className="border border-slate-300">
+                    <td className="border border-slate-300 flex  pl-2">
+                      <Checkbox
+                        onChange={onchange}
+                        value={item.product}
+                        checked={listChecked.includes(item?.product)}
+                      />
+
                       <img
                         src={item.image}
                         alt=""
