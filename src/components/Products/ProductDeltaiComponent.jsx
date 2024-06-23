@@ -9,8 +9,16 @@ import { useQuery } from "@tanstack/react-query";
 import Slider from "react-slick";
 import Loading from "../loading/loading";
 import { Rate } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addOrderProduct } from "../../redux/slides/orderSlide";
 const ProductDeltaiComponent = () => {
+  const user = useSelector((state) => state.user);
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  //Slider product
   const settings = {
     customPaging: function (i) {
       return (
@@ -26,20 +34,6 @@ const ProductDeltaiComponent = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const { id } = useParams();
-  const getProductById = async () => {
-    const res = await getDetailProduct(id);
-    return res.data;
-  };
-
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["productsbyid"],
-    queryFn: getProductById,
-  });
-  // console.log(data);
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
   const onHandleChangeQuantity = (event) => {
     if (event === "increase") {
       setQuantity(quantity + 1);
@@ -53,6 +47,67 @@ const ProductDeltaiComponent = () => {
     const value = Math.max(1, Number(e.target.value));
     setQuantity(value);
   };
+  const getProductById = async () => {
+    const res = await getDetailProduct(id);
+    return res.data;
+  };
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["productsbyid"],
+    queryFn: getProductById,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const onhandleAddCart = () => {
+    if (!user?.id) {
+      navigate("/signin");
+    } else {
+      // orderItems: [
+      //   {
+      //     name: {
+      //       type: String,
+      //       required: true,
+      //     },
+      //     amount: {
+      //       type: Number,
+      //       required: true,
+      //     },
+      //     image: {
+      //       type: String,
+      //       required: true,
+      //     },
+      //     price: {
+      //       type: Number,
+      //       required: true,
+      //     },
+      //     discount: {
+      //       type: Number,
+      //     },
+      //     product: {
+      //       type: mongoose.Schema.Types.ObjectId,
+      //       ref: "Product",
+      //       required: true,
+      //     },
+      //   },
+      // ],
+      dispatch(
+        addOrderProduct({
+          orderItem: {
+            name: data?.name,
+            amount: quantity,
+            image: data?.image,
+            price: finalPrice,
+            discount: data?.discount,
+            product: data?._id,
+          },
+        })
+      );
+    }
+  };
+  // console.log(data);
+  const finalPrice = data.price - (data.price * data.discount) / 100;
   return (
     <Loading isLoading={isLoading}>
       <div className="container">
@@ -96,7 +151,7 @@ const ProductDeltaiComponent = () => {
             </h2>
             <div className="flex my-2 align-center">
               <Rate allowHalf defaultValue={data.rating} />
-              <span className="ml-2">| đã bán 1000+</span>
+              <span className="ml-2">| đã bán {data.selled}</span>
             </div>
             {/* Mô tả */}
             <div className="mb-2">
@@ -108,10 +163,10 @@ const ProductDeltaiComponent = () => {
             {/* Gía */}
             <div className="mb-2">
               <span className="text-red-500 font-bold text-[25px] my-3 mr-5">
-                {data?.selled} VND
+                {finalPrice.toLocaleString()} VND
               </span>
               <span className="text-black font-bold text-[20px] my-3 line-through">
-                {data.price} VND
+                {data.price.toLocaleString()} VND
               </span>
             </div>
             {/* Số lượng */}
@@ -142,7 +197,10 @@ const ProductDeltaiComponent = () => {
             </div>
             {/* Buton order */}
             <div className="my-7">
-              <button className="border border-red-600 bg-slate-50 text-red-600 font-medium w-[170px] h-[50px] text-[18px] hover:scale-105">
+              <button
+                className="border border-red-600 bg-slate-50 text-red-600 font-medium w-[170px] h-[50px] text-[18px] hover:scale-105"
+                onClick={onhandleAddCart}
+              >
                 Add to Cart
               </button>
               <button className="border border-collapse font-medium w-[170px] h-[50px] text-[18px] bg-red-600 text-white ml-7 hover:scale-105">

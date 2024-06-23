@@ -46,7 +46,7 @@ const NavBar2 = () => {
           </ul>
         </div>
         {/*  Dịch vụ*/}
-        <div className="space-y-6">
+        {/* <div className="space-y-6">
           <div>
             <h5 className="my-2 font-medium text-[16px]">Dịch vụ</h5>
             <div className="form-check">
@@ -62,7 +62,7 @@ const NavBar2 = () => {
               ></label>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
