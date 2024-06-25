@@ -23,7 +23,7 @@ const ProductList = () => {
   const searchInput = useRef(null);
 
   const getAllProducts = async () => {
-    const res = await getAllProduct();
+    const res = await getAllProduct({ limit: 100 });
     return res;
   };
 
@@ -48,7 +48,7 @@ const ProductList = () => {
   const onhandleDeleteProduct = async () => {
     try {
       const res = await deleteProduct(rowSelected, user?.access_token);
-      if ((res.status == "OK")) {
+      if (res.status == "OK") {
         success(res.message);
         setIsModalOpen(false);
         // Call refetch to get updated product list after deletion

@@ -6,20 +6,23 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "./redux/store.js";
+import { persistor, store } from "./redux/store.js";
 import { Provider } from "react-redux";
 import {
   QueryClient,
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { PersistGate } from "redux-persist/integration/react";
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       {/* <React.StrictMode> */}
       <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
       {/* </React.StrictMode> */}
     </BrowserRouter>{" "}

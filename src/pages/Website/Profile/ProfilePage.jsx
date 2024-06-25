@@ -14,7 +14,6 @@ const ProfilePage = () => {
   const [avatar, setAvatar] = useState("");
   const [formData, setFormData] = useState({
     name: "",
-
     phone: "",
     email: "",
     address: "",
@@ -27,7 +26,7 @@ const ProfilePage = () => {
         phone: user.phone || "",
         email: user.email || "",
         address: user.address || "",
-        avatar: user.avatar || "",
+        avatar: user?.avatar || "",
       });
       setAvatar(user.avatar || "");
     }
@@ -58,6 +57,7 @@ const ProfilePage = () => {
     const updatedData = {
       ...user, // Giá trị cũ từ user
       ...formData, // Giá trị mới từ formData
+      _id: user.id,
     };
     // console.log("updatedData", updatedData);
     const res = await updateUserSV(updatedData);
@@ -90,31 +90,31 @@ const ProfilePage = () => {
           <hr className="my-2" />
           <div className="mb-7">
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
-              <i class="fa-regular fa-user"></i>
+              <i className="fa-regular fa-user"></i>
               <span className="ml-5">Personal Information</span>
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
-              <i class="fa-solid fa-border-all"></i>
+              <i className="fa-solid fa-border-all"></i>
               <span className="ml-5">My Orders</span>
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
-              <i class="fa-regular fa-heart"></i>
+              <i className="fa-regular fa-heart"></i>
               <span className="ml-5">My Wishlists</span>
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
-              <i class="fa-solid fa-location-dot"></i>
+              <i className="fa-solid fa-location-dot"></i>
               <span className="ml-5">Mannage Addresses</span>
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
-              <i class="fa-solid fa-wallet"></i>
+              <i className="fa-solid fa-wallet"></i>
               <span className="ml-5">Saved Cards</span>
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
-              <i class="fa-regular fa-bell"></i>
+              <i className="fa-regular fa-bell"></i>
               <span className="ml-5">Notifications</span>
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
-              <i class="fa-solid fa-gear"></i>
+              <i className="fa-solid fa-gear"></i>
               <span className="ml-5">Settings</span>
             </div>
           </div>

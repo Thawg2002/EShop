@@ -12,6 +12,7 @@ import { Rate } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addOrderProduct } from "../../redux/slides/orderSlide";
+import { convertPrice } from "../../utils";
 const ProductDeltaiComponent = () => {
   const user = useSelector((state) => state.user);
   const [quantity, setQuantity] = useState(1);
@@ -163,10 +164,10 @@ const ProductDeltaiComponent = () => {
             {/* Gía */}
             <div className="mb-2">
               <span className="text-red-500 font-bold text-[25px] my-3 mr-5">
-                {finalPrice.toLocaleString()} VND
+                {convertPrice(finalPrice)}
               </span>
               <span className="text-black font-bold text-[20px] my-3 line-through">
-                {data.price.toLocaleString()} VND
+                {convertPrice(data.price)}
               </span>
             </div>
             {/* Số lượng */}
