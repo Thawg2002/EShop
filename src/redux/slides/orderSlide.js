@@ -44,18 +44,17 @@ export const orderSlider = createSlice({
       }
     },
     removeAllOrder: (state, action) => {
-      if (confirm("Bạn có chắc muốn xóa tất cả sản phẩm này không?")) {
-        const listchecked = action.payload;
-        console.log("listchecked", listchecked);
-        const itemOrder = state.orderItems.filter(
-          (item) => !listchecked.includes(item.product)
-        );
-        const itemOrderSelected = state.orderItemSelected.filter(
-          (item) => !listchecked.includes(item.product)
-        );
-        state.orderItems = itemOrder;
-        state.orderItemSelected = itemOrderSelected;
-      }
+      const listchecked = action.payload;
+      console.log("listchecked", listchecked);
+      // console.log("state", state.orderItems);
+      const itemOrder = state?.orderItems.filter(
+        (item) => !listchecked.includes(item.product)
+      );
+      const itemOrderSelected = state.orderItemSelected.filter(
+        (item) => !listchecked.includes(item.product)
+      );
+      state.orderItems = itemOrder;
+      state.orderItemSelected = itemOrderSelected;
     },
     increaseAmount: (state, action) => {
       const idProduct = action.payload;

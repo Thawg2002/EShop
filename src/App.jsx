@@ -27,6 +27,8 @@ import {
 } from "./services/UserServices";
 import { isJsonString } from "./utils";
 import HomePage from "./pages/Website/HomePage/Home";
+import PaymentPage from "./pages/Website/PaymentPage/PaymentPage";
+import OrderSucess from "./pages/Website/OrderSucess.jsx/OrderSucess";
 
 const processQueue = (error, token = null) => {
   failedQueue.forEach((prom) => {
@@ -129,6 +131,8 @@ const App = () => {
           <Route path="/shop/:category" element={<ShopPage />} />
           <Route path="/blog" element={<BlogPage />} />{" "}
           <Route path="/order" element={<OrderPage />} />
+          <Route path="/orderSucess" element={<OrderSucess />} />
+          <Route path="/payment" element={<PaymentPage />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile-user" element={<ProfilePage />} />

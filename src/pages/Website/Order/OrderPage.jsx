@@ -12,13 +12,22 @@ import {
 } from "../../../redux/slides/orderSlide";
 import { Checkbox } from "antd";
 import { convertPrice } from "../../../utils";
-import { useNavigate } from "react-router-dom";
+import Step from "../../../components/StepComponent/StepComponent";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import StepComponent from "../../../components/StepComponent/StepComponent";
 const OrderPage = () => {
   const [listChecked, setListChecked] = useState([]);
+
   const order = useSelector((state) => state.order);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const onHandleChangeQuantity = (event, idProduct) => {
     if (event === "increase") {
       dispatch(increaseAmount(idProduct));
@@ -76,12 +85,21 @@ const OrderPage = () => {
   }, [order]);
   // phí giao hàng
   const diliveryPriceMemo = useMemo(() => {
-    if (priceMemo > 100000) {
+    // if (priceMemo > 200000 && priceMemo < 500000) {
+    //   return 10000;
+    // } else if (priceMemo >= 500000 || order?.orderItemSelected.length === 0) {
+    //   return 0;
+    // } else {
+    //   return 20000;
+    // }
+    if (priceMemo < 200000 && order?.orderItemSelected.length > 0) {
       return 20000;
-    } else if (priceMemo === 0) {
+    } else if (priceMemo >= 200000 && priceMemo <= 500000) {
+      return 10000;
+    } else if (priceMemo > 500000) {
       return 0;
     } else {
-      return 10000;
+      return 0;
     }
   }, [priceMemo]);
 
@@ -92,20 +110,50 @@ const OrderPage = () => {
 
   // Add cart
   const onhandleAddCart = () => {
-    console.log("user", user);
     if (!user?.phone || !user?.address || !user?.name) {
       alert("Vui lòng cập nhật thông tin tài khoản trước khi mua hàng");
       navigate("/profile-user");
-    }else{
-      
+    } else if (!order?.orderItemSelected.length) {
+      alert("Vui lòng chọn sản phẩm");
+    } else {
+      navigate("/payment");
     }
   };
+
+  const itemsDelivery = [
+    {
+      title: "20.000 VND",
+      description: "Dưới 200.000 VND",
+    },
+    {
+      title: "10.000 VND",
+      description: "Từ 200.000 VND - dưới 500.000 VND",
+    },
+    {
+      title: "0 VND",
+      description: "Trên 500.000 VND",
+    },
+  ];
   return (
     <div className="container mt-5 mb-16">
       <div className="mx-6">
         <h1 className="text-lg font-medium mb-3 ">Your Car</h1>
         <div className="w-full flex gap-8 mx-3">
           <div className="w-2/3 drop-shadow-2xl">
+            <div className="my-2">
+              <StepComponent
+                items={itemsDelivery}
+                current={
+                  diliveryPriceMemo === 10000
+                    ? 1
+                    : diliveryPriceMemo === 20000
+                    ? 0
+                    : diliveryPriceMemo === 0
+                    ? 3
+                    : 0
+                }
+              />
+            </div>
             <table className="table-fixed w-full text-center">
               <thead>
                 <tr>
@@ -115,7 +163,7 @@ const OrderPage = () => {
                       checked={listChecked?.length === order?.orderItems.length}
                     />
                     <span className="text-sm ml-3 ">
-                      Tất cả {order.orderItems.length} sp
+                      All {order.orderItems.length} sp
                     </span>
                   </th>
                   <th className="border border-slate-300">Name</th>
@@ -195,8 +243,21 @@ const OrderPage = () => {
             </table>
           </div>
           <div className="w-1/3">
-            <div className="bg-slate-100">
+            {/* checkout */}
+            <div className="bg-slate-50">
               <div className="p-5">
+                <div className="my-3">
+                  Địa chỉ giao hàng:{" "}
+                  <strong className="text-lg text-blue-800">
+                    {user?.address}
+                  </strong>
+                  <Link
+                    className="p-2 text-sm text-blue-700"
+                    to={"/profile-user"}
+                  >
+                    Thay đổi
+                  </Link>
+                </div>
                 <ul>
                   <li className="flex justify-between">
                     <span>Tạm tính</span> <span>{convertPrice(priceMemo)}</span>
@@ -216,12 +277,13 @@ const OrderPage = () => {
                     </span>
                   </li>
                 </ul>
+
                 <div className="text-center">
                   <button
                     className="bg-red-500 text-white text-[20px] py-3 px-10 w-full mt-2"
                     onClick={() => onhandleAddCart()}
                   >
-                    Mua Hàng
+                    Checkout
                   </button>
                 </div>
               </div>
