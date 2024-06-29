@@ -54,6 +54,9 @@ const content = (user) => (
         <p className="cursor-pointer py-1 hover:text-red-700">Admin Page</p>
       </Link>
     )}
+    <Link to={"/myorder"}>
+      <p className="cursor-pointer py-1 hover:text-red-700">My Order</p>
+    </Link>
     <Link to={"/profile-user"}>
       <p className="cursor-pointer py-1 hover:text-red-700">
         Personal Information

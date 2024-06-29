@@ -8,6 +8,7 @@ import { success } from "../../../components/Message/message";
 import { Button, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { getBase64 } from "../../../utils";
+import { Link } from "react-router-dom";
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -95,7 +96,9 @@ const ProfilePage = () => {
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
               <i className="fa-solid fa-border-all"></i>
-              <span className="ml-5">My Orders</span>
+              <Link to={"/myorder"}>
+                <span className="ml-5">My Orders</span>
+              </Link>
             </div>
             <div className="hover:text-white hover:bg-black pl-4 py-3 ">
               <i className="fa-regular fa-heart"></i>
