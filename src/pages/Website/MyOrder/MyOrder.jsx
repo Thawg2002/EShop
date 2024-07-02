@@ -1,24 +1,51 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import React from "react";
-import { getAllOrderDetailsById } from "../../../services/orderServices";
-import Loading from "../../../components/loading/loading";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Loading from "../../../components/loading/loading";
+import {
+  cancelDetailsOrder,
+  getAllOrderDetail,
+} from "../../../services/orderServices";
 import { convertPrice } from "../../../utils";
-import { useLocation } from "react-router-dom";
+import { success, error } from "../../../components/Message/message";
 const MyOrder = () => {
   const user = useSelector((state) => state.user);
 
   const getAllOrderDetails = async () => {
-    const data = await getAllOrderDetailsById(user?.id, user?.access_token);
+    const data = await getAllOrderDetail(user?.id, user?.access_token);
     return data;
+  };
+  const mutation = useMutation({
+    mutationFn: async (data) => {
+      const { id, token, orderItems } = data;
+      const res = await cancelDetailsOrder(id, token, orderItems);
+      return res;
+    },
+    onSuccess: () => {
+      success("Hủy thành công");
+    },
+    onError: () => {
+      error("Hủy thất bại");
+      // console.log(error.message);
+    },
+  });
+  const onhandleCancel = (order) => {
+    mutation.mutate({
+      id: order._id,
+      token: user?.access_token,
+      orderItems: order.orderItems,
+    });
   };
   const { isLoading, error, data } = useQuery({
     queryKey: ["orderbyid"],
     queryFn: getAllOrderDetails,
   });
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  console.log("data", data.data);
+  // console.log("data", data.data);
+
   return (
     <Loading isLoading={isLoading}>
       <div className="container mt-5 mb-16">
@@ -81,12 +108,18 @@ const MyOrder = () => {
                   })}
                 </div>
                 <div className="flex justify-end">
-                  <button className="border border-spacing-1 border-cyan-400 text-cyan-700 px-5 py-2 mx-2 font-medium">
+                  <button
+                    onClick={() => onhandleCancel(order)}
+                    className="border border-spacing-1  border-red-400 text-red-700 px-5 py-2 mx-2 font-medium hover:bg-red-700 hover:text-white"
+                  >
                     Huỷ đơn hàng
                   </button>
-                  <button className="border border-spacing-1 border-red-400 text-red-700 px-5 py-2 mx-2 font-medium">
+                  <Link
+                    to={`/details-order/${order._id}`}
+                    className="border border-spacing-1 border-cyan-400 text-cyan-700  px-5 py-2 mx-2 font-medium hover:bg-cyan-700 hover:text-white  "
+                  >
                     Xem chi tiết
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
