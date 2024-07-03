@@ -26,7 +26,7 @@ const DetailsOrder = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  console.log("data", data);
+  // console.log("data", data);
 
   const {
     shippingAddress,

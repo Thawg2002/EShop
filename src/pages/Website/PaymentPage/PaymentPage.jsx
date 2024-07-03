@@ -3,6 +3,7 @@ import { LuMinus } from "react-icons/lu";
 import { FiPlus } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { PayPalButton } from "react-paypal-button-v2";
 import {
   decreaseAmount,
   increaseAmount,
@@ -16,8 +17,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { createOrder } from "../../../services/orderServices";
+import { getConfig } from "../../../services/PaymentServices";
 const PaymentPage = () => {
   const [listChecked, setListChecked] = useState([]);
+  const [sdkReady, setSdkReady] = useState(false);
 
   const order = useSelector((state) => state.order);
   const user = useSelector((state) => state.user);
@@ -126,7 +129,51 @@ const PaymentPage = () => {
       message.error("Đặt hàng thất bại");
     },
   });
-
+  const addPaypalScript = async () => {
+    const { data } = await getConfig();
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+    script.async = true;
+    script.onload = () => {
+      setSdkReady(true);
+    };
+    document.body.appendChild(script);
+  };
+  const onSuccessPaypal = (details, data) => {
+    if (
+      user?.access_token &&
+      order?.orderItemSelected &&
+      user?.name &&
+      user?.address &&
+      user?.phone &&
+      priceMemo &&
+      user?.id
+    ) {
+      mutation.mutate({
+        token: user?.access_token,
+        orderItems: order?.orderItemSelected,
+        fullName: user?.name,
+        address: user?.address,
+        phone: user?.phone,
+        city: "Hà Nội",
+        paymentMethod: payment,
+        itemsPrice: priceMemo,
+        shippingPrice: diliveryPriceMemo,
+        totalPrice: totalPriceMemo,
+        user: user?.id,
+        isPaid: true,
+        paidAt: details.update_time,
+      });
+    }
+  };
+  useEffect(() => {
+    if (!window.paypal) {
+      addPaypalScript();
+    } else {
+      setSdkReady(true);
+    }
+  }, []);
   return (
     <div className="container mt-5 mb-16">
       <div className="mx-6">
@@ -206,12 +253,23 @@ const PaymentPage = () => {
                 </ul>
 
                 <div className="text-center">
-                  <button
-                    className="bg-red-500 text-white text-[20px] py-3 px-10 w-full mt-2"
-                    onClick={() => onhandleAddOrder()}
-                  >
-                    Place Order
-                  </button>
+                  {payment === "paypal" && sdkReady ? (
+                    <PayPalButton
+                      amount={totalPriceMemo}
+                      // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                      onSuccess={onSuccessPaypal}
+                      onError={(err) => {
+                        alert("Đã xảy ra lỗi, vui lòng thử lại sau!");
+                      }}
+                    />
+                  ) : (
+                    <button
+                      className="bg-red-500 text-white text-[20px] py-3 px-10 w-full mt-2"
+                      onClick={() => onhandleAddOrder()}
+                    >
+                      Place Order
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
