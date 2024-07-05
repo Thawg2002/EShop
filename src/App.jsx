@@ -31,6 +31,7 @@ import PaymentPage from "./pages/Website/PaymentPage/PaymentPage";
 import OrderSucess from "./pages/Website/OrderSucess.jsx/OrderSucess";
 import MyOrder from "./pages/Website/MyOrder/MyOrder";
 import DetailsOrder from "./pages/Website/Details-order/DetailsOrder";
+import OrderList from "./pages/Admin/Order/OrderList";
 
 const processQueue = (error, token = null) => {
   failedQueue.forEach((prom) => {
@@ -77,7 +78,7 @@ const App = () => {
               isRefreshing = false;
             } catch (error) {
               processQueue(error, null);
-              console.error("Error refreshing token:", error);
+              // console.error("Error refreshing token:", error);
               throw error;
             } finally {
               isRefreshing = false;
@@ -149,6 +150,7 @@ const App = () => {
           <Route path="user" element={<UserList />} />
           <Route path="user-add" element={<UserAdd />} />
           <Route path="user/:id/edit" element={<UserUpdate />} />
+          <Route path="order" element={<OrderList />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

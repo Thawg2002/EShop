@@ -33,3 +33,6 @@ export const convertPrice = (price) => {
     return null;
   }
 };
+// src/config.js
+export const API_URL_BACKEND = "http://localhost:8080/api";
+export const IS_LOCAL = "true";

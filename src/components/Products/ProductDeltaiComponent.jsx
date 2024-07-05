@@ -12,7 +12,10 @@ import { Rate } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addOrderProduct } from "../../redux/slides/orderSlide";
-import { convertPrice } from "../../utils";
+import { API_URL_BACKEND, convertPrice, IS_LOCAL } from "../../utils";
+import { success } from "../Message/message";
+import LikeButtonComponent from "../LikeButtonComponent/LikeButtonComponent";
+import CommentComponent from "../CommentComponent/CommentComponent";
 const ProductDeltaiComponent = () => {
   const user = useSelector((state) => state.user);
   const [quantity, setQuantity] = useState(1);
@@ -65,34 +68,6 @@ const ProductDeltaiComponent = () => {
     if (!user?.id) {
       navigate("/signin");
     } else {
-      // orderItems: [
-      //   {
-      //     name: {
-      //       type: String,
-      //       required: true,
-      //     },
-      //     amount: {
-      //       type: Number,
-      //       required: true,
-      //     },
-      //     image: {
-      //       type: String,
-      //       required: true,
-      //     },
-      //     price: {
-      //       type: Number,
-      //       required: true,
-      //     },
-      //     discount: {
-      //       type: Number,
-      //     },
-      //     product: {
-      //       type: mongoose.Schema.Types.ObjectId,
-      //       ref: "Product",
-      //       required: true,
-      //     },
-      //   },
-      // ],
       dispatch(
         addOrderProduct({
           orderItem: {
@@ -105,10 +80,13 @@ const ProductDeltaiComponent = () => {
           },
         })
       );
+      success("Thêm vào giỏ hàng thành công");
     }
   };
-  // console.log(data);
   const finalPrice = data.price - (data.price * data.discount) / 100;
+
+  // console.log("API URL:", API_URL_BACKEND);
+  // console.log("Is Local:", IS_LOCAL);
   return (
     <Loading isLoading={isLoading}>
       <div className="container">
@@ -133,7 +111,7 @@ const ProductDeltaiComponent = () => {
                 <div>
                   <img
                     className="w-[100%] h-[500px] object-cover"
-                    src={"https://picsum.photos/200"}
+                    src={"https://picsum.photos/600"}
                   />
                 </div>
                 <div>
@@ -171,9 +149,10 @@ const ProductDeltaiComponent = () => {
               </span>
             </div>
             {/* Số lượng */}
+
             <div className="mb-2">
               <h4 className="text-xl font-bold text-[#324d67] dark:text-white capitalize">
-                Quantity:
+                Quantity: {data.quantity}
               </h4>
               <div className="flex mt-[10px] ml-[10px]">
                 <button
@@ -208,7 +187,26 @@ const ProductDeltaiComponent = () => {
                 Buy Now
               </button>
             </div>
+            <div>
+              <LikeButtonComponent
+                datahref={
+                  IS_LOCAL
+                    ? `https://developers.facebook.com/docs/plugins/`
+                    : window.location.href
+                }
+              />
+            </div>
           </div>
+        </div>
+        <div className="">
+          <CommentComponent
+            datahref={
+              IS_LOCAL
+                ? "https://developers.facebook.com/docs/plugins/comments#configurator"
+                : window.location.href
+            }
+            width="100%"
+          />
         </div>
       </div>
     </Loading>

@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { createOrder } from "../../../services/orderServices";
 import { getConfig } from "../../../services/PaymentServices";
+import { error } from "../../../components/Message/message";
 const PaymentPage = () => {
   const [listChecked, setListChecked] = useState([]);
   const [sdkReady, setSdkReady] = useState(false);
@@ -51,13 +52,6 @@ const PaymentPage = () => {
   }, [order]);
   // phí giao hàng
   const diliveryPriceMemo = useMemo(() => {
-    // if (priceMemo > 100000) {
-    //   return 20000;
-    // } else if (priceMemo === 0) {
-    //   return 0;
-    // } else {
-    //   return 10000;
-    // }
     if (priceMemo < 200000 && order?.orderItemSelected.length > 0) {
       return 20000;
     } else if (priceMemo >= 200000 && priceMemo <= 500000) {
@@ -125,7 +119,6 @@ const PaymentPage = () => {
       });
     },
     onError: (error) => {
-      console.log(error.message);
       message.error("Đặt hàng thất bại");
     },
   });

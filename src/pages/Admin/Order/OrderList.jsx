@@ -1,16 +1,12 @@
-import React, { useRef, useState } from "react";
-import { PlusOutlined } from "@ant-design/icons";
-import TableComponent from "../../../components/TableComponent/TableComponent";
-import { Link } from "react-router-dom";
-import ModalComponent from "../../../components/ModalComponent/ModalComponent";
-import { deleteUser, getAllUserSV } from "../../../services/UserServices";
-import { useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { success } from "../../../components/Message/message";
-import { Button, Input, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-const UserList = () => {
+import { useQuery } from "@tanstack/react-query";
+import { Button, Input, Space } from "antd";
+import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import TableComponent from "../../../components/TableComponent/TableComponent";
+import { getAllOrders } from "../../../services/orderServices";
+import { orderContant } from "../../../contant";
+const OrderList = () => {
   const user = useSelector((state) => state.user);
   const [rowSelected, setRowSelected] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,13 +15,13 @@ const UserList = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
-  const getAllUser = async () => {
-    const res = await getAllUserSV();
+  const getAllOrder = async () => {
+    const res = await getAllOrders(user?.access_token);
     return res;
   };
   const { data, isFetching, isLoading, refetch, error, isError } = useQuery({
-    queryKey: ["user"],
-    queryFn: getAllUser,
+    queryKey: ["orders"],
+    queryFn: getAllOrder,
   });
   if (isLoading) {
     return <div>loading...</div>; // loading data
@@ -33,45 +29,7 @@ const UserList = () => {
   if (isError) {
     return <div>{error.message}</div>; // error data
   }
-
-  const onhandleDeleteUser = async () => {
-    try {
-      const res = await deleteUser(rowSelected, user?.access_token);
-      if ((res.status = "OK")) {
-        success(res.message);
-        setIsModalOpen(false);
-        // Call refetch to get updated product list after deletion
-        refetch();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onhandlgetDetailUser = () => {
-    // console.log("rowSelected", rowSelected);
-  };
-  const renderAction = () => {
-    return (
-      <div>
-        <DeleteOutlined
-          className="text-lg mx-2 cursor-pointer"
-          onClick={() => setIsModalOpen(true)}
-        />
-        {rowSelected !== "" ? (
-          <Link to={`/admin/user/${rowSelected}/edit`}>
-            <EditOutlined className="text-lg mx-2 cursor-pointer" />
-          </Link>
-        ) : (
-          <EditOutlined
-            className="text-lg mx-2 cursor-pointer"
-            onClick={onhandlgetDetailUser}
-          />
-        )}
-      </div>
-    );
-  };
-
+  //   console.log("data", data);
   const renderImage = (image) => {
     return (
       <div>
@@ -79,16 +37,15 @@ const UserList = () => {
       </div>
     );
   };
-  const handleCancelDelete = () => {
-    setIsModalOpen(false);
-  };
 
-  //Seach user
+  // Function to handle search
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
+
+  // Function to reset search
   const handleReset = (clearFilters) => {
     clearFilters();
     setSearchText("");
@@ -167,45 +124,22 @@ const UserList = () => {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
-    // render: (text) =>
-    //   searchedColumn === dataIndex ? (
-    //     <Highlighter
-    //       highlightStyle={{
-    //         backgroundColor: "#ffc069",
-    //         padding: 0,
-    //       }}
-    //       searchWords={[searchText]}
-    //       autoEscape
-    //       textToHighlight={text ? text.toString() : ""}
-    //     />
-    //   ) : (
-    //     text
-    //   ),
   });
 
   //Data
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "userName",
+      dataIndex: "userName",
       render: (text) => <a>{text}</a>,
       sorter: (a, b) => a.name.length - b.name.length,
-      ...getColumnSearchProps("name"),
-    },
-    {
-      title: "avatar",
-      dataIndex: "avatar",
-      render: renderImage,
+      ...getColumnSearchProps("userName"),
     },
 
     {
-      title: "isAdmin",
-      dataIndex: "isAdmin",
-      render: (isAdmin) => (isAdmin ? "Admin" : "User"),
-    },
-    {
       title: "phone",
       dataIndex: "phone",
+      ...getColumnSearchProps("phone"),
     },
     {
       title: "address",
@@ -213,26 +147,65 @@ const UserList = () => {
       ...getColumnSearchProps("address"),
     },
     {
-      title: "action",
-      dataIndex: "action",
-      render: renderAction,
+      title: "nameProduct",
+      dataIndex: "product",
+      ...getColumnSearchProps("product"),
+    },
+    {
+      title: "imageProduct",
+      dataIndex: "image",
+      render: renderImage,
+    },
+    {
+      title: "amountProduct",
+      dataIndex: "amount",
+      ...getColumnSearchProps("amount"),
+    },
+    {
+      title: "paymentMethod",
+      dataIndex: "paymentMethod",
+      ...getColumnSearchProps("paymentMethod"),
+    },
+    {
+      title: "isPaid",
+      dataIndex: "isPaid",
+      ...getColumnSearchProps("isPaid"),
+    },
+    {
+      title: "shipper",
+      dataIndex: "isDelivered",
+      ...getColumnSearchProps("isDelivered"),
+    },
+    {
+      title: "totalPrice",
+      dataIndex: "totalPrice",
+      ...getColumnSearchProps("totalPrice"),
     },
   ];
   const dataTable =
-    data?.user.length &&
-    data.user.map((product) => {
-      return { ...product, key: product._id };
+    data?.data.length &&
+    data.data.map((order) => {
+      return {
+        ...order,
+        key: order._id,
+        userName: order?.shippingAddress?.fullName,
+        phone: order?.shippingAddress?.phone,
+        address: order?.shippingAddress?.address,
+        product: order?.orderItems.map((item) => item.name).join(", "),
+        image: order?.orderItems.map((item) => item.image).join(", "),
+        amount: order?.orderItems.map((item) => item.amount).join(", "),
+        paymentMethod: orderContant.payment[order?.paymentMethod],
+        isPaid: order?.isPaid ? "TRUE" : "FALSE",
+        isDelivered: order?.isDelivered ? "TRUE" : "FALSE",
+        totalPrice: order?.totalPrice,
+      };
     });
 
   return (
     <div>
       <div className="mt-5 ">
-        <h2 className="text-[18px]">Quản lý User</h2>
-        <button className="bg-sky-600 text-white px-3 py-2 rounded-lg mt-3">
-          {/* <Link to={"/admin/user-add"}>
-            Thêm người dùng <PlusOutlined />
-          </Link> */}
-        </button>
+        <h2 className="text-[18px]">Quản lý Order</h2>
+        <button className="bg-sky-600 text-white px-3 py-2 rounded-lg mt-3"></button>
       </div>
       <div>
         {/* BANG User */}
@@ -240,26 +213,10 @@ const UserList = () => {
           columns={columns}
           products={dataTable}
           isLoading={isLoading}
-          onRow={(record, rowIndex) => {
-            return {
-              onClick: (event) => {
-                // console.log(record);
-                setRowSelected(record._id);
-              }, // click row
-            };
-          }}
         />
-        <ModalComponent
-          title="Xóa User"
-          open={isModalOpen}
-          onCancel={handleCancelDelete}
-          onOk={onhandleDeleteUser}
-        >
-          <div>Bạn có chắc chắn muốn xóa user này không?</div>
-        </ModalComponent>
       </div>
     </div>
   );
 };
 
-export default UserList;
+export default OrderList;

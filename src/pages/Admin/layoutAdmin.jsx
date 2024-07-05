@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import UserList from "./Users/UserList";
 import ProductList from "./Products/ProductList";
+import { BsCart3 } from "react-icons/bs";
 const items = [
   {
     key: "user",
@@ -20,6 +21,11 @@ const items = [
     key: "product",
     label: <Link to={"/admin/product"}>Products</Link>,
     icon: <AppstoreOutlined />,
+  },
+  {
+    key: "order",
+    label: <Link to={"/admin/order"}>Order</Link>,
+    icon: <BsCart3 />,
   },
 ];
 // const renderPage = (key) => {
