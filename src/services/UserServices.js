@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: `${import.meta.env.VITE_SOME_URL_BACKEND}`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -57,7 +57,7 @@ export const updateUserSV = async (user) => {
   return res.data;
 };
 export const getAllUserSV = async (access_token) => {
-  const res = await axios.get(`http://localhost:8080/api/user`, {
+  const res = await axios.get(`${import.meta.env.VITE_SOME_URL_BACKEND}/user`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
@@ -66,7 +66,7 @@ export const getAllUserSV = async (access_token) => {
 };
 export const deleteUser = async (id, access_token) => {
   const res = await axios.delete(
-    `http://localhost:8080/api/delete-user/${id}`,
+    `${import.meta.env.VITE_SOME_URL_BACKEND}/delete-user/${id}`,
     {
       headers: {
         Authorization: `Bearer ${access_token}`,
@@ -77,7 +77,7 @@ export const deleteUser = async (id, access_token) => {
 };
 // export const updateUser = async (user, access_token) => {
 //   const res = await axios.put(
-//     `http://localhost:8080/api/update-user/${user._id}`,
+//     `${import.meta.env.VITE_SOME_URL_BACKEND}/update-user/${user._id}`,
 //     user,
 //     {
 //       headers: {

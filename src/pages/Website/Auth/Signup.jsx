@@ -17,13 +17,15 @@ const Signup = () => {
 
   const mutation = useMutation({
     mutationFn: async (user) => {
-      const res = await axios.post("http://localhost:8080/api/signup", user);
+      const res = await axios.post(
+        `${import.meta.env.VITE_SOME_URL_BACKEND}/signup`,
+        user
+      );
       // console.log(res.data);
       return res.data;
     },
     onSuccess: (data) => {
       if (data.status == "ERR") {
-   
         error("Đăng ký thất bại");
       } else {
         success("Đăng ký tài khoản thành công");

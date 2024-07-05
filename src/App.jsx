@@ -119,8 +119,16 @@ const App = () => {
 
   const handleGetDetailUser = async (id, token) => {
     try {
+      const storageRefreshToken = localStorage.getItem("refresh_token");
+      const refreshToken = JSON.parse(storageRefreshToken);
       const res = await getdetailUser(id, token);
-      dispatch(updateUser({ ...res?.user, access_token: token }));
+      dispatch(
+        updateUser({
+          ...res?.user,
+          access_token: token,
+          refreshToken: refreshToken,
+        })
+      );
     } catch (error) {
       return error;
     }

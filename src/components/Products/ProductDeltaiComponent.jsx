@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import Image1 from "../../assets/product/p-1.jpg";
-import { PiStarThin } from "react-icons/pi";
-import { LuMinus } from "react-icons/lu";
-import { FiPlus } from "react-icons/fi";
-import { useParams } from "react-router-dom";
-import { getDetailProduct } from "../../services/ProductServices";
 import { useQuery } from "@tanstack/react-query";
-import Slider from "react-slick";
-import Loading from "../loading/loading";
 import { Rate } from "antd";
+import React, { useState } from "react";
+import { FiPlus } from "react-icons/fi";
+import { LuMinus } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Slider from "react-slick";
 import { addOrderProduct } from "../../redux/slides/orderSlide";
-import { API_URL_BACKEND, convertPrice, IS_LOCAL } from "../../utils";
-import { success } from "../Message/message";
-import LikeButtonComponent from "../LikeButtonComponent/LikeButtonComponent";
+import { getDetailProduct } from "../../services/ProductServices";
+import { convertPrice } from "../../utils";
 import CommentComponent from "../CommentComponent/CommentComponent";
+import LikeButtonComponent from "../LikeButtonComponent/LikeButtonComponent";
+import Loading from "../loading/loading";
+import { success } from "../Message/message";
 const ProductDeltaiComponent = () => {
   const user = useSelector((state) => state.user);
   const [quantity, setQuantity] = useState(1);
@@ -85,8 +82,6 @@ const ProductDeltaiComponent = () => {
   };
   const finalPrice = data.price - (data.price * data.discount) / 100;
 
-  // console.log("API URL:", API_URL_BACKEND);
-  // console.log("Is Local:", IS_LOCAL);
   return (
     <Loading isLoading={isLoading}>
       <div className="container">
@@ -190,7 +185,7 @@ const ProductDeltaiComponent = () => {
             <div>
               <LikeButtonComponent
                 datahref={
-                  IS_LOCAL
+                  import.meta.env.VITE_SOME_API_IS_LOCAL
                     ? `https://developers.facebook.com/docs/plugins/`
                     : window.location.href
                 }
@@ -201,7 +196,7 @@ const ProductDeltaiComponent = () => {
         <div className="">
           <CommentComponent
             datahref={
-              IS_LOCAL
+              import.meta.env.VITE_SOME_API_IS_LOCAL
                 ? "https://developers.facebook.com/docs/plugins/comments#configurator"
                 : window.location.href
             }

@@ -6,7 +6,11 @@ import axios from "axios";
 import { error, success } from "../../../components/Message/message";
 import { useMutation } from "@tanstack/react-query";
 import { jwtDecode } from "jwt-decode";
-import { getdetailUser, loginUser } from "../../../services/UserServices";
+import {
+  getdetailUser,
+  loginUser,
+  refreshToken,
+} from "../../../services/UserServices";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../../redux/slides/userSlider";
 import { refresh } from "aos";
@@ -24,8 +28,7 @@ const Signin = () => {
 
   const mutation = useMutation({
     mutationFn: async (user) => {
-      // const res = await axios.post("http://localhost:8080/api/signin", user);
-      // return res.data;
+    
       const res = await loginUser(user);
       return res;
     },
@@ -65,8 +68,10 @@ const Signin = () => {
 
   const handleGetDetailUser = async (id, token) => {
     try {
+      const storage = localStorage.getItem("refresh_token");
+      const refreshToken = JSON.parse(storage);
       const res = await getdetailUser(id, token);
-      dispatch(updateUser({ ...res?.user, access_token: token }));
+      dispatch(updateUser({ ...res?.user, access_token: token, refreshToken }));
       return res;
     } catch (error) {
       console.log(error.message);

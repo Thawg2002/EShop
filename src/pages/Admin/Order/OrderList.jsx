@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import TableComponent from "../../../components/TableComponent/TableComponent";
 import { getAllOrders } from "../../../services/orderServices";
 import { orderContant } from "../../../contant";
+import PieChartComponent from "./PieChartComponent";
+import { convertPrice } from "../../../utils";
 const OrderList = () => {
   const user = useSelector((state) => state.user);
   const [rowSelected, setRowSelected] = useState("");
@@ -197,12 +199,15 @@ const OrderList = () => {
         paymentMethod: orderContant.payment[order?.paymentMethod],
         isPaid: order?.isPaid ? "TRUE" : "FALSE",
         isDelivered: order?.isDelivered ? "TRUE" : "FALSE",
-        totalPrice: order?.totalPrice,
+        totalPrice: convertPrice(order?.totalPrice),
       };
     });
 
   return (
     <div>
+      <div className="w-[500px] h-[200px]">
+        <PieChartComponent data={data?.data} />
+      </div>
       <div className="mt-5 ">
         <h2 className="text-[18px]">Quản lý Order</h2>
         <button className="bg-sky-600 text-white px-3 py-2 rounded-lg mt-3"></button>

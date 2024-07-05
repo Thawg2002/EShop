@@ -9,6 +9,7 @@ const initialState = {
   phone: "",
   isAdmin: false,
   id: "",
+  refreshToken: "",
 };
 
 export const userSlide = createSlice({
@@ -27,6 +28,7 @@ export const userSlide = createSlice({
         phone,
         isAdmin,
         _id,
+        refreshToken,
       } = action.payload;
       state.name = name || email;
       state.email = email;
@@ -36,6 +38,7 @@ export const userSlide = createSlice({
       state.phone = phone;
       state.isAdmin = isAdmin;
       state.id = _id;
+      state.refreshToken = refreshToken;
     },
   },
 });
