@@ -23,7 +23,7 @@ const ProductList = () => {
   const searchInput = useRef(null);
 
   const getAllProducts = async () => {
-    const res = await getAllProduct({ limit: 100 });
+    const res = await getAllProduct(0, 100);
     return res;
   };
 
