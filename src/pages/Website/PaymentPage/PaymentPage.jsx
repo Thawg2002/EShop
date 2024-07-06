@@ -3,7 +3,8 @@ import { LuMinus } from "react-icons/lu";
 import { FiPlus } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { PayPalButton } from "react-paypal-button-v2";
+// import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import {
   decreaseAmount,
   increaseAmount,
@@ -122,17 +123,52 @@ const PaymentPage = () => {
       message.error("Đặt hàng thất bại");
     },
   });
-  const addPaypalScript = async () => {
-    const { data } = await getConfig();
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
-    script.async = true;
-    script.onload = () => {
-      setSdkReady(true);
-    };
-    document.body.appendChild(script);
-  };
+  // const addPaypalScript = async () => {
+  //   const { data } = await getConfig();
+  //   const script = document.createElement("script");
+  //   script.type = "text/javascript";
+  //   script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+  //   script.async = true;
+  //   script.onload = () => {
+  //     setSdkReady(true);
+  //   };
+  //   document.body.appendChild(script);
+  // };
+  // const onSuccessPaypal = (details, data) => {
+  //   if (
+  //     user?.access_token &&
+  //     order?.orderItemSelected &&
+  //     user?.name &&
+  //     user?.address &&
+  //     user?.phone &&
+  //     priceMemo &&
+  //     user?.id
+  //   ) {
+  //     mutation.mutate({
+  //       token: user?.access_token,
+  //       orderItems: order?.orderItemSelected,
+  //       fullName: user?.name,
+  //       address: user?.address,
+  //       phone: user?.phone,
+  //       city: "Hà Nội",
+  //       paymentMethod: payment,
+  //       itemsPrice: priceMemo,
+  //       shippingPrice: diliveryPriceMemo,
+  //       totalPrice: totalPriceMemo,
+  //       user: user?.id,
+  //       isPaid: true,
+  //       paidAt: details.update_time,
+  //     });
+  //   }
+  // };
+  // useEffect(() => {
+  //   if (!window.paypal) {
+  //     addPaypalScript();
+  //   } else {
+  //     setSdkReady(true);
+  //   }
+  // }, []);
+
   const onSuccessPaypal = (details, data) => {
     if (
       user?.access_token &&
@@ -160,12 +196,25 @@ const PaymentPage = () => {
       });
     }
   };
-  useEffect(() => {
-    if (!window.paypal) {
-      addPaypalScript();
-    } else {
-      setSdkReady(true);
+
+  const addPaypalScript = async () => {
+    try {
+      const { data } = await getConfig();
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    } catch (err) {
+      console.error("Failed to load PayPal script:", err);
     }
+  };
+
+  useEffect(() => {
+    addPaypalScript();
   }, []);
   return (
     <div className="container mt-5 mb-16">
@@ -247,14 +296,43 @@ const PaymentPage = () => {
 
                 <div className="text-center">
                   {payment === "paypal" && sdkReady ? (
-                    <PayPalButton
-                      amount={totalPriceMemo}
-                      // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                      onSuccess={onSuccessPaypal}
-                      onError={(err) => {
-                        alert("Đã xảy ra lỗi, vui lòng thử lại sau!");
-                      }}
-                    />
+                    // <PayPalButton
+                    //   amount={totalPriceMemo}
+                    //   // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                    //   onSuccess={onSuccessPaypal}
+                    //   onError={(err) => {
+                    //     alert("Đã xảy ra lỗi, vui lòng thử lại sau!");
+                    //   }}
+                    // />
+                    <PayPalScriptProvider
+                      options={{ "client-id": "YOUR_CLIENT_ID" }}
+                    >
+                      <PayPalButtons
+                        style={{ layout: "horizontal" }}
+                        createOrder={(data, actions) => {
+                          return actions.order.create({
+                            purchase_units: [
+                              {
+                                amount: {
+                                  value: totalPriceMemo,
+                                },
+                              },
+                            ],
+                          });
+                        }}
+                        onApprove={(data, actions) => {
+                          return actions.order.capture().then((details) => {
+                            onSuccessPaypal(details, data);
+                          });
+                        }}
+                        onError={(err) => {
+                          console.error("PayPal error:", err);
+                          message.error(
+                            "Đã xảy ra lỗi khi thanh toán qua PayPal."
+                          );
+                        }}
+                      />
+                    </PayPalScriptProvider>
                   ) : (
                     <button
                       className="bg-red-500 text-white text-[20px] py-3 px-10 w-full mt-2"
