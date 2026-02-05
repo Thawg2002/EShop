@@ -32,6 +32,7 @@ import OrderSucess from "./pages/Website/OrderSucess.jsx/OrderSucess";
 import MyOrder from "./pages/Website/MyOrder/MyOrder";
 import DetailsOrder from "./pages/Website/Details-order/DetailsOrder";
 import OrderList from "./pages/Admin/Order/OrderList";
+import MomoPayment from "./pages/Website/PaymentPage/MomoPayment";
 
 const processQueue = (error, token = null) => {
   failedQueue.forEach((prom) => {
@@ -150,6 +151,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile-user" element={<ProfilePage />} />
           <Route path="/product-detail/:id" element={<ProductDetai />} />
+          <Route path="/momo" element={<MomoPayment />} />
         </Route>
         <Route path="/admin" element={<LayoutAdmin />}>
           <Route path="product" element={<ProductList />} />
