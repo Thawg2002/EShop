@@ -104,7 +104,7 @@ export default function ShopPage() {
                         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
                             {PRODUCTS.map((product, idx) => (
                                 <Link
-                                    href={`/shop/${product.id}`}
+                                    href={`/cua-hang/${product.id}`}
                                     key={product.id}
                                     className={`block break-inside-avoid group relative cursor-pointer ${idx % 3 === 1 ? 'md:pt-12' : ''}`}
                                 >

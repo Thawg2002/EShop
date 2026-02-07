@@ -100,13 +100,13 @@ export function HeroSlider() {
 
                                 <div className="flex flex-col gap-6 sm:flex-row animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-700">
                                     <Link
-                                        href="/shop"
+                                        href="/cua-hang"
                                         className="transform bg-primary px-12 py-5 text-xs font-bold uppercase tracking-[0.25em] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-primary-hover hover:shadow-[0_10px_30px_rgba(94,58,115,0.4)]"
                                     >
                                         Khám phá ngay
                                     </Link>
                                     <Link
-                                        href="/journal"
+                                        href="/nhat-ky"
                                         className="group flex items-center justify-center gap-3 border border-white/30 bg-black/20 px-10 py-5 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md transition-all hover:bg-white hover:text-primary"
                                     >
                                         <span>Xem Lookbook</span>

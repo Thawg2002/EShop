@@ -14,7 +14,7 @@ export default function LoginPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (isSignIn) {
-            router.push('/profile');
+            router.push('/ho-so');
         }
     };
 

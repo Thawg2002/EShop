@@ -4,7 +4,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 
 export const metadata: Metadata = {
-    title: 'Journal | XX.II Collective',
+    title: 'Nhật Ký | XX.II Collective',
     description: 'Stories of craftsmanship, heritage, and the art of modern living.',
 };
 
@@ -36,7 +36,7 @@ export default function JournalPage() {
                     <div className="text-center mb-24 md:mb-32">
                         <span className="text-primary font-bold uppercase text-[10px] tracking-[0.6em] mb-6 block">Editorial</span>
                         <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-8 leading-[0.9]">
-                            The Journal
+                            Nhật Ký
                         </h1>
                         <p className="text-sm text-muted-text dark:text-dark-text-secondary max-w-2xl mx-auto leading-relaxed font-serif-display">
                             Stories of craftsmanship, heritage, and the art of modern living.
@@ -70,7 +70,7 @@ export default function JournalPage() {
                                 </p>
 
                                 <button className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-all">
-                                    Read Article
+                                    Đọc Bài Viết
                                     <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
                                 </button>
                             </article>

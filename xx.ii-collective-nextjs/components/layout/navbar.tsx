@@ -25,13 +25,16 @@ export function Navbar() {
 
                     {/* Desktop Left Nav */}
                     <div className="hidden lg:flex items-center gap-8">
-                        <Link href="/shop" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/shop')}`}>
+                        <Link href="/cua-hang" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/cua-hang')}`}>
                             Cửa Hàng
                         </Link>
-                        <Link href="/journal" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/journal')}`}>
+                        <Link href="/nhat-ky" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/nhat-ky')}`}>
                             Bộ Sưu Tập
                         </Link>
-                        <Link href="/contact" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/contact')}`}>
+                        <Link href="/cam-hung" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/cam-hung')}`}>
+                            Cảm Hứng
+                        </Link>
+                        <Link href="/lien-he" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/lien-he')}`}>
                             Liên Hệ
                         </Link>
                     </div>
@@ -48,10 +51,10 @@ export function Navbar() {
                         <button className="hidden sm:block text-dark-text hover:text-primary transition-colors">
                             <span className="material-symbols-outlined text-[22px]">search</span>
                         </button>
-                        <Link href="/profile" className={`hidden sm:block transition-colors ${isActive('/profile')}`}>
+                        <Link href="/ho-so" className={`hidden sm:block transition-colors ${isActive('/ho-so')}`}>
                             <span className="material-symbols-outlined text-[22px]">person</span>
                         </Link>
-                        <Link href="/cart" className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase hover:underline">
+                        <Link href="/gio-hang" className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase hover:underline">
                             <span className="hidden sm:inline">Giỏ Hàng</span>
                             <span className="relative">
                                 <span className="material-symbols-outlined text-[22px]">shopping_bag</span>
@@ -69,10 +72,11 @@ export function Navbar() {
             {/* Mobile Menu Overlay */}
             <div className={`fixed inset-0 z-40 bg-white transform transition-transform duration-300 lg:hidden pt-24 px-8 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <nav className="flex flex-col gap-6">
-                    <Link href="/shop" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Cửa Hàng</Link>
-                    <Link href="/journal" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Bộ Sưu Tập</Link>
-                    <Link href="/profile" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Hồ Sơ</Link>
-                    <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Liên Hệ</Link>
+                    <Link href="/cua-hang" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Cửa Hàng</Link>
+                    <Link href="/nhat-ky" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Bộ Sưu Tập</Link>
+                    <Link href="/cam-hung" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Cảm Hứng</Link>
+                    <Link href="/ho-so" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Hồ Sơ</Link>
+                    <Link href="/lien-he" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Liên Hệ</Link>
                 </nav>
             </div>
         </>

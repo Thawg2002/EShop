@@ -30,16 +30,16 @@ export function Footer() {
                         <div>
                             <h3 className="text-xs font-bold uppercase tracking-widest mb-4 dark:text-dark-text-primary">Mua Sắm</h3>
                             <ul className="space-y-3 text-sm text-muted-text dark:text-dark-text-secondary">
-                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Sản Phẩm Mới</Link></li>
-                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Bán Chạy</Link></li>
-                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Phụ Kiện</Link></li>
-                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Sale</Link></li>
+                                <li><Link href="/cua-hang" className="hover:text-primary dark:hover:text-primary transition-colors">Sản Phẩm Mới</Link></li>
+                                <li><Link href="/cua-hang" className="hover:text-primary dark:hover:text-primary transition-colors">Bán Chạy</Link></li>
+                                <li><Link href="/cua-hang" className="hover:text-primary dark:hover:text-primary transition-colors">Phụ Kiện</Link></li>
+                                <li><Link href="/cua-hang" className="hover:text-primary dark:hover:text-primary transition-colors">Sale</Link></li>
                             </ul>
                         </div>
                         <div>
                             <h3 className="text-xs font-bold uppercase tracking-widest mb-4 dark:text-dark-text-primary">Công Ty</h3>
                             <ul className="space-y-3 text-sm text-muted-text dark:text-dark-text-secondary">
-                                <li><Link href="/contact" className="hover:text-primary dark:hover:text-primary transition-colors">Về Chúng Tôi</Link></li>
+                                <li><Link href="/lien-he" className="hover:text-primary dark:hover:text-primary transition-colors">Về Chúng Tôi</Link></li>
                                 <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Tuyển Dụng</Link></li>
                                 <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Phát Triển Bền Vững</Link></li>
                                 <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Press</Link></li>
@@ -49,7 +49,7 @@ export function Footer() {
                             <h3 className="text-xs font-bold uppercase tracking-widest mb-4 dark:text-dark-text-primary">Pháp Lý</h3>
                             <ul className="space-y-3 text-sm text-muted-text dark:text-dark-text-secondary">
                                 <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Điều Khoản</Link></li>
-                                <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Quyền Riêng Tư</Link></li>
+                                <li><Link href="/chinh-sach-bao-mat" className="hover:text-primary dark:hover:text-primary transition-colors">Quyền Riêng Tư</Link></li>
                                 <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Đổi Trả</Link></li>
                             </ul>
                         </div>

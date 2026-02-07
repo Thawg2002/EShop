@@ -25,7 +25,7 @@ export default function CartPage() {
                                 <div className="text-center py-24">
                                     <p className="text-sm text-muted-text dark:text-dark-text-secondary mb-8 font-serif-display">Giỏ hàng của bạn đang trống.</p>
                                     <Link
-                                        href="/shop"
+                                        href="/cua-hang"
                                         className="inline-block px-10 py-4 bg-dark-text dark:bg-primary text-white text-xs uppercase tracking-[0.2em] font-bold hover:bg-primary dark:hover:bg-primary-hover transition-colors"
                                     >
                                         Tiếp Tục Mua Sắm

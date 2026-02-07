@@ -42,7 +42,7 @@ export default function HomePage() {
                             {/* Large Featured Product - Left */}
                             {featuredProducts[0] && (
                                 <div className="group relative cursor-pointer md:col-span-6 md:row-span-2 lg:col-span-5">
-                                    <Link href={`/shop/${featuredProducts[0].id}`}>
+                                    <Link href={`/cua-hang/${featuredProducts[0].id}`}>
                                         <div className="relative aspect-[3/4] w-full overflow-hidden bg-off-white dark:bg-dark-card shadow-2xl shadow-gray-200/50 dark:shadow-none">
                                             <div className="absolute inset-0 z-10 bg-white/10 dark:bg-black/10 transition-colors duration-500 group-hover:bg-transparent"></div>
                                             <img
@@ -74,7 +74,7 @@ export default function HomePage() {
                             {/* Medium Product - Top Right */}
                             {featuredProducts[1] && (
                                 <div className="group relative cursor-pointer md:col-span-6 lg:col-span-5 lg:col-start-7 lg:mt-32">
-                                    <Link href={`/shop/${featuredProducts[1].id}`}>
+                                    <Link href={`/cua-hang/${featuredProducts[1].id}`}>
                                         <div className="relative aspect-[3/4] w-full overflow-hidden bg-off-white dark:bg-dark-card shadow-lg">
                                             <img
                                                 src={featuredProducts[1].image}
@@ -96,7 +96,7 @@ export default function HomePage() {
                             {/* Medium Product - Bottom Left */}
                             {featuredProducts[2] && (
                                 <div className="group relative cursor-pointer md:col-span-12 lg:col-span-4 lg:row-start-2 lg:mt-[-80px]">
-                                    <Link href={`/shop/${featuredProducts[2].id}`}>
+                                    <Link href={`/cua-hang/${featuredProducts[2].id}`}>
                                         <div className="relative aspect-[4/5] w-full overflow-hidden bg-off-white dark:bg-dark-card shadow-lg">
                                             <img
                                                 src={featuredProducts[2].image}
@@ -117,7 +117,7 @@ export default function HomePage() {
                             {/* Circular Product - Bottom Right */}
                             {featuredProducts[3] && (
                                 <div className="group relative cursor-pointer md:col-span-6 lg:col-span-3 lg:col-start-6 lg:row-start-2 lg:mt-24">
-                                    <Link href={`/shop/${featuredProducts[3].id}`}>
+                                    <Link href={`/cua-hang/${featuredProducts[3].id}`}>
                                         <div className="relative aspect-square w-full overflow-hidden rounded-full border border-black/10 dark:border-dark-border bg-off-white dark:bg-dark-card shadow-xl transition-colors group-hover:border-primary">
                                             <img
                                                 src={featuredProducts[3].image}

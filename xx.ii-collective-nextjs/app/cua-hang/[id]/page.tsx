@@ -26,7 +26,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <div className="min-h-screen flex items-center justify-center bg-white dark:bg-dark-bg transition-colors pt-24">
                     <div className="text-center">
                         <h1 className="text-4xl font-serif-display italic mb-6 text-dark-text dark:text-dark-text-primary">Không Tìm Thấy</h1>
-                        <Link href="/shop" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">← Quay Lại Cửa Hàng</Link>
+                        <Link href="/cua-hang" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">← Quay Lại Cửa Hàng</Link>
                     </div>
                 </div>
                 <Footer />
@@ -43,7 +43,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
     const handleAddToCart = () => {
         addItem(product, selectedSize, colors[selectedColor].name);
-        router.push('/cart');
+        router.push('/gio-hang');
     };
 
     const sections = [
@@ -67,7 +67,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12">
                     {/* Back Link */}
-                    <Link href="/shop" className="inline-flex items-center text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary transition-colors mb-12">
+                    <Link href="/cua-hang" className="inline-flex items-center text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary transition-colors mb-12">
                         <span className="material-symbols-outlined text-sm mr-2">arrow_back</span>
                         Quay Lại
                     </Link>
@@ -206,7 +206,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                         <h2 className="text-4xl md:text-5xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-12 text-center">Có Thể Bạn Thích</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
                             {PRODUCTS.filter(p => p.id !== product.id).slice(0, 4).map((relatedProduct) => (
-                                <Link href={`/shop/${relatedProduct.id}`} key={relatedProduct.id} className="group">
+                                <Link href={`/cua-hang/${relatedProduct.id}`} key={relatedProduct.id} className="group">
                                     <div className="aspect-[3/4] bg-off-white dark:bg-dark-card mb-4 overflow-hidden">
                                         <img
                                             src={relatedProduct.image}
