@@ -12,8 +12,8 @@ export function CartItemComponent({ item }: CartItemProps) {
     const { updateQuantity, removeItem } = useCartStore();
 
     return (
-        <div className="py-8 first:pt-0 flex gap-6">
-            <div className="relative w-24 h-32 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+        <div className="py-8 first:pt-0 flex flex-col sm:flex-row gap-6 border-b border-gray-100 dark:border-dark-border last:border-0">
+            <div className="relative w-full sm:w-28 h-36 bg-gray-100 dark:bg-dark-card overflow-hidden flex-shrink-0">
                 <Image
                     src={item.image}
                     alt={item.name}
@@ -21,37 +21,49 @@ export function CartItemComponent({ item }: CartItemProps) {
                     className="object-cover"
                 />
             </div>
-            <div className="flex-1 flex flex-col justify-between">
+            <div className="flex-1 flex flex-col justify-between gap-4">
                 <div>
-                    <div className="flex justify-between items-start mb-1">
-                        <h3 className="font-medium text-lg">{item.name}</h3>
-                        <p className="font-medium text-lg">${item.price * item.quantity}.00</p>
+                    <div className="flex justify-between items-start mb-2 gap-4">
+                        <h3 className="font-serif-display text-base sm:text-lg font-medium dark:text-dark-text tracking-wide">
+                            {item.name}
+                        </h3>
+                        <p className="font-bold text-base sm:text-lg dark:text-dark-text whitespace-nowrap">
+                            ${item.price * item.quantity}
+                        </p>
                     </div>
-                    <p className="text-sm text-gray-500 mb-1">
-                        Size: {item.selectedSize} | Color: {item.color}
+                    <p className="text-[11px] text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
+                        Kích thước: {item.selectedSize} | Màu: {item.color}
                     </p>
                 </div>
-                <div className="flex justify-between items-end">
-                    <div className="flex items-center border border-gray-200 rounded-lg h-9">
+                <div className="flex justify-between items-center">
+                    <div className="flex items-center border border-gray-200 dark:border-dark-border h-10">
                         <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="w-9 h-full flex items-center justify-center hover:bg-gray-50"
+                            className="w-10 h-full flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-dark-text transition-colors"
+                            aria-label="Giảm số lượng"
                         >
-                            -
+                            <span className="material-symbols-outlined text-[18px]">remove</span>
                         </button>
-                        <span className="w-10 text-center text-sm">{item.quantity}</span>
+                        <span className="w-12 text-center text-sm font-medium dark:text-dark-text">
+                            {item.quantity}
+                        </span>
                         <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-9 h-full flex items-center justify-center hover:bg-gray-50"
+                            className="w-10 h-full flex items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-dark-text transition-colors"
+                            aria-label="Tăng số lượng"
                         >
-                            +
+                            <span className="material-symbols-outlined text-[18px]">add</span>
                         </button>
                     </div>
                     <button
                         onClick={() => removeItem(item.id)}
-                        className="text-sm text-red-500 hover:underline"
+                        className="flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-red-500 transition-colors uppercase tracking-wider font-medium group"
+                        aria-label="Xóa sản phẩm"
                     >
-                        Remove
+                        <span className="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">
+                            delete
+                        </span>
+                        Xóa
                     </button>
                 </div>
             </div>

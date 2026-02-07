@@ -1,54 +1,80 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import { ShoppingBagIcon, SearchIcon, UserIcon, MenuIcon, DiamondIcon } from '@/components/icons';
+import { usePathname } from 'next/navigation';
 import { useCartStore } from '@/lib/store';
 
 export function Navbar() {
+    const pathname = usePathname();
     const itemCount = useCartStore((state) => state.getItemCount());
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const isActive = (path: string) => pathname === path ? "text-primary" : "text-dark-text hover:text-primary";
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md">
-            <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-                <div className="flex lg:hidden">
-                    <button className="text-secondary"><MenuIcon /></button>
-                </div>
+        <>
+            <header className="fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-black/5 transition-all duration-300">
+                <div className="flex h-20 items-center justify-between px-6 lg:px-12">
+                    {/* Mobile Menu Toggle */}
+                    <div className="flex items-center gap-4 lg:hidden">
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
+                            <span className="material-symbols-outlined">menu</span>
+                        </button>
+                    </div>
 
-                <Link href="/" className="flex items-center gap-2">
-                    <DiamondIcon className="text-primary w-6 h-6" />
-                    <span className="text-2xl font-serif font-bold tracking-widest text-secondary">XX.II</span>
-                </Link>
+                    {/* Desktop Left Nav */}
+                    <div className="hidden lg:flex items-center gap-8">
+                        <Link href="/shop" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/shop')}`}>
+                            Cửa Hàng
+                        </Link>
+                        <Link href="/journal" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/journal')}`}>
+                            Bộ Sưu Tập
+                        </Link>
+                        <Link href="/contact" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/contact')}`}>
+                            Liên Hệ
+                        </Link>
+                    </div>
 
-                <nav className="hidden gap-8 lg:flex">
-                    <Link href="/shop" className="text-sm font-medium hover:text-primary transition-colors">
-                        Shop
-                    </Link>
-                    <Link href="/shop" className="text-sm font-medium hover:text-primary transition-colors">
-                        Collections
-                    </Link>
-                    <Link href="/journal" className="text-sm font-medium hover:text-primary transition-colors">
-                        Journal
-                    </Link>
-                    <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">
-                        About
-                    </Link>
-                </nav>
+                    {/* Logo Center */}
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                        <Link href="/" className="text-3xl font-serif-display font-medium tracking-widest italic text-dark-text">
+                            XX.II
+                        </Link>
+                    </div>
 
-                <div className="flex items-center gap-6">
-                    <button className="hover:text-primary transition-colors"><SearchIcon /></button>
-                    <Link href="/login" className="hover:text-primary transition-colors">
-                        <UserIcon />
-                    </Link>
-                    <Link href="/cart" className="relative hover:text-primary transition-colors">
-                        <ShoppingBagIcon />
-                        {itemCount > 0 && (
-                            <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                                {itemCount}
+                    {/* Right Icons */}
+                    <div className="flex items-center gap-6">
+                        <button className="hidden sm:block text-dark-text hover:text-primary transition-colors">
+                            <span className="material-symbols-outlined text-[22px]">search</span>
+                        </button>
+                        <Link href="/profile" className={`hidden sm:block transition-colors ${isActive('/profile')}`}>
+                            <span className="material-symbols-outlined text-[22px]">person</span>
+                        </Link>
+                        <Link href="/cart" className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase hover:underline">
+                            <span className="hidden sm:inline">Giỏ Hàng</span>
+                            <span className="relative">
+                                <span className="material-symbols-outlined text-[22px]">shopping_bag</span>
+                                {itemCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary text-[8px] text-white">
+                                        {itemCount}
+                                    </span>
+                                )}
                             </span>
-                        )}
-                    </Link>
+                        </Link>
+                    </div>
                 </div>
+            </header>
+
+            {/* Mobile Menu Overlay */}
+            <div className={`fixed inset-0 z-40 bg-white transform transition-transform duration-300 lg:hidden pt-24 px-8 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <nav className="flex flex-col gap-6">
+                    <Link href="/shop" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Cửa Hàng</Link>
+                    <Link href="/journal" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Bộ Sưu Tập</Link>
+                    <Link href="/profile" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Hồ Sơ</Link>
+                    <Link href="/contact" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Liên Hệ</Link>
+                </nav>
             </div>
-        </header>
+        </>
     );
 }

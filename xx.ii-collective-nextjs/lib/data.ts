@@ -3,11 +3,11 @@ import { Product, Order, Address } from '@/types';
 export const PRODUCTS: Product[] = [
     {
         id: 1,
-        name: 'Silk Slip Dress',
+        name: 'Váy Lụa Trơn',
         price: 240,
-        category: 'Dresses',
-        color: 'Ivory',
-        description: 'Expertly tailored from Italian silk, this slip dress offers a relaxed fit with a refined finish.',
+        category: 'Váy',
+        color: 'Ngà',
+        description: 'Được thiết kế thủ công từ lụa Ý cao cấp, chiếc váy này mang lại sự thoải mái và sang trọng.',
         image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=1000&auto=format&fit=crop',
         images: [
             'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=1000&auto=format&fit=crop',
@@ -17,41 +17,41 @@ export const PRODUCTS: Product[] = [
     },
     {
         id: 2,
-        name: 'Linen Blazer',
+        name: 'Áo Vest Linen',
         price: 350,
-        category: 'Outerwear',
-        color: 'Sand',
+        category: 'Áo Khoác',
+        color: 'Cát',
         image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=1000&auto=format&fit=crop'
     },
     {
         id: 3,
-        name: 'Wide Leg Trousers',
+        name: 'Quần Ống Rộng',
         price: 180,
-        category: 'Trousers',
-        color: 'White',
+        category: 'Quần',
+        color: 'Trắng',
         image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop'
     },
     {
         id: 4,
-        name: 'Leather Mules',
+        name: 'Giày Da Cao Gót',
         price: 210,
-        category: 'Shoes',
-        color: 'Tan',
+        category: 'Giày',
+        color: 'Da Bò',
         image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=1000&auto=format&fit=crop'
     },
     {
         id: 5,
-        name: 'Structured Coat',
+        name: 'Áo Khoác Dáng Dài',
         price: 420,
-        category: 'Outerwear',
-        color: 'Oatmeal',
+        category: 'Áo Khoác',
+        color: 'Kem',
         image: 'https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?q=80&w=1000&auto=format&fit=crop'
     },
     {
         id: 6,
-        name: 'Evening Slip',
+        name: 'Váy Dạ Hội',
         price: 260,
-        category: 'Dresses',
+        category: 'Váy',
         color: 'Champagne',
         image: 'https://images.unsplash.com/photo-1612336307429-8a898d10e223?q=80&w=1000&auto=format&fit=crop'
     }
@@ -60,21 +60,21 @@ export const PRODUCTS: Product[] = [
 export const ORDERS: Order[] = [
     {
         id: '204-99812-XX',
-        date: 'February 12, 2024',
+        date: '12 Tháng 2, 2024',
         total: 590.00,
         status: 'Processing',
         items: []
     },
     {
         id: '204-88123-XX',
-        date: 'January 24, 2024',
+        date: '24 Tháng 1, 2024',
         total: 210.00,
         status: 'Delivered',
         items: []
     },
     {
         id: '204-77210-XX',
-        date: 'January 10, 2024',
+        date: '10 Tháng 1, 2024',
         total: 180.00,
         status: 'Shipped',
         items: []
@@ -84,24 +84,24 @@ export const ORDERS: Order[] = [
 export const ADDRESSES: Address[] = [
     {
         id: 1,
-        name: 'Eleanor Pena',
-        type: 'Home',
-        street: '4517 Washington Ave.',
-        city: 'Manchester',
-        state: 'Kentucky',
-        zip: '39495',
-        phone: '+1 (202) 555-0133',
+        name: 'Nguyễn Văn A',
+        type: 'Nhà Riêng',
+        street: '123 Đường Láng',
+        city: 'Hà Nội',
+        state: 'Đống Đa',
+        zip: '100000',
+        phone: '+84 98 765 4321',
         isDefault: true
     },
     {
         id: 2,
-        name: 'Eleanor Pena (Office)',
-        type: 'Office',
-        street: '3891 Ranchview Dr.',
-        city: 'Richardson',
-        state: 'California',
-        zip: '62639',
-        phone: '+1 (219) 555-0114',
+        name: 'Nguyễn Văn A (Văn Phòng)',
+        type: 'Văn Phòng',
+        street: '456 Phố Huế',
+        city: 'Hà Nội',
+        state: 'Hai Bà Trưng',
+        zip: '100000',
+        phone: '+84 97 654 3210',
         isDefault: false
     },
 ];

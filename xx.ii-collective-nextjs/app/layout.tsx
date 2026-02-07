@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
-import { Cinzel, Inter } from 'next/font/google';
+import { Bodoni_Moda, Inter } from 'next/font/google';
 import './globals.css';
-import { Navbar } from '@/components/layout/navbar';
-import { Footer } from '@/components/layout/footer';
 
-const cinzel = Cinzel({
+const bodoniModa = Bodoni_Moda({
     subsets: ['latin'],
-    variable: '--font-cinzel',
+    variable: '--font-bodoni',
     display: 'swap',
+    style: ['normal', 'italic'],
+    weight: ['400', '500', '600', '700', '800', '900'],
 });
 
 const inter = Inter({
@@ -42,8 +42,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${cinzel.variable} ${inter.variable}`}>
-            <body className="min-h-screen flex flex-col font-sans text-secondary antialiased selection:bg-primary/20 bg-white">
+        <html lang="vi" className={`${bodoniModa.variable} ${inter.variable}`}>
+            <head>
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+                    rel="stylesheet"
+                />
+            </head>
+            <body className="min-h-screen flex flex-col font-sans text-dark-text dark:text-dark-text-primary antialiased selection:bg-primary/20 bg-white dark:bg-dark-bg transition-colors">
                 {children}
             </body>
         </html>

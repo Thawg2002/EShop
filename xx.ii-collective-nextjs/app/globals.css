@@ -7,11 +7,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
+.font-serif-display {
+  font-family: var(--font-bodoni), serif;
+}
+
+.scrollbar-hide::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-.scrollbar-hide {
+.scrollbar-hide,
+.no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

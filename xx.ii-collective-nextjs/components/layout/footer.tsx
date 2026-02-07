@@ -1,65 +1,63 @@
 import Link from 'next/link';
-import { DiamondIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 
 export function Footer() {
     return (
-        <footer className="bg-white border-t border-gray-100 pt-16 pb-8">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+        <footer className="bg-off-white dark:bg-dark-bg border-t border-black/5 dark:border-dark-border pt-16 pb-8 transition-colors">
+            <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
                     <div className="lg:col-span-5">
-                        <div className="flex items-center gap-2 mb-4">
-                            <DiamondIcon className="text-primary w-5 h-5" />
-                            <span className="text-xl font-serif font-bold tracking-widest">XX.II</span>
-                        </div>
-                        <p className="text-sm text-gray-500 max-w-sm leading-relaxed">
-                            Elevating everyday essentials with a focus on quality, sustainability, and timeless design. Join our world.
+                        <Link href="/" className="text-2xl font-serif-display font-medium tracking-widest italic text-dark-text dark:text-dark-text-primary inline-block mb-4">
+                            XX.II
+                        </Link>
+                        <p className="text-sm text-muted-text dark:text-dark-text-secondary max-w-sm leading-relaxed font-light">
+                            Nâng tầm phong cách hàng ngày với chất lượng, bền vững và thiết kế vượt thời gian. Tham gia cùng chúng tôi.
                         </p>
-                        <div className="mt-6">
-                            <h3 className="text-sm font-semibold mb-2">Unlock 10% Off Your First Order</h3>
+                        <div className="mt-8">
+                            <h3 className="text-xs font-bold uppercase tracking-widest mb-3 dark:text-dark-text-primary">Giảm 10% Cho Đơn Hàng Đầu Tiên</h3>
                             <div className="flex gap-2 max-w-sm">
                                 <input
                                     type="email"
-                                    placeholder="Enter your email"
-                                    className="flex-1 bg-light-bg border-none rounded px-4 py-2 text-sm focus:ring-1 focus:ring-primary"
+                                    placeholder="Email của bạn"
+                                    className="flex-1 bg-white dark:bg-dark-card dark:text-dark-text-primary border border-gray-200 dark:border-dark-border px-4 py-2 text-sm focus:ring-1 focus:ring-primary focus:border-primary"
                                 />
-                                <Button size="sm" className="px-4 py-2">Subscribe</Button>
+                                <Button size="sm" className="px-6 py-2 text-xs font-bold uppercase tracking-wider">Đăng Ký</Button>
                             </div>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:col-span-7">
                         <div>
-                            <h3 className="text-sm font-semibold mb-4">Shop</h3>
-                            <ul className="space-y-3 text-sm text-gray-500">
-                                <li><Link href="/shop" className="hover:text-primary">New Arrivals</Link></li>
-                                <li><Link href="/shop" className="hover:text-primary">Best Sellers</Link></li>
-                                <li><Link href="/shop" className="hover:text-primary">Accessories</Link></li>
-                                <li><Link href="/shop" className="hover:text-primary">Sale</Link></li>
+                            <h3 className="text-xs font-bold uppercase tracking-widest mb-4 dark:text-dark-text-primary">Mua Sắm</h3>
+                            <ul className="space-y-3 text-sm text-muted-text dark:text-dark-text-secondary">
+                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Sản Phẩm Mới</Link></li>
+                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Bán Chạy</Link></li>
+                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Phụ Kiện</Link></li>
+                                <li><Link href="/shop" className="hover:text-primary dark:hover:text-primary transition-colors">Sale</Link></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-sm font-semibold mb-4">Company</h3>
-                            <ul className="space-y-3 text-sm text-gray-500">
-                                <li><Link href="/contact" className="hover:text-primary">About Us</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Careers</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Sustainability</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Press</Link></li>
+                            <h3 className="text-xs font-bold uppercase tracking-widest mb-4 dark:text-dark-text-primary">Công Ty</h3>
+                            <ul className="space-y-3 text-sm text-muted-text dark:text-dark-text-secondary">
+                                <li><Link href="/contact" className="hover:text-primary dark:hover:text-primary transition-colors">Về Chúng Tôi</Link></li>
+                                <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Tuyển Dụng</Link></li>
+                                <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Phát Triển Bền Vững</Link></li>
+                                <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Press</Link></li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="text-sm font-semibold mb-4">Legal</h3>
-                            <ul className="space-y-3 text-sm text-gray-500">
-                                <li><Link href="#" className="hover:text-primary">Terms</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Privacy</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Returns</Link></li>
+                            <h3 className="text-xs font-bold uppercase tracking-widest mb-4 dark:text-dark-text-primary">Pháp Lý</h3>
+                            <ul className="space-y-3 text-sm text-muted-text dark:text-dark-text-secondary">
+                                <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Điều Khoản</Link></li>
+                                <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Quyền Riêng Tư</Link></li>
+                                <li><Link href="#" className="hover:text-primary dark:hover:text-primary transition-colors">Đổi Trả</Link></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-gray-100 text-center md:text-left">
-                    <p className="text-xs text-gray-400">© 2024 XX.II Fashion. All rights reserved.</p>
+                <div className="mt-12 pt-8 border-t border-black/5 dark:border-dark-border text-center">
+                    <p className="text-[10px] uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">© 2024 XX.II Fashion. Bản quyền thuộc về XX.II.</p>
                 </div>
             </div>
         </footer>

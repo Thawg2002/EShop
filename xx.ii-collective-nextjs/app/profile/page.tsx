@@ -2,12 +2,10 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ShoppingBagIcon, UserIcon, TruckIcon, DiamondIcon, SearchIcon } from '@/components/icons';
 import { OrderCard } from '@/components/features/order-card';
 import { AddressCard } from '@/components/features/address-card';
 import { ORDERS, ADDRESSES } from '@/lib/data';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 
@@ -19,46 +17,51 @@ export default function ProfilePage() {
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white">
-                <div className="max-w-7xl mx-auto px-6 py-12">
-                    <div className="flex flex-col lg:flex-row gap-12 min-h-[600px]">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
+                <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 min-h-[600px]">
                         {/* Sidebar */}
-                        <aside className="w-full lg:w-72 flex-shrink-0">
-                            <div className="sticky top-24">
-                                <div className="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
-                                    <div className="relative w-14 h-14 bg-gray-200 rounded-full overflow-hidden">
+                        <aside className="w-full lg:w-80 flex-shrink-0">
+                            <div className="sticky top-32">
+                                {/* Profile Header */}
+                                <div className="flex items-center gap-4 mb-10 pb-8 border-b border-black/5 dark:border-dark-border">
+                                    <div className="relative w-16 h-16 bg-off-white dark:bg-dark-card overflow-hidden">
                                         <Image
                                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop"
                                             alt="Profile"
                                             fill
-                                            className="object-cover"
+                                            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
                                         />
                                     </div>
                                     <div>
-                                        <h2 className="font-semibold text-lg">Isabella Ross</h2>
-                                        <p className="text-xs text-gray-500">Diamond Member</p>
+                                        <h2 className="text-xl font-serif-display italic text-dark-text dark:text-dark-text-primary">Isabella Ross</h2>
+                                        <p className="text-[10px] uppercase tracking-widest text-primary">Diamond Member</p>
                                     </div>
                                 </div>
-                                <nav className="space-y-1">
+
+                                {/* Navigation */}
+                                <nav className="space-y-2">
                                     {[
-                                        { id: 'info' as const, label: 'Account Info', icon: <UserIcon className="w-5 h-5" /> },
-                                        { id: 'orders' as const, label: 'Order History', icon: <ShoppingBagIcon className="w-5 h-5" /> },
-                                        { id: 'addresses' as const, label: 'Saved Addresses', icon: <TruckIcon className="w-5 h-5" /> },
-                                        { id: 'payment' as const, label: 'Payment Methods', icon: <DiamondIcon className="w-5 h-5" /> }
+                                        { id: 'info' as const, label: 'Thông Tin', icon: 'person' },
+                                        { id: 'orders' as const, label: 'Đơn Hàng', icon: 'shopping_bag' },
+                                        { id: 'addresses' as const, label: 'Địa Chỉ', icon: 'location_on' },
+                                        { id: 'payment' as const, label: 'Thanh Toán', icon: 'credit_card' }
                                     ].map(item => (
                                         <button
                                             key={item.id}
                                             onClick={() => setActiveTab(item.id)}
-                                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${activeTab === item.id
-                                                    ? 'bg-primary/5 text-primary font-bold'
-                                                    : 'text-gray-600 hover:bg-light-bg'
+                                            className={`w-full flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest font-bold transition-all ${activeTab === item.id
+                                                    ? 'bg-primary text-white'
+                                                    : 'text-muted-text dark:text-dark-text-secondary hover:bg-off-white dark:hover:bg-dark-card'
                                                 }`}
                                         >
-                                            <span className="w-5">{item.icon}</span> {item.label}
+                                            <span className="material-symbols-outlined text-lg">{item.icon}</span>
+                                            {item.label}
                                         </button>
                                     ))}
-                                    <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 mt-6 border-t border-gray-100 pt-6">
-                                        Log Out
+                                    <button className="w-full flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest font-bold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 mt-8 border-t border-black/5 dark:border-dark-border pt-8">
+                                        <span className="material-symbols-outlined text-lg">logout</span>
+                                        Đăng Xuất
                                     </button>
                                 </nav>
                             </div>
@@ -67,19 +70,19 @@ export default function ProfilePage() {
                         {/* Content */}
                         <div className="flex-1">
                             {activeTab === 'orders' && (
-                                <div className="space-y-8">
-                                    <div className="flex justify-between items-end">
+                                <div className="space-y-10">
+                                    <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
                                         <div>
-                                            <h1 className="text-3xl font-serif font-bold mb-2">Order History</h1>
-                                            <p className="text-gray-500">View details and check status of recent purchases.</p>
+                                            <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Đơn Hàng</h1>
+                                            <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Lịch sử mua hàng của bạn</p>
                                         </div>
                                         <div className="relative">
                                             <input
                                                 type="text"
-                                                placeholder="Search orders..."
-                                                className="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:ring-primary focus:border-primary w-64"
+                                                placeholder="Tìm kiếm đơn hàng..."
+                                                className="pl-10 pr-4 py-3 border border-black/10 dark:border-dark-border text-sm focus:ring-1 focus:ring-primary focus:border-primary w-full md:w-80 bg-white dark:bg-dark-card dark:text-dark-text-primary"
                                             />
-                                            <div className="absolute left-3 top-2.5 text-gray-400"><SearchIcon className="w-4 h-4" /></div>
+                                            <span className="material-symbols-outlined absolute left-3 top-3 text-muted-text dark:text-dark-text-secondary text-lg">search</span>
                                         </div>
                                     </div>
 
@@ -90,64 +93,75 @@ export default function ProfilePage() {
                             )}
 
                             {activeTab === 'addresses' && (
-                                <div className="space-y-8">
-                                    <div className="flex justify-between items-end">
-                                        <h1 className="text-3xl font-serif font-bold">Saved Addresses</h1>
+                                <div className="space-y-10">
+                                    <div>
+                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Địa Chỉ</h1>
+                                        <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Quản lý địa chỉ giao hàng</p>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {ADDRESSES.map(addr => <AddressCard key={addr.id} address={addr} />)}
-                                        <button className="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center min-h-[240px] text-gray-500 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all">
-                                            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3"><span className="text-2xl">+</span></div>
-                                            <span className="font-bold text-sm">Add New Address</span>
+                                        <button className="border-2 border-dashed border-black/10 dark:border-dark-border p-8 flex flex-col items-center justify-center min-h-[240px] text-muted-text dark:text-dark-text-secondary hover:border-primary hover:text-primary hover:bg-off-white dark:hover:bg-dark-card transition-all">
+                                            <span className="material-symbols-outlined text-5xl mb-4">add_circle</span>
+                                            <span className="text-xs uppercase tracking-widest font-bold">Thêm Địa Chỉ Mới</span>
                                         </button>
                                     </div>
                                 </div>
                             )}
 
                             {activeTab === 'payment' && (
-                                <div className="space-y-8">
-                                    <h1 className="text-3xl font-serif font-bold">Payment Methods</h1>
+                                <div className="space-y-10">
+                                    <div>
+                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Thanh Toán</h1>
+                                        <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Quản lý phương thức thanh toán</p>
+                                    </div>
                                     <div className="space-y-4">
-                                        <div className="border border-gray-200 rounded-lg p-6 flex justify-between items-center">
+                                        <div className="border border-black/10 dark:border-dark-border p-6 flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-off-white/50 dark:bg-dark-card/50">
                                             <div className="flex items-center gap-5">
-                                                <div className="w-16 h-10 border border-gray-200 bg-gray-50 rounded flex items-center justify-center font-bold text-blue-800 italic">VISA</div>
+                                                <div className="w-16 h-10 border border-black/10 dark:border-dark-border bg-white dark:bg-dark-surface flex items-center justify-center font-bold text-blue-800 italic">VISA</div>
                                                 <div>
-                                                    <p className="font-bold flex items-center gap-2">
+                                                    <p className="font-bold flex items-center gap-2 text-dark-text dark:text-dark-text-primary">
                                                         Visa ending in 4242
-                                                        <span className="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded uppercase">Default</span>
+                                                        <span className="bg-primary/10 text-primary text-[9px] px-2 py-1 uppercase tracking-widest">Mặc Định</span>
                                                     </p>
-                                                    <p className="text-sm text-gray-500">Expires 12/26</p>
+                                                    <p className="text-xs text-muted-text dark:text-dark-text-secondary mt-1">Hết hạn 12/26</p>
                                                 </div>
                                             </div>
-                                            <div className="flex gap-3 text-sm font-medium text-gray-500">
-                                                <button className="hover:text-primary">Edit</button>
-                                                <button className="hover:text-red-500">Remove</button>
+                                            <div className="flex gap-4 text-xs uppercase tracking-widest font-bold text-muted-text dark:text-dark-text-secondary">
+                                                <button className="hover:text-primary transition-colors">Sửa</button>
+                                                <button className="hover:text-red-500 transition-colors">Xóa</button>
                                             </div>
                                         </div>
-                                        <div className="border border-dashed border-gray-300 rounded-lg p-8 text-center bg-white/50 hover:bg-white transition-colors">
-                                            <Button>Add Payment Method</Button>
-                                        </div>
+                                        <button className="w-full border-2 border-dashed border-black/10 dark:border-dark-border p-8 text-center bg-white dark:bg-dark-bg hover:bg-off-white dark:hover:bg-dark-card transition-colors flex items-center justify-center gap-3">
+                                            <span className="material-symbols-outlined">add</span>
+                                            <span className="text-xs uppercase tracking-widest font-bold">Thêm Phương Thức Thanh Toán</span>
+                                        </button>
                                     </div>
                                 </div>
                             )}
 
                             {activeTab === 'info' && (
-                                <div className="max-w-xl">
-                                    <h1 className="text-3xl font-serif font-bold mb-8">Personal Information</h1>
-                                    <div className="grid grid-cols-2 gap-6 mb-6">
-                                        <Input label="First Name" defaultValue="Isabella" />
-                                        <Input label="Last Name" defaultValue="Ross" />
+                                <div className="max-w-2xl">
+                                    <div className="mb-10">
+                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Thông Tin</h1>
+                                        <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Cập nhật thông tin cá nhân</p>
                                     </div>
-                                    <div className="mb-6">
+                                    <div className="space-y-6">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <Input label="Họ" defaultValue="Isabella" />
+                                            <Input label="Tên" defaultValue="Ross" />
+                                        </div>
                                         <Input
                                             label="Email"
                                             type="email"
                                             defaultValue="isabella.ross@example.com"
                                             disabled
-                                            className="bg-gray-50 text-gray-500"
+                                            className="bg-off-white dark:bg-dark-card text-muted-text dark:text-dark-text-secondary"
                                         />
+                                        <Input label="Số Điện Thoại" defaultValue="+84 123 456 789" />
+                                        <button className="w-full md:w-auto px-10 py-4 bg-dark-text dark:bg-primary text-white text-xs uppercase tracking-[0.2em] font-bold hover:bg-primary dark:hover:bg-primary-hover transition-colors">
+                                            Lưu Thay Đổi
+                                        </button>
                                     </div>
-                                    <Button>Save Changes</Button>
                                 </div>
                             )}
                         </div>

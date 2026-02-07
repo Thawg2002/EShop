@@ -6,10 +6,6 @@ import { Footer } from '@/components/layout/footer';
 export const metadata: Metadata = {
     title: 'Journal | XX.II Collective',
     description: 'Stories of craftsmanship, heritage, and the art of modern living.',
-    openGraph: {
-        title: 'The Journal | XX.II Collective',
-        description: 'Editorial stories and insights',
-    },
 };
 
 const articles = [
@@ -19,7 +15,7 @@ const articles = [
         category: 'Trends',
         date: 'Oct 24, 2023',
         excerpt: 'Wide silhouettes are here to stay. Discover how to style the season\'s most commanding look with effortless sophistication.',
-        image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070',
     },
     {
         id: 2,
@@ -27,7 +23,7 @@ const articles = [
         category: 'Heritage',
         date: 'Oct 18, 2023',
         excerpt: 'A retrospective look at the defining moments that shaped our design philosophy over two decades of minimalist excellence.',
-        image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070',
     },
 ];
 
@@ -35,36 +31,48 @@ export default function JournalPage() {
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white">
-                <div className="max-w-7xl mx-auto px-6 py-16">
-                    <div className="text-center mb-16">
-                        <span className="text-primary font-bold tracking-widest uppercase text-xs">Editorial</span>
-                        <h1 className="text-5xl font-serif mt-3 mb-6">The Journal</h1>
-                        <p className="text-gray-500 max-w-2xl mx-auto">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
+                <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-28">
+                    <div className="text-center mb-24 md:mb-32">
+                        <span className="text-primary font-bold uppercase text-[10px] tracking-[0.6em] mb-6 block">Editorial</span>
+                        <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-8 leading-[0.9]">
+                            The Journal
+                        </h1>
+                        <p className="text-sm text-muted-text dark:text-dark-text-secondary max-w-2xl mx-auto leading-relaxed font-serif-display">
                             Stories of craftsmanship, heritage, and the art of modern living.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
                         {articles.map(article => (
                             <article key={article.id} className="group cursor-pointer">
-                                <div className="aspect-[4/3] bg-gray-100 overflow-hidden mb-6 relative">
-                                    <Image
+                                <div className="aspect-[4/5] bg-off-white dark:bg-dark-card overflow-hidden mb-10 relative">
+                                    <img
                                         src={article.image}
                                         alt={article.title}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                        className="w-full h-full object-cover grayscale transition-all duration-[1.5s] group-hover:grayscale-0 group-hover:scale-110"
                                     />
+                                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 </div>
-                                <div className="flex items-center gap-3 text-xs font-bold uppercase text-gray-500 mb-3">
-                                    <span className="text-primary">{article.category}</span>
-                                    <span>•</span>
-                                    <span>{article.date}</span>
+
+                                <div className="flex items-center gap-4 mb-6">
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary">{article.category}</span>
+                                    <span className="w-1 h-1 rounded-full bg-black/10 dark:bg-dark-border"></span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">{article.date}</span>
                                 </div>
-                                <h2 className="text-2xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
+
+                                <h2 className="text-3xl md:text-4xl font-serif-display italic mb-6 text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-colors leading-tight">
                                     {article.title}
                                 </h2>
-                                <p className="text-gray-500 line-clamp-3">{article.excerpt}</p>
+
+                                <p className="text-sm text-muted-text dark:text-dark-text-secondary leading-relaxed mb-8 line-clamp-3 font-serif-display">
+                                    {article.excerpt}
+                                </p>
+
+                                <button className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-all">
+                                    Read Article
+                                    <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+                                </button>
                             </article>
                         ))}
                     </div>
