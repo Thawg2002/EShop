@@ -10,20 +10,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#5e3a73",
-        "primary-hover": "#4a2c5c",
+        primary: {
+          DEFAULT: "#c5a059",
+          hover: "#a38241",
+          light: "#e5c17e",
+        },
         secondary: "#211d11",
         "off-white": "#f8f7f6",
         "light-bg": "#f8f7f6",
         "dark-text": "#1a1a1a",
         "muted-text": "#666666",
-        // Dark Mode Color System - Base: #0F1729
-        "dark-bg": "#0F1729", // Main dark background
-        "dark-card": "#1a2332", // Cards & containers (lighter than bg)
-        "dark-surface": "#0a0f1a", // Deeper surfaces (darker than bg)
-        "dark-border": "#2a3544", // Borders & dividers
-        "dark-text-primary": "#e5e7eb", // Primary text color (dark mode)
-        "dark-text-secondary": "#9ca3af", // Secondary text color (dark mode)
+        gold: {
+          50: "#fbf8f1",
+          100: "#f4eddb",
+          200: "#e9dbba",
+          300: "#d9c08d",
+          400: "#c5a059",
+          500: "#b48c47",
+          600: "#9c713a",
+          700: "#825a32",
+          800: "#6b4a2d",
+          900: "#5a3f29",
+        },
+        luxury: {
+          cream: "#fdf8f4",
+          black: "#050505",
+          charcoal: "#0a0a0a",
+          onyx: "#1a1a1b",
+          "warm-grey": "#8e8e8e",
+          "champagne-gold": "#d4af37",
+          "slate-grey": "#4a4a4b",
+          porcelain: "#f2f2f2",
+        },
+        // Dark Mode Color System
+        "dark-bg": "#050505",
+        "dark-card": "#0a0a0a",
+        "dark-surface": "#000000",
+        "dark-border": "rgba(255,255,255,0.05)",
+        "dark-text-primary": "#fdf8f4",
+        "dark-text-secondary": "#a3a3a3",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "serif"],
@@ -36,6 +61,10 @@ const config: Config = {
       },
       letterSpacing: {
         "widest-xl": "0.2em",
+      },
+      boxShadow: {
+        premium: "0 10px 50px -10px rgba(0, 0, 0, 0.05)",
+        "premium-hover": "0 20px 70px -15px rgba(0, 0, 0, 0.08)",
       },
     },
   },

@@ -35,7 +35,7 @@ export default function ShopPage() {
                         <div>
                             <h2 className="font-serif-display text-xl italic mb-4 text-dark-text dark:text-dark-text-primary">Bộ Lọc</h2>
                             <div className="mb-8">
-                                <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-dark-text-secondary mb-3">Kích Thước</h3>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary mb-3">Kích Thước</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {['XS', 'S', 'M', 'L', 'XL'].map(size => (
                                         <button key={size} className="w-8 h-8 flex items-center justify-center border border-slate-200 dark:border-dark-border text-xs hover:bg-black hover:text-white dark:hover:bg-primary transition-colors">
@@ -45,7 +45,7 @@ export default function ShopPage() {
                                 </div>
                             </div>
                             <div className="mb-8">
-                                <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-dark-text-secondary mb-3">Màu Sắc</h3>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary mb-3">Màu Sắc</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {[
                                         { name: 'Đen', color: 'bg-black' },
@@ -62,11 +62,11 @@ export default function ShopPage() {
                                 </div>
                             </div>
                             <div>
-                                <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-dark-text-secondary mb-2">Giá</h3>
+                                <h3 className="text-xs font-bold uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary mb-2">Giá</h3>
                                 <ul className="space-y-2">
-                                    <li><a href="#" className="block text-[10px] text-muted-text dark:text-dark-text-secondary hover:text-black dark:hover:text-primary">Dưới $100</a></li>
-                                    <li><a href="#" className="block text-[10px] text-muted-text dark:text-dark-text-secondary hover:text-black dark:hover:text-primary">$100 - $300</a></li>
-                                    <li><a href="#" className="block text-[10px] text-muted-text dark:text-dark-text-secondary hover:text-black dark:hover:text-primary">Trên $300</a></li>
+                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-primary transition-colors">Dưới $100</a></li>
+                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-primary transition-colors">$100 - $300</a></li>
+                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-primary transition-colors">Trên $300</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -120,7 +120,7 @@ export default function ShopPage() {
                                         {/* Overlays */}
                                         {product.isBestSeller && (
                                             <div className="absolute top-4 left-4 z-20">
-                                                <span className="inline-block px-3 py-1 bg-white/90 text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
+                                                <span className="inline-block px-3 py-1 bg-white/90 text-[11px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
                                             </div>
                                         )}
 
@@ -140,7 +140,7 @@ export default function ShopPage() {
                                     <div className="mt-4 flex justify-between items-start opacity-70 group-hover:opacity-100 transition-opacity">
                                         <div>
                                             <h3 className="text-lg font-serif-display italic text-dark-text dark:text-dark-text-primary">{product.name}</h3>
-                                            <p className="text-[10px] uppercase tracking-widest text-gray-500 dark:text-dark-text-secondary">{product.category}</p>
+                                            <p className="text-[11px] font-medium uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">{product.category}</p>
                                         </div>
                                         <span className="font-mono text-xs">${product.price}</span>
                                     </div>

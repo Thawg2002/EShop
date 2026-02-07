@@ -143,7 +143,7 @@ export default function InspirationPage() {
                                                     <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
                                                         <span className="material-symbols-outlined text-white text-[14px]">push_pin</span>
                                                     </div>
-                                                    <span className="text-white/80 text-[10px] uppercase tracking-widest">Xem trên Pinterest</span>
+                                                    <span className="text-white/80 text-[11px] uppercase tracking-widest font-medium">Xem trên Pinterest</span>
                                                 </div>
                                             </div>
                                         </a>

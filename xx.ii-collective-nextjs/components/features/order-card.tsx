@@ -16,15 +16,15 @@ export function OrderCard({ order }: OrderCardProps) {
             <div className="bg-light-bg px-6 py-4 border-b border-gray-200 flex flex-wrap justify-between items-center gap-4">
                 <div className="flex gap-8 text-sm">
                     <div>
-                        <p className="text-xs text-gray-500 uppercase mb-1">Placed</p>
+                        <p className="text-xs text-luxury-slate-grey font-bold uppercase mb-1">Placed</p>
                         <p className="font-medium">{order.date}</p>
                     </div>
                     <div>
-                        <p className="text-xs text-gray-500 uppercase mb-1">Total</p>
+                        <p className="text-xs text-luxury-slate-grey font-bold uppercase mb-1">Total</p>
                         <p className="font-medium">${order.total}.00</p>
                     </div>
                     <div>
-                        <p className="text-xs text-gray-500 uppercase mb-1">Order #</p>
+                        <p className="text-xs text-luxury-slate-grey font-bold uppercase mb-1">Order #</p>
                         <p className="font-medium">{order.id}</p>
                     </div>
                 </div>

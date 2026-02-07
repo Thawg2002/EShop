@@ -35,7 +35,7 @@ export default function ProfilePage() {
                                     </div>
                                     <div>
                                         <h2 className="text-xl font-serif-display italic text-dark-text dark:text-dark-text-primary">Isabella Ross</h2>
-                                        <p className="text-[10px] uppercase tracking-widest text-primary">Diamond Member</p>
+                                        <p className="text-[11px] uppercase tracking-widest text-primary font-bold">Diamond Member</p>
                                     </div>
                                 </div>
 
@@ -51,8 +51,8 @@ export default function ProfilePage() {
                                             key={item.id}
                                             onClick={() => setActiveTab(item.id)}
                                             className={`w-full flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest font-bold transition-all ${activeTab === item.id
-                                                    ? 'bg-primary text-white'
-                                                    : 'text-muted-text dark:text-dark-text-secondary hover:bg-off-white dark:hover:bg-dark-card'
+                                                ? 'bg-primary text-white'
+                                                : 'text-muted-text dark:text-dark-text-secondary hover:bg-off-white dark:hover:bg-dark-card'
                                                 }`}
                                         >
                                             <span className="material-symbols-outlined text-lg">{item.icon}</span>
@@ -74,7 +74,7 @@ export default function ProfilePage() {
                                     <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
                                         <div>
                                             <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Đơn Hàng</h1>
-                                            <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Lịch sử mua hàng của bạn</p>
+                                            <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Lịch sử mua hàng của bạn</p>
                                         </div>
                                         <div className="relative">
                                             <input
@@ -96,7 +96,7 @@ export default function ProfilePage() {
                                 <div className="space-y-10">
                                     <div>
                                         <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Địa Chỉ</h1>
-                                        <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Quản lý địa chỉ giao hàng</p>
+                                        <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Quản lý địa chỉ giao hàng</p>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {ADDRESSES.map(addr => <AddressCard key={addr.id} address={addr} />)}
@@ -112,7 +112,7 @@ export default function ProfilePage() {
                                 <div className="space-y-10">
                                     <div>
                                         <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Thanh Toán</h1>
-                                        <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Quản lý phương thức thanh toán</p>
+                                        <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Quản lý phương thức thanh toán</p>
                                     </div>
                                     <div className="space-y-4">
                                         <div className="border border-black/10 dark:border-dark-border p-6 flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-off-white/50 dark:bg-dark-card/50">
@@ -121,7 +121,7 @@ export default function ProfilePage() {
                                                 <div>
                                                     <p className="font-bold flex items-center gap-2 text-dark-text dark:text-dark-text-primary">
                                                         Visa ending in 4242
-                                                        <span className="bg-primary/10 text-primary text-[9px] px-2 py-1 uppercase tracking-widest">Mặc Định</span>
+                                                        <span className="bg-primary/10 text-primary text-[11px] px-2 py-1 font-bold uppercase tracking-widest">Mặc Định</span>
                                                     </p>
                                                     <p className="text-xs text-muted-text dark:text-dark-text-secondary mt-1">Hết hạn 12/26</p>
                                                 </div>
@@ -143,7 +143,7 @@ export default function ProfilePage() {
                                 <div className="max-w-2xl">
                                     <div className="mb-10">
                                         <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Thông Tin</h1>
-                                        <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">Cập nhật thông tin cá nhân</p>
+                                        <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Cập nhật thông tin cá nhân</p>
                                     </div>
                                     <div className="space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

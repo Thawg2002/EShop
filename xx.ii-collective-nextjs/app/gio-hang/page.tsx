@@ -70,7 +70,7 @@ export default function CartPage() {
                                         Thanh Toán
                                     </button>
 
-                                    <div className="flex justify-center gap-6 text-[10px] uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">
+                                    <div className="flex justify-center gap-6 text-[11px] uppercase tracking-widest font-bold text-luxury-slate-grey dark:text-dark-text-secondary">
                                         <span className="flex items-center gap-2">
                                             <span className="material-symbols-outlined text-sm">lock</span>
                                             Bảo Mật

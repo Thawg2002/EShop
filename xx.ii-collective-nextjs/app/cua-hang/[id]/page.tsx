@@ -84,7 +84,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                 />
                                 {product.isBestSeller && (
                                     <div className="absolute top-6 left-6 z-20">
-                                        <span className="inline-block px-4 py-2 bg-white/90 text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
+                                        <span className="inline-block px-4 py-2 bg-white/90 text-[11px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
                                     </div>
                                 )}
                             </div>
@@ -115,11 +115,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                 <span className="text-3xl font-light text-dark-text dark:text-dark-text-primary">${product.price}</span>
                                 <div className="flex items-center gap-1">
                                     {[1, 2, 3, 4, 5].map(i => <span key={i} className="text-primary text-sm">★</span>)}
-                                    <span className="text-xs text-muted-text dark:text-dark-text-secondary ml-2">(124)</span>
+                                    <span className="text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary ml-2">(124)</span>
                                 </div>
                             </div>
 
-                            <p className="text-sm font-light leading-relaxed text-muted-text dark:text-dark-text-secondary mb-12 font-serif-display">
+                            <p className="text-sm font-medium leading-relaxed text-luxury-slate-grey dark:text-dark-text-secondary mb-12 font-serif-display">
                                 {product.description || "Được chế tác từ cotton Ý cao cấp, sản phẩm này mang đến sự thoải mái tối đa với form dáng thanh lịch. Thiết kế thoáng khí, phù hợp cho cả văn phòng lẫn dạo phố."}
                             </p>
 
@@ -175,7 +175,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                 <span className="material-symbols-outlined text-lg">shopping_bag</span>
                                 Thêm Vào Giỏ
                             </button>
-                            <p className="text-[10px] text-center text-muted-text dark:text-dark-text-secondary uppercase tracking-widest">Miễn phí vận chuyển cho đơn hàng trên $300</p>
+                            <p className="text-[11px] text-center text-luxury-slate-grey dark:text-dark-text-secondary uppercase tracking-widest font-medium">Miễn phí vận chuyển cho đơn hàng trên $300</p>
 
                             {/* Accordion Sections */}
                             <div className="mt-12 border-t border-black/5 dark:border-dark-border">
@@ -191,7 +191,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                             </span>
                                         </button>
                                         {expandedSection === section.title && (
-                                            <div className="pb-6 text-sm font-light leading-relaxed text-muted-text dark:text-dark-text-secondary animate-in fade-in duration-300">
+                                            <div className="pb-6 text-sm font-medium leading-relaxed text-luxury-slate-grey dark:text-dark-text-secondary animate-in fade-in duration-300">
                                                 {section.content}
                                             </div>
                                         )}
@@ -215,7 +215,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                         />
                                     </div>
                                     <h3 className="text-lg font-serif-display italic text-dark-text dark:text-dark-text-primary mb-1">{relatedProduct.name}</h3>
-                                    <p className="text-xs text-muted-text dark:text-dark-text-secondary">${relatedProduct.price}</p>
+                                    <p className="text-xs font-bold text-luxury-slate-grey dark:text-dark-text-secondary">${relatedProduct.price}</p>
                                 </Link>
                             ))}
                         </div>

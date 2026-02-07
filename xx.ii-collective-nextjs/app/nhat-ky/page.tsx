@@ -34,11 +34,11 @@ export default function JournalPage() {
             <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-28">
                     <div className="text-center mb-24 md:mb-32">
-                        <span className="text-primary font-bold uppercase text-[10px] tracking-[0.6em] mb-6 block">Editorial</span>
+                        <span className="text-primary font-bold uppercase text-[11px] tracking-[0.6em] mb-6 block">Editorial</span>
                         <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-8 leading-[0.9]">
                             Nhật Ký
                         </h1>
-                        <p className="text-sm text-muted-text dark:text-dark-text-secondary max-w-2xl mx-auto leading-relaxed font-serif-display">
+                        <p className="text-sm text-luxury-slate-grey dark:text-dark-text-secondary max-w-2xl mx-auto leading-relaxed font-serif-display font-medium">
                             Stories of craftsmanship, heritage, and the art of modern living.
                         </p>
                     </div>
@@ -55,21 +55,21 @@ export default function JournalPage() {
                                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 </div>
 
-                                <div className="flex items-center gap-4 mb-6">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary">{article.category}</span>
+                                <div className="flex items-center gap-4 mb-6 text-[11px] font-bold uppercase tracking-widest">
+                                    <span className="text-primary">{article.category}</span>
                                     <span className="w-1 h-1 rounded-full bg-black/10 dark:bg-dark-border"></span>
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">{article.date}</span>
+                                    <span className="text-luxury-slate-grey dark:text-dark-text-secondary">{article.date}</span>
                                 </div>
 
                                 <h2 className="text-3xl md:text-4xl font-serif-display italic mb-6 text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-colors leading-tight">
                                     {article.title}
                                 </h2>
 
-                                <p className="text-sm text-muted-text dark:text-dark-text-secondary leading-relaxed mb-8 line-clamp-3 font-serif-display">
+                                <p className="text-sm text-luxury-slate-grey dark:text-dark-text-secondary leading-relaxed mb-8 line-clamp-3 font-serif-display font-medium">
                                     {article.excerpt}
                                 </p>
 
-                                <button className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-all">
+                                <button className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-all">
                                     Đọc Bài Viết
                                     <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
                                 </button>

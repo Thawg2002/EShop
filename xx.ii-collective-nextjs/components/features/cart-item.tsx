@@ -31,7 +31,7 @@ export function CartItemComponent({ item }: CartItemProps) {
                             ${item.price * item.quantity}
                         </p>
                     </div>
-                    <p className="text-[11px] text-gray-500 dark:text-dark-text-secondary uppercase tracking-wider">
+                    <p className="text-[11px] text-luxury-slate-grey dark:text-dark-text-secondary uppercase tracking-wider font-medium">
                         Kích thước: {item.selectedSize} | Màu: {item.color}
                     </p>
                 </div>
@@ -57,7 +57,7 @@ export function CartItemComponent({ item }: CartItemProps) {
                     </div>
                     <button
                         onClick={() => removeItem(item.id)}
-                        className="flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-red-500 transition-colors uppercase tracking-wider font-medium group"
+                        className="flex items-center gap-1.5 text-[11px] text-luxury-slate-grey hover:text-red-500 transition-colors uppercase tracking-wider font-bold group"
                         aria-label="Xóa sản phẩm"
                     >
                         <span className="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">

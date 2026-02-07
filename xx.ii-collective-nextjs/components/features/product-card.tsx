@@ -39,7 +39,7 @@ export function ProductCard({ product, showQuickAdd = true }: ProductCardProps) 
                     </div>
                 )}
                 {product.id === 1 && (
-                    <div className="absolute top-3 left-3 bg-dark-text text-white text-[9px] font-bold uppercase px-2.5 py-1.5 tracking-[0.15em]">
+                    <div className="absolute top-3 left-3 bg-dark-text text-white text-[11px] font-bold uppercase px-2.5 py-1.5 tracking-[0.15em]">
                         Best Seller
                     </div>
                 )}
@@ -49,7 +49,7 @@ export function ProductCard({ product, showQuickAdd = true }: ProductCardProps) 
                     <h3 className="font-serif-display text-sm font-medium group-hover:text-primary transition-colors dark:text-dark-text tracking-wide">
                         {product.name}
                     </h3>
-                    <p className="text-gray-500 dark:text-dark-text-secondary text-[11px] mt-1 uppercase tracking-wider">
+                    <p className="text-luxury-slate-grey dark:text-dark-text-secondary text-[11px] font-medium mt-1 uppercase tracking-wider">
                         {product.color}
                     </p>
                 </div>
