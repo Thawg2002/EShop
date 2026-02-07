@@ -10,7 +10,7 @@ export function Navbar() {
     const itemCount = useCartStore((state) => state.getItemCount());
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const isActive = (path: string) => pathname === path ? "text-primary" : "text-dark-text hover:text-primary";
+    const isActive = (path: string) => pathname === path;
 
     return (
         <>
@@ -24,18 +24,22 @@ export function Navbar() {
                     </div>
 
                     {/* Desktop Left Nav */}
-                    <div className="hidden lg:flex items-center gap-8">
-                        <Link href="/cua-hang" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/cua-hang')}`}>
+                    <div className="hidden lg:flex items-center gap-10">
+                        <Link href="/cua-hang" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/cua-hang') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
                             Cửa Hàng
+                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/cua-hang') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                         </Link>
-                        <Link href="/nhat-ky" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/nhat-ky')}`}>
+                        <Link href="/nhat-ky" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/nhat-ky') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
                             Bộ Sưu Tập
+                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/nhat-ky') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                         </Link>
-                        <Link href="/cam-hung" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/cam-hung')}`}>
+                        <Link href="/cam-hung" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/cam-hung') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
                             Cảm Hứng
+                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/cam-hung') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                         </Link>
-                        <Link href="/lien-he" className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive('/lien-he')}`}>
+                        <Link href="/lien-he" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/lien-he') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
                             Liên Hệ
+                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/lien-he') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                         </Link>
                     </div>
 

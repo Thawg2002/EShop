@@ -74,8 +74,8 @@ export default function ShopPage() {
                 </aside>
 
                 {/* Main Content */}
-                <main className="flex-1 w-full lg:pl-[280px] pt-24 pb-12">
-                    <section className="px-6 md:px-12 max-w-[1600px] mx-auto">
+                <main className="flex-1 w-full lg:pl-[280px] pt-24 min-h-screen flex flex-col">
+                    <section className="flex-1 px-6 md:px-12 max-w-[1600px] mx-auto w-full py-12">
                         {/* Header */}
                         <div className="mb-16 mt-12">
                             <span className="block text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4">Bộ Sưu Tập / 2024</span>
@@ -148,9 +148,9 @@ export default function ShopPage() {
                             ))}
                         </div>
                     </section>
+                    <Footer />
                 </main>
             </div>
-            <Footer />
         </>
     );
 }

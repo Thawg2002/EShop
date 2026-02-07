@@ -57,7 +57,7 @@ export function Footer() {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-black/5 dark:border-dark-border text-center">
-                    <p className="text-[10px] uppercase tracking-widest text-muted-text dark:text-dark-text-secondary">© 2024 XX.II Fashion. Bản quyền thuộc về XX.II.</p>
+                    <p className="text-[10px] uppercase tracking-[0.3em] font-medium text-muted-text dark:text-dark-text-secondary">© 2024 XX.II FASHION. BẢN QUYỀN THUỘC VỀ XX.II.</p>
                 </div>
             </div>
         </footer>
