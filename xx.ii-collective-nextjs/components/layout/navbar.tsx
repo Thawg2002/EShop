@@ -14,73 +14,99 @@ export function Navbar() {
 
     return (
         <>
-            <header className="fixed top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-black/5 transition-all duration-300">
-                <div className="flex h-20 items-center justify-between px-6 lg:px-12">
-                    {/* Mobile Menu Toggle */}
-                    <div className="flex items-center gap-4 lg:hidden">
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
-                            <span className="material-symbols-outlined">menu</span>
+            <header className="fixed top-0 z-50 w-full bg-[#fdf8f4]/95 backdrop-blur-md border-b border-black/5 transition-all duration-300">
+                {/* Top Utility Bar */}
+                <div className="flex h-16 items-center justify-between px-6 lg:px-12 border-b border-black/[0.03]">
+                    {/* Left: Search */}
+                    <div className="flex-1 hidden lg:flex items-center">
+                        <div className="flex items-center gap-2 border-b border-black/20 pb-1 w-48 group focus-within:border-black transition-colors">
+                            <span className="material-symbols-outlined text-[18px] text-gray-400">search</span>
+                            <input
+                                type="text"
+                                placeholder="Tìm kiếm"
+                                className="bg-transparent text-[10px] uppercase tracking-widest outline-none w-full placeholder:text-gray-400"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Center: Logo */}
+                    <div className="flex-shrink-0 text-center">
+                        <Link href="/" className="flex flex-col items-center">
+                            <span className="text-3xl font-serif-display font-medium tracking-[0.3em] uppercase text-black leading-none">XX.II</span>
+                            <span className="text-[8px] tracking-[0.5em] uppercase text-gray-500 mt-1">Collective</span>
+                        </Link>
+                    </div>
+
+                    {/* Right: Actions */}
+                    <div className="flex-1 flex items-center justify-end gap-6">
+                        <div className="hidden sm:flex items-center gap-6">
+                            <Link href="/ho-so" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black hover:opacity-60 transition-opacity">
+                                <span className="material-symbols-outlined text-[20px]">person</span>
+                                <span className="hidden lg:inline">Tài khoản</span>
+                            </Link>
+                            <Link href="/gio-hang" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black hover:opacity-60 transition-opacity">
+                                <span className="relative">
+                                    <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
+                                    {itemCount > 0 && (
+                                        <span className="absolute -top-1 -right-1 flex h-3 w-3 items-center justify-center rounded-full bg-black text-[6px] text-white">
+                                            {itemCount}
+                                        </span>
+                                    )}
+                                </span>
+                                <span className="hidden lg:inline">Giỏ hàng</span>
+                            </Link>
+                        </div>
+                        {/* Mobile Menu Toggle */}
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-black">
+                            <span className="material-symbols-outlined">{isMenuOpen ? 'close' : 'menu'}</span>
                         </button>
-                    </div>
-
-                    {/* Desktop Left Nav */}
-                    <div className="hidden lg:flex items-center gap-10">
-                        <Link href="/cua-hang" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/cua-hang') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
-                            Cửa Hàng
-                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/cua-hang') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-                        </Link>
-                        <Link href="/nhat-ky" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/nhat-ky') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
-                            Bộ Sưu Tập
-                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/nhat-ky') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-                        </Link>
-                        <Link href="/cam-hung" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/cam-hung') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
-                            Cảm Hứng
-                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/cam-hung') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-                        </Link>
-                        <Link href="/lien-he" className={`group relative text-xs font-bold uppercase tracking-[0.25em] transition-colors ${isActive('/lien-he') ? 'text-primary' : 'text-dark-text hover:text-primary'}`}>
-                            Liên Hệ
-                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive('/lien-he') ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-                        </Link>
-                    </div>
-
-                    {/* Logo Center */}
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                        <Link href="/" className="text-3xl font-serif-display font-medium tracking-widest italic text-dark-text">
-                            XX.II
-                        </Link>
-                    </div>
-
-                    {/* Right Icons */}
-                    <div className="flex items-center gap-6">
-                        <button className="hidden sm:block text-dark-text hover:text-primary transition-colors">
-                            <span className="material-symbols-outlined text-[22px]">search</span>
-                        </button>
-                        <Link href="/ho-so" className={`hidden sm:block transition-colors ${isActive('/ho-so')}`}>
-                            <span className="material-symbols-outlined text-[22px]">person</span>
-                        </Link>
-                        <Link href="/gio-hang" className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase hover:underline">
-                            <span className="hidden sm:inline">Giỏ Hàng</span>
-                            <span className="relative">
-                                <span className="material-symbols-outlined text-[22px]">shopping_bag</span>
-                                {itemCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary text-[8px] text-white">
-                                        {itemCount}
-                                    </span>
-                                )}
-                            </span>
-                        </Link>
                     </div>
                 </div>
+
+                {/* Bottom Navigation Menu */}
+                <nav className="hidden lg:flex h-12 items-center justify-center bg-[#fdf8f4]/50">
+                    <div className="flex items-center gap-10">
+                        <Link href="/cua-hang?cat=women" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:opacity-70 transition-opacity">
+                            Phụ Nữ
+                        </Link>
+                        <Link href="/cua-hang?cat=men" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:opacity-70 transition-opacity">
+                            Nam Giới
+                        </Link>
+                        <Link href="/cua-hang?cat=leather" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:opacity-70 transition-opacity">
+                            Đồ Da
+                        </Link>
+                        <Link href="/cua-hang?cat=jewelry" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:opacity-70 transition-opacity">
+                            Trang Sức
+                        </Link>
+                        <Link href="/cua-hang?cat=accessories" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:opacity-70 transition-opacity">
+                            Phụ Kiện
+                        </Link>
+                        <Link href="/cam-hung" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:opacity-70 transition-opacity">
+                            Cảm Hứng
+                        </Link>
+                        <Link href="/cua-hang?cat=sale" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-red-800 hover:opacity-70 transition-opacity">
+                            Sale
+                        </Link>
+                        <Link href="/lien-he" className="group relative text-[10px] font-bold uppercase tracking-[0.2em] text-black hover:opacity-70 transition-opacity">
+                            Về XX.II
+                        </Link>
+                    </div>
+                </nav>
             </header>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 z-40 bg-white transform transition-transform duration-300 lg:hidden pt-24 px-8 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-                <nav className="flex flex-col gap-6">
-                    <Link href="/cua-hang" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Cửa Hàng</Link>
-                    <Link href="/nhat-ky" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Bộ Sưu Tập</Link>
-                    <Link href="/cam-hung" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Cảm Hứng</Link>
-                    <Link href="/ho-so" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Hồ Sơ</Link>
-                    <Link href="/lien-he" onClick={() => setIsMenuOpen(false)} className="text-lg font-serif-display italic">Liên Hệ</Link>
+            <div className={`fixed inset-0 z-40 bg-[#fdf8f4] transform transition-transform duration-500 lg:hidden pt-32 px-10 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <nav className="flex flex-col gap-8">
+                    <Link href="/cua-hang?cat=women" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif-display uppercase tracking-widest border-b border-black/5 pb-2">Phụ Nữ</Link>
+                    <Link href="/cua-hang?cat=men" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif-display uppercase tracking-widest border-b border-black/5 pb-2">Nam Giới</Link>
+                    <Link href="/cua-hang?cat=leather" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif-display uppercase tracking-widest border-b border-black/5 pb-2">Đồ Da</Link>
+                    <Link href="/cua-hang?cat=jewelry" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif-display uppercase tracking-widest border-b border-black/5 pb-2">Trang Sức</Link>
+                    <Link href="/cam-hung" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif-display uppercase tracking-widest border-b border-black/5 pb-2">Cảm Hứng</Link>
+                    <Link href="/ho-so" onClick={() => setIsMenuOpen(false)} className="text-xl font-serif-display uppercase tracking-widest border-b border-black/5 pb-2">Hồ Sơ</Link>
+                    <div className="mt-4 flex gap-6">
+                        <Link href="/gio-hang" onClick={() => setIsMenuOpen(false)} className="text-xs font-bold uppercase tracking-widest text-primary underline">Giỏ hàng</Link>
+                        <Link href="/lien-he" onClick={() => setIsMenuOpen(false)} className="text-xs font-bold uppercase tracking-widest text-gray-500 underline">Liên hệ</Link>
+                    </div>
                 </nav>
             </div>
         </>
