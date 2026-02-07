@@ -1,18 +1,24 @@
 import type { Metadata } from 'next';
-import { Bodoni_Moda, Inter } from 'next/font/google';
+import { Bodoni_Moda, Manrope, Overpass_Mono } from 'next/font/google';
 import './globals.css';
 
 const bodoniModa = Bodoni_Moda({
     subsets: ['latin'],
-    variable: '--font-bodoni',
+    variable: '--font-serif',
     display: 'swap',
     style: ['normal', 'italic'],
     weight: ['400', '500', '600', '700', '800', '900'],
 });
 
-const inter = Inter({
+const manrope = Manrope({
     subsets: ['latin'],
-    variable: '--font-inter',
+    variable: '--font-primary',
+    display: 'swap',
+});
+
+const overpassMono = Overpass_Mono({
+    subsets: ['latin'],
+    variable: '--font-secondary',
     display: 'swap',
 });
 
@@ -42,7 +48,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="vi" className={`${bodoniModa.variable} ${inter.variable}`} suppressHydrationWarning>
+        <html lang="vi" className={`${bodoniModa.variable} ${manrope.variable} ${overpassMono.variable}`} suppressHydrationWarning>
             <head>
                 <link
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"

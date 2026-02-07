@@ -26,9 +26,10 @@ const config: Config = {
         "dark-text-secondary": "#9ca3af", // Secondary text color (dark mode)
       },
       fontFamily: {
-        serif: ["var(--font-bodoni)", "serif"],
-        "serif-display": ["var(--font-bodoni)", "serif"],
-        sans: ["var(--font-inter)", "sans-serif"],
+        serif: ["var(--font-serif)", "serif"],
+        "serif-display": ["var(--font-serif)", "serif"],
+        sans: ["var(--font-primary)", "sans-serif"],
+        mono: ["var(--font-secondary)", "monospace"],
       },
       spacing: {
         "128": "32rem",
