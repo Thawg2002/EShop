@@ -106,41 +106,110 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* Section 3: Celestial Collection (High-end Product Grid) */}
-                <section className="bg-white py-32 px-6 lg:px-12 relative">
-                    <div className="mx-auto max-w-[1400px]">
-                        <div className="flex flex-col items-start mb-20 space-y-4">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-luxury-warm-grey">Celestial Selection</span>
-                            <h2 className="font-serif-display text-4xl md:text-6xl text-luxury-onyx italic">Tinh Hoa Hội Tụ</h2>
+                {/* Section 3: Celestial Collection (Editorial Masterpiece) */}
+                <section className="bg-white py-48 px-6 lg:px-12 relative overflow-hidden group/section">
+                    {/* Background Editorial Watermark */}
+                    <div className="absolute top-1/2 left-[-5%] -translate-y-1/2 text-[25vw] font-serif-display italic text-black/[0.02] whitespace-nowrap pointer-events-none select-none z-0 tracking-tighter">
+                        BỘ SƯU TẬP
+                    </div>
+
+                    <div className="mx-auto max-w-[1400px] relative z-10">
+                        {/* Featured Header */}
+                        <div className="flex flex-col items-center mb-32 space-y-6 text-center">
+                            <span className="text-[11px] font-bold uppercase tracking-[0.6em] text-luxury-slate-grey">Hào Quang Của Sự Hoàn Mỹ</span>
+                            <h2 className="font-serif-display text-5xl md:text-8xl text-luxury-onyx italic leading-tight">Tinh Hoa Hội Tụ</h2>
+                            <div className="w-32 h-[1px] bg-black/5"></div>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-                            {PRODUCTS.slice(4, 7).map((product) => (
-                                <div key={product.id} className="group relative bg-white border border-gray-100 p-[1px] overflow-hidden transition-all duration-700 hover:shadow-[0_20px_50px_rgba(197,160,89,0.15)]">
-                                    {/* Animated Gold Border */}
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-gold-300/0 via-gold-300/30 to-gold-300/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                        {/* Featured Trio (The Highlights) */}
+                        <div className="grid grid-cols-1 gap-y-24 gap-x-12 md:grid-cols-3 mb-48">
+                            {PRODUCTS.slice(4, 7).map((product, index) => (
+                                <div
+                                    key={product.id}
+                                    className={`group relative transition-all duration-1000 ${index === 1 ? 'md:mt-32' : index === 2 ? 'md:mt-16' : ''
+                                        }`}
+                                >
+                                    {/* Card Container */}
+                                    <div className="relative aspect-[3/4.5] w-full overflow-hidden bg-white shadow-sm transition-shadow duration-700 hover:shadow-2xl">
+                                        {/* Background Image Layer */}
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="h-full w-full object-cover transition-all duration-[2000ms] group-hover:scale-110 group-hover:rotate-1 grayscale-[0.5] group-hover:grayscale-0"
+                                        />
 
-                                    <div className="bg-white p-10 relative z-10 flex flex-col h-full">
-                                        <div className="relative aspect-[3/4] w-full mb-10 overflow-hidden bg-gray-50">
-                                            <img src={product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                                            <div className="absolute top-4 right-4 bg-black text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1">Limited</div>
-                                        </div>
+                                        {/* Overlay Gradient */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-                                        <div className="space-y-4 mb-10">
-                                            <h3 className="text-lg font-bold uppercase tracking-widest text-luxury-onyx group-hover:text-black transition-colors">{product.name}</h3>
-                                            <div className="flex items-center gap-4 text-[11px] text-luxury-slate-grey uppercase tracking-widest">
-                                                <span>Handcrafted</span>
-                                                <div className="w-1 h-1 bg-black/20 rounded-full"></div>
-                                                <span>Silk & Wool</span>
+                                        {/* Floating Glassmorphism Info Card */}
+                                        <div className="absolute bottom-6 left-6 right-6 p-8 bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl translate-y-4 group-hover:translate-y-0 transition-all duration-700">
+                                            <div className="space-y-4">
+                                                <div className="flex justify-between items-start">
+                                                    <div className="space-y-1">
+                                                        <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/60">Hạng Mục Tuyển Chọn</span>
+                                                        <h3 className="text-xl font-serif-display italic text-white leading-none">{product.name}</h3>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className="text-2xl font-serif-display text-white">${product.price}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="h-[1px] w-full bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 origin-left"></div>
+
+                                                <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                                                    <div className="flex gap-4">
+                                                        <span className="text-[10px] text-white/50 uppercase tracking-widest">Phiên Bản Giới Hạn</span>
+                                                    </div>
+                                                    <Link href={`/cua-hang/${product.id}`} className="flex items-center gap-4 group/btn">
+                                                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white">Xem Chi Tiết</span>
+                                                        <span className="material-symbols-outlined text-sm text-white transition-transform group-hover/btn:translate-x-2">arrow_right_alt</span>
+                                                    </Link>
+                                                </div>
                                             </div>
-                                            <p className="text-2xl font-serif-display text-luxury-onyx">${product.price}</p>
                                         </div>
 
-                                        <div className="mt-auto space-y-4">
-                                            <div className="h-[1px] w-full bg-gray-100"></div>
+                                        {/* Premium Tag */}
+                                        <div className="absolute top-6 right-6 w-10 h-10 border border-white/20 flex items-center justify-center backdrop-blur-md">
+                                            <span className="text-[8px] font-bold text-white tracking-tighter vertical-text rotate-180 uppercase">Highlight</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-8 px-2">
+                                        <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">Highlight 0{index + 1}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Transition Divider */}
+                        <div className="flex flex-col items-center mb-24 space-y-4">
+                            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">Bộ Sưu Tập Mở Rộng</span>
+                            <div className="w-16 h-[1px] bg-black/10"></div>
+                        </div>
+
+                        {/* Extended Grid */}
+                        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 mb-24">
+                            {[...PRODUCTS.slice(0, 4), ...PRODUCTS.slice(7)].map((product) => (
+                                <div key={product.id} className="group relative bg-white overflow-hidden transition-all duration-700 border border-black/5 hover:border-black/10 hover:shadow-xl">
+                                    <div className="bg-white p-6 relative z-10 flex flex-col h-full">
+                                        <div className="relative aspect-[4/5] w-full mb-8 overflow-hidden bg-gray-50">
+                                            <img src={product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                                            {/* Minimalist Overlay */}
+                                            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                        </div>
+
+                                        <div className="space-y-4 flex-1">
+                                            <div className="flex justify-between items-start">
+                                                <h3 className="text-xs font-bold uppercase tracking-widest text-luxury-onyx leading-snug max-w-[70%]">{product.name}</h3>
+                                                <p className="text-sm font-serif-display text-luxury-onyx">${product.price}</p>
+                                            </div>
+                                            <p className="text-[10px] text-luxury-slate-grey uppercase tracking-widest">{product.category}</p>
+                                        </div>
+
+                                        <div className="mt-8">
                                             <Link href={`/cua-hang/${product.id}`} className="flex items-center justify-between group/link">
-                                                <span className="text-[11px] font-bold uppercase tracking-widest text-luxury-onyx group-hover/link:translate-x-2 transition-transform">Sở hữu ngay</span>
-                                                <span className="material-symbols-outlined text-lg text-black/60">arrow_forward</span>
+                                                <span className="text-[9px] font-bold uppercase tracking-widest text-luxury-onyx border-b border-black/10 pb-1 group-hover/link:border-black transition-all">Sở hữu ngay</span>
+                                                <span className="material-symbols-outlined text-lg text-black/40 group-hover/link:translate-x-1 transition-transform">east</span>
                                             </Link>
                                         </div>
                                     </div>
@@ -148,15 +217,23 @@ export default function HomePage() {
                             ))}
                         </div>
 
-                        <div className="mt-24 relative overflow-hidden bg-luxury-black p-16 text-center">
-                            <div className="absolute inset-0 opacity-10 pointer-events-none">
-                                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
-                            </div>
-                            <h4 className="text-2xl font-serif-display italic text-white mb-8">Trải nghiệm dịch vụ cá nhân hóa dành riêng cho bạn</h4>
-                            <Link href="/cua-hang" className="inline-block bg-white px-12 py-5 text-xs font-bold uppercase tracking-[0.3em] text-black hover:bg-gray-100 transition-all shadow-xl">
-                                Đặt lịch tư vấn ngay
+                        {/* Discover More CTA */}
+                        <div className="text-center">
+                            <Link href="/cua-hang" className="inline-flex items-center gap-8 group">
+                                <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-luxury-onyx">Khám phá toàn bộ bộ sưu tập</span>
+                                <div className="h-[1px] w-24 bg-black/20 transition-all duration-500 group-hover:w-40 origin-left"></div>
                             </Link>
                         </div>
+                    </div>
+
+                    <div className="mt-24 relative overflow-hidden bg-luxury-black p-16 text-center">
+                        <div className="absolute inset-0 opacity-10 pointer-events-none">
+                            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
+                        </div>
+                        <h4 className="text-2xl font-serif-display italic text-white mb-8">Trải nghiệm dịch vụ cá nhân hóa dành riêng cho bạn</h4>
+                        <Link href="/cua-hang" className="inline-block bg-white px-12 py-5 text-xs font-bold uppercase tracking-[0.3em] text-black hover:bg-gray-100 transition-all shadow-xl">
+                            Đặt lịch tư vấn ngay
+                        </Link>
                     </div>
                 </section>
 
@@ -260,93 +337,93 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* Section 6: Signature Trust (Editorial Asymmetrical Layout) */}
-                <section className="bg-white py-60 px-6 lg:px-12 relative overflow-hidden">
+                {/* Section 6: Signature Trust (Redesigned Editorial Full-Screen) */}
+                <section className="bg-white min-h-[90vh] lg:min-h-screen flex items-center px-6 lg:px-12 relative overflow-hidden">
                     {/* Large Editorial Watermark */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-serif-display italic text-gray-50/70 pointer-events-none select-none z-0 whitespace-nowrap">
                         AUTHENTICITY
                     </div>
 
-                    <div className="mx-auto max-w-[1400px] relative z-10">
-                        <div className="flex flex-col lg:flex-row items-center gap-24 lg:gap-40">
+                    <div className="mx-auto max-w-[1400px] w-full relative z-10 py-20 lg:py-0">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-16 lg:gap-32">
                             {/* Left Column: Narrative Hub */}
-                            <div className="lg:w-1/3 space-y-12 text-center lg:text-left">
+                            <div className="lg:col-span-4 space-y-10 text-center lg:text-left">
                                 <div className="space-y-6">
                                     <span className="text-[10px] font-bold uppercase tracking-[0.6em] text-luxury-warm-grey">Premium Assurance</span>
                                     <h2 className="text-5xl md:text-7xl font-serif-display italic leading-tight text-luxury-onyx">Niềm Tin<br />Tuyệt Đối</h2>
                                 </div>
-                                <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase italic">
+                                <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase italic max-w-md mx-auto lg:mx-0">
                                     "Mỗi sản phẩm là một lời cam kết về chất lượng và sự tận tâm dành cho những quý chủ nhân xứng tầm."
                                 </p>
                                 <div className="h-[1px] w-24 bg-black/10 mx-auto lg:mx-0"></div>
                             </div>
 
-                            {/* Right Column: Asymmetrical Floating Badges */}
-                            <div className="lg:w-2/3 grid grid-cols-12 gap-y-24 lg:gap-y-32">
-                                {/* Badge 1: Top Left */}
-                                <div className="col-span-12 md:col-span-6 lg:col-span-12 flex items-center gap-12 group">
-                                    <div className="relative w-32 h-32 flex-shrink-0">
+                            {/* Right Column: Balanced Badge Grid */}
+                            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 lg:gap-x-20 lg:gap-y-24">
+                                {/* Badge 1 */}
+                                <div className="flex items-center gap-8 group">
+                                    <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-90 transition-transform duration-[2000ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-90 transition-transform duration-[2000ms]"></div>
                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-4xl text-black/60 transition-all duration-700 group-hover:scale-125">lock</span>
+                                            <span className="material-symbols-outlined text-3xl text-black/60 transition-all duration-700 group-hover:scale-125">lock</span>
                                         </div>
                                     </div>
-                                    <div className="space-y-4">
-                                        <h4 className="text-xl font-serif-display italic text-luxury-onyx">Giao dịch Bảo mật</h4>
-                                        <p className="text-[11px] font-bold text-luxury-slate-grey uppercase tracking-[0.3em]">Mã hóa SSL 256-bit chuẩn quốc tế</p>
+                                    <div className="space-y-2">
+                                        <h4 className="text-lg font-serif-display italic text-luxury-onyx">Giao dịch Bảo mật</h4>
+                                        <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Mã hóa chuẩn quốc tế</p>
                                     </div>
                                 </div>
 
-                                {/* Badge 2: Mid Right (Pushed) */}
-                                <div className="col-span-12 md:col-span-6 lg:col-span-12 flex lg:justify-end items-center gap-12 group lg:translate-x-20">
-                                    <div className="relative w-32 h-32 flex-shrink-0">
+                                {/* Badge 2 */}
+                                <div className="flex items-center gap-8 group md:translate-y-8">
+                                    <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-[225deg] transition-transform duration-[2500ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-[135deg] transition-transform duration-[2500ms]"></div>
                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-4xl text-black/60 transition-all duration-700 group-hover:scale-125">card_giftcard</span>
+                                            <span className="material-symbols-outlined text-3xl text-black/60 transition-all duration-700 group-hover:scale-125">card_giftcard</span>
                                         </div>
                                     </div>
-                                    <div className="space-y-4 text-left">
-                                        <h4 className="text-xl font-serif-display italic text-luxury-onyx">Đóng gói Nghệ thuật</h4>
-                                        <p className="text-[11px] font-bold text-luxury-slate-grey uppercase tracking-[0.3em]">Hộp quà bespoke cao cấp</p>
+                                    <div className="space-y-2">
+                                        <h4 className="text-lg font-serif-display italic text-luxury-onyx">Đóng gói Nghệ thuật</h4>
+                                        <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Hộp quà bespoke cao cấp</p>
                                     </div>
                                 </div>
 
-                                {/* Badge 3: Bottom Left (Lowered) */}
-                                <div className="col-span-12 md:col-span-6 lg:col-span-12 flex items-center gap-12 group lg:-translate-x-12">
-                                    <div className="relative w-32 h-32 flex-shrink-0">
+                                {/* Badge 3 */}
+                                <div className="flex items-center gap-8 group lg:-translate-x-12">
+                                    <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-90 transition-transform duration-[2000ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-90 transition-transform duration-[2000ms]"></div>
                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-4xl text-black/60 transition-all duration-700 group-hover:scale-125">history_edu</span>
+                                            <span className="material-symbols-outlined text-3xl text-black/60 transition-all duration-700 group-hover:scale-125">history_edu</span>
                                         </div>
                                     </div>
-                                    <div className="space-y-4">
-                                        <h4 className="text-xl font-serif-display italic text-luxury-onyx">Di sản Độc bản</h4>
-                                        <p className="text-[11px] font-bold text-luxury-slate-grey uppercase tracking-[0.3em]">Chứng nhận sở hữu cá nhân</p>
+                                    <div className="space-y-2">
+                                        <h4 className="text-lg font-serif-display italic text-luxury-onyx">Di sản Độc bản</h4>
+                                        <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Chứng nhận sở hữu cá nhân</p>
                                     </div>
                                 </div>
 
-                                {/* Badge 4: Deep Right */}
-                                <div className="col-span-12 md:col-span-6 lg:col-span-12 flex lg:justify-end items-center gap-12 group lg:translate-x-40">
-                                    <div className="relative w-32 h-32 flex-shrink-0">
+                                {/* Badge 4 */}
+                                <div className="flex items-center gap-8 group md:translate-y-8 lg:translate-x-8">
+                                    <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-180 transition-transform duration-[3000ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-180 transition-transform duration-[3000ms]"></div>
                                         <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-4xl text-black/60 transition-all duration-700 group-hover:scale-125">contact_support</span>
+                                            <span className="material-symbols-outlined text-3xl text-black/60 transition-all duration-700 group-hover:scale-125">contact_support</span>
                                         </div>
                                     </div>
-                                    <div className="space-y-4 text-left">
-                                        <h4 className="text-xl font-serif-display italic text-luxury-onyx">Hỗ trợ 24/7</h4>
-                                        <p className="text-[11px] font-bold text-luxury-slate-grey uppercase tracking-[0.3em]">Đội ngũ chuyên gia trợ lý cá nhân</p>
+                                    <div className="space-y-2">
+                                        <h4 className="text-lg font-serif-display italic text-luxury-onyx">Hỗ trợ 24/7</h4>
+                                        <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Trợ lý trợ lý cá nhân</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-            </main>
+            </main >
             <Footer />
         </>
     );
