@@ -89,34 +89,29 @@ export function HeroSlider() {
 
                         {/* Hero Content */}
                         <div className="relative z-20 flex h-full w-full items-end justify-start px-6 pb-24 md:px-12 md:pb-32 pt-24 md:pt-32">
-                            <div className="max-w-xl text-left">
-                                <BlurFade delay={0.2} direction="right">
-                                    <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/80 mb-6">
+                            <div className="flex flex-col items-center text-center px-6">
+                                <BlurFade delay={0.2}>
+                                    <span className={"block text-[11px] font-bold uppercase tracking-[0.3em] text-white/80 mb-6"}>
                                         {slide.tag}
                                     </span>
                                 </BlurFade>
-
-                                <BlurFade delay={0.4} direction="right">
-                                    <div className="mb-10">
-                                        <h2 className="font-sans text-5xl font-black uppercase leading-[1.1] tracking-tighter text-white md:text-7xl lg:text-8xl">
-                                            {slide.title}<br />
-                                            <span className="font-light italic opacity-90">{slide.subtitle}</span>
-                                        </h2>
-                                    </div>
+                                <BlurFade delay={0.4}>
+                                    <h2 className={"font-serif text-6xl md:text-8xl lg:text-9xl font-medium leading-[0.9] tracking-tight text-white mb-8"}>
+                                        {slide.title}
+                                    </h2>
                                 </BlurFade>
-
-                                <BlurFade delay={0.6} direction="right">
-                                    <p className="mb-12 max-w-md text-xs font-medium uppercase tracking-widest leading-relaxed text-white/70">
+                                <BlurFade delay={0.6}>
+                                    <p className={"mb-12 max-w-lg text-sm md:text-base font-normal uppercase tracking-[0.2em] leading-relaxed text-white/70 italic serif"}>
                                         {slide.description}
                                     </p>
                                 </BlurFade>
-
-                                <BlurFade delay={0.8} direction="right">
-                                    <div className="flex">
-                                        <Link href="/cua-hang">
-                                            <ShinyButton className="border-white/20 text-white">
-                                                Khám phá ngay
-                                            </ShinyButton>
+                                <BlurFade delay={0.8}>
+                                    <div className="flex items-center gap-6">
+                                        <Link
+                                            href="/cua-hang"
+                                            className="group relative h-14 px-10 bg-white text-zinc-950 text-[11px] font-bold uppercase tracking-[0.3em] overflow-hidden transition-all hover:bg-zinc-100"
+                                        >
+                                            <span className="relative z-10">Khám Phá</span>
                                         </Link>
                                     </div>
                                 </BlurFade>

@@ -28,7 +28,7 @@ export default function LoginPage() {
                         backgroundImage: 'url(https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2070)'
                     }}
                 />
-                <div className="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+                <div className="absolute inset-0 bg-black/20 mix-blend-multiply"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
                 {/* Bottom Text */}
@@ -46,7 +46,7 @@ export default function LoginPage() {
                 <div className="absolute top-8 left-8 lg:left-12 z-20">
                     <Link
                         href="/"
-                        className="group flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-primary transition-colors duration-300"
+                        className="group flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors duration-300"
                     >
                         <span className="material-symbols-outlined text-[20px] transition-transform group-hover:-translate-x-1 duration-300">
                             arrow_back
@@ -60,7 +60,7 @@ export default function LoginPage() {
                     {/* Logo & Title */}
                     <div className="text-center mb-12">
                         <div className="inline-flex items-center justify-center gap-3 mb-6">
-                            <span className="material-symbols-outlined text-primary text-[28px]">diamond</span>
+                            <span className="material-symbols-outlined text-black dark:text-white text-[28px]">diamond</span>
                             <span className="text-4xl font-serif-display font-bold tracking-[0.25em] text-gray-900">XX.II</span>
                         </div>
                         <h2 className="text-sm font-medium tracking-[0.3em] text-gray-500 uppercase border-b border-gray-100 pb-4 inline-block px-4">
@@ -72,22 +72,22 @@ export default function LoginPage() {
                     <div className="flex mb-12 relative border-b border-gray-100">
                         <button
                             onClick={() => setIsSignIn(true)}
-                            className={`flex-1 pb-4 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors relative ${isSignIn ? 'text-primary' : 'text-gray-400 hover:text-gray-600'
+                            className={`flex-1 pb-4 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors relative ${isSignIn ? 'text-black dark:text-white' : 'text-gray-400 hover:text-gray-600'
                                 }`}
                         >
                             Đăng Nhập
                             {isSignIn && (
-                                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary"></span>
+                                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black dark:bg-white"></span>
                             )}
                         </button>
                         <button
                             onClick={() => setIsSignIn(false)}
-                            className={`flex-1 pb-4 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors relative ${!isSignIn ? 'text-primary' : 'text-gray-400 hover:text-gray-600'
+                            className={`flex-1 pb-4 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors relative ${!isSignIn ? 'text-black dark:text-white' : 'text-gray-400 hover:text-gray-600'
                                 }`}
                         >
                             Đăng Ký
                             {!isSignIn && (
-                                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-primary"></span>
+                                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black dark:bg-white"></span>
                             )}
                         </button>
                     </div>
@@ -127,11 +127,11 @@ export default function LoginPage() {
                                 placeholder="Mật khẩu"
                                 required
                                 autoComplete="current-password"
-                                className="peer block w-full border-0 border-b border-gray-300 bg-transparent py-2.5 text-gray-900 focus:border-primary focus:ring-0 sm:text-sm transition-all duration-300 pr-8"
+                                className="peer block w-full border-0 border-b border-gray-300 bg-transparent py-2.5 text-gray-900 focus:border-black dark:focus:border-white focus:ring-0 sm:text-sm transition-all duration-300 pr-8"
                             />
                             <label
                                 htmlFor="password"
-                                className={`absolute left-0 block text-[11px] tracking-widest uppercase text-gray-500 transition-all duration-300 cursor-text pointer-events-none ${password ? '-top-4 text-[9px] text-primary font-bold' : 'top-2.5 text-[11px]'
+                                className={`absolute left-0 block text-[11px] tracking-widest uppercase text-gray-500 transition-all duration-300 cursor-text pointer-events-none ${password ? '-top-4 text-[9px] text-black dark:text-white font-bold' : 'top-2.5 text-[11px]'
                                     }`}
                             >
                                 Mật khẩu
@@ -139,7 +139,7 @@ export default function LoginPage() {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 flex items-center text-gray-400 hover:text-primary transition-colors focus:outline-none"
+                                className="absolute inset-y-0 right-0 flex items-center text-gray-400 hover:text-black dark:hover:text-white transition-colors focus:outline-none"
                             >
                                 <span className="material-symbols-outlined text-[18px]">
                                     {showPassword ? 'visibility' : 'visibility_off'}
@@ -155,11 +155,11 @@ export default function LoginPage() {
                                         id="remember-me"
                                         name="remember-me"
                                         type="checkbox"
-                                        className="h-3.5 w-3.5 rounded-sm border-gray-300 text-primary focus:ring-primary focus:ring-offset-0 transition-colors cursor-pointer"
+                                        className="h-3.5 w-3.5 rounded-sm border-gray-300 text-black dark:text-white focus:ring-black dark:focus:ring-white focus:ring-offset-0 transition-colors cursor-pointer"
                                     />
                                     <label
                                         htmlFor="remember-me"
-                                        className="ml-2 block text-[10px] text-gray-500 group-hover:text-primary transition-colors uppercase tracking-wider cursor-pointer font-medium"
+                                        className="ml-2 block text-[10px] text-gray-500 group-hover:text-black dark:group-hover:text-white transition-colors uppercase tracking-wider cursor-pointer font-medium"
                                     >
                                         Ghi nhớ đăng nhập
                                     </label>
@@ -167,7 +167,7 @@ export default function LoginPage() {
                                 <div className="text-[10px]">
                                     <a
                                         href="#"
-                                        className="font-medium text-gray-500 hover:text-primary transition-colors uppercase tracking-wider border-b border-transparent hover:border-primary/30 pb-0.5"
+                                        className="font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors uppercase tracking-wider border-b border-transparent hover:border-black/30 dark:hover:border-white/30 pb-0.5"
                                     >
                                         Quên mật khẩu?
                                     </a>
@@ -179,7 +179,7 @@ export default function LoginPage() {
                         <div className="pt-4">
                             <button
                                 type="submit"
-                                className="relative w-full overflow-hidden bg-primary text-white py-4 px-4 text-xs font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-xl hover:bg-primary-hover transition-all duration-300 group rounded-sm"
+                                className="relative w-full overflow-hidden bg-black dark:bg-white text-white dark:text-black py-4 px-4 text-xs font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-xl hover:opacity-90 transition-all duration-300 group rounded-sm"
                             >
                                 <span className="relative z-10 group-hover:tracking-[0.25em] transition-all duration-300">
                                     {isSignIn ? 'Đăng Nhập' : 'Đăng Ký'}
@@ -231,8 +231,8 @@ export default function LoginPage() {
                     <div className="mt-12 text-center">
                         <p className="text-[9px] text-gray-400 uppercase tracking-[0.1em]">
                             Bằng cách đăng nhập, bạn đồng ý với{' '}
-                            <a href="#" className="underline hover:text-primary transition-colors">Điều khoản</a> &{' '}
-                            <a href="#" className="underline hover:text-primary transition-colors">Chính sách bảo mật</a>{' '}
+                            <a href="#" className="underline hover:text-black dark:hover:text-white transition-colors">Điều khoản</a> &{' '}
+                            <a href="#" className="underline hover:text-black dark:hover:text-white transition-colors">Chính sách bảo mật</a>{' '}
                             của chúng tôi.
                         </p>
                     </div>

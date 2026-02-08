@@ -1,24 +1,22 @@
 import type { Metadata } from 'next';
-import { Bodoni_Moda, Open_Sans, Overpass_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
-const bodoniModa = Bodoni_Moda({
+const geistSans = Geist({
     subsets: ['latin'],
-    variable: '--font-serif',
-    display: 'swap',
-    style: ['normal', 'italic'],
-    weight: ['400', '500', '600', '700', '800', '900'],
-});
-
-const openSans = Open_Sans({
-    subsets: ['latin'],
-    variable: '--font-primary',
+    variable: '--font-geist-sans',
     display: 'swap',
 });
 
-const overpassMono = Overpass_Mono({
+const geistMono = Geist_Mono({
     subsets: ['latin'],
-    variable: '--font-secondary',
+    variable: '--font-geist-mono',
+    display: 'swap',
+});
+
+const playfair = Playfair_Display({
+    subsets: ['latin'],
+    variable: '--font-playfair',
     display: 'swap',
 });
 
@@ -48,7 +46,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="vi" className={`${bodoniModa.variable} ${openSans.variable} ${overpassMono.variable}`} suppressHydrationWarning>
+        <html lang="vi" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable}`} suppressHydrationWarning>
             <head>
                 <link
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"

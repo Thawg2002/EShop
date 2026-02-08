@@ -22,10 +22,10 @@ export default function HomePage() {
                 <section className="relative px-6 py-16 lg:px-12 min-h-[85vh] flex items-center">
                     <div className="mx-auto max-w-[1400px] w-full relative">
                         <BlurFade delay={0.2} inView>
-                            <div className="flex flex-col items-center mb-12 space-y-3">
-                                <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">The Discovery</span>
-                                <h2 className="font-serif-display text-4xl md:text-6xl text-luxury-onyx leading-tight text-center italic">Sự Khởi Đầu Mới</h2>
-                                <div className="w-12 h-[1px] bg-black/10"></div>
+                            <div className="flex flex-col items-center mb-16 space-y-4">
+                                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">Editorial Discovery</span>
+                                <h2 className="text-5xl md:text-8xl font-serif font-medium text-zinc-950 dark:text-zinc-50 leading-tight text-center tracking-tight">Sự Khởi Đầu Mới</h2>
+                                <div className="w-16 h-[1px] bg-zinc-200 dark:bg-zinc-800"></div>
                             </div>
                         </BlurFade>
 
@@ -42,13 +42,12 @@ export default function HomePage() {
                                         <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
                                     </div>
                                     {/* Editorial Card - Always Visible */}
-                                    <div className="absolute -bottom-12 left-[-20px] bg-white p-12 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700 group-hover:translate-y-[-20px] z-10 max-w-sm md:max-w-md">
-                                        <div className="transition-transform duration-500 group-hover:scale-105 origin-left">
-                                            <h3 className="text-3xl font-serif-display italic text-luxury-onyx mb-4">Ánh Sáng Champagne</h3>
-                                            <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase leading-relaxed mb-8">Khám phá vẻ đẹp vĩnh cửu trong từng đường nét thiết kế mới nhấn mạnh vào sự sang trọng và lôi cuốn.</p>
-                                            <Link href="/cua-hang" className="inline-block relative overflow-hidden group/btn px-10 py-5 text-[10px] font-bold uppercase tracking-[0.3em] text-dark-text border border-black/10">
-                                                <span className="relative z-10 transition-colors group-hover/btn:text-white">Khám phá ngay</span>
-                                                <div className="absolute inset-0 bg-dark-text translate-y-full transition-transform duration-500 group-hover/btn:translate-y-0"></div>
+                                    <div className="absolute -bottom-12 left-[-20px] bg-[#fcfcfc] dark:bg-zinc-950 p-12 shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 group-hover:translate-y-[-20px] z-10 max-w-sm md:max-w-md border border-zinc-100 dark:border-zinc-900">
+                                        <div className="transition-transform duration-500 group-hover:scale-[1.02] origin-left">
+                                            <h3 className="text-4xl font-serif font-medium tracking-tight text-zinc-950 dark:text-zinc-50 mb-6">Ánh Sáng Champagne</h3>
+                                            <p className="text-sm font-medium tracking-tight text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10 italic">Khám phá vẻ đẹp vĩnh cửu trong từng đường nét thiết kế mới nhấn mạnh vào sự sang trọng và lôi cuốn.</p>
+                                            <Link href="/cua-hang" className="inline-block relative overflow-hidden group/btn px-10 py-5 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-950 dark:text-zinc-50 border border-zinc-200 dark:border-zinc-800 transition-all hover:bg-zinc-950 hover:text-white dark:hover:bg-white dark:hover:text-black">
+                                                <span className="relative z-10">Khám phá ngay</span>
                                             </Link>
                                         </div>
                                     </div>
@@ -65,10 +64,10 @@ export default function HomePage() {
                                             className="h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
                                         />
                                         <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
-                                        <div className="absolute -bottom-10 right-[-20px] bg-luxury-cream p-12 shadow-2xl transition-transform duration-700 group-hover:translate-y-[-20px] z-10">
-                                            <div className="transition-transform duration-500 group-hover:scale-110 origin-right">
-                                                <h4 className="text-xl font-serif-display text-luxury-onyx mb-2 italic">Signature Style</h4>
-                                                <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase">Chi tiết tạo nên đẳng cấp</p>
+                                        <div className="absolute -bottom-10 right-[-20px] bg-[#fcfcfc] dark:bg-zinc-950 p-10 shadow-2xl transition-transform duration-700 group-hover:translate-y-[-20px] z-10 border border-zinc-100 dark:border-zinc-900">
+                                            <div className="transition-transform duration-500 group-hover:scale-[1.02] origin-right">
+                                                <h4 className="text-2xl font-serif font-medium tracking-tight text-zinc-950 dark:text-zinc-50 mb-3">Signature Style</h4>
+                                                <p className="text-[11px] font-bold tracking-[0.15em] text-zinc-400 dark:text-zinc-500 uppercase italic">Chi tiết tạo nên đẳng cấp</p>
                                             </div>
                                         </div>
                                     </div>
@@ -89,8 +88,8 @@ export default function HomePage() {
                         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16 lg:gap-32">
                             {/* Left Content */}
                             <BlurFade delay={0.2} direction="right" className="space-y-10 order-2 lg:order-1">
-                                <h2 className="text-6xl md:text-8xl lg:text-[10vw] font-serif-display leading-none tracking-tighter">
-                                    <span className="block italic text-luxury-warm-grey transition-all duration-1000 group-hover/legacy:translate-x-4">Hành Trình</span>
+                                <h2 className="text-6xl md:text-8xl lg:text-[10vw] font-serif font-medium leading-[0.85] tracking-tight text-white">
+                                    <span className="block transition-all duration-1000 group-hover/legacy:translate-x-4 opacity-30 italic">Hành Trình</span>
                                     <span className="block ml-8 md:ml-16 lg:ml-24 transition-all duration-1000 group-hover/legacy:-translate-x-4">Vĩnh Cửu</span>
                                 </h2>
                                 <div className="space-y-8 ml-8 md:ml-16 lg:ml-24">
@@ -135,17 +134,14 @@ export default function HomePage() {
 
                     <div className="mx-auto max-w-[1400px] w-full relative z-10 pt-10 lg:pt-14 pb-12 lg:pb-16">
                         {/* Featured Header */}
-                        <div className="flex flex-col items-center mb-6 space-y-2 text-center">
+                        <div className="flex flex-col items-center mb-16 space-y-4 text-center">
                             <BlurFade delay={0.2} inView>
-                                <span className="text-[9px] font-bold uppercase tracking-[0.6em] text-luxury-slate-grey">Hào Quang Của Sự Hoàn Mỹ</span>
+                                <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500 italic">Hào Quang Của Sự Hoàn Mỹ</span>
                             </BlurFade>
                             <BlurFade delay={0.4} inView>
-                                <WordRotate
-                                    words={["Tinh Hoa Hội Tụ", "Đẳng Cấp Thượng Lưu", "Vẻ Đẹp Vĩnh Cửu"]}
-                                    className="font-serif-display text-3xl md:text-5xl text-luxury-onyx italic leading-tight"
-                                />
+                                <h2 className="text-4xl md:text-7xl font-serif font-medium text-zinc-950 dark:text-zinc-50 leading-tight tracking-tight">Bộ Sưu Tập Đặc Biệt</h2>
                             </BlurFade>
-                            <div className="w-10 h-[1px] bg-black/5"></div>
+                            <div className="w-16 h-[1px] bg-zinc-200 dark:bg-zinc-800"></div>
                         </div>
 
                         {/* Featured Trio (The Highlights) */}
@@ -178,8 +174,8 @@ export default function HomePage() {
                                                 <div className="relative z-10 flex flex-col gap-4">
                                                     <div className="flex justify-between items-end border-b border-white/10 pb-4">
                                                         <div className="space-y-1">
-                                                            <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 mb-1 block">Selected Piece</span>
-                                                            <h3 className="text-xl md:text-2xl font-serif-display italic text-white leading-tight tracking-wide">{product.name}</h3>
+                                                            <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/40 mb-1 block">Selected Piece</span>
+                                                            <h3 className="text-xl md:text-3xl font-bold text-white leading-tight tracking-tighter uppercase">{product.name}</h3>
                                                         </div>
                                                         <div className="text-right pb-1">
                                                             <p className="text-lg md:text-xl font-medium tracking-tighter text-white/90">
@@ -272,17 +268,17 @@ export default function HomePage() {
                             {/* Narrative Column */}
                             <BlurFade delay={0.2} direction="right" className="lg:w-1/3 flex flex-col justify-center space-y-10">
                                 <div className="space-y-4">
-                                    <div className="text-6xl font-serif-display text-black/10">01.</div>
-                                    <h3 className="text-4xl md:text-5xl font-serif-display italic text-luxury-onyx leading-tight">Trải Nghiệm Thượng Lưu</h3>
-                                    <p className="text-[11px] font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase">
+                                    <div className="text-6xl font-bold text-zinc-900/10 dark:text-white/5 tracking-tighter">01.</div>
+                                    <h3 className="text-4xl md:text-5xl font-bold text-zinc-950 dark:text-zinc-50 leading-tight tracking-tighter uppercase">Trải Nghiệm Thượng Lưu</h3>
+                                    <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed tracking-widest uppercase">
                                         Chúng tôi không chỉ bán sản phẩm, chúng tôi mang tới một phong cách sống. Những đặc quyền dành riêng cho thành viên XX.II Collective.
                                     </p>
                                 </div>
-                                <div className="h-[1px] w-full bg-black/10"></div>
+                                <div className="h-[1px] w-full bg-zinc-100 dark:bg-zinc-800"></div>
                                 <div className="space-y-4">
-                                    <div className="text-6xl font-serif-display text-black/10">02.</div>
-                                    <h3 className="text-4xl md:text-5xl font-serif-display italic text-luxury-onyx leading-tight">Di Sản Toàn Cầu</h3>
-                                    <p className="text-[11px] font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase">
+                                    <div className="text-6xl font-bold text-zinc-900/10 dark:text-white/5 tracking-tighter">02.</div>
+                                    <h3 className="text-4xl md:text-5xl font-bold text-zinc-950 dark:text-zinc-50 leading-tight tracking-tighter uppercase">Di Sản Toàn Cầu</h3>
+                                    <p className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed tracking-widest uppercase">
                                         Mạng lưới showroom và đối tác chiến lược tại các kinh đô thời trang lớn nhất thế giới, sẵn sàng phục vụ bạn.
                                     </p>
                                 </div>
@@ -332,12 +328,12 @@ export default function HomePage() {
                             </BlurFade>
                             <BlurFade delay={0.4} direction="left" className="lg:col-span-5 space-y-12">
                                 <div className="space-y-4">
-                                    <div className="w-12 h-[1px] bg-black/20"></div>
-                                    <h2 className="font-serif-display text-5xl md:text-7xl leading-tight italic text-luxury-onyx">Hành Trình<br />Vĩnh Cửu</h2>
+                                    <div className="w-12 h-[1px] bg-zinc-200 dark:bg-zinc-800"></div>
+                                    <h2 className="text-5xl md:text-8xl font-bold leading-tight text-zinc-950 dark:text-zinc-50 tracking-tighter uppercase">Hành Trình<br />Vĩnh Cửu</h2>
                                 </div>
                                 <div className="space-y-8">
-                                    <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-[0.2em] relative uppercase">
-                                        <span className="absolute -left-12 top-2 w-8 h-[1px] bg-black/20"></span>
+                                    <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed tracking-[0.2em] relative uppercase">
+                                        <span className="absolute -left-12 top-2 w-8 h-[1px] bg-zinc-200 dark:bg-zinc-800"></span>
                                         XX.II Collective định nghĩa lại sự sang trọng qua lăng kính của nghệ thuật và di sản. Mỗi sản phẩm là sự kết giao giữa truyền thống hàng trăm năm và tư duy thiết kế đương đại.
                                     </p>
                                     <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-[0.2em] uppercase">
@@ -378,10 +374,10 @@ export default function HomePage() {
                             {/* Left Column: Narrative Hub */}
                             <BlurFade delay={0.2} direction="right" className="lg:col-span-4 space-y-6 text-center lg:text-left">
                                 <div className="space-y-4">
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.6em] text-luxury-warm-grey">Premium Assurance</span>
-                                    <h2 className="text-5xl md:text-6xl font-serif-display italic leading-tight text-luxury-onyx">Niềm Tin<br />Tuyệt Đối</h2>
+                                    <span className="text-[11px] font-bold uppercase tracking-[0.6em] text-zinc-400 dark:text-zinc-500">Premium Assurance</span>
+                                    <h2 className="text-5xl md:text-7xl font-bold leading-tight text-zinc-950 dark:text-zinc-50 tracking-tighter uppercase">Niềm Tin<br />Tuyệt Đối</h2>
                                 </div>
-                                <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase italic max-w-md mx-auto lg:mx-0">
+                                <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400 leading-relaxed tracking-widest uppercase max-w-md mx-auto lg:mx-0">
                                     "Mỗi sản phẩm là một lời cam kết về chất lượng và sự tận tâm dành cho những quý chủ nhân xứng tầm."
                                 </p>
                                 <div className="h-[1px] w-24 bg-black/10 mx-auto lg:mx-0"></div>

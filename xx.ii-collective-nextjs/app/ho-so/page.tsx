@@ -67,7 +67,7 @@ export default function ProfilePage() {
                                                 }`}
                                         >
                                             <div className="flex items-center gap-4">
-                                                <span className={`material-symbols-outlined text-xl transition-colors ${activeTab === item.id ? 'text-white dark:text-dark-bg' : 'text-luxury-slate-grey/30 group-hover:text-primary'}`}>
+                                                <span className={`material-symbols-outlined text-xl transition-colors ${activeTab === item.id ? 'text-white dark:text-dark-bg' : 'text-luxury-slate-grey/30 group-hover:text-black dark:group-hover:text-white'}`}>
                                                     {item.icon}
                                                 </span>
                                                 <span className="text-[11px] font-bold uppercase tracking-[0.15em]">{item.label}</span>
@@ -100,7 +100,7 @@ export default function ProfilePage() {
                                                 <input
                                                     type="text"
                                                     placeholder="TÌM KIẾM ĐƠN HÀNG..."
-                                                    className="w-full pl-10 pr-4 py-3 border border-black/[0.05] dark:border-white/[0.05] bg-black/[0.02] dark:bg-white/[0.02] text-[9px] uppercase tracking-[0.15em] focus:ring-1 focus:ring-primary focus:border-primary transition-all dark:text-dark-text-primary font-bold placeholder:text-luxury-slate-grey/40 rounded-xl"
+                                                    className="w-full pl-10 pr-4 py-3 border border-black/[0.05] dark:border-white/[0.05] bg-black/[0.02] dark:bg-white/[0.02] text-[9px] uppercase tracking-[0.15em] focus:ring-1 focus:ring-black focus:border-black dark:focus:ring-white dark:focus:border-white transition-all dark:text-dark-text-primary font-bold placeholder:text-luxury-slate-grey/40 rounded-xl"
                                                 />
                                                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-luxury-slate-grey/40 text-lg">search</span>
                                             </div>
@@ -124,7 +124,7 @@ export default function ProfilePage() {
                                             <div className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:border-primary transition-all">
                                                 <span className="material-symbols-outlined text-2xl text-luxury-slate-grey group-hover:text-white">add</span>
                                             </div>
-                                            <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey group-hover:text-primary">Thêm Địa Chỉ Mới</span>
+                                            <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey group-hover:text-black dark:group-hover:text-white">Thêm Địa Chỉ Mới</span>
                                         </button>
                                     </div>
                                 </div>
@@ -149,13 +149,13 @@ export default function ProfilePage() {
                                                 </div>
                                             </div>
                                             <div className="flex gap-6 text-[9px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey/60 dark:text-dark-text-secondary">
-                                                <button className="hover:text-primary transition-colors">Sửa</button>
+                                                <button className="hover:text-black dark:hover:text-white transition-colors">Sửa</button>
                                                 <button className="hover:text-red-500 transition-colors">Gỡ bỏ</button>
                                             </div>
                                         </div>
                                         <button className="w-full border border-dashed border-black/10 dark:border-white/10 py-8 text-center bg-black/[0.02] dark:bg-white/[0.02] hover:bg-white dark:hover:bg-dark-card hover:shadow-2xl transition-all duration-700 flex items-center justify-center gap-3 group rounded-2xl">
-                                            <span className="material-symbols-outlined text-luxury-slate-grey/60 group-hover:text-primary">add</span>
-                                            <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey/60 group-hover:text-primary">Thêm Phương Thức Mới</span>
+                                            <span className="material-symbols-outlined text-luxury-slate-grey/60 group-hover:text-black dark:group-hover:text-white">add</span>
+                                            <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey/60 group-hover:text-black dark:group-hover:text-white">Thêm Phương Thức Mới</span>
                                         </button>
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@ export default function ProfilePage() {
                                             <input defaultValue="+84 123 456 789" className="w-full bg-transparent border-0 border-b border-black/10 dark:border-white/10 focus:ring-0 focus:border-primary py-4 text-sm font-medium transition-all" />
                                         </div>
                                         <div className="pt-10">
-                                            <button className="bg-dark-text dark:bg-dark-text-primary text-white dark:text-dark-bg px-12 py-5 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-primary dark:hover:bg-primary hover:text-white transition-all shadow-xl hover:shadow-primary/20 rounded-xl">
+                                            <button className="bg-dark-text dark:bg-dark-text-primary text-white dark:text-dark-bg px-12 py-5 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-all shadow-xl rounded-xl">
                                                 Lưu Thay Đổi
                                             </button>
                                         </div>

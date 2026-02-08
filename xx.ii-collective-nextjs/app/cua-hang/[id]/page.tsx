@@ -29,7 +29,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <div className="min-h-screen flex items-center justify-center bg-white dark:bg-dark-bg transition-colors pt-32">
                     <div className="text-center">
                         <h1 className="text-4xl font-serif-display italic mb-6 text-dark-text dark:text-dark-text-primary">Không Tìm Thấy</h1>
-                        <Link href="/cua-hang" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">← Quay Lại Cửa Hàng</Link>
+                        <Link href="/cua-hang" className="text-xs uppercase tracking-widest hover:text-black dark:hover:text-white transition-colors">← Quay Lại Cửa Hàng</Link>
                     </div>
                 </div>
                 <Footer />
@@ -177,7 +177,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                             <div className="mb-12">
                                 <div className="flex justify-between items-center mb-4">
                                     <span className="text-xs uppercase tracking-widest font-bold">Kích Thước</span>
-                                    <button className="text-xs text-muted-text dark:text-dark-text-secondary underline hover:text-primary transition-colors">Hướng Dẫn</button>
+                                    <button className="text-xs text-muted-text dark:text-dark-text-secondary underline hover:text-black dark:hover:text-white transition-colors">Hướng Dẫn</button>
                                 </div>
                                 <div className="grid grid-cols-4 gap-3">
                                     {['S', 'M', 'L', 'XL'].map(size => (
@@ -214,7 +214,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                             className="w-full py-6 flex items-center justify-between text-left group"
                                         >
                                             <span className="text-xs uppercase tracking-widest font-bold text-dark-text dark:text-dark-text-primary">{section.title}</span>
-                                            <span className="material-symbols-outlined text-muted-text dark:text-dark-text-secondary group-hover:text-primary transition-colors">
+                                            <span className="material-symbols-outlined text-muted-text dark:text-dark-text-secondary group-hover:text-black dark:group-hover:text-white transition-colors">
                                                 {expandedSection === section.title ? 'remove' : 'add'}
                                             </span>
                                         </button>

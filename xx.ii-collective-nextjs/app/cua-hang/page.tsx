@@ -25,23 +25,23 @@ export default function ShopPage() {
                 <aside className="hidden lg:flex flex-col w-[280px] fixed h-full pt-20 px-8 pb-8 border-r border-black/5 dark:border-dark-border overflow-y-auto no-scrollbar bg-white dark:bg-dark-bg z-10">
                     <div className="space-y-12">
                         <div>
-                            <h2 className="font-serif-display text-2xl italic mb-6 text-dark-text dark:text-dark-text-primary">Danh Mục</h2>
-                            <ul className="space-y-4">
-                                <li><a href="#" className="block text-xs uppercase tracking-widest font-bold text-black dark:text-dark-text-primary border-l-2 border-primary pl-4">Tất Cả</a></li>
-                                <li><a href="#" className="block text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary hover:pl-2 transition-all">Váy</a></li>
-                                <li><a href="#" className="block text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary hover:pl-2 transition-all">Áo Khoác</a></li>
-                                <li><a href="#" className="block text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary hover:pl-2 transition-all">Áo & Blouse</a></li>
-                                <li><a href="#" className="block text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary hover:pl-2 transition-all">Quần</a></li>
-                                <li><a href="#" className="block text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary hover:pl-2 transition-all">Phụ Kiện</a></li>
+                            <h2 className="text-[11px] font-bold uppercase tracking-[0.15em] mb-8 text-zinc-400 dark:text-zinc-500 italic">Danh Mục</h2>
+                            <ul className="space-y-6">
+                                <li><a href="#" className="block text-sm font-medium text-zinc-950 dark:text-zinc-50 border-l border-zinc-950 dark:border-white pl-4 transition-all">Tất Cả</a></li>
+                                <li><a href="#" className="block text-sm font-normal text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 transition-all pl-4 hover:pl-6">Váy</a></li>
+                                <li><a href="#" className="block text-sm font-normal text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 transition-all pl-4 hover:pl-6">Áo Khoác</a></li>
+                                <li><a href="#" className="block text-sm font-normal text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 transition-all pl-4 hover:pl-6">Áo & Blouse</a></li>
+                                <li><a href="#" className="block text-sm font-normal text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 transition-all pl-4 hover:pl-6">Quần</a></li>
+                                <li><a href="#" className="block text-sm font-normal text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 transition-all pl-4 hover:pl-6">Phụ Kiện</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h2 className="font-serif-display text-xl italic mb-4 text-dark-text dark:text-dark-text-primary">Bộ Lọc</h2>
+                            <h2 className="text-[11px] font-bold uppercase tracking-[0.15em] mb-8 text-zinc-400 dark:text-zinc-500 italic">Bộ Lọc</h2>
                             <div className="mb-8">
-                                <h3 className="text-xs font-bold uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary mb-3">Kích Thước</h3>
+                                <h3 className="text-[10px] font-bold uppercase tracking-[0.1em] text-zinc-400 mb-4">Kích Thước</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {['XS', 'S', 'M', 'L', 'XL'].map(size => (
-                                        <button key={size} className="w-8 h-8 flex items-center justify-center border border-slate-200 dark:border-dark-border text-xs hover:bg-black hover:text-white dark:hover:bg-primary transition-colors">
+                                        <button key={size} className="w-10 h-10 flex items-center justify-center border border-zinc-100 dark:border-zinc-900 text-[10px] font-bold transition-all hover:bg-zinc-950 hover:text-white dark:hover:bg-white dark:hover:text-black">
                                             {size}
                                         </button>
                                     ))}
@@ -67,9 +67,9 @@ export default function ShopPage() {
                             <div>
                                 <h3 className="text-xs font-bold uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary mb-2">Giá</h3>
                                 <ul className="space-y-2">
-                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-primary transition-colors">Dưới $100</a></li>
-                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-primary transition-colors">$100 - $300</a></li>
-                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-primary transition-colors">Trên $300</a></li>
+                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-white transition-colors">Dưới $100</a></li>
+                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-white transition-colors">$100 - $300</a></li>
+                                    <li><a href="#" className="block text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary hover:text-black dark:hover:text-white transition-colors">Trên $300</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -80,12 +80,12 @@ export default function ShopPage() {
                 <main className="flex-1 w-full lg:pl-[280px] pt-20 min-h-screen flex flex-col overflow-x-hidden">
                     <section className="flex-1 px-6 md:px-12 max-w-[1600px] mx-auto w-full py-12">
                         {/* Header */}
-                        <div className="mb-16 mt-12">
-                            <span className="block text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4">Bộ Sưu Tập / 2024</span>
-                            <h1 className="text-6xl md:text-7xl font-serif-display italic text-dark-text dark:text-dark-text-primary leading-[0.9] tracking-tight mb-6">
-                                Thời Trang<br />Xuân Hè
+                        <div className="mb-24 mt-16">
+                            <span className="block text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500 italic mb-6">Xuân Hè / 2025</span>
+                            <h1 className="text-6xl md:text-[8vw] font-serif font-medium text-zinc-950 dark:text-zinc-50 leading-[0.85] tracking-tight mb-8">
+                                Thời Trang<br /><span className="italic opacity-30">Của Bạn</span>
                             </h1>
-                            <p className="text-sm font-light leading-relaxed text-muted-text dark:text-dark-text-secondary max-w-md">
+                            <p className="text-base font-normal leading-relaxed text-zinc-500 dark:text-zinc-400 max-w-sm italic">
                                 Khám phá các thiết kế mới nhất được định nghĩa bởi sự thanh lịch và chất lượng cao cấp.
                             </p>
                         </div>

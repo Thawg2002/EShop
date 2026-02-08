@@ -17,7 +17,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                         // Variants
                         'bg-primary text-white hover:bg-primary-hover shadow-lg hover:shadow-xl': variant === 'primary',
                         'border border-gray-300 text-dark-text hover:bg-gray-50 dark:border-dark-border dark:text-dark-text dark:hover:bg-gray-800': variant === 'outline',
-                        'text-gray-600 hover:text-primary hover:bg-gray-50 dark:text-dark-text-secondary dark:hover:bg-gray-800': variant === 'ghost',
+                        'text-gray-600 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:text-dark-text-secondary dark:hover:bg-gray-800': variant === 'ghost',
                         'p-2 hover:bg-gray-100 dark:hover:bg-gray-800': variant === 'icon',
                         // Sizes
                         'px-4 py-2 text-[10px]': size === 'sm' && variant !== 'icon',

@@ -1,4 +1,4 @@
-import { Product, Order, Address } from "@/types";
+import { Product, Order, Address, BlogPost, BlogCategory } from "@/types";
 
 export const PRODUCTS: Product[] = [
   {
@@ -137,5 +137,107 @@ export const ADDRESSES: Address[] = [
     zip: "100000",
     phone: "+84 97 654 3210",
     isDefault: false,
+  },
+];
+
+export const BLOG_CATEGORIES: BlogCategory[] = [
+  { id: "all", name: "Tất Cả", count: 6 },
+  { id: "xu-huong", name: "Xu Hướng", count: 2 },
+  { id: "phong-cach", name: "Phong Cách", count: 2 },
+  { id: "chat-lieu", name: "Chất Liệu", count: 1 },
+  { id: "su-kien", name: "Sự Kiện", count: 1 },
+];
+
+export const BLOG_POSTS: BlogPost[] = [
+  {
+    id: 1,
+    slug: "nghe-thuat-phoi-do-minimalism",
+    title: "Nghệ Thuật Phối Đồ Minimalism: Ít Nhưng Chất",
+    excerpt:
+      "Khám phá cách xây dựng tủ đồ tối giản nhưng vẫn mang đậm dấu ấn cá nhân và sự sang trọng vượt thời gian.",
+    content: `
+      <h2>Tại sao nên chọn phong cách Minimalism?</h2>
+      <p>Phong cách tối giản không chỉ là một xu hướng thời trang, mà còn là một triết lý sống. Trong thời đại của thời trang nhanh, minimalism mang đến một hơi thở mới với sự chú trọng vào chất lượng hơn số lượng.</p>
+      
+      <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=1000&auto=format&fit=crop" alt="Minimalism Fashion" />
+
+      <h3>1. Chất liệu là chìa khóa</h3>
+      <p>Khi bạn cắt giảm các chi tiết rườm rà, chất liệu vải sẽ trở thành tâm điểm. Cotton Ý, Lụa tơ tằm hay Linen cao cấp không chỉ mang lại cảm giác dễ chịu mà còn tạo nên phom dáng chuẩn xác cho trang phục.</p>
+
+      <h3>2. Bảng màu trung tính</h3>
+      <p>Trắng, đen, be và xám là những gam màu kinh điển. Chúng cho phép bạn dễ dàng kết hợp mọi món đồ trong tủ quần áo với nhau mà không sợ lỗi mốt.</p>
+
+      <blockquote>"Simplicity is the ultimate sophistication." - Leonardo da Vinci</blockquote>
+
+      <p>Hãy bắt đầu hành trình tối giản của bạn từ những món đồ cơ bản nhất tại XX.II Collective.</p>
+    `,
+    image:
+      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=1000&auto=format&fit=crop",
+    date: "8 Tháng 2, 2026",
+    author: {
+      name: "Minh Anh",
+      role: "Fashion Editor",
+      avatar: "https://i.pravatar.cc/150?u=minhanh",
+    },
+    category: "Phong Cách",
+    readTime: "5 phút",
+    tags: ["Minimalism", "Fashion", "Style"],
+  },
+  {
+    id: 2,
+    slug: "chat-lieu-ben-vung-trong-thoi-trang-cao-cap",
+    title: "Chất Liệu Bền Vững Trong Thời Trang Cao Cấp",
+    excerpt:
+      "Sự kết hợp giữa đẳng cấp và trách nhiệm với môi trường thông qua những chất liệu vải sinh học mới nhất.",
+    content: "<p>Nội dung đang được cập nhật...</p>",
+    image:
+      "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1000&auto=format&fit=crop",
+    date: "5 Tháng 2, 2026",
+    author: {
+      name: "Hoàng Long",
+      role: "Sustainability Expert",
+      avatar: "https://i.pravatar.cc/150?u=hoanglong",
+    },
+    category: "Chất Liệu",
+    readTime: "7 phút",
+    tags: ["Eco-friendly", "Premium", "Materials"],
+  },
+  {
+    id: 3,
+    slug: "bo-suu-tap-moi-xuan-he-2026",
+    title: "Cận Cảnh Bộ Sưu Tập Mới Xuân Hè 2026",
+    excerpt:
+      "Đánh dấu sự trở lại của những gam màu pastel và phom dáng bay bổng trong bộ sưu tập 'Aura of Spring'.",
+    content: "<p>Nội dung đang được cập nhật...</p>",
+    image:
+      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1000&auto=format&fit=crop",
+    date: "1 Tháng 2, 2026",
+    author: {
+      name: "Thảo Vy",
+      role: "Creative Director",
+      avatar: "https://i.pravatar.cc/150?u=thaovy",
+    },
+    category: "Sự Kiện",
+    readTime: "4 phút",
+    tags: ["New Collection", "Spring Summer", "2026"],
+  },
+  {
+    id: 4,
+    slug: "cach-bao-quan-do-lua-luon-nhu-moi",
+    title: "Bí Quyết Bảo Quản Đồ Lụa Luôn Như Mới",
+    excerpt:
+      "Lụa là chất liệu đỏng đảnh, nhưng với 5 bước đơn giản này, trang phục của bạn sẽ luôn giữ được độ bóng mượt.",
+    content: "<p>Nội dung đang được cập nhật...</p>",
+    image:
+      "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?q=80&w=1000&auto=format&fit=crop",
+    date: "28 Tháng 1, 2026",
+    author: {
+      name: "Minh Anh",
+      role: "Fashion Editor",
+      avatar: "https://i.pravatar.cc/150?u=minhanh",
+    },
+    category: "Phong Cách",
+    readTime: "6 phút",
+    tags: ["Silk Care", "Luxury", "Tips"],
   },
 ];

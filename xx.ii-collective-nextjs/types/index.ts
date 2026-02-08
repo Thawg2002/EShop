@@ -45,3 +45,27 @@ export interface PaymentMethod {
   expiry: string;
   isDefault: boolean;
 }
+
+export interface BlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  date: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  category: string;
+  readTime: string;
+  tags: string[];
+}
+
+export interface BlogCategory {
+  id: string;
+  name: string;
+  count: number;
+}

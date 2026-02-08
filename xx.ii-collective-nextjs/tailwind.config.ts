@@ -11,15 +11,15 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#c5a059",
+          DEFAULT: "#c5a059", // Champagne Gold
           hover: "#a38241",
           light: "#e5c17e",
         },
         secondary: "#211d11",
-        "off-white": "#f8f7f6",
-        "light-bg": "#f8f7f6",
-        "dark-text": "#1d1d20",
-        "muted-text": "#666666",
+        "off-white": "#fcfcfc", // Soft silk white
+        "light-bg": "#fcfcfc",
+        "dark-text": "#0a0a0b", // Midnight Black
+        "muted-text": "#737373", // Zinc 500 equivalent but softer
         gold: {
           50: "#fbf8f1",
           100: "#f4eddb",
@@ -33,28 +33,31 @@ const config: Config = {
           900: "#5a3f29",
         },
         luxury: {
-          cream: "#fdf8f4",
+          cream: "#f9f9f9",
           black: "#050505",
-          charcoal: "#0a0a0a",
-          onyx: "#1a1a1b",
+          charcoal: "#0a0a0b",
+          onyx: "#111111",
           "warm-grey": "#8e8e8e",
-          "champagne-gold": "#d4af37",
+          "champagne-gold": "#c5a059",
           "slate-grey": "#4a4a4b",
           porcelain: "#f2f2f2",
         },
-        // Dark Mode Color System
-        "dark-bg": "#050505",
-        "dark-card": "#0a0a0a",
-        "dark-surface": "#000000",
-        "dark-border": "rgba(255,255,255,0.05)",
-        "dark-text-primary": "#fdf8f4",
-        "dark-text-secondary": "#a3a3a3",
+        // Dark Mode Color System (Softer High-End Dark)
+        "dark-bg": "#0a0a0b",
+        "dark-card": "#141415",
+        "dark-surface": "#0a0a0b",
+        "dark-border": "#1f1f21",
+        "dark-text-primary": "#fcfcfc",
+        "dark-text-secondary": "#a1a1aa",
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "serif"],
-        "serif-display": ["var(--font-serif)", "serif"],
-        sans: ["var(--font-primary)", "sans-serif"],
-        mono: ["var(--font-secondary)", "monospace"],
+        sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "SFMono-Regular"],
+        serif: ["var(--font-playfair)", "serif"],
+        "serif-display": ["var(--font-playfair)", "serif"],
+      },
+      fontWeight: {
+        tight: "tracking-tight",
       },
       spacing: {
         "128": "32rem",

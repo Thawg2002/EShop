@@ -25,7 +25,7 @@ export function DarkModeToggle() {
 
     if (!mounted) {
         return (
-            <button className="hover:text-primary transition-colors">
+            <button className="hover:text-black dark:hover:text-white transition-colors">
                 <SunIcon />
             </button>
         );
@@ -34,7 +34,7 @@ export function DarkModeToggle() {
     return (
         <button
             onClick={toggle}
-            className="hover:text-primary transition-all duration-300"
+            className="hover:text-black dark:hover:text-white transition-all duration-300"
             aria-label="Toggle dark mode"
         >
             {isDarkMode ? (

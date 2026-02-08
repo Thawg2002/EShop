@@ -33,12 +33,12 @@ export default function JournalPage() {
             <Navbar />
             <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16 overflow-x-hidden">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-28">
-                    <div className="text-center mb-24 md:mb-32">
-                        <span className="text-primary font-bold uppercase text-[11px] tracking-[0.6em] mb-6 block">Editorial</span>
-                        <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-8 leading-[0.9]">
-                            Nhật Ký
+                    <div className="text-center mb-32 md:mb-48">
+                        <span className="text-zinc-400 dark:text-zinc-500 font-bold uppercase text-[11px] tracking-[0.15em] mb-8 block italic">Editorial</span>
+                        <h1 className="text-6xl md:text-[10vw] font-serif font-medium text-zinc-950 dark:text-zinc-50 mb-12 leading-[0.85] tracking-tight">
+                            Nhật Ký <br /> <span className="italic opacity-30">Tương Lai</span>
                         </h1>
-                        <p className="text-sm text-luxury-slate-grey dark:text-dark-text-secondary max-w-2xl mx-auto leading-relaxed font-serif-display font-medium">
+                        <p className="text-base md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed italic">
                             Stories of craftsmanship, heritage, and the art of modern living.
                         </p>
                     </div>
@@ -55,21 +55,20 @@ export default function JournalPage() {
                                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 </div>
 
-                                <div className="flex items-center gap-4 mb-6 text-[11px] font-bold uppercase tracking-widest">
-                                    <span className="text-primary">{article.category}</span>
-                                    <span className="w-1 h-1 rounded-full bg-black/10 dark:bg-dark-border"></span>
-                                    <span className="text-luxury-slate-grey dark:text-dark-text-secondary">{article.date}</span>
+                                <div className="flex items-center gap-6 mb-6 text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500 italic">
+                                    <span className="text-zinc-950 dark:text-zinc-50">{article.category}</span>
+                                    <span>{article.date}</span>
                                 </div>
 
-                                <h2 className="text-3xl md:text-4xl font-serif-display italic mb-6 text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-colors leading-tight">
+                                <h2 className="text-4xl md:text-5xl font-serif font-medium mb-8 text-zinc-950 dark:text-zinc-50 group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors leading-tight tracking-tight">
                                     {article.title}
                                 </h2>
 
-                                <p className="text-sm text-luxury-slate-grey dark:text-dark-text-secondary leading-relaxed mb-8 line-clamp-3 font-serif-display font-medium">
+                                <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 line-clamp-3 font-normal">
                                     {article.excerpt}
                                 </p>
 
-                                <button className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-dark-text dark:text-dark-text-primary group-hover:text-primary transition-all">
+                                <button className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-dark-text dark:text-dark-text-primary group-hover:text-black dark:group-hover:text-white transition-all">
                                     Đọc Bài Viết
                                     <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
                                 </button>
