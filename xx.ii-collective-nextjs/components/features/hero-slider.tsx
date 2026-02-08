@@ -77,7 +77,7 @@ export function HeroSlider() {
                         </div>
 
                         {/* Hero Content */}
-                        <div className="relative z-20 flex h-full w-full items-end justify-start px-6 pb-24 md:px-12 md:pb-32 pt-32 md:pt-40">
+                        <div className="relative z-20 flex h-full w-full items-end justify-start px-6 pb-24 md:px-12 md:pb-32 pt-24 md:pt-32">
                             <div className="max-w-xl text-left">
                                 <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/80 mb-6 animate-in fade-in slide-in-from-left-4 duration-700">
                                     {slide.tag}

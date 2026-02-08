@@ -8,6 +8,7 @@ import { useCartStore } from '@/lib/store';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { ProductSection } from '@/components/features/product-section';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 import { formatPrice } from '@/lib/utils';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -25,7 +26,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         return (
             <>
                 <Navbar />
-                <div className="min-h-screen flex items-center justify-center bg-white dark:bg-dark-bg transition-colors pt-24">
+                <div className="min-h-screen flex items-center justify-center bg-white dark:bg-dark-bg transition-colors pt-32">
                     <div className="text-center">
                         <h1 className="text-4xl font-serif-display italic mb-6 text-dark-text dark:text-dark-text-primary">Không Tìm Thấy</h1>
                         <Link href="/cua-hang" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">← Quay Lại Cửa Hàng</Link>
@@ -36,7 +37,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         );
     }
 
-    const images = product.images || [product.image, product.image, product.image];
+    const images = Array(6).fill(product.image);
     const colors = [
         { name: 'Beige', hex: '#d2b48c' },
         { name: 'Navy', hex: '#1c2841' },
@@ -50,12 +51,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
     const sections = [
         {
-            title: 'Chi Tiết Sản Phẩm',
-            content: product.materials || 'Được chế tác từ cotton Ý cao cấp, sản phẩm này mang đến sự thoải mái tối đa với form dáng thanh lịch. Thiết kế thoáng khí, phù hợp cho cả văn phòng lẫn dạo phố.'
+            title: 'Mô Tả Sản Phẩm',
+            content: product.description
         },
         {
-            title: 'Vận Chuyển & Đổi Trả',
-            content: 'Miễn phí vận chuyển cho đơn hàng trên 5.000.000 VNĐ. Đổi trả trong vòng 30 ngày. Chính sách đổi trả linh hoạt, không cần lý do.'
+            title: 'Kích Thước & Phom Dáng',
+            content: 'Người mẫu cao 175cm mặc size S. Phom dáng suông rộng thoải mái. Đường may tỉ mỉ theo tiêu chuẩn cao cấp.'
         },
         {
             title: 'Chất Liệu & Bảo Quản',
@@ -63,42 +64,33 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         }
     ];
 
+    const breadcrumbItems = [
+        { label: 'Cửa Hàng', href: '/cua-hang' },
+        { label: product.category, href: `/cua-hang?cat=${product.category.toLowerCase()}` },
+        { label: product.name }
+    ];
+
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16 overflow-x-hidden">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-16 pb-16 overflow-x-hidden">
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-                    {/* Back Link */}
-                    <Link href="/cua-hang" className="inline-flex items-center text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary transition-colors mb-12">
-                        <span className="material-symbols-outlined text-sm mr-2">arrow_back</span>
-                        Quay Lại
-                    </Link>
+                    {/* Breadcrumbs */}
+                    <div className="mb-6">
+                        <Breadcrumbs items={breadcrumbItems} />
+                    </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-0">
                         {/* Image Gallery - 7 columns, Sticky */}
-                        <div className="lg:col-span-7 lg:sticky lg:top-32 lg:self-start">
-                            <div className="max-h-[calc(100vh-10rem)] flex flex-col">
-                                {/* Main Image - Optimized for viewport */}
-                                <div className="relative aspect-square bg-off-white dark:bg-dark-card mb-4 overflow-hidden group flex-shrink-0">
-                                    <img
-                                        src={images[selectedImageIndex]}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover transition-all duration-[1.5s]"
-                                    />
-                                    {product.isBestSeller && (
-                                        <div className="absolute top-6 left-6 z-20">
-                                            <span className="inline-block px-4 py-2 bg-white/90 text-[11px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Thumbnail Gallery - Horizontal Slider */}
-                                <div className="grid grid-cols-4 gap-3 flex-shrink-0">
+                        <div className="lg:col-span-7 lg:sticky lg:top-14 lg:self-start">
+                            <div className="flex flex-col lg:flex-row gap-4">
+                                {/* Vertical Thumbnails - Left Side (Desktop) / Bottom (Mobile) */}
+                                <div className="order-2 lg:order-1 flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto lg:max-h-[600px] scroll-smooth scrollbar-hide pb-2 lg:pb-0">
                                     {images.map((img, idx) => (
                                         <div
                                             key={idx}
                                             onClick={() => setSelectedImageIndex(idx)}
-                                            className={`aspect-square cursor-pointer overflow-hidden transition-all border-2 ${idx === selectedImageIndex
+                                            className={`flex-shrink-0 w-20 h-20 cursor-pointer overflow-hidden transition-all border-2 ${idx === selectedImageIndex
                                                 ? 'border-primary opacity-100'
                                                 : 'border-transparent opacity-60 hover:opacity-100 hover:border-black/10'
                                                 }`}
@@ -107,12 +99,42 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                         </div>
                                     ))}
                                 </div>
+
+                                {/* Main Image - Right Side with Navigation */}
+                                <div className="order-1 lg:order-2 flex-1 relative group">
+                                    <div className="relative aspect-square bg-off-white dark:bg-dark-card overflow-hidden">
+                                        <img
+                                            src={images[selectedImageIndex]}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover transition-all duration-[1.5s]"
+                                        />
+                                        {product.isBestSeller && (
+                                            <div className="absolute top-6 left-6 z-20">
+                                                <span className="inline-block px-4 py-2 bg-white/90 text-[11px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
+                                            </div>
+                                        )}
+
+                                        {/* Navigation Buttons */}
+                                        <button
+                                            onClick={() => setSelectedImageIndex(prev => prev > 0 ? prev - 1 : images.length - 1)}
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 dark:bg-dark-card/90 border border-black/10 flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg z-10"
+                                        >
+                                            <span className="material-symbols-outlined text-lg">chevron_left</span>
+                                        </button>
+                                        <button
+                                            onClick={() => setSelectedImageIndex(prev => prev < images.length - 1 ? prev + 1 : 0)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 dark:bg-dark-card/90 border border-black/10 flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg z-10"
+                                        >
+                                            <span className="material-symbols-outlined text-lg">chevron_right</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         {/* Product Info - 5 columns */}
                         <div className="lg:col-span-5">
-                            <span className="block text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4">{product.category}</span>
+                            <span className="block text-xs font-bold uppercase tracking-[0.3em] text-primary mb-2">{product.category}</span>
                             <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary leading-[0.95] mb-6">
                                 {product.name}
                             </h1>
@@ -210,8 +232,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     {/* Related Products (Common Component) */}
                     <ProductSection
                         title="Có Thể Bạn Thích"
-                        products={PRODUCTS.filter(p => p.id !== product.id).slice(0, 4)}
+                        products={PRODUCTS.filter(p => p.id !== product.id).slice(0, 8)}
                         className="mt-32"
+                        mode="slider"
                     />
                 </div>
             </main>

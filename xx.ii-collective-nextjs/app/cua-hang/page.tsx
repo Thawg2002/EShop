@@ -20,7 +20,7 @@ export default function ShopPage() {
             <Navbar />
             <div className="flex min-h-screen bg-white dark:bg-dark-bg">
                 {/* Sidebar Filter */}
-                <aside className="hidden lg:flex flex-col w-[280px] fixed h-full pt-32 px-8 pb-8 border-r border-black/5 dark:border-dark-border overflow-y-auto no-scrollbar bg-white dark:bg-dark-bg z-10">
+                <aside className="hidden lg:flex flex-col w-[280px] fixed h-full pt-22 px-8 pb-8 border-r border-black/5 dark:border-dark-border overflow-y-auto no-scrollbar bg-white dark:bg-dark-bg z-10">
                     <div className="space-y-12">
                         <div>
                             <h2 className="font-serif-display text-2xl italic mb-6 text-dark-text dark:text-dark-text-primary">Danh Mục</h2>
@@ -75,7 +75,7 @@ export default function ShopPage() {
                 </aside>
 
                 {/* Main Content */}
-                <main className="flex-1 w-full lg:pl-[280px] pt-24 min-h-screen flex flex-col overflow-x-hidden">
+                <main className="flex-1 w-full lg:pl-[280px] pt-20 min-h-screen flex flex-col overflow-x-hidden">
                     <section className="flex-1 px-6 md:px-12 max-w-[1600px] mx-auto w-full py-12">
                         {/* Header */}
                         <div className="mb-16 mt-12">

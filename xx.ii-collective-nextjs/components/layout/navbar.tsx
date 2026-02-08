@@ -10,100 +10,137 @@ export function Navbar() {
     const itemCount = useCartStore((state) => state.getItemCount());
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(() => {
+        // Initialize theme from localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            setIsDarkMode(true);
+            document.documentElement.classList.add('dark');
+        }
+
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+            setIsScrolled(window.scrollY > 10);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const toggleDarkMode = () => {
+        const newMode = !isDarkMode;
+        setIsDarkMode(newMode);
+        if (newMode) {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        }
+    };
+
     const isActive = (path: string) => pathname === path;
+
+    const navLinks = [
+        { name: 'Phụ Nữ', href: '/cua-hang?cat=women' },
+        { name: 'Nam Giới', href: '/cua-hang?cat=men' },
+        { name: 'Đồ Da', href: '/cua-hang?cat=leather' },
+        { name: 'Trang Sức', href: '/cua-hang?cat=jewelry' },
+        { name: 'Phụ Kiện', href: '/cua-hang?cat=accessories' },
+        { name: 'Cảm Hứng', href: '/cam-hung' },
+        { name: 'Sale', href: '/cua-hang?cat=sale', isSale: true },
+        { name: 'Về XX.II', href: '/lien-he' },
+    ];
 
     return (
         <>
-            <header className={`fixed top-0 z-50 w-full transition-all duration-1000 ease-in-out ${isScrolled
-                ? 'bg-white/70 backdrop-blur-xl border-b border-black/[0.05] py-2 shadow-premium'
-                : 'bg-transparent border-transparent py-6'
+            <header className={`fixed top-0 z-50 w-full transition-all duration-700 ease-in-out ${isScrolled
+                ? 'bg-white/80 dark:bg-dark-bg/80 backdrop-blur-xl border-b border-black/[0.05] dark:border-white/[0.05] py-2 shadow-premium'
+                : 'bg-transparent border-transparent py-1.5'
                 }`}>
-                {/* Top Utility Bar */}
-                <div className="flex h-16 items-center justify-between px-6 lg:px-12 border-b border-black/[0.03]">
-                    {/* Left: Search */}
-                    <div className="flex-1 hidden lg:flex items-center">
-                        <div className="flex items-center gap-2 border-b border-black/20 pb-1 w-48 group focus-within:border-black transition-colors">
-                            <span className="material-symbols-outlined text-[18px] text-gray-400">search</span>
-                            <input
-                                type="text"
-                                placeholder="Tìm kiếm"
-                                className="bg-transparent text-xs uppercase tracking-widest outline-none w-full placeholder:text-gray-500 font-medium"
-                            />
+                <div className={`relative flex items-center justify-between px-6 lg:px-12 transition-all duration-700 ${isScrolled ? 'h-12' : 'h-14'}`}>
+                    {/* Left: Search (Always visible, but layout changes) */}
+                    <div className={`flex items-center transition-all duration-700 ${isScrolled ? 'w-auto gap-8' : 'flex-1'}`}>
+                        {/* Logo in Scrolled State (Left-aligned) */}
+                        {isScrolled && (
+                            <Link href="/" className="flex flex-col items-center group/logo flex-shrink-0">
+                                <span className="font-serif-display font-medium uppercase text-luxury-onyx dark:text-dark-text text-xl tracking-[0.2em]">XX.II</span>
+                            </Link>
+                        )}
+
+                        {/* Search Bar */}
+                        <div className={`hidden lg:flex items-center transition-all duration-700 ${isScrolled ? 'w-40' : 'w-48'}`}>
+                            <div className="flex items-center gap-2 border-b border-black/20 dark:border-white/20 pb-1 w-full group focus-within:border-black dark:focus-within:border-white transition-colors">
+                                <span className="material-symbols-outlined text-[18px] text-gray-400">search</span>
+                                <input
+                                    type="text"
+                                    placeholder="Tìm kiếm"
+                                    className="bg-transparent text-[10px] uppercase tracking-widest outline-none w-full placeholder:text-gray-500 font-medium dark:text-dark-text"
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    {/* Center: Logo */}
-                    <div className={`flex-shrink-0 text-center transition-all duration-700 ${isScrolled ? 'scale-100' : 'scale-110'}`}>
-                        <Link href="/" className="flex flex-col items-center group/logo">
-                            <span className={`text-3xl font-serif-display font-medium tracking-[0.3em] uppercase text-luxury-onyx leading-none transition-all duration-1000 ${isScrolled ? 'tracking-[0.2em]' : 'tracking-[0.4em]'}`}>XX.II</span>
-                            <span className={`text-[8px] tracking-[0.5em] uppercase text-luxury-warm-grey mt-1 transition-all duration-1000 ${isScrolled ? 'opacity-100 translate-y-0' : 'opacity-40 -translate-y-1'}`}>Collective</span>
-                        </Link>
+                    {/* Center: Logo (Only when NOT scrolled) or Nav (Only when scrolled) */}
+                    <div className={`transition-all duration-700 ${isScrolled ? 'flex-1 flex justify-center px-4' : 'flex-shrink-0'}`}>
+                        {!isScrolled ? (
+                            <Link href="/" className="flex flex-col items-center group/logo">
+                                <span className="font-serif-display font-medium uppercase text-luxury-onyx dark:text-dark-text text-2xl tracking-[0.5em]">XX.II</span>
+                                <span className="text-[8px] tracking-[0.6em] uppercase text-luxury-warm-grey dark:text-dark-text-secondary mt-1">Collective</span>
+                            </Link>
+                        ) : (
+                            <nav className="hidden lg:flex items-center gap-6">
+                                {navLinks.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        href={link.href}
+                                        className={`group relative text-[10px] font-bold uppercase tracking-[0.15em] transition-all hover:opacity-70 ${link.isSale ? 'text-red-700 dark:text-red-500' : 'text-luxury-onyx dark:text-dark-text'} scale-90`}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                ))}
+                            </nav>
+                        )}
                     </div>
 
                     {/* Right: Actions */}
-                    <div className="flex-1 flex items-center justify-end gap-6">
-                        <div className="hidden sm:flex items-center gap-6">
-                            <Link href="/ho-so" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black hover:opacity-60 transition-opacity">
-                                <span className="material-symbols-outlined text-[20px]">person</span>
-                                <span className="hidden lg:inline">Tài khoản</span>
-                            </Link>
-                            <Link href="/gio-hang" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-black hover:opacity-60 transition-opacity">
-                                <span className="relative">
-                                    <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
-                                    {itemCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-black text-[8px] text-white">
-                                            {itemCount}
-                                        </span>
-                                    )}
-                                </span>
-                                <span className="hidden lg:inline">Giỏ hàng</span>
-                            </Link>
-                        </div>
+                    <div className={`flex items-center justify-end gap-5 transition-all duration-700 ${isScrolled ? 'w-auto' : 'flex-1'}`}>
+                        {/* Theme Toggle */}
+                        <button
+                            onClick={toggleDarkMode}
+                            className="p-1.5 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-luxury-onyx dark:text-dark-text"
+                            title={isDarkMode ? "Chuyển sang chế độ sáng" : "Chuyển sang chế độ tối"}
+                        >
+                            <span className="material-symbols-outlined text-[20px]">
+                                {isDarkMode ? 'light_mode' : 'dark_mode'}
+                            </span>
+                        </button>
+
+                        <Link href="/ho-so" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black dark:text-white hover:opacity-60 transition-opacity">
+                            <span className="material-symbols-outlined text-[20px]">person</span>
+                            <span className={isScrolled ? 'hidden xl:inline' : 'hidden lg:inline'}>Tài khoản</span>
+                        </Link>
+
+                        <Link href="/gio-hang" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black dark:text-white hover:opacity-60 transition-opacity">
+                            <span className="relative">
+                                <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
+                                {itemCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-black dark:bg-white text-[8px] text-white dark:text-black">
+                                        {itemCount}
+                                    </span>
+                                )}
+                            </span>
+                            <span className={isScrolled ? 'hidden xl:inline' : 'hidden lg:inline'}>Giỏ hàng</span>
+                        </Link>
+
                         {/* Mobile Menu Toggle */}
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-black">
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-black dark:text-white">
                             <span className="material-symbols-outlined">{isMenuOpen ? 'close' : 'menu'}</span>
                         </button>
                     </div>
                 </div>
-
-                {/* Bottom Navigation Menu */}
-                <nav className={`hidden lg:flex h-12 items-center justify-center transition-all duration-1000 ${isScrolled ? 'opacity-100 max-h-12 translate-y-0' : 'opacity-0 max-h-0 -translate-y-4 overflow-hidden'}`}>
-                    <div className="flex items-center gap-10">
-                        <Link href="/cua-hang?cat=women" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-luxury-onyx hover:opacity-70 transition-opacity">
-                            Phụ Nữ
-                        </Link>
-                        <Link href="/cua-hang?cat=men" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-luxury-onyx hover:opacity-70 transition-opacity">
-                            Nam Giới
-                        </Link>
-                        <Link href="/cua-hang?cat=leather" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-luxury-onyx hover:opacity-70 transition-opacity">
-                            Đồ Da
-                        </Link>
-                        <Link href="/cua-hang?cat=jewelry" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-luxury-onyx hover:opacity-70 transition-opacity">
-                            Trang Sức
-                        </Link>
-                        <Link href="/cua-hang?cat=accessories" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-luxury-onyx hover:opacity-70 transition-opacity">
-                            Phụ Kiện
-                        </Link>
-                        <Link href="/cam-hung" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-luxury-onyx hover:opacity-70 transition-opacity">
-                            Cảm Hứng
-                        </Link>
-                        <Link href="/cua-hang?cat=sale" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-red-800 hover:opacity-70 transition-opacity">
-                            Sale
-                        </Link>
-                        <Link href="/lien-he" className="group relative text-xs font-bold uppercase tracking-[0.2em] text-luxury-onyx hover:opacity-70 transition-opacity">
-                            Về XX.II
-                        </Link>
-                    </div>
-                </nav>
             </header>
 
             {/* Mobile Menu Overlay */}

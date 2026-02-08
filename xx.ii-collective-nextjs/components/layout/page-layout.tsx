@@ -32,7 +32,7 @@ export function PageLayout({
             <main
                 className={cn(
                     "flex-1 w-full bg-white dark:bg-dark-bg",
-                    navbarPadding && "pt-24",
+                    navbarPadding && "pt-20",
                     MAX_WIDTH_CLASSES[maxWidth]
                 )}
             >
