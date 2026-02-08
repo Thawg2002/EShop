@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types';
 import { useCartStore } from '@/lib/store';
+import { formatPrice } from '@/lib/utils';
 
 interface ProductCardProps {
     product: Product;
@@ -53,7 +54,7 @@ export function ProductCard({ product, showQuickAdd = true }: ProductCardProps) 
                         {product.color}
                     </p>
                 </div>
-                <p className="font-bold text-sm text-primary whitespace-nowrap">${product.price}</p>
+                <p className="font-bold text-sm text-primary whitespace-nowrap">{formatPrice(product.price)}</p>
             </div>
         </Link>
     );

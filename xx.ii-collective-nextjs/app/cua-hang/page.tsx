@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { PRODUCTS } from '@/lib/data';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { formatPrice } from '@/lib/utils';
 
 export const metadata: Metadata = {
     title: 'Cửa Hàng | XX.II Collective',
@@ -142,7 +143,7 @@ export default function ShopPage() {
                                             <h3 className="text-lg font-serif-display italic text-dark-text dark:text-dark-text-primary">{product.name}</h3>
                                             <p className="text-[11px] font-medium uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">{product.category}</p>
                                         </div>
-                                        <span className="font-mono text-xs">${product.price}</span>
+                                        <span className="font-mono text-[13px] font-bold text-luxury-onyx dark:text-dark-text-primary tracking-tight">{formatPrice(product.price)}</span>
                                     </div>
                                 </Link>
                             ))}

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { CartItem } from '@/types';
 import { useCartStore } from '@/lib/store';
+import { formatPrice } from '@/lib/utils';
 
 interface CartItemProps {
     item: CartItem;
@@ -28,7 +29,7 @@ export function CartItemComponent({ item }: CartItemProps) {
                             {item.name}
                         </h3>
                         <p className="font-bold text-base sm:text-lg dark:text-dark-text whitespace-nowrap">
-                            ${item.price * item.quantity}
+                            {formatPrice(item.price * item.quantity)}
                         </p>
                     </div>
                     <p className="text-[11px] text-luxury-slate-grey dark:text-dark-text-secondary uppercase tracking-wider font-medium">

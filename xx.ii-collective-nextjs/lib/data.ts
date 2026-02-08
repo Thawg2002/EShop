@@ -4,7 +4,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 1,
     name: "Váy Lụa Trơn",
-    price: 240,
+    price: 2400000,
     category: "Váy",
     color: "Ngà",
     description:
@@ -20,7 +20,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 2,
     name: "Áo Vest Linen",
-    price: 350,
+    price: 3500000,
     category: "Áo Khoác",
     color: "Cát",
     image:
@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 3,
     name: "Quần Ống Rộng",
-    price: 180,
+    price: 1800000,
     category: "Quần",
     color: "Trắng",
     image:
@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 4,
     name: "Giày Da Cao Gót",
-    price: 210,
+    price: 2100000,
     category: "Giày",
     color: "Da Bò",
     image:
@@ -47,7 +47,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 5,
     name: "Áo Khoác Dáng Dài",
-    price: 420,
+    price: 4200000,
     category: "Áo Khoác",
     color: "Kem",
     image:
@@ -56,7 +56,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 6,
     name: "Váy Dạ Hội",
-    price: 260,
+    price: 2600000,
     category: "Váy",
     color: "Champagne",
     image:
@@ -65,7 +65,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 7,
     name: "Túi Xách Da Thật",
-    price: 850,
+    price: 8500000,
     category: "Phụ Kiện",
     color: "Đen",
     image:
@@ -74,7 +74,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 8,
     name: "Khăn Choàng Cashmere",
-    price: 320,
+    price: 3200000,
     category: "Phụ Kiện",
     color: "Xám",
     image:
@@ -83,7 +83,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 9,
     name: "Váy Lụa Họa Tiết",
-    price: 480,
+    price: 4800000,
     category: "Váy",
     color: "Đa Sắc",
     image:
@@ -95,21 +95,21 @@ export const ORDERS: Order[] = [
   {
     id: "204-99812-XX",
     date: "12 Tháng 2, 2024",
-    total: 590.0,
+    total: 5900000.0,
     status: "Processing",
     items: [],
   },
   {
     id: "204-88123-XX",
     date: "24 Tháng 1, 2024",
-    total: 210.0,
+    total: 2100000.0,
     status: "Delivered",
     items: [],
   },
   {
     id: "204-77210-XX",
     date: "10 Tháng 1, 2024",
-    total: 180.0,
+    total: 1800000.0,
     status: "Shipped",
     items: [],
   },

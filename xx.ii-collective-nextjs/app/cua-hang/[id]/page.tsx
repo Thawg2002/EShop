@@ -7,6 +7,7 @@ import { PRODUCTS } from '@/lib/data';
 import { useCartStore } from '@/lib/store';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { formatPrice } from '@/lib/utils';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
@@ -53,7 +54,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         },
         {
             title: 'Vận Chuyển & Đổi Trả',
-            content: 'Miễn phí vận chuyển cho đơn hàng trên $300. Đổi trả trong vòng 30 ngày. Chính sách đổi trả linh hoạt, không cần lý do.'
+            content: 'Miễn phí vận chuyển cho đơn hàng trên 5.000.000 VNĐ. Đổi trả trong vòng 30 ngày. Chính sách đổi trả linh hoạt, không cần lý do.'
         },
         {
             title: 'Chất Liệu & Bảo Quản',
@@ -112,7 +113,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                             </h1>
 
                             <div className="flex items-baseline gap-4 mb-8">
-                                <span className="text-3xl font-light text-dark-text dark:text-dark-text-primary">${product.price}</span>
+                                <span className="text-4xl font-bold text-dark-text dark:text-dark-text-primary">{formatPrice(product.price)}</span>
                                 <div className="flex items-center gap-1">
                                     {[1, 2, 3, 4, 5].map(i => <span key={i} className="text-primary text-sm">★</span>)}
                                     <span className="text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary ml-2">(124)</span>
@@ -215,7 +216,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                         />
                                     </div>
                                     <h3 className="text-lg font-serif-display italic text-dark-text dark:text-dark-text-primary mb-1">{relatedProduct.name}</h3>
-                                    <p className="text-xs font-bold text-luxury-slate-grey dark:text-dark-text-secondary">${relatedProduct.price}</p>
+                                    <p className="text-[13px] font-bold text-primary">{formatPrice(relatedProduct.price)}</p>
                                 </Link>
                             ))}
                         </div>

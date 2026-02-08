@@ -3,6 +3,7 @@ import { PRODUCTS } from '@/lib/data';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { HeroSlider } from '@/components/features/hero-slider';
+import { formatPrice } from '@/lib/utils';
 
 export default function HomePage() {
 
@@ -13,14 +14,13 @@ export default function HomePage() {
                 {/* Hero Slider */}
                 <HeroSlider />
 
-                {/* Section 1: Luminous Discovery (Clean & Focused) */}
-                <section className="relative px-6 py-32 lg:px-12">
+                <section className="relative px-6 py-16 lg:px-12 min-h-[85vh] flex items-center">
 
-                    <div className="mx-auto max-w-[1400px] relative">
-                        <div className="flex flex-col items-center mb-24 space-y-4">
+                    <div className="mx-auto max-w-[1400px] w-full relative">
+                        <div className="flex flex-col items-center mb-12 space-y-3">
                             <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">The Discovery</span>
-                            <h2 className="font-serif-display text-5xl md:text-7xl text-luxury-onyx leading-tight text-center italic">Sự Khởi Đầu Mới</h2>
-                            <div className="w-24 h-[1px] bg-black/10"></div>
+                            <h2 className="font-serif-display text-4xl md:text-6xl text-luxury-onyx leading-tight text-center italic">Sự Khởi Đầu Mới</h2>
+                            <div className="w-12 h-[1px] bg-black/10"></div>
                         </div>
 
                         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
@@ -68,69 +68,78 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* Section 2: Signature Silhouette (Typography & Overlap) */}
-                <section className="py-40 bg-luxury-black text-white relative overflow-hidden">
+                {/* Section 2: Legacy - Pure Silhouette (typography & Overlap Redesigned) */}
+                <section className="bg-luxury-black text-white min-h-[90vh] lg:min-h-screen flex items-center relative overflow-hidden group/legacy">
                     {/* Background Decorative Text */}
-                    <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[25vw] font-serif-display italic text-white/[0.03] whitespace-nowrap pointer-events-none select-none">
+                    <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[22vw] font-serif-display italic text-white/[0.03] whitespace-nowrap pointer-events-none select-none z-0">
                         TIMLESS ELEGANCE
                     </div>
 
-                    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 relative flex flex-col lg:flex-row items-center gap-24">
-                        <div className="lg:w-1/2 space-y-12 relative z-10">
-                            <h2 className="text-7xl md:text-9xl font-serif-display leading-none">
-                                <span className="block italic text-luxury-warm-grey">Pure</span>
-                                <span className="block ml-12 md:ml-32">Silhouete</span>
-                            </h2>
-                            <p className="max-w-md text-sm font-light leading-relaxed tracking-widest text-luxury-warm-grey border-l border-white/20 pl-8 ml-12 md:ml-32">
-                                Những thiết kế tôn vinh vóc dáng người phụ nữ hiện đại, tối giản nhưng chứa đựng sự tinh tế tuyệt đối. Mỗi trang phục là một tác phẩm hội họa sống động.
-                            </p>
-                            <Link href="/cua-hang" className="inline-flex items-center gap-6 ml-12 md:ml-32 group">
-                                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white group-hover:text-luxury-warm-grey transition-colors">Xem bộ sưu tập</span>
-                                <div className="h-[1px] w-24 bg-white/20 transition-all duration-500 group-hover:w-40"></div>
-                            </Link>
-                        </div>
+                    <div className="mx-auto max-w-[1400px] px-6 lg:px-12 w-full relative z-10 py-20 lg:py-0">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16 lg:gap-32">
+                            {/* Left Content */}
+                            <div className="space-y-10 order-2 lg:order-1">
+                                <h2 className="text-6xl md:text-8xl lg:text-[10vw] font-serif-display leading-none tracking-tighter">
+                                    <span className="block italic text-luxury-warm-grey transition-all duration-1000 group-hover/legacy:translate-x-4">Hành Trình</span>
+                                    <span className="block ml-8 md:ml-16 lg:ml-24 transition-all duration-1000 group-hover/legacy:-translate-x-4">Vĩnh Cửu</span>
+                                </h2>
+                                <div className="space-y-8 ml-8 md:ml-16 lg:ml-24">
+                                    <p className="max-w-md text-[13px] md:text-sm font-light leading-relaxed tracking-[0.2em] text-luxury-warm-grey border-l border-white/20 pl-8 uppercase italic">
+                                        XX.II Collective định nghĩa lại sự sang trọng qua lăng kính của nghệ thuật và di sản. Mỗi sản phẩm là sự kết giao giữa truyền thống hàng trăm năm và tư duy thiết kế đương đại.
+                                    </p>
+                                    <Link href="/cua-hang" className="inline-flex items-center gap-8 group/btn transition-transform hover:translate-x-4 duration-500">
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white">Khám phá di sản</span>
+                                        <div className="h-[1px] w-12 bg-white/40 group-hover/btn:w-24 transition-all duration-700"></div>
+                                    </Link>
+                                </div>
+                            </div>
 
-                        <div className="lg:w-1/2 relative">
-                            {/* Artistic Overlap Images */}
-                            <div className="relative z-10 w-full aspect-[3/4] overflow-hidden translate-x-8 translate-y-8">
-                                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070" className="h-full w-full object-cover" alt="Overlap 1" />
-                            </div>
-                            <div className="absolute top-0 right-8 z-20 w-3/4 aspect-[3/4] overflow-hidden border-[15px] border-luxury-black shadow-2xl translate-x-[-20%] translate-y-[-10%] group">
-                                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2070" className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Overlap 2" />
-                            </div>
-                            {/* Floating Champagne Element */}
-                            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-white p-8 flex items-center justify-center rounded-full shadow-2xl z-30">
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-black text-center">New Season 2024</span>
+                            {/* Right Imagery */}
+                            <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
+                                <div className="relative w-full max-w-[500px] aspect-[4/5] group/img">
+                                    {/* Main Image */}
+                                    <div className="absolute inset-0 overflow-hidden shadow-2xl transition-all duration-1000 group-hover/img:scale-95 group-hover/img:brightness-75 opacity-80">
+                                        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070" className="h-full w-full object-cover" alt="Main Silhouette" />
+                                    </div>
+                                    {/* Overlap Focus Image */}
+                                    <div className="absolute top-0 right-0 w-[85%] aspect-[3/4] overflow-hidden border-[12px] border-luxury-black shadow-2xl translate-x-12 translate-y-[-10%] transition-all duration-1000 group-hover/img:translate-x-4 group-hover/img:translate-y-4 group-hover/img:scale-105 z-20">
+                                        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2070" className="h-full w-full object-cover" alt="Focus Silhouette" />
+                                    </div>
+                                    {/* Floating Branding Element */}
+                                    <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-white p-6 flex flex-col items-center justify-center rounded-full shadow-2xl z-30 transition-transform duration-700 group-hover/img:-translate-y-4 group-hover/img:rotate-12">
+                                        <span className="text-[8px] font-bold uppercase tracking-widest text-black text-center mb-1 leading-none">Established</span>
+                                        <span className="text-xl font-serif-display italic text-black">1886</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Section 3: Celestial Collection (Editorial Masterpiece) */}
-                <section className="bg-white py-48 px-6 lg:px-12 relative overflow-hidden group/section">
+                {/* Section 3: Celestial Collection - Featured Trio (Viewport Optimized) */}
+                <section className="bg-white min-h-[80vh] flex items-center px-6 lg:px-12 relative overflow-hidden group/section">
                     {/* Background Editorial Watermark */}
                     <div className="absolute top-1/2 left-[-5%] -translate-y-1/2 text-[25vw] font-serif-display italic text-black/[0.02] whitespace-nowrap pointer-events-none select-none z-0 tracking-tighter">
                         BỘ SƯU TẬP
                     </div>
 
-                    <div className="mx-auto max-w-[1400px] relative z-10">
+                    <div className="mx-auto max-w-[1400px] w-full relative z-10 pt-10 lg:pt-14 pb-12 lg:pb-16">
                         {/* Featured Header */}
-                        <div className="flex flex-col items-center mb-32 space-y-6 text-center">
-                            <span className="text-[11px] font-bold uppercase tracking-[0.6em] text-luxury-slate-grey">Hào Quang Của Sự Hoàn Mỹ</span>
-                            <h2 className="font-serif-display text-5xl md:text-8xl text-luxury-onyx italic leading-tight">Tinh Hoa Hội Tụ</h2>
-                            <div className="w-32 h-[1px] bg-black/5"></div>
+                        <div className="flex flex-col items-center mb-6 space-y-2 text-center">
+                            <span className="text-[9px] font-bold uppercase tracking-[0.6em] text-luxury-slate-grey">Hào Quang Của Sự Hoàn Mỹ</span>
+                            <h2 className="font-serif-display text-3xl md:text-5xl text-luxury-onyx italic leading-tight">Tinh Hoa Hội Tụ</h2>
+                            <div className="w-10 h-[1px] bg-black/5"></div>
                         </div>
 
                         {/* Featured Trio (The Highlights) */}
-                        <div className="grid grid-cols-1 gap-y-24 gap-x-12 md:grid-cols-3 mb-48">
+                        <div className="grid grid-cols-3 gap-6 mb-6">
                             {PRODUCTS.slice(4, 7).map((product, index) => (
                                 <div
                                     key={product.id}
-                                    className={`group relative transition-all duration-1000 ${index === 1 ? 'md:mt-32' : index === 2 ? 'md:mt-16' : ''
-                                        }`}
+                                    className="group relative transition-all duration-1000"
                                 >
-                                    {/* Card Container */}
-                                    <div className="relative aspect-[3/4.5] w-full overflow-hidden bg-white shadow-sm transition-shadow duration-700 hover:shadow-2xl">
+                                    {/* Card Container - Tighter Aspect for Viewport Fitting */}
+                                    <div className="relative aspect-[10/12] w-full overflow-hidden bg-white shadow-sm transition-shadow duration-700 hover:shadow-2xl">
                                         {/* Background Image Layer */}
                                         <img
                                             src={product.image}
@@ -141,120 +150,142 @@ export default function HomePage() {
                                         {/* Overlay Gradient */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-                                        {/* Floating Glassmorphism Info Card */}
-                                        <div className="absolute bottom-6 left-6 right-6 p-8 bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl translate-y-4 group-hover:translate-y-0 transition-all duration-700">
-                                            <div className="space-y-4">
-                                                <div className="flex justify-between items-start">
-                                                    <div className="space-y-1">
-                                                        <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/60">Hạng Mục Tuyển Chọn</span>
-                                                        <h3 className="text-xl font-serif-display italic text-white leading-none">{product.name}</h3>
-                                                    </div>
-                                                    <div className="text-right">
-                                                        <p className="text-2xl font-serif-display text-white">${product.price}</p>
-                                                    </div>
-                                                </div>
+                                        {/* Floating Glassmorphism Info Card - Editorial Redesign */}
+                                        <div className="absolute bottom-4 left-4 right-4 p-6 bg-black/20 backdrop-blur-3xl border border-white/10 shadow-2xl translate-y-4 group-hover:translate-y-0 transition-all duration-1000">
+                                            <div className="relative">
+                                                {/* Background Number Accent */}
+                                                <span className="absolute -top-4 -left-2 text-6xl font-serif-display text-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
+                                                    0{index + 1}
+                                                </span>
 
-                                                <div className="h-[1px] w-full bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 origin-left"></div>
-
-                                                <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
-                                                    <div className="flex gap-4">
-                                                        <span className="text-[10px] text-white/50 uppercase tracking-widest">Phiên Bản Giới Hạn</span>
+                                                <div className="relative z-10 flex flex-col gap-4">
+                                                    <div className="flex justify-between items-end border-b border-white/10 pb-4">
+                                                        <div className="space-y-1">
+                                                            <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-white/40 mb-1 block">Selected Piece</span>
+                                                            <h3 className="text-xl md:text-2xl font-serif-display italic text-white leading-tight tracking-wide">{product.name}</h3>
+                                                        </div>
+                                                        <div className="text-right pb-1">
+                                                            <p className="text-lg md:text-xl font-medium tracking-tighter text-white/90">
+                                                                <span className="text-[10px] uppercase tracking-widest text-white/40 mr-2">VND</span>
+                                                                {product.price.toLocaleString('vi-VN')}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <Link href={`/cua-hang/${product.id}`} className="flex items-center gap-4 group/btn">
-                                                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white">Xem Chi Tiết</span>
-                                                        <span className="material-symbols-outlined text-sm text-white transition-transform group-hover/btn:translate-x-2">arrow_right_alt</span>
-                                                    </Link>
+
+                                                    <div className="flex items-center justify-between pt-1">
+                                                        <div className="flex items-center gap-3">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-pulse"></div>
+                                                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/60">Limited Release</span>
+                                                        </div>
+                                                        <Link href={`/cua-hang/${product.id}`} className="flex items-center gap-3 group/btn">
+                                                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white hover:text-gold-400 transition-colors">Details</span>
+                                                            <span className="material-symbols-outlined text-[14px] text-white/40 group-hover/btn:translate-x-1 group-hover/btn:text-white transition-all">arrow_forward</span>
+                                                        </Link>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* Premium Tag */}
-                                        <div className="absolute top-6 right-6 w-10 h-10 border border-white/20 flex items-center justify-center backdrop-blur-md">
-                                            <span className="text-[8px] font-bold text-white tracking-tighter vertical-text rotate-180 uppercase">Highlight</span>
+                                        <div className="absolute top-6 right-6 w-10 h-10 border border-white/40 flex items-center justify-center bg-white/10 backdrop-blur-md shadow-sm">
+                                            <span className="text-[9px] font-bold text-white tracking-widest vertical-text rotate-180 uppercase">Highlight</span>
                                         </div>
                                     </div>
 
-                                    <div className="mt-8 px-2">
-                                        <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">Highlight 0{index + 1}</span>
+                                    <div className="mt-8 px-2 flex items-center justify-between group/h-label cursor-default">
+                                        <div className="flex items-center gap-4">
+                                            <div className="h-[1px] w-12 bg-black/10 transition-all duration-1000 group-hover/section:w-20 group-hover/section:bg-gold-600"></div>
+                                            <span className="text-[10px] font-bold uppercase tracking-[0.6em] text-luxury-onyx/40 group-hover/section:text-luxury-onyx transition-colors duration-700">
+                                                Archive <span className="text-gold-600 ml-1">0{index + 1}</span>
+                                            </span>
+                                        </div>
+                                        <span className="text-[8px] font-medium uppercase tracking-widest text-black/20 opacity-0 group-hover/section:opacity-100 transition-all duration-1000 delay-300">Highlight Piece</span>
                                     </div>
                                 </div>
                             ))}
                         </div>
 
-                        {/* Transition Divider */}
-                        <div className="flex flex-col items-center mb-24 space-y-4">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">Bộ Sưu Tập Mở Rộng</span>
-                            <div className="w-16 h-[1px] bg-black/10"></div>
+                        {/* Discover More CTA - Linked to top section */}
+                        <div className="text-center">
+                            <Link href="/cua-hang" className="inline-flex items-center gap-6 group">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-luxury-onyx">Khám phá toàn bộ bộ sưu tập</span>
+                                <div className="h-[1px] w-16 bg-black/20 transition-all duration-500 group-hover:w-32 origin-left"></div>
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Section 3B: Extended Collection (Viewport Optimized) */}
+                <section className="bg-gray-50/50 min-h-[80vh] flex items-center px-6 lg:px-12 relative overflow-hidden">
+                    <div className="mx-auto max-w-[1400px] w-full pt-10 lg:pt-14 pb-12 lg:pb-16">
+                        {/* Transition Divider / Header */}
+                        <div className="flex flex-col items-center mb-6 space-y-2">
+                            <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">Bộ Sưu Tập Mở Rộng</span>
+                            <div className="w-8 h-[1px] bg-black/10"></div>
                         </div>
 
                         {/* Extended Grid */}
-                        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 mb-24">
+                        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-4 mb-8">
                             {[...PRODUCTS.slice(0, 4), ...PRODUCTS.slice(7)].map((product) => (
-                                <div key={product.id} className="group relative bg-white overflow-hidden transition-all duration-700 border border-black/5 hover:border-black/10 hover:shadow-xl">
-                                    <div className="bg-white p-6 relative z-10 flex flex-col h-full">
-                                        <div className="relative aspect-[4/5] w-full mb-8 overflow-hidden bg-gray-50">
+                                <div key={product.id} className="group relative bg-white overflow-hidden transition-all duration-700 border border-black/5 hover:border-black/10 hover:shadow-lg">
+                                    <div className="bg-white p-3 relative z-10 flex flex-col h-full">
+                                        <div className="relative aspect-[4/5] w-full mb-3 overflow-hidden bg-gray-50">
                                             <img src={product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                                            {/* Minimalist Overlay */}
-                                            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                         </div>
 
-                                        <div className="space-y-4 flex-1">
-                                            <div className="flex justify-between items-start">
-                                                <h3 className="text-xs font-bold uppercase tracking-widest text-luxury-onyx leading-snug max-w-[70%]">{product.name}</h3>
-                                                <p className="text-sm font-serif-display text-luxury-onyx">${product.price}</p>
+                                        <div className="space-y-1 flex-1">
+                                            <div className="flex justify-between items-start gap-2">
+                                                <h3 className="text-[9px] font-bold uppercase tracking-widest text-luxury-onyx leading-tight line-clamp-1">{product.name}</h3>
+                                                <p className="text-xs font-serif-display font-bold text-luxury-onyx">{formatPrice(product.price)}</p>
                                             </div>
-                                            <p className="text-[10px] text-luxury-slate-grey uppercase tracking-widest">{product.category}</p>
+                                            <p className="text-[7px] text-luxury-slate-grey uppercase tracking-widest">{product.category}</p>
                                         </div>
 
-                                        <div className="mt-8">
+                                        <div className="mt-3">
                                             <Link href={`/cua-hang/${product.id}`} className="flex items-center justify-between group/link">
-                                                <span className="text-[9px] font-bold uppercase tracking-widest text-luxury-onyx border-b border-black/10 pb-1 group-hover/link:border-black transition-all">Sở hữu ngay</span>
-                                                <span className="material-symbols-outlined text-lg text-black/40 group-hover/link:translate-x-1 transition-transform">east</span>
+                                                <span className="text-[7px] font-bold uppercase tracking-widest text-luxury-onyx border-b border-black/10 pb-1 group-hover/link:border-black transition-all">Chi tiết</span>
+                                                <span className="material-symbols-outlined text-[12px] text-black/40 group-hover/link:translate-x-1 transition-transform">east</span>
                                             </Link>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-
-                        {/* Discover More CTA */}
-                        <div className="text-center">
-                            <Link href="/cua-hang" className="inline-flex items-center gap-8 group">
-                                <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-luxury-onyx">Khám phá toàn bộ bộ sưu tập</span>
-                                <div className="h-[1px] w-24 bg-black/20 transition-all duration-500 group-hover:w-40 origin-left"></div>
-                            </Link>
-                        </div>
                     </div>
 
-                    <div className="mt-24 relative overflow-hidden bg-luxury-black p-16 text-center">
-                        <div className="absolute inset-0 opacity-10 pointer-events-none">
-                            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
-                        </div>
-                        <h4 className="text-2xl font-serif-display italic text-white mb-8">Trải nghiệm dịch vụ cá nhân hóa dành riêng cho bạn</h4>
-                        <Link href="/cua-hang" className="inline-block bg-white px-12 py-5 text-xs font-bold uppercase tracking-[0.3em] text-black hover:bg-gray-100 transition-all shadow-xl">
-                            Đặt lịch tư vấn ngay
-                        </Link>
+                    <div className="absolute bottom-0 left-0 w-full overflow-hidden bg-luxury-black p-8 text-center bg-transparent">
+                        {/* Subtle Indicator */}
                     </div>
                 </section>
 
+                <div className="relative overflow-hidden bg-luxury-black py-12 text-center">
+                    <div className="absolute inset-0 opacity-10 pointer-events-none">
+                        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
+                    </div>
+                    <h4 className="text-xl font-serif-display italic text-white mb-6">Trải nghiệm dịch vụ cá nhân hóa dành riêng cho bạn</h4>
+                    <Link href="/cua-hang" className="inline-block bg-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black hover:bg-gray-100 transition-all shadow-xl">
+                        Đặt lịch tư vấn ngay
+                    </Link>
+                </div>
+
                 {/* Section 4: Elite Services (Editorial Narrative) */}
-                <section className="py-40 px-6 lg:px-12 bg-white relative overflow-hidden">
-                    <div className="mx-auto max-w-[1400px]">
-                        <div className="flex flex-col lg:flex-row gap-32">
+                <section className="bg-white min-h-[85vh] flex items-center px-6 lg:px-12 relative overflow-hidden">
+                    <div className="mx-auto max-w-[1400px] w-full py-12 lg:py-16">
+                        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
                             {/* Narrative Column */}
-                            <div className="lg:w-1/3 flex flex-col justify-center space-y-12">
-                                <div className="space-y-6">
+                            <div className="lg:w-1/3 flex flex-col justify-center space-y-10">
+                                <div className="space-y-4">
                                     <div className="text-6xl font-serif-display text-black/10">01.</div>
-                                    <h3 className="text-5xl font-serif-display italic text-luxury-onyx leading-tight">Trải Nghiệm Thượng Lưu</h3>
-                                    <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase">
+                                    <h3 className="text-4xl md:text-5xl font-serif-display italic text-luxury-onyx leading-tight">Trải Nghiệm Thượng Lưu</h3>
+                                    <p className="text-[11px] font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase">
                                         Chúng tôi không chỉ bán sản phẩm, chúng tôi mang tới một phong cách sống. Những đặc quyền dành riêng cho thành viên XX.II Collective.
                                     </p>
                                 </div>
                                 <div className="h-[1px] w-full bg-black/10"></div>
-                                <div className="space-y-6">
+                                <div className="space-y-4">
                                     <div className="text-6xl font-serif-display text-black/10">02.</div>
-                                    <h3 className="text-5xl font-serif-display italic text-luxury-onyx leading-tight">Di Sản Toàn Cầu</h3>
-                                    <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase">
+                                    <h3 className="text-4xl md:text-5xl font-serif-display italic text-luxury-onyx leading-tight">Di Sản Toàn Cầu</h3>
+                                    <p className="text-[11px] font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase">
                                         Mạng lưới showroom và đối tác chiến lược tại các kinh đô thời trang lớn nhất thế giới, sẵn sàng phục vụ bạn.
                                     </p>
                                 </div>
@@ -262,14 +293,14 @@ export default function HomePage() {
 
                             {/* visual Column (Asymmetrical Grid) */}
                             <div className="lg:w-2/3 grid grid-cols-12 gap-8 items-start">
-                                <div className="col-span-12 md:col-span-7 group relative aspect-[3/4] overflow-hidden shadow-2xl">
+                                <div className="col-span-12 md:col-span-7 group relative aspect-[4/5] overflow-hidden shadow-2xl">
                                     <img src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=2070" className="h-full w-full object-cover transition-transform duration-[3000ms] group-hover:scale-110" alt="Collection 1" />
                                     <div className="absolute inset-0 bg-gold-900/10 group-hover:bg-transparent transition-colors duration-1000"></div>
                                     <div className="absolute bottom-10 left-10 p-8 bg-white/10 backdrop-blur-xl border border-white/20 glassmorphism-card translate-y-full group-hover:translate-y-0 transition-transform duration-700">
                                         <p className="text-xs font-bold text-white uppercase tracking-[0.4em]">Membership Program</p>
                                     </div>
                                 </div>
-                                <div className="col-span-12 md:col-span-5 mt-20 group relative aspect-[3/5] overflow-hidden shadow-2xl">
+                                <div className="col-span-12 md:col-span-5 mt-12 group relative aspect-[4/5] overflow-hidden shadow-2xl">
                                     <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2070" className="h-full w-full object-cover transition-transform duration-[3000ms] group-hover:scale-110" alt="Collection 2" />
                                     <div className="absolute inset-0 bg-gold-900/10 group-hover:bg-transparent transition-colors duration-1000"></div>
                                     <div className="absolute top-10 right-10 p-8 bg-white/10 backdrop-blur-xl border border-white/20 glassmorphism-card -translate-y-full group-hover:translate-y-0 transition-transform duration-700">
@@ -282,30 +313,30 @@ export default function HomePage() {
                 </section>
 
                 {/* Section 5: Heritage (Artistic Narrative) */}
-                <section className="bg-white py-60 px-6 lg:px-12 relative overflow-hidden text-black">
+                <section className="bg-white min-h-[85vh] flex items-center px-6 lg:px-12 relative overflow-hidden text-black">
                     {/* Artistic Watermark */}
                     <div className="absolute top-[20%] left-[-5%] text-[30vw] font-serif-display italic text-gray-50/50 pointer-events-none select-none z-0">
                         Heritage
                     </div>
 
-                    <div className="mx-auto max-w-[1400px] relative z-10">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 items-center">
+                    <div className="mx-auto max-w-[1400px] w-full relative z-10 py-12 lg:py-16">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-center">
                             <div className="lg:col-span-7 relative">
                                 <div className="relative group overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2070" alt="Heritage" className="w-full h-[700px] object-cover rounded-sm shadow-2xl transition-transform duration-[3000ms] group-hover:scale-105" />
+                                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2070" alt="Heritage" className="w-full h-[500px] lg:h-[600px] object-cover rounded-sm shadow-2xl transition-transform duration-[3000ms] group-hover:scale-105" />
                                     <div className="absolute inset-0 bg-gold-900/10 group-hover:bg-transparent transition-colors duration-1000"></div>
                                 </div>
                                 {/* Layered Secondary Image */}
-                                <div className="absolute -bottom-20 -right-20 w-1/2 overflow-hidden border-[20px] border-white shadow-2xl hidden lg:block">
+                                <div className="absolute -bottom-12 -right-12 w-1/2 overflow-hidden border-[15px] border-white shadow-2xl hidden lg:block">
                                     <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070" alt="Heritage Detail" className="w-full object-cover grayscale" />
                                 </div>
                                 {/* Artistic Founding Year */}
-                                <div className="absolute -top-16 -left-16 text-[15rem] font-serif-display text-gold-100/40 select-none hidden lg:block">1886</div>
+                                <div className="absolute -top-12 -left-12 text-[10rem] font-serif-display text-gold-100/40 select-none hidden lg:block">1886</div>
                             </div>
-                            <div className="lg:col-span-5 space-y-16">
-                                <div className="space-y-6">
+                            <div className="lg:col-span-5 space-y-12">
+                                <div className="space-y-4">
                                     <div className="w-12 h-[1px] bg-black/20"></div>
-                                    <h2 className="font-serif-display text-6xl md:text-8xl leading-tight italic text-luxury-onyx">Hành Trình<br />Vĩnh Cửu</h2>
+                                    <h2 className="font-serif-display text-5xl md:text-7xl leading-tight italic text-luxury-onyx">Hành Trình<br />Vĩnh Cửu</h2>
                                 </div>
                                 <div className="space-y-8">
                                     <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-[0.2em] relative uppercase">
@@ -338,19 +369,19 @@ export default function HomePage() {
                 </section>
 
                 {/* Section 6: Signature Trust (Redesigned Editorial Full-Screen) */}
-                <section className="bg-white min-h-[90vh] lg:min-h-screen flex items-center px-6 lg:px-12 relative overflow-hidden">
+                <section className="bg-white min-h-[80vh] flex items-center px-6 lg:px-12 relative overflow-hidden">
                     {/* Large Editorial Watermark */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-serif-display italic text-gray-50/70 pointer-events-none select-none z-0 whitespace-nowrap">
                         AUTHENTICITY
                     </div>
 
-                    <div className="mx-auto max-w-[1400px] w-full relative z-10 py-20 lg:py-0">
+                    <div className="mx-auto max-w-[1400px] w-full relative z-10 py-12 lg:py-16">
                         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-16 lg:gap-32">
                             {/* Left Column: Narrative Hub */}
-                            <div className="lg:col-span-4 space-y-10 text-center lg:text-left">
-                                <div className="space-y-6">
+                            <div className="lg:col-span-4 space-y-6 text-center lg:text-left">
+                                <div className="space-y-4">
                                     <span className="text-[10px] font-bold uppercase tracking-[0.6em] text-luxury-warm-grey">Premium Assurance</span>
-                                    <h2 className="text-5xl md:text-7xl font-serif-display italic leading-tight text-luxury-onyx">Niềm Tin<br />Tuyệt Đối</h2>
+                                    <h2 className="text-5xl md:text-6xl font-serif-display italic leading-tight text-luxury-onyx">Niềm Tin<br />Tuyệt Đối</h2>
                                 </div>
                                 <p className="text-sm font-medium text-luxury-slate-grey leading-relaxed tracking-widest uppercase italic max-w-md mx-auto lg:mx-0">
                                     "Mỗi sản phẩm là một lời cam kết về chất lượng và sự tận tâm dành cho những quý chủ nhân xứng tầm."
@@ -423,7 +454,7 @@ export default function HomePage() {
                         </div>
                     </div>
                 </section>
-            </main >
+            </main>
             <Footer />
         </>
     );
