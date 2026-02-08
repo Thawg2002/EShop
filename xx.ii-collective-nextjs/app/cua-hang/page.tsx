@@ -20,7 +20,7 @@ export default function ShopPage() {
             <Navbar />
             <div className="flex min-h-screen bg-white dark:bg-dark-bg">
                 {/* Sidebar Filter */}
-                <aside className="hidden lg:flex flex-col w-[280px] fixed h-full pt-22 px-8 pb-8 border-r border-black/5 dark:border-dark-border overflow-y-auto no-scrollbar bg-white dark:bg-dark-bg z-10">
+                <aside className="hidden lg:flex flex-col w-[280px] fixed h-full pt-20 px-8 pb-8 border-r border-black/5 dark:border-dark-border overflow-y-auto no-scrollbar bg-white dark:bg-dark-bg z-10">
                     <div className="space-y-12">
                         <div>
                             <h2 className="font-serif-display text-2xl italic mb-6 text-dark-text dark:text-dark-text-primary">Danh Mục</h2>

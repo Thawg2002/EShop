@@ -61,7 +61,7 @@ export function Navbar() {
                 : 'bg-transparent border-transparent py-1.5'
                 }`}>
                 <div className={`relative flex items-center justify-between px-6 lg:px-12 transition-all duration-700 ${isScrolled ? 'h-12' : 'h-14'}`}>
-                    {/* Left: Search (Always visible, but layout changes) */}
+                    {/* Left: Branding & Search */}
                     <div className={`flex items-center transition-all duration-700 ${isScrolled ? 'w-auto gap-8' : 'flex-1'}`}>
                         {/* Logo in Scrolled State (Left-aligned) */}
                         {isScrolled && (
@@ -70,7 +70,7 @@ export function Navbar() {
                             </Link>
                         )}
 
-                        {/* Search Bar */}
+                        {/* Search Bar - Back on the left */}
                         <div className={`hidden lg:flex items-center transition-all duration-700 ${isScrolled ? 'w-40' : 'w-48'}`}>
                             <div className="flex items-center gap-2 border-b border-black/20 dark:border-white/20 pb-1 w-full group focus-within:border-black dark:focus-within:border-white transition-colors">
                                 <span className="material-symbols-outlined text-[18px] text-gray-400">search</span>
