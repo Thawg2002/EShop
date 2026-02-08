@@ -22,7 +22,7 @@ export interface Order {
   id: string;
   date: string;
   total: number;
-  status: "Processing" | "Shipped" | "Delivered" | "Returned";
+  status: "Processing" | "Shipped" | "Delivered" | "Cancelled" | "Returned";
   items: CartItem[];
 }
 

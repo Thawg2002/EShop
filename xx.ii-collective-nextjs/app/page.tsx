@@ -24,29 +24,31 @@ export default function HomePage() {
                         </div>
 
                         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-                            {/* Main Luminous Banner */}
-                            <div className="group relative overflow-hidden lg:col-span-8 rounded-sm shadow-2xl">
-                                <div className="relative aspect-[16/9] w-full overflow-hidden">
+                            {/* Main Luminous Banner (Left) */}
+                            <div className="group relative lg:col-span-8">
+                                <div className="relative aspect-[16/9] w-full overflow-hidden shadow-2xl border border-black/5">
                                     <img
                                         src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070"
                                         alt="Luminous Promotion"
                                         className="h-full w-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
                                     />
-                                    {/* Glassmorphism Card */}
-                                    <div className="absolute top-1/2 left-10 -translate-y-1/2 w-80 p-8 bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl opacity-0 translate-x-[-20px] transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-0">
-                                        <h3 className="text-2xl font-serif-display italic text-white mb-4">Ánh Sáng Champagne</h3>
-                                        <p className="text-xs font-light tracking-widest text-white leading-relaxed mb-8">Khám phá vẻ đẹp vĩnh cửu trong từng đường nét thiết kế mới nhấn mạnh vào sự sang trọng và lôi cuốn.</p>
-                                        <Link href="/cua-hang" className="inline-block relative overflow-hidden group/btn px-10 py-4 text-xs font-bold uppercase tracking-widest text-white border border-white/40">
-                                            <span className="relative z-10 transition-colors group-hover/btn:text-black">Khám phá ngay</span>
-                                            <div className="absolute inset-0 bg-white translate-y-full transition-transform duration-500 group-hover/btn:translate-y-0"></div>
+                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
+                                </div>
+                                {/* Editorial Card - Always Visible */}
+                                <div className="absolute -bottom-12 left-[-20px] bg-white p-12 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700 group-hover:translate-y-[-20px] z-10 max-w-sm md:max-w-md">
+                                    <div className="transition-transform duration-500 group-hover:scale-105 origin-left">
+                                        <h3 className="text-3xl font-serif-display italic text-luxury-onyx mb-4">Ánh Sáng Champagne</h3>
+                                        <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase leading-relaxed mb-8">Khám phá vẻ đẹp vĩnh cửu trong từng đường nét thiết kế mới nhấn mạnh vào sự sang trọng và lôi cuốn.</p>
+                                        <Link href="/cua-hang" className="inline-block relative overflow-hidden group/btn px-10 py-5 text-[10px] font-bold uppercase tracking-[0.3em] text-dark-text border border-black/10">
+                                            <span className="relative z-10 transition-colors group-hover/btn:text-white">Khám phá ngay</span>
+                                            <div className="absolute inset-0 bg-dark-text translate-y-full transition-transform duration-500 group-hover/btn:translate-y-0"></div>
                                         </Link>
                                     </div>
-                                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent"></div>
                                 </div>
                             </div>
 
-                            {/* Accented Banner */}
-                            <div className="group relative lg:col-span-4 mt-12 lg:mt-24">
+                            {/* Accented Banner (Right) */}
+                            <div className="group relative lg:col-span-4 mt-12 lg:mt-32">
                                 <div className="relative aspect-[4/5] w-full overflow-hidden shadow-xl border border-black/5">
                                     <img
                                         src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
@@ -54,9 +56,11 @@ export default function HomePage() {
                                         className="h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700"></div>
-                                    <div className="absolute -bottom-10 right-[-20px] bg-luxury-cream p-12 shadow-2xl transition-transform duration-700 group-hover:translate-y-[-20px]">
-                                        <h4 className="text-xl font-serif-display text-luxury-onyx mb-2">Signature Style</h4>
-                                        <p className="text-[11px] font-medium tracking-widest text-luxury-slate-grey uppercase">Chi tiết tạo nên đẳng cấp</p>
+                                    <div className="absolute -bottom-10 right-[-20px] bg-luxury-cream p-12 shadow-2xl transition-transform duration-700 group-hover:translate-y-[-20px] z-10">
+                                        <div className="transition-transform duration-500 group-hover:scale-110 origin-right">
+                                            <h4 className="text-xl font-serif-display text-luxury-onyx mb-2 italic">Signature Style</h4>
+                                            <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase">Chi tiết tạo nên đẳng cấp</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

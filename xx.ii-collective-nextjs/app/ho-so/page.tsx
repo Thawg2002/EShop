@@ -17,15 +17,15 @@ export default function ProfilePage() {
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
-                <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 min-h-[600px]">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg transition-colors duration-500">
+                <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-32">
+                    <div className="flex flex-col lg:flex-row gap-20 lg:gap-32 min-h-[600px]">
                         {/* Sidebar */}
                         <aside className="w-full lg:w-80 flex-shrink-0">
-                            <div className="sticky top-32">
+                            <div className="sticky top-40">
                                 {/* Profile Header */}
-                                <div className="flex items-center gap-4 mb-10 pb-8 border-b border-black/5 dark:border-dark-border">
-                                    <div className="relative w-16 h-16 bg-off-white dark:bg-dark-card overflow-hidden">
+                                <div className="flex items-center gap-6 mb-12 pb-10 border-b border-black/5 dark:border-dark-border">
+                                    <div className="relative w-20 h-20 bg-off-white dark:bg-dark-card overflow-hidden">
                                         <Image
                                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop"
                                             alt="Profile"
@@ -34,13 +34,13 @@ export default function ProfilePage() {
                                         />
                                     </div>
                                     <div>
-                                        <h2 className="text-xl font-serif-display italic text-dark-text dark:text-dark-text-primary">Isabella Ross</h2>
-                                        <p className="text-[11px] uppercase tracking-widest text-primary font-bold">Diamond Member</p>
+                                        <h2 className="text-2xl font-serif-display italic text-dark-text dark:text-dark-text-primary">Isabella Ross</h2>
+                                        <p className="text-[11px] uppercase tracking-[0.2em] text-primary font-bold mt-1">Diamond Member</p>
                                     </div>
                                 </div>
 
                                 {/* Navigation */}
-                                <nav className="space-y-2">
+                                <nav className="flex flex-col">
                                     {[
                                         { id: 'info' as const, label: 'Thông Tin', icon: 'person' },
                                         { id: 'orders' as const, label: 'Đơn Hàng', icon: 'shopping_bag' },
@@ -50,117 +50,126 @@ export default function ProfilePage() {
                                         <button
                                             key={item.id}
                                             onClick={() => setActiveTab(item.id)}
-                                            className={`w-full flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest font-bold transition-all ${activeTab === item.id
-                                                ? 'bg-primary text-white'
-                                                : 'text-muted-text dark:text-dark-text-secondary hover:bg-off-white dark:hover:bg-dark-card'
+                                            className={`w-full flex items-center gap-4 py-5 text-[11px] uppercase tracking-[0.2em] transition-all duration-500 border-l-2 ${activeTab === item.id
+                                                ? 'border-dark-text text-dark-text font-bold pl-8 bg-off-white/30'
+                                                : 'border-transparent text-luxury-slate-grey dark:text-dark-text-secondary hover:text-dark-text hover:pl-8 pl-6'
                                                 }`}
                                         >
-                                            <span className="material-symbols-outlined text-lg">{item.icon}</span>
+                                            <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
                                             {item.label}
                                         </button>
                                     ))}
-                                    <button className="w-full flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest font-bold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 mt-8 border-t border-black/5 dark:border-dark-border pt-8">
-                                        <span className="material-symbols-outlined text-lg">logout</span>
+                                    <button className="w-full flex items-center gap-4 py-5 text-[11px] uppercase tracking-[0.2em] text-luxury-slate-grey hover:text-red-500 transition-all duration-500 border-t border-black/5 dark:border-dark-border mt-12 pt-10 pl-6">
+                                        <span className="material-symbols-outlined text-[20px]">logout</span>
                                         Đăng Xuất
                                     </button>
                                 </nav>
                             </div>
                         </aside>
 
-                        {/* Content */}
+                        {/* Content Area */}
                         <div className="flex-1">
                             {activeTab === 'orders' && (
-                                <div className="space-y-10">
-                                    <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6">
-                                        <div>
-                                            <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Đơn Hàng</h1>
-                                            <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Lịch sử mua hàng của bạn</p>
-                                        </div>
-                                        <div className="relative">
-                                            <input
-                                                type="text"
-                                                placeholder="Tìm kiếm đơn hàng..."
-                                                className="pl-10 pr-4 py-3 border border-black/10 dark:border-dark-border text-sm focus:ring-1 focus:ring-primary focus:border-primary w-full md:w-80 bg-white dark:bg-dark-card dark:text-dark-text-primary"
-                                            />
-                                            <span className="material-symbols-outlined absolute left-3 top-3 text-muted-text dark:text-dark-text-secondary text-lg">search</span>
+                                <div className="space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
+                                    <div className="mb-16">
+                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-4 leading-tight">Đơn Hàng</h1>
+                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mt-6">
+                                            <p className="text-xs uppercase tracking-[0.2em] text-luxury-slate-grey dark:text-dark-text-secondary font-medium">Lịch sử giao dịch & acquisitions</p>
+                                            <div className="relative group w-full md:w-96">
+                                                <input
+                                                    type="text"
+                                                    placeholder="Tìm kiếm đơn hàng..."
+                                                    className="w-full pl-12 pr-6 py-4 border border-black/5 dark:border-dark-border bg-off-white/20 dark:bg-dark-card/20 text-[11px] uppercase tracking-widest focus:ring-0 focus:border-black transition-all dark:text-dark-text-primary font-medium"
+                                                />
+                                                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-luxury-slate-grey text-xl opacity-40">search</span>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div className="space-y-6">
+                                    <div className="space-y-10">
                                         {ORDERS.map(order => <OrderCard key={order.id} order={order} />)}
                                     </div>
                                 </div>
                             )}
 
                             {activeTab === 'addresses' && (
-                                <div className="space-y-10">
-                                    <div>
-                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Địa Chỉ</h1>
-                                        <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Quản lý địa chỉ giao hàng</p>
+                                <div className="space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
+                                    <div className="mb-16">
+                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-4 leading-tight">Địa Chỉ</h1>
+                                        <p className="text-xs uppercase tracking-[0.2em] text-luxury-slate-grey dark:text-dark-text-secondary font-medium mt-6">Quản lý các node giao nhận</p>
                                     </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
                                         {ADDRESSES.map(addr => <AddressCard key={addr.id} address={addr} />)}
-                                        <button className="border-2 border-dashed border-black/10 dark:border-dark-border p-8 flex flex-col items-center justify-center min-h-[240px] text-muted-text dark:text-dark-text-secondary hover:border-primary hover:text-primary hover:bg-off-white dark:hover:bg-dark-card transition-all">
-                                            <span className="material-symbols-outlined text-5xl mb-4">add_circle</span>
-                                            <span className="text-xs uppercase tracking-widest font-bold">Thêm Địa Chỉ Mới</span>
+                                        <button className="border border-dashed border-black/10 dark:border-dark-border p-12 flex flex-col items-center justify-center min-h-[300px] bg-off-white/10 hover:bg-off-white/50 transition-all duration-700 group">
+                                            <div className="w-16 h-16 rounded-full border border-black/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                                <span className="material-symbols-outlined text-3xl text-luxury-slate-grey group-hover:text-dark-text">add</span>
+                                            </div>
+                                            <span className="text-[11px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey group-hover:text-dark-text">Thêm Địa Chỉ Mới</span>
                                         </button>
                                     </div>
                                 </div>
                             )}
 
                             {activeTab === 'payment' && (
-                                <div className="space-y-10">
-                                    <div>
-                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Thanh Toán</h1>
-                                        <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Quản lý phương thức thanh toán</p>
+                                <div className="space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
+                                    <div className="mb-16">
+                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-4 leading-tight">Thanh Toán</h1>
+                                        <p className="text-xs uppercase tracking-[0.2em] text-luxury-slate-grey dark:text-dark-text-secondary font-medium mt-6">Thông tin danh tính tài chính</p>
                                     </div>
-                                    <div className="space-y-4">
-                                        <div className="border border-black/10 dark:border-dark-border p-6 flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-off-white/50 dark:bg-dark-card/50">
-                                            <div className="flex items-center gap-5">
-                                                <div className="w-16 h-10 border border-black/10 dark:border-dark-border bg-white dark:bg-dark-surface flex items-center justify-center font-bold text-blue-800 italic">VISA</div>
+                                    <div className="space-y-8">
+                                        <div className="border border-black/[0.05] dark:border-dark-border p-10 flex flex-col md:flex-row md:justify-between md:items-center gap-8 bg-white dark:bg-dark-card hover:shadow-premium transition-all duration-700 group">
+                                            <div className="flex items-center gap-8">
+                                                <div className="w-20 h-12 border border-black/5 dark:border-dark-border bg-white dark:bg-dark-surface flex items-center justify-center font-bold text-blue-900 italic text-lg tracking-tighter">VISA</div>
                                                 <div>
-                                                    <p className="font-bold flex items-center gap-2 text-dark-text dark:text-dark-text-primary">
+                                                    <p className="font-bold text-dark-text dark:text-dark-text-primary flex items-center gap-4 text-sm uppercase tracking-wide">
                                                         Visa ending in 4242
-                                                        <span className="bg-primary/10 text-primary text-[11px] px-2 py-1 font-bold uppercase tracking-widest">Mặc Định</span>
+                                                        <span className="bg-black text-white px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em]">Mặc Định</span>
                                                     </p>
-                                                    <p className="text-xs text-muted-text dark:text-dark-text-secondary mt-1">Hết hạn 12/26</p>
+                                                    <p className="text-[11px] text-luxury-slate-grey dark:text-dark-text-secondary mt-2 font-medium uppercase tracking-[0.2em]">Hết hạn 12 / 26</p>
                                                 </div>
                                             </div>
-                                            <div className="flex gap-4 text-xs uppercase tracking-widest font-bold text-muted-text dark:text-dark-text-secondary">
-                                                <button className="hover:text-primary transition-colors">Sửa</button>
+                                            <div className="flex gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey dark:text-dark-text-secondary">
+                                                <button className="hover:text-dark-text transition-colors">Sửa</button>
                                                 <button className="hover:text-red-500 transition-colors">Xóa</button>
                                             </div>
                                         </div>
-                                        <button className="w-full border-2 border-dashed border-black/10 dark:border-dark-border p-8 text-center bg-white dark:bg-dark-bg hover:bg-off-white dark:hover:bg-dark-card transition-colors flex items-center justify-center gap-3">
-                                            <span className="material-symbols-outlined">add</span>
-                                            <span className="text-xs uppercase tracking-widest font-bold">Thêm Phương Thức Thanh Toán</span>
+                                        <button className="w-full border border-dashed border-black/10 dark:border-dark-border py-12 text-center bg-off-white/10 hover:bg-off-white/50 transition-all duration-700 flex items-center justify-center gap-4 group">
+                                            <span className="material-symbols-outlined text-luxury-slate-grey group-hover:text-dark-text">add</span>
+                                            <span className="text-[11px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey group-hover:text-dark-text">Thêm Phương Thức Thanh Toán</span>
                                         </button>
                                     </div>
                                 </div>
                             )}
 
                             {activeTab === 'info' && (
-                                <div className="max-w-2xl">
-                                    <div className="mb-10">
-                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-2">Thông Tin</h1>
-                                        <p className="text-xs uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">Cập nhật thông tin cá nhân</p>
+                                <div className="max-w-2xl space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
+                                    <div className="mb-16">
+                                        <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-4 leading-tight">Hồ Sơ</h1>
+                                        <p className="text-xs uppercase tracking-[0.2em] text-luxury-slate-grey dark:text-dark-text-secondary font-medium mt-6">Cập nhật siêu dữ liệu cá nhân</p>
                                     </div>
-                                    <div className="space-y-6">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <Input label="Họ" defaultValue="Isabella" />
-                                            <Input label="Tên" defaultValue="Ross" />
+                                    <div className="space-y-10">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey/60 pl-1">Họ</label>
+                                                <input defaultValue="Isabella" className="w-full bg-transparent border-0 border-b border-black/10 dark:border-dark-border focus:ring-0 focus:border-black py-4 text-sm font-medium transition-all" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey/60 pl-1">Tên</label>
+                                                <input defaultValue="Ross" className="w-full bg-transparent border-0 border-b border-black/10 dark:border-dark-border focus:ring-0 focus:border-black py-4 text-sm font-medium transition-all" />
+                                            </div>
                                         </div>
-                                        <Input
-                                            label="Email"
-                                            type="email"
-                                            defaultValue="isabella.ross@example.com"
-                                            disabled
-                                            className="bg-off-white dark:bg-dark-card text-muted-text dark:text-dark-text-secondary"
-                                        />
-                                        <Input label="Số Điện Thoại" defaultValue="+84 123 456 789" />
-                                        <button className="w-full md:w-auto px-10 py-4 bg-dark-text dark:bg-primary text-white text-xs uppercase tracking-[0.2em] font-bold hover:bg-primary dark:hover:bg-primary-hover transition-colors">
-                                            Lưu Thay Đổi
-                                        </button>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey/60 pl-1">Email</label>
+                                            <input defaultValue="isabella.ross@example.com" disabled className="w-full bg-transparent border-0 border-b border-black/5 dark:border-dark-border py-4 text-sm font-medium opacity-50 cursor-not-allowed" />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-luxury-slate-grey/60 pl-1">Số Điện Thoại</label>
+                                            <input defaultValue="+84 123 456 789" className="w-full bg-transparent border-0 border-b border-black/10 dark:border-dark-border focus:ring-0 focus:border-black py-4 text-sm font-medium transition-all" />
+                                        </div>
+                                        <div className="pt-10">
+                                            <button className="bg-dark-text text-white px-12 py-5 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-black transition-all shadow-lg hover:shadow-xl">
+                                                Lưu Thay Đổi
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             )}
