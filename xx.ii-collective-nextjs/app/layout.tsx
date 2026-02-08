@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Bodoni_Moda, Manrope, Overpass_Mono } from 'next/font/google';
+import { Bodoni_Moda, Open_Sans, Overpass_Mono } from 'next/font/google';
 import './globals.css';
 
 const bodoniModa = Bodoni_Moda({
@@ -10,7 +10,7 @@ const bodoniModa = Bodoni_Moda({
     weight: ['400', '500', '600', '700', '800', '900'],
 });
 
-const manrope = Manrope({
+const openSans = Open_Sans({
     subsets: ['latin'],
     variable: '--font-primary',
     display: 'swap',
@@ -48,7 +48,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="vi" className={`${bodoniModa.variable} ${manrope.variable} ${overpassMono.variable}`} suppressHydrationWarning>
+        <html lang="vi" className={`${bodoniModa.variable} ${openSans.variable} ${overpassMono.variable}`} suppressHydrationWarning>
             <head>
                 <link
                     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"

@@ -18,7 +18,7 @@ const config: Config = {
         secondary: "#211d11",
         "off-white": "#f8f7f6",
         "light-bg": "#f8f7f6",
-        "dark-text": "#1a1a1a",
+        "dark-text": "#1d1d20",
         "muted-text": "#666666",
         gold: {
           50: "#fbf8f1",
