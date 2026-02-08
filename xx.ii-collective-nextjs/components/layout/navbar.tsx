@@ -72,12 +72,18 @@ export function Navbar() {
 
                         {/* Search Bar - Back on the left */}
                         <div className={`hidden lg:flex items-center transition-all duration-700 ${isScrolled ? 'w-40' : 'w-48'}`}>
-                            <div className="flex items-center gap-2 border-b border-black/20 dark:border-white/20 pb-1 w-full group focus-within:border-black dark:focus-within:border-white transition-colors">
-                                <span className="material-symbols-outlined text-[18px] text-gray-400">search</span>
+                            <div className={`flex items-center gap-2 border-b pb-1 w-full group transition-colors ${isScrolled
+                                    ? 'border-black/20 dark:border-white/20 focus-within:border-black dark:focus-within:border-white'
+                                    : 'border-white/40 focus-within:border-white'
+                                }`}>
+                                <span className={`material-symbols-outlined text-[18px] transition-colors ${isScrolled ? 'text-gray-400' : 'text-white/70'}`}>search</span>
                                 <input
                                     type="text"
                                     placeholder="Tìm kiếm"
-                                    className="bg-transparent text-[10px] uppercase tracking-widest outline-none w-full placeholder:text-gray-500 font-medium dark:text-dark-text"
+                                    className={`bg-transparent text-[10px] uppercase tracking-widest outline-none w-full font-medium transition-colors ${isScrolled
+                                            ? 'placeholder:text-gray-500 dark:text-dark-text text-luxury-onyx'
+                                            : 'placeholder:text-white/60 text-white'
+                                        }`}
                                 />
                             </div>
                         </div>
@@ -87,8 +93,8 @@ export function Navbar() {
                     <div className={`transition-all duration-700 ${isScrolled ? 'flex-1 flex justify-center px-4' : 'flex-shrink-0'}`}>
                         {!isScrolled ? (
                             <Link href="/" className="flex flex-col items-center group/logo">
-                                <span className="font-serif-display font-medium uppercase text-luxury-onyx dark:text-dark-text text-2xl tracking-[0.5em]">XX.II</span>
-                                <span className="text-[8px] tracking-[0.6em] uppercase text-luxury-warm-grey dark:text-dark-text-secondary mt-1">Collective</span>
+                                <span className="font-serif-display font-medium uppercase text-white text-2xl tracking-[0.5em]">XX.II</span>
+                                <span className="text-[8px] tracking-[0.6em] uppercase text-white/70 mt-1">Collective</span>
                             </Link>
                         ) : (
                             <nav className="hidden lg:flex items-center gap-6">
@@ -110,7 +116,8 @@ export function Navbar() {
                         {/* Theme Toggle */}
                         <button
                             onClick={toggleDarkMode}
-                            className="p-1.5 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-luxury-onyx dark:text-dark-text"
+                            className={`p-1.5 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${isScrolled ? 'text-luxury-onyx dark:text-dark-text' : 'text-white'
+                                }`}
                             title={isDarkMode ? "Chuyển sang chế độ sáng" : "Chuyển sang chế độ tối"}
                         >
                             <span className="material-symbols-outlined text-[20px]">
@@ -118,16 +125,19 @@ export function Navbar() {
                             </span>
                         </button>
 
-                        <Link href="/ho-so" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black dark:text-white hover:opacity-60 transition-opacity">
+                        <Link href="/ho-so" className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:opacity-60 transition-all ${isScrolled ? 'text-black dark:text-white' : 'text-white'
+                            }`}>
                             <span className="material-symbols-outlined text-[20px]">person</span>
                             <span className={isScrolled ? 'hidden xl:inline' : 'hidden lg:inline'}>Tài khoản</span>
                         </Link>
 
-                        <Link href="/gio-hang" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black dark:text-white hover:opacity-60 transition-opacity">
+                        <Link href="/gio-hang" className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:opacity-60 transition-all ${isScrolled ? 'text-black dark:text-white' : 'text-white'
+                            }`}>
                             <span className="relative">
                                 <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
                                 {itemCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-black dark:bg-white text-[8px] text-white dark:text-black">
+                                    <span className={`absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full text-[8px] ${isScrolled ? 'bg-black dark:bg-white text-white dark:text-black' : 'bg-white text-black'
+                                        }`}>
                                         {itemCount}
                                     </span>
                                 )}
@@ -136,7 +146,8 @@ export function Navbar() {
                         </Link>
 
                         {/* Mobile Menu Toggle */}
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden p-2 text-black dark:text-white">
+                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className={`lg:hidden p-2 transition-colors ${isScrolled ? 'text-black dark:text-white' : 'text-white'
+                            }`}>
                             <span className="material-symbols-outlined">{isMenuOpen ? 'close' : 'menu'}</span>
                         </button>
                     </div>
