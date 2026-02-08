@@ -4,6 +4,8 @@ import { PRODUCTS } from '@/lib/data';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { formatPrice } from '@/lib/utils';
+import { ProductCard } from '@/components/features/product-card';
+import { BlurFade } from '@/components/magicui/blur-fade';
 
 export const metadata: Metadata = {
     title: 'Cửa Hàng | XX.II Collective',
@@ -101,51 +103,12 @@ export default function ShopPage() {
                             </select>
                         </div>
 
-                        {/* Masonry Grid */}
-                        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+                        {/* Product Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {PRODUCTS.map((product, idx) => (
-                                <Link
-                                    href={`/cua-hang/${product.id}`}
-                                    key={product.id}
-                                    className={`block break-inside-avoid group relative cursor-pointer ${idx % 3 === 1 ? 'md:pt-12' : ''}`}
-                                >
-                                    <div className="relative overflow-hidden w-full bg-off-white dark:bg-dark-card">
-                                        <div className={`w-full ${idx % 5 === 0 ? 'aspect-[4/5]' : idx % 5 === 2 ? 'aspect-square' : idx % 5 === 3 ? 'aspect-[2/3]' : 'aspect-[3/4]'}`}>
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="h-full w-full object-cover transition-transform duration-[1.5s] ease-in-out group-hover:scale-110"
-                                            />
-                                        </div>
-
-                                        {/* Overlays */}
-                                        {product.isBestSeller && (
-                                            <div className="absolute top-4 left-4 z-20">
-                                                <span className="inline-block px-3 py-1 bg-white/90 text-[11px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
-                                            </div>
-                                        )}
-
-                                        {product.videoOverlay && (
-                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/10">
-                                                <span className="text-4xl font-serif-display italic text-white mix-blend-overlay">Chuyển Động</span>
-                                            </div>
-                                        )}
-
-                                        {product.description && (
-                                            <div className="absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-black/10 flex items-center justify-center p-8">
-                                                <p className="text-white font-serif-display text-2xl italic text-center translate-y-4 transition-all duration-500 group-hover:translate-y-0">{product.description}</p>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div className="mt-4 flex justify-between items-start opacity-70 group-hover:opacity-100 transition-opacity">
-                                        <div>
-                                            <h3 className="text-lg font-serif-display italic text-dark-text dark:text-dark-text-primary">{product.name}</h3>
-                                            <p className="text-[11px] font-medium uppercase tracking-widest text-luxury-slate-grey dark:text-dark-text-secondary">{product.category}</p>
-                                        </div>
-                                        <span className="font-mono text-[13px] font-bold text-luxury-onyx dark:text-dark-text-primary tracking-tight">{formatPrice(product.price)}</span>
-                                    </div>
-                                </Link>
+                                <BlurFade key={product.id} delay={0.1 + idx * 0.05} inView>
+                                    <ProductCard product={product} />
+                                </BlurFade>
                             ))}
                         </div>
                     </section>

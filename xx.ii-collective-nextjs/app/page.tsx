@@ -5,6 +5,10 @@ import { Footer } from '@/components/layout/footer';
 import { ProductSection } from '@/components/features/product-section';
 import { HeroSlider } from '@/components/features/hero-slider';
 import { formatPrice } from '@/lib/utils';
+import { BlurFade } from '@/components/magicui/blur-fade';
+import { WordRotate } from '@/components/magicui/word-rotate';
+import { Marquee } from '@/components/magicui/marquee';
+import { ShinyButton } from '@/components/magicui/shiny-button';
 
 export default function HomePage() {
 
@@ -16,55 +20,60 @@ export default function HomePage() {
                 <HeroSlider />
 
                 <section className="relative px-6 py-16 lg:px-12 min-h-[85vh] flex items-center">
-
                     <div className="mx-auto max-w-[1400px] w-full relative">
-                        <div className="flex flex-col items-center mb-12 space-y-3">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">The Discovery</span>
-                            <h2 className="font-serif-display text-4xl md:text-6xl text-luxury-onyx leading-tight text-center italic">Sự Khởi Đầu Mới</h2>
-                            <div className="w-12 h-[1px] bg-black/10"></div>
-                        </div>
+                        <BlurFade delay={0.2} inView>
+                            <div className="flex flex-col items-center mb-12 space-y-3">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">The Discovery</span>
+                                <h2 className="font-serif-display text-4xl md:text-6xl text-luxury-onyx leading-tight text-center italic">Sự Khởi Đầu Mới</h2>
+                                <div className="w-12 h-[1px] bg-black/10"></div>
+                            </div>
+                        </BlurFade>
 
                         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
                             {/* Main Luminous Banner (Left) */}
-                            <div className="group relative lg:col-span-8">
-                                <div className="relative aspect-[16/9] w-full overflow-hidden shadow-2xl border border-black/5">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070"
-                                        alt="Luminous Promotion"
-                                        className="h-full w-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
-                                </div>
-                                {/* Editorial Card - Always Visible */}
-                                <div className="absolute -bottom-12 left-[-20px] bg-white p-12 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700 group-hover:translate-y-[-20px] z-10 max-w-sm md:max-w-md">
-                                    <div className="transition-transform duration-500 group-hover:scale-105 origin-left">
-                                        <h3 className="text-3xl font-serif-display italic text-luxury-onyx mb-4">Ánh Sáng Champagne</h3>
-                                        <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase leading-relaxed mb-8">Khám phá vẻ đẹp vĩnh cửu trong từng đường nét thiết kế mới nhấn mạnh vào sự sang trọng và lôi cuốn.</p>
-                                        <Link href="/cua-hang" className="inline-block relative overflow-hidden group/btn px-10 py-5 text-[10px] font-bold uppercase tracking-[0.3em] text-dark-text border border-black/10">
-                                            <span className="relative z-10 transition-colors group-hover/btn:text-white">Khám phá ngay</span>
-                                            <div className="absolute inset-0 bg-dark-text translate-y-full transition-transform duration-500 group-hover/btn:translate-y-0"></div>
-                                        </Link>
+                            <BlurFade delay={0.3} direction="up" className="lg:col-span-8">
+                                <div className="group relative">
+                                    <div className="relative aspect-[16/9] w-full overflow-hidden shadow-2xl border border-black/5">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070"
+                                            alt="Luminous Promotion"
+                                            className="h-full w-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
                                     </div>
-                                </div>
-                            </div>
-
-                            {/* Accented Banner (Right) */}
-                            <div className="group relative lg:col-span-4 mt-12 lg:mt-32">
-                                <div className="relative aspect-[4/5] w-full overflow-hidden shadow-xl border border-black/5">
-                                    <img
-                                        src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
-                                        alt="Celestial Detail"
-                                        className="h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
-                                    <div className="absolute -bottom-10 right-[-20px] bg-luxury-cream p-12 shadow-2xl transition-transform duration-700 group-hover:translate-y-[-20px] z-10">
-                                        <div className="transition-transform duration-500 group-hover:scale-110 origin-right">
-                                            <h4 className="text-xl font-serif-display text-luxury-onyx mb-2 italic">Signature Style</h4>
-                                            <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase">Chi tiết tạo nên đẳng cấp</p>
+                                    {/* Editorial Card - Always Visible */}
+                                    <div className="absolute -bottom-12 left-[-20px] bg-white p-12 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700 group-hover:translate-y-[-20px] z-10 max-w-sm md:max-w-md">
+                                        <div className="transition-transform duration-500 group-hover:scale-105 origin-left">
+                                            <h3 className="text-3xl font-serif-display italic text-luxury-onyx mb-4">Ánh Sáng Champagne</h3>
+                                            <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase leading-relaxed mb-8">Khám phá vẻ đẹp vĩnh cửu trong từng đường nét thiết kế mới nhấn mạnh vào sự sang trọng và lôi cuốn.</p>
+                                            <Link href="/cua-hang" className="inline-block relative overflow-hidden group/btn px-10 py-5 text-[10px] font-bold uppercase tracking-[0.3em] text-dark-text border border-black/10">
+                                                <span className="relative z-10 transition-colors group-hover/btn:text-white">Khám phá ngay</span>
+                                                <div className="absolute inset-0 bg-dark-text translate-y-full transition-transform duration-500 group-hover/btn:translate-y-0"></div>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </BlurFade>
+
+                            {/* Accented Banner (Right) */}
+                            <BlurFade delay={0.5} direction="up" className="lg:col-span-4 mt-12 lg:mt-32">
+                                <div className="group relative">
+                                    <div className="relative aspect-[4/5] w-full overflow-hidden shadow-xl border border-black/5">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
+                                            alt="Celestial Detail"
+                                            className="h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
+                                        <div className="absolute -bottom-10 right-[-20px] bg-luxury-cream p-12 shadow-2xl transition-transform duration-700 group-hover:translate-y-[-20px] z-10">
+                                            <div className="transition-transform duration-500 group-hover:scale-110 origin-right">
+                                                <h4 className="text-xl font-serif-display text-luxury-onyx mb-2 italic">Signature Style</h4>
+                                                <p className="text-[11px] font-medium tracking-[0.2em] text-luxury-slate-grey uppercase">Chi tiết tạo nên đẳng cấp</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </BlurFade>
                         </div>
                     </div>
                 </section>
@@ -79,7 +88,7 @@ export default function HomePage() {
                     <div className="mx-auto max-w-[1400px] px-6 lg:px-12 w-full relative z-10 py-20 lg:py-0">
                         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16 lg:gap-32">
                             {/* Left Content */}
-                            <div className="space-y-10 order-2 lg:order-1">
+                            <BlurFade delay={0.2} direction="right" className="space-y-10 order-2 lg:order-1">
                                 <h2 className="text-6xl md:text-8xl lg:text-[10vw] font-serif-display leading-none tracking-tighter">
                                     <span className="block italic text-luxury-warm-grey transition-all duration-1000 group-hover/legacy:translate-x-4">Hành Trình</span>
                                     <span className="block ml-8 md:ml-16 lg:ml-24 transition-all duration-1000 group-hover/legacy:-translate-x-4">Vĩnh Cửu</span>
@@ -93,10 +102,10 @@ export default function HomePage() {
                                         <div className="h-[1px] w-12 bg-white/40 group-hover/btn:w-24 transition-all duration-700"></div>
                                     </Link>
                                 </div>
-                            </div>
+                            </BlurFade>
 
                             {/* Right Imagery */}
-                            <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
+                            <BlurFade delay={0.4} direction="left" className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
                                 <div className="relative w-full max-w-[500px] aspect-[4/5] group/img">
                                     {/* Main Image */}
                                     <div className="absolute inset-0 overflow-hidden shadow-2xl transition-all duration-1000 group-hover/img:scale-95 group-hover/img:brightness-75 opacity-80">
@@ -112,7 +121,7 @@ export default function HomePage() {
                                         <span className="text-xl font-serif-display italic text-black">1886</span>
                                     </div>
                                 </div>
-                            </div>
+                            </BlurFade>
                         </div>
                     </div>
                 </section>
@@ -127,8 +136,15 @@ export default function HomePage() {
                     <div className="mx-auto max-w-[1400px] w-full relative z-10 pt-10 lg:pt-14 pb-12 lg:pb-16">
                         {/* Featured Header */}
                         <div className="flex flex-col items-center mb-6 space-y-2 text-center">
-                            <span className="text-[9px] font-bold uppercase tracking-[0.6em] text-luxury-slate-grey">Hào Quang Của Sự Hoàn Mỹ</span>
-                            <h2 className="font-serif-display text-3xl md:text-5xl text-luxury-onyx italic leading-tight">Tinh Hoa Hội Tụ</h2>
+                            <BlurFade delay={0.2} inView>
+                                <span className="text-[9px] font-bold uppercase tracking-[0.6em] text-luxury-slate-grey">Hào Quang Của Sự Hoàn Mỹ</span>
+                            </BlurFade>
+                            <BlurFade delay={0.4} inView>
+                                <WordRotate
+                                    words={["Tinh Hoa Hội Tụ", "Đẳng Cấp Thượng Lưu", "Vẻ Đẹp Vĩnh Cửu"]}
+                                    className="font-serif-display text-3xl md:text-5xl text-luxury-onyx italic leading-tight"
+                                />
+                            </BlurFade>
                             <div className="w-10 h-[1px] bg-black/5"></div>
                         </div>
 
@@ -226,14 +242,27 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                <div className="relative overflow-hidden bg-luxury-black py-12 text-center">
-                    <div className="absolute inset-0 opacity-10 pointer-events-none">
-                        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
+                <div className="relative overflow-hidden bg-luxury-black py-4 text-center">
+                    <Marquee className="[--duration:20s] py-2 border-y border-white/10" pauseOnHover>
+                        {["TRẢI NGHIỆM THƯỢNG LƯU", "Nghệ Thuật & Di Sản", "Độc Bản & Cá Nhân Hóa", "XX.II COLLECTIVE EST 1886", "TINH HOA HỘI TỤ"].map((text) => (
+                            <span key={text} className="text-[12px] font-bold tracking-[0.5em] text-white/40 uppercase mx-8">{text}</span>
+                        ))}
+                    </Marquee>
+                    <div className="py-12 relative">
+                        <div className="absolute inset-0 opacity-10 pointer-events-none">
+                            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
+                        </div>
+                        <BlurFade delay={0.2} inView>
+                            <h4 className="text-xl font-serif-display italic text-white mb-6">Trải nghiệm dịch vụ cá nhân hóa dành riêng cho bạn</h4>
+                        </BlurFade>
+                        <BlurFade delay={0.4} inView>
+                            <Link href="/cua-hang">
+                                <ShinyButton className="border-white/20 text-white">
+                                    Đặt lịch tư vấn ngay
+                                </ShinyButton>
+                            </Link>
+                        </BlurFade>
                     </div>
-                    <h4 className="text-xl font-serif-display italic text-white mb-6">Trải nghiệm dịch vụ cá nhân hóa dành riêng cho bạn</h4>
-                    <Link href="/cua-hang" className="inline-block bg-white px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black hover:bg-gray-100 transition-all shadow-xl">
-                        Đặt lịch tư vấn ngay
-                    </Link>
                 </div>
 
                 {/* Section 4: Elite Services (Editorial Narrative) */}
@@ -241,7 +270,7 @@ export default function HomePage() {
                     <div className="mx-auto max-w-[1400px] w-full py-12 lg:py-16">
                         <div className="flex flex-col lg:flex-row gap-16 lg:gap-32">
                             {/* Narrative Column */}
-                            <div className="lg:w-1/3 flex flex-col justify-center space-y-10">
+                            <BlurFade delay={0.2} direction="right" className="lg:w-1/3 flex flex-col justify-center space-y-10">
                                 <div className="space-y-4">
                                     <div className="text-6xl font-serif-display text-black/10">01.</div>
                                     <h3 className="text-4xl md:text-5xl font-serif-display italic text-luxury-onyx leading-tight">Trải Nghiệm Thượng Lưu</h3>
@@ -257,10 +286,10 @@ export default function HomePage() {
                                         Mạng lưới showroom và đối tác chiến lược tại các kinh đô thời trang lớn nhất thế giới, sẵn sàng phục vụ bạn.
                                     </p>
                                 </div>
-                            </div>
+                            </BlurFade>
 
                             {/* visual Column (Asymmetrical Grid) */}
-                            <div className="lg:w-2/3 grid grid-cols-12 gap-8 items-start">
+                            <BlurFade delay={0.4} direction="up" className="lg:w-2/3 grid grid-cols-12 gap-8 items-start">
                                 <div className="col-span-12 md:col-span-7 group relative aspect-[4/5] overflow-hidden shadow-2xl">
                                     <img src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=2070" className="h-full w-full object-cover transition-transform duration-[3000ms] group-hover:scale-110" alt="Collection 1" />
                                     <div className="absolute inset-0 bg-gold-900/10 group-hover:bg-transparent transition-colors duration-1000"></div>
@@ -275,7 +304,7 @@ export default function HomePage() {
                                         <p className="text-xs font-bold text-white uppercase tracking-[0.4em]">International Stores</p>
                                     </div>
                                 </div>
-                            </div>
+                            </BlurFade>
                         </div>
                     </div>
                 </section>
@@ -289,7 +318,7 @@ export default function HomePage() {
 
                     <div className="mx-auto max-w-[1400px] w-full relative z-10 py-12 lg:py-16">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32 items-center">
-                            <div className="lg:col-span-7 relative">
+                            <BlurFade delay={0.2} direction="right" className="lg:col-span-7 relative">
                                 <div className="relative group overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2070" alt="Heritage" className="w-full h-[500px] lg:h-[600px] object-cover rounded-sm shadow-2xl transition-transform duration-[3000ms] group-hover:scale-105" />
                                     <div className="absolute inset-0 bg-gold-900/10 group-hover:bg-transparent transition-colors duration-1000"></div>
@@ -300,8 +329,8 @@ export default function HomePage() {
                                 </div>
                                 {/* Artistic Founding Year */}
                                 <div className="absolute -top-12 -left-12 text-[10rem] font-serif-display text-gold-100/40 select-none hidden lg:block">1886</div>
-                            </div>
-                            <div className="lg:col-span-5 space-y-12">
+                            </BlurFade>
+                            <BlurFade delay={0.4} direction="left" className="lg:col-span-5 space-y-12">
                                 <div className="space-y-4">
                                     <div className="w-12 h-[1px] bg-black/20"></div>
                                     <h2 className="font-serif-display text-5xl md:text-7xl leading-tight italic text-luxury-onyx">Hành Trình<br />Vĩnh Cửu</h2>
@@ -316,9 +345,10 @@ export default function HomePage() {
                                     </p>
                                 </div>
                                 <div className="flex flex-col sm:flex-row items-center gap-12 pt-8">
-                                    <Link href="/lien-he" className="group relative px-16 py-6 overflow-hidden bg-black">
-                                        <span className="relative z-10 text-xs font-bold uppercase tracking-[0.6em] text-white">Khám phá di sản</span>
-                                        <div className="absolute inset-0 bg-luxury-onyx translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500"></div>
+                                    <Link href="/lien-he">
+                                        <ShinyButton className="px-16 py-6 bg-black text-white hover:bg-neutral-900">
+                                            Khám phá di sản
+                                        </ShinyButton>
                                     </Link>
                                     <div className="flex items-center gap-4">
                                         <div className="flex -space-x-4">
@@ -331,7 +361,7 @@ export default function HomePage() {
                                         <div className="text-xs font-bold uppercase tracking-widest text-black/80">Joined by 5k+</div>
                                     </div>
                                 </div>
-                            </div>
+                            </BlurFade>
                         </div>
                     </div>
                 </section>
@@ -346,7 +376,7 @@ export default function HomePage() {
                     <div className="mx-auto max-w-[1400px] w-full relative z-10 py-12 lg:py-16">
                         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-16 lg:gap-32">
                             {/* Left Column: Narrative Hub */}
-                            <div className="lg:col-span-4 space-y-6 text-center lg:text-left">
+                            <BlurFade delay={0.2} direction="right" className="lg:col-span-4 space-y-6 text-center lg:text-left">
                                 <div className="space-y-4">
                                     <span className="text-[10px] font-bold uppercase tracking-[0.6em] text-luxury-warm-grey">Premium Assurance</span>
                                     <h2 className="text-5xl md:text-6xl font-serif-display italic leading-tight text-luxury-onyx">Niềm Tin<br />Tuyệt Đối</h2>
@@ -355,12 +385,12 @@ export default function HomePage() {
                                     "Mỗi sản phẩm là một lời cam kết về chất lượng và sự tận tâm dành cho những quý chủ nhân xứng tầm."
                                 </p>
                                 <div className="h-[1px] w-24 bg-black/10 mx-auto lg:mx-0"></div>
-                            </div>
+                            </BlurFade>
 
                             {/* Right Column: Balanced Badge Grid */}
                             <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 lg:gap-x-20 lg:gap-y-24">
                                 {/* Badge 1 */}
-                                <div className="flex items-center gap-8 group">
+                                <BlurFade delay={0.3} direction="up" className="flex items-center gap-8 group">
                                     <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-90 transition-transform duration-[2000ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-90 transition-transform duration-[2000ms]"></div>
@@ -372,10 +402,10 @@ export default function HomePage() {
                                         <h4 className="text-lg font-serif-display italic text-luxury-onyx">Giao dịch Bảo mật</h4>
                                         <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Mã hóa chuẩn quốc tế</p>
                                     </div>
-                                </div>
+                                </BlurFade>
 
                                 {/* Badge 2 */}
-                                <div className="flex items-center gap-8 group md:translate-y-8">
+                                <BlurFade delay={0.4} direction="up" className="flex items-center gap-8 group md:translate-y-8">
                                     <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-[225deg] transition-transform duration-[2500ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-[135deg] transition-transform duration-[2500ms]"></div>
@@ -387,10 +417,10 @@ export default function HomePage() {
                                         <h4 className="text-lg font-serif-display italic text-luxury-onyx">Đóng gói Nghệ thuật</h4>
                                         <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Hộp quà bespoke cao cấp</p>
                                     </div>
-                                </div>
+                                </BlurFade>
 
                                 {/* Badge 3 */}
-                                <div className="flex items-center gap-8 group lg:-translate-x-12">
+                                <BlurFade delay={0.5} direction="up" className="flex items-center gap-8 group lg:-translate-x-12">
                                     <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-90 transition-transform duration-[2000ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-90 transition-transform duration-[2000ms]"></div>
@@ -402,10 +432,10 @@ export default function HomePage() {
                                         <h4 className="text-lg font-serif-display italic text-luxury-onyx">Di sản Độc bản</h4>
                                         <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Chứng nhận sở hữu cá nhân</p>
                                     </div>
-                                </div>
+                                </BlurFade>
 
                                 {/* Badge 4 */}
-                                <div className="flex items-center gap-8 group md:translate-y-8 lg:translate-x-8">
+                                <BlurFade delay={0.6} direction="up" className="flex items-center gap-8 group md:translate-y-8 lg:translate-x-8">
                                     <div className="relative w-24 h-24 flex-shrink-0">
                                         <div className="absolute inset-0 border border-black/20 rotate-45 group-hover:rotate-180 transition-transform duration-[3000ms]"></div>
                                         <div className="absolute inset-2 border border-black/5 -rotate-45 group-hover:-rotate-180 transition-transform duration-[3000ms]"></div>
@@ -417,7 +447,7 @@ export default function HomePage() {
                                         <h4 className="text-lg font-serif-display italic text-luxury-onyx">Hỗ trợ 24/7</h4>
                                         <p className="text-[10px] font-bold text-luxury-slate-grey uppercase tracking-[0.2em] leading-snug">Trợ lý trợ lý cá nhân</p>
                                     </div>
-                                </div>
+                                </BlurFade>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import Link from 'next/link';
+import { Particles } from '@/components/magicui/particles';
+import { BlurFade } from '@/components/magicui/blur-fade';
+import { ShinyButton } from '@/components/magicui/shiny-button';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -70,6 +73,14 @@ export function HeroSlider() {
                         <div className="absolute inset-0 h-full w-full">
                             <div className="absolute inset-0 z-10 bg-black/20"></div>
                             <div className="absolute inset-0 z-10 bg-gradient-to-tr from-black/60 via-black/10 to-transparent"></div>
+                            <Particles
+                                className="absolute inset-0 z-10"
+                                quantity={100}
+                                staticity={30}
+                                ease={50}
+                                color="#ffffff"
+                                refresh={true}
+                            />
                             <div
                                 className="h-full w-full bg-cover bg-center"
                                 style={{ backgroundImage: `url("${slide.image}")` }}
@@ -79,30 +90,36 @@ export function HeroSlider() {
                         {/* Hero Content */}
                         <div className="relative z-20 flex h-full w-full items-end justify-start px-6 pb-24 md:px-12 md:pb-32 pt-24 md:pt-32">
                             <div className="max-w-xl text-left">
-                                <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/80 mb-6 animate-in fade-in slide-in-from-left-4 duration-700">
-                                    {slide.tag}
-                                </span>
+                                <BlurFade delay={0.2} direction="right">
+                                    <span className="block text-[10px] font-bold uppercase tracking-[0.4em] text-white/80 mb-6">
+                                        {slide.tag}
+                                    </span>
+                                </BlurFade>
 
-                                <div className="mb-10 animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
-                                    <h2 className="font-sans text-5xl font-black uppercase leading-[1.1] tracking-tighter text-white md:text-7xl lg:text-8xl">
-                                        {slide.title}<br />
-                                        <span className="font-light italic opacity-90">{slide.subtitle}</span>
-                                    </h2>
-                                </div>
+                                <BlurFade delay={0.4} direction="right">
+                                    <div className="mb-10">
+                                        <h2 className="font-sans text-5xl font-black uppercase leading-[1.1] tracking-tighter text-white md:text-7xl lg:text-8xl">
+                                            {slide.title}<br />
+                                            <span className="font-light italic opacity-90">{slide.subtitle}</span>
+                                        </h2>
+                                    </div>
+                                </BlurFade>
 
-                                <p className="mb-12 max-w-md text-xs font-medium uppercase tracking-widest leading-relaxed text-white/70 animate-in fade-in slide-in-from-left-12 duration-1000 delay-500">
-                                    {slide.description}
-                                </p>
+                                <BlurFade delay={0.6} direction="right">
+                                    <p className="mb-12 max-w-md text-xs font-medium uppercase tracking-widest leading-relaxed text-white/70">
+                                        {slide.description}
+                                    </p>
+                                </BlurFade>
 
-                                <div className="flex animate-in fade-in slide-in-from-left-16 duration-1000 delay-700">
-                                    <Link
-                                        href="/cua-hang"
-                                        className="group relative inline-flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.3em] text-white border-b border-white/40 pb-2 transition-all hover:border-white"
-                                    >
-                                        <span>Khám phá ngay</span>
-                                        <span className="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                                    </Link>
-                                </div>
+                                <BlurFade delay={0.8} direction="right">
+                                    <div className="flex">
+                                        <Link href="/cua-hang">
+                                            <ShinyButton className="border-white/20 text-white">
+                                                Khám phá ngay
+                                            </ShinyButton>
+                                        </Link>
+                                    </div>
+                                </BlurFade>
                             </div>
                         </div>
                     </SwiperSlide>

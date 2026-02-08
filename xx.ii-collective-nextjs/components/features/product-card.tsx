@@ -2,7 +2,9 @@
 
 import Link from 'next/link';
 import { Product } from '@/types';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, cn } from '@/lib/utils';
+import { MagicCard } from '@/components/magicui/magic-card';
+import { ShineBorder } from '@/components/magicui/shine-border';
 
 interface ProductCardProps {
     product: Product;
@@ -10,16 +12,39 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, className = '' }: ProductCardProps) {
+    const isFeatured = product.price > 2000000; // Example condition
+
     return (
-        <div className={`group relative bg-white dark:bg-dark-card overflow-hidden transition-all duration-700 border border-black/5 dark:border-white/5 hover:border-black/10 dark:hover:border-white/10 hover:shadow-lg ${className}`}>
-            <div className="bg-white dark:bg-dark-card p-3 relative z-10 flex flex-col h-full">
-                {/* Image Contaner */}
+        <MagicCard
+            className={cn(
+                "group relative overflow-hidden transition-all duration-700 border border-black/5 dark:border-white/5 hover:border-black/10 dark:hover:border-white/10 shadow-sm hover:shadow-2xl",
+                className
+            )}
+            gradientColor={isFeatured ? "#c5a059" : "#262626"}
+        >
+            {isFeatured && (
+                <ShineBorder
+                    borderWidth={1}
+                    duration={14}
+                    shineColor={["#c5a059", "#e5c17e", "#9c713a"]}
+                    className="z-20"
+                />
+            )}
+            <div className="p-3 relative z-10 flex flex-col h-full">
+                {/* Image Container */}
                 <div className="relative aspect-[4/5] w-full mb-3 overflow-hidden bg-gray-50 dark:bg-dark-bg">
                     <img
                         src={product.image}
                         alt={product.name}
                         className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
+                    {product.isBestSeller && (
+                        <div className="absolute top-2 left-2 z-20">
+                            <span className="inline-block px-2 py-0.5 bg-white/90 text-[8px] font-bold uppercase tracking-widest backdrop-blur-sm text-black rounded-sm border border-black/5">
+                                Best Seller
+                            </span>
+                        </div>
+                    )}
                 </div>
 
                 {/* Info Container */}
@@ -49,6 +74,6 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
                     </Link>
                 </div>
             </div>
-        </div>
+        </MagicCard>
     );
 }
