@@ -1,61 +1,54 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types';
-import { useCartStore } from '@/lib/store';
 import { formatPrice } from '@/lib/utils';
 
 interface ProductCardProps {
     product: Product;
-    showQuickAdd?: boolean;
+    className?: string;
 }
 
-export function ProductCard({ product, showQuickAdd = true }: ProductCardProps) {
-    const addItem = useCartStore((state) => state.addItem);
-
-    const handleQuickAdd = (e: React.MouseEvent) => {
-        e.preventDefault();
-        addItem(product);
-    };
-
+export function ProductCard({ product, className = '' }: ProductCardProps) {
     return (
-        <Link href={`/shop/${product.id}`} className="group cursor-pointer block">
-            <div className="aspect-[3/4] overflow-hidden bg-gray-100 dark:bg-dark-card relative mb-4">
-                <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover transition-all duration-700 group-hover:scale-105 grayscale-[30%] group-hover:grayscale-0"
-                />
-                {showQuickAdd && (
-                    <div className="absolute bottom-0 left-0 right-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                        <button
-                            onClick={handleQuickAdd}
-                            className="w-full bg-white/95 backdrop-blur-sm text-dark-text py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-2"
-                        >
-                            <span className="material-symbols-outlined text-base">shopping_bag</span>
-                            Thêm vào giỏ
-                        </button>
+        <div className={`group relative bg-white dark:bg-dark-card overflow-hidden transition-all duration-700 border border-black/5 dark:border-white/5 hover:border-black/10 dark:hover:border-white/10 hover:shadow-lg ${className}`}>
+            <div className="bg-white dark:bg-dark-card p-3 relative z-10 flex flex-col h-full">
+                {/* Image Contaner */}
+                <div className="relative aspect-[4/5] w-full mb-3 overflow-hidden bg-gray-50 dark:bg-dark-bg">
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                </div>
+
+                {/* Info Container */}
+                <div className="space-y-1 flex-1">
+                    <div className="flex justify-between items-start gap-2">
+                        <h3 className="text-[9px] font-bold uppercase tracking-widest text-luxury-onyx dark:text-dark-text leading-tight line-clamp-1">
+                            {product.name}
+                        </h3>
+                        <p className="text-xs font-serif-display font-bold text-luxury-onyx dark:text-dark-text-primary">
+                            {formatPrice(product.price)}
+                        </p>
                     </div>
-                )}
-                {product.id === 1 && (
-                    <div className="absolute top-3 left-3 bg-dark-text text-white text-[11px] font-bold uppercase px-2.5 py-1.5 tracking-[0.15em]">
-                        Best Seller
-                    </div>
-                )}
-            </div>
-            <div className="flex justify-between items-start gap-3">
-                <div className="flex-1">
-                    <h3 className="font-serif-display text-sm font-medium group-hover:text-primary transition-colors dark:text-dark-text tracking-wide">
-                        {product.name}
-                    </h3>
-                    <p className="text-luxury-slate-grey dark:text-dark-text-secondary text-[11px] font-medium mt-1 uppercase tracking-wider">
-                        {product.color}
+                    <p className="text-[7px] text-luxury-slate-grey dark:text-dark-text-secondary uppercase tracking-widest">
+                        {product.category}
                     </p>
                 </div>
-                <p className="font-bold text-sm text-primary whitespace-nowrap">{formatPrice(product.price)}</p>
+
+                {/* Footer Link */}
+                <div className="mt-3">
+                    <Link href={`/cua-hang/${product.id}`} className="flex items-center justify-between group/link">
+                        <span className="text-[7px] font-bold uppercase tracking-widest text-luxury-onyx dark:text-dark-text border-b border-black/10 dark:border-white/10 pb-1 group-hover/link:border-black dark:group-hover/link:border-white transition-all">
+                            Chi tiết
+                        </span>
+                        <span className="material-symbols-outlined text-[12px] text-black/40 dark:text-white/40 group-hover/link:translate-x-1 transition-transform">
+                            east
+                        </span>
+                    </Link>
+                </div>
             </div>
-        </Link>
+        </div>
     );
 }

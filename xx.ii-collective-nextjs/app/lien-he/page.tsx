@@ -20,7 +20,7 @@ export default function ContactPage() {
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16 overflow-x-hidden">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-28">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
                         {/* Info Section */}

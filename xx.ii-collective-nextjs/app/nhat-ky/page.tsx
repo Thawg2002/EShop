@@ -31,7 +31,7 @@ export default function JournalPage() {
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16 overflow-x-hidden">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-28">
                     <div className="text-center mb-24 md:mb-32">
                         <span className="text-primary font-bold uppercase text-[11px] tracking-[0.6em] mb-6 block">Editorial</span>
@@ -50,7 +50,7 @@ export default function JournalPage() {
                                     <img
                                         src={article.image}
                                         alt={article.title}
-                                        className="w-full h-full object-cover grayscale transition-all duration-[1.5s] group-hover:grayscale-0 group-hover:scale-110"
+                                        className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                                 </div>

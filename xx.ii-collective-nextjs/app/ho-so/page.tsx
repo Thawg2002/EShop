@@ -17,7 +17,7 @@ export default function ProfilePage() {
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white dark:bg-dark-bg transition-colors duration-500">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg transition-colors duration-500 overflow-x-hidden">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-32">
                     <div className="flex flex-col lg:flex-row gap-20 lg:gap-32 min-h-[600px]">
                         {/* Sidebar */}
@@ -30,7 +30,7 @@ export default function ProfilePage() {
                                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop"
                                             alt="Profile"
                                             fill
-                                            className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                                            className="object-cover transition-all duration-700 hover:scale-110"
                                         />
                                     </div>
                                     <div>

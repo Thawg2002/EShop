@@ -13,7 +13,7 @@ export default function CartPage() {
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16 overflow-x-hidden">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12">
                     <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-4">Giỏ Hàng</h1>
                     <p className="text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary mb-12">{items.length} Sản Phẩm</p>

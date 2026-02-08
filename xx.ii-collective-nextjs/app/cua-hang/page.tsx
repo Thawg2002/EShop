@@ -75,7 +75,7 @@ export default function ShopPage() {
                 </aside>
 
                 {/* Main Content */}
-                <main className="flex-1 w-full lg:pl-[280px] pt-24 min-h-screen flex flex-col">
+                <main className="flex-1 w-full lg:pl-[280px] pt-24 min-h-screen flex flex-col overflow-x-hidden">
                     <section className="flex-1 px-6 md:px-12 max-w-[1600px] mx-auto w-full py-12">
                         {/* Header */}
                         <div className="mb-16 mt-12">
@@ -114,7 +114,7 @@ export default function ShopPage() {
                                             <img
                                                 src={product.image}
                                                 alt={product.name}
-                                                className="h-full w-full object-cover transition-transform duration-[1.5s] ease-in-out group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                                className="h-full w-full object-cover transition-transform duration-[1.5s] ease-in-out group-hover:scale-110"
                                             />
                                         </div>
 

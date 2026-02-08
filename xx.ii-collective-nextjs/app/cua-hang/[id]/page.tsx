@@ -7,6 +7,7 @@ import { PRODUCTS } from '@/lib/data';
 import { useCartStore } from '@/lib/store';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { ProductSection } from '@/components/features/product-section';
 import { formatPrice } from '@/lib/utils';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -65,7 +66,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     return (
         <>
             <Navbar />
-            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16">
+            <main className="flex-1 w-full bg-white dark:bg-dark-bg pt-24 pb-16 overflow-x-hidden">
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12">
                     {/* Back Link */}
                     <Link href="/cua-hang" className="inline-flex items-center text-xs uppercase tracking-widest text-muted-text dark:text-dark-text-secondary hover:text-primary transition-colors mb-12">
@@ -74,39 +75,43 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </Link>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-                        {/* Image Gallery - 7 columns */}
-                        <div className="lg:col-span-7">
-                            {/* Main Image */}
-                            <div className="relative aspect-[3/4] bg-off-white dark:bg-dark-card mb-6 overflow-hidden group">
-                                <img
-                                    src={images[selectedImageIndex]}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1.5s]"
-                                />
-                                {product.isBestSeller && (
-                                    <div className="absolute top-6 left-6 z-20">
-                                        <span className="inline-block px-4 py-2 bg-white/90 text-[11px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
-                                    </div>
-                                )}
-                            </div>
+                        {/* Image Gallery - 7 columns, Sticky */}
+                        <div className="lg:col-span-7 lg:sticky lg:top-32 lg:self-start">
+                            <div className="max-h-[calc(100vh-10rem)] flex flex-col">
+                                {/* Main Image - Optimized for viewport */}
+                                <div className="relative aspect-square bg-off-white dark:bg-dark-card mb-4 overflow-hidden group flex-shrink-0">
+                                    <img
+                                        src={images[selectedImageIndex]}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover transition-all duration-[1.5s]"
+                                    />
+                                    {product.isBestSeller && (
+                                        <div className="absolute top-6 left-6 z-20">
+                                            <span className="inline-block px-4 py-2 bg-white/90 text-[11px] font-bold uppercase tracking-widest backdrop-blur-sm text-black">Bán Chạy</span>
+                                        </div>
+                                    )}
+                                </div>
 
-                            {/* Thumbnail Gallery */}
-                            <div className="grid grid-cols-3 gap-4">
-                                {images.map((img, idx) => (
-                                    <div
-                                        key={idx}
-                                        onClick={() => setSelectedImageIndex(idx)}
-                                        className={`aspect-[3/4] cursor-pointer overflow-hidden transition-all ${idx === selectedImageIndex ? 'opacity-100 ring-2 ring-primary' : 'opacity-60 hover:opacity-100'
-                                            }`}
-                                    >
-                                        <img src={img} alt="" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                                    </div>
-                                ))}
+                                {/* Thumbnail Gallery - Horizontal Slider */}
+                                <div className="grid grid-cols-4 gap-3 flex-shrink-0">
+                                    {images.map((img, idx) => (
+                                        <div
+                                            key={idx}
+                                            onClick={() => setSelectedImageIndex(idx)}
+                                            className={`aspect-square cursor-pointer overflow-hidden transition-all border-2 ${idx === selectedImageIndex
+                                                ? 'border-primary opacity-100'
+                                                : 'border-transparent opacity-60 hover:opacity-100 hover:border-black/10'
+                                                }`}
+                                        >
+                                            <img src={img} alt="" className="w-full h-full object-cover transition-all duration-700" />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
-                        {/* Product Info - 5 columns, sticky */}
-                        <div className="lg:col-span-5 lg:sticky lg:top-32 lg:self-start">
+                        {/* Product Info - 5 columns */}
+                        <div className="lg:col-span-5">
                             <span className="block text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4">{product.category}</span>
                             <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary leading-[0.95] mb-6">
                                 {product.name}
@@ -202,25 +207,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                         </div>
                     </div>
 
-                    {/* Related Products */}
-                    <div className="mt-32">
-                        <h2 className="text-4xl md:text-5xl font-serif-display italic text-dark-text dark:text-dark-text-primary mb-12 text-center">Có Thể Bạn Thích</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                            {PRODUCTS.filter(p => p.id !== product.id).slice(0, 4).map((relatedProduct) => (
-                                <Link href={`/cua-hang/${relatedProduct.id}`} key={relatedProduct.id} className="group">
-                                    <div className="aspect-[3/4] bg-off-white dark:bg-dark-card mb-4 overflow-hidden">
-                                        <img
-                                            src={relatedProduct.image}
-                                            alt={relatedProduct.name}
-                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1.5s] group-hover:scale-110"
-                                        />
-                                    </div>
-                                    <h3 className="text-lg font-serif-display italic text-dark-text dark:text-dark-text-primary mb-1">{relatedProduct.name}</h3>
-                                    <p className="text-[13px] font-bold text-primary">{formatPrice(relatedProduct.price)}</p>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
+                    {/* Related Products (Common Component) */}
+                    <ProductSection
+                        title="Có Thể Bạn Thích"
+                        products={PRODUCTS.filter(p => p.id !== product.id).slice(0, 4)}
+                        className="mt-32"
+                    />
                 </div>
             </main>
             <Footer />

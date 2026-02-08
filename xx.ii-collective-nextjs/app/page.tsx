@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { PRODUCTS } from '@/lib/data';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { ProductSection } from '@/components/features/product-section';
 import { HeroSlider } from '@/components/features/hero-slider';
 import { formatPrice } from '@/lib/utils';
 
@@ -32,7 +33,7 @@ export default function HomePage() {
                                         alt="Luminous Promotion"
                                         className="h-full w-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700"></div>
+                                    <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
                                 </div>
                                 {/* Editorial Card - Always Visible */}
                                 <div className="absolute -bottom-12 left-[-20px] bg-white p-12 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-700 group-hover:translate-y-[-20px] z-10 max-w-sm md:max-w-md">
@@ -55,7 +56,7 @@ export default function HomePage() {
                                         alt="Celestial Detail"
                                         className="h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
                                     />
-                                    <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700"></div>
+                                    <div className="absolute inset-0 bg-black/0 transition-colors duration-700"></div>
                                     <div className="absolute -bottom-10 right-[-20px] bg-luxury-cream p-12 shadow-2xl transition-transform duration-700 group-hover:translate-y-[-20px] z-10">
                                         <div className="transition-transform duration-500 group-hover:scale-110 origin-right">
                                             <h4 className="text-xl font-serif-display text-luxury-onyx mb-2 italic">Signature Style</h4>
@@ -144,7 +145,7 @@ export default function HomePage() {
                                         <img
                                             src={product.image}
                                             alt={product.name}
-                                            className="h-full w-full object-cover transition-all duration-[2000ms] group-hover:scale-110 group-hover:rotate-1 grayscale-[0.5] group-hover:grayscale-0"
+                                            className="h-full w-full object-cover transition-all duration-[2000ms] group-hover:scale-110 group-hover:rotate-1"
                                         />
 
                                         {/* Overlay Gradient */}
@@ -215,46 +216,13 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                {/* Section 3B: Extended Collection (Viewport Optimized) */}
+                {/* Section 3B: Extended Collection (Common Component) */}
                 <section className="bg-gray-50/50 min-h-[80vh] flex items-center px-6 lg:px-12 relative overflow-hidden">
                     <div className="mx-auto max-w-[1400px] w-full pt-10 lg:pt-14 pb-12 lg:pb-16">
-                        {/* Transition Divider / Header */}
-                        <div className="flex flex-col items-center mb-6 space-y-2">
-                            <span className="text-[9px] font-bold uppercase tracking-[0.5em] text-luxury-warm-grey">Bộ Sưu Tập Mở Rộng</span>
-                            <div className="w-8 h-[1px] bg-black/10"></div>
-                        </div>
-
-                        {/* Extended Grid */}
-                        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-4 mb-8">
-                            {[...PRODUCTS.slice(0, 4), ...PRODUCTS.slice(7)].map((product) => (
-                                <div key={product.id} className="group relative bg-white overflow-hidden transition-all duration-700 border border-black/5 hover:border-black/10 hover:shadow-lg">
-                                    <div className="bg-white p-3 relative z-10 flex flex-col h-full">
-                                        <div className="relative aspect-[4/5] w-full mb-3 overflow-hidden bg-gray-50">
-                                            <img src={product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                                        </div>
-
-                                        <div className="space-y-1 flex-1">
-                                            <div className="flex justify-between items-start gap-2">
-                                                <h3 className="text-[9px] font-bold uppercase tracking-widest text-luxury-onyx leading-tight line-clamp-1">{product.name}</h3>
-                                                <p className="text-xs font-serif-display font-bold text-luxury-onyx">{formatPrice(product.price)}</p>
-                                            </div>
-                                            <p className="text-[7px] text-luxury-slate-grey uppercase tracking-widest">{product.category}</p>
-                                        </div>
-
-                                        <div className="mt-3">
-                                            <Link href={`/cua-hang/${product.id}`} className="flex items-center justify-between group/link">
-                                                <span className="text-[7px] font-bold uppercase tracking-widest text-luxury-onyx border-b border-black/10 pb-1 group-hover/link:border-black transition-all">Chi tiết</span>
-                                                <span className="material-symbols-outlined text-[12px] text-black/40 group-hover/link:translate-x-1 transition-transform">east</span>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="absolute bottom-0 left-0 w-full overflow-hidden bg-luxury-black p-8 text-center bg-transparent">
-                        {/* Subtle Indicator */}
+                        <ProductSection
+                            title="Bộ Sưu Tập Mở Rộng"
+                            products={[...PRODUCTS.slice(0, 4), ...PRODUCTS.slice(7)]}
+                        />
                     </div>
                 </section>
 
@@ -328,7 +296,7 @@ export default function HomePage() {
                                 </div>
                                 {/* Layered Secondary Image */}
                                 <div className="absolute -bottom-12 -right-12 w-1/2 overflow-hidden border-[15px] border-white shadow-2xl hidden lg:block">
-                                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070" alt="Heritage Detail" className="w-full object-cover grayscale" />
+                                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070" alt="Heritage Detail" className="w-full object-cover" />
                                 </div>
                                 {/* Artistic Founding Year */}
                                 <div className="absolute -top-12 -left-12 text-[10rem] font-serif-display text-gold-100/40 select-none hidden lg:block">1886</div>
@@ -355,7 +323,7 @@ export default function HomePage() {
                                     <div className="flex items-center gap-4">
                                         <div className="flex -space-x-4">
                                             {[1, 2, 3].map(i => (
-                                                <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-gray-100 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                                                <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-gray-100 overflow-hidden transition-all duration-700">
                                                     <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="user" className="w-full h-full object-cover" />
                                                 </div>
                                             ))}

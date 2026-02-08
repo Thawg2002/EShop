@@ -42,7 +42,7 @@ export function OrderCard({ order }: OrderCardProps) {
                 <div className="flex gap-8 items-center">
                     <div className="flex -space-x-6 hover:space-x-4 transition-all duration-700">
                         {order.items.slice(0, 3).map((item, idx) => (
-                            <div key={idx} className="relative w-24 h-32 bg-white dark:bg-dark-surface border border-black/[0.03] shadow-md overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 transform hover:scale-105 hover:z-10">
+                            <div key={idx} className="relative w-24 h-32 bg-white dark:bg-dark-surface border border-black/[0.03] shadow-md overflow-hidden transition-all duration-1000 transform hover:scale-105 hover:z-10">
                                 <Image
                                     src={item.image}
                                     alt={item.name}
