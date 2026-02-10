@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { useCartStore } from '@/lib/store';
 
@@ -46,13 +47,13 @@ export function Navbar() {
     const isActive = (path: string) => pathname === path;
 
     const navLinks = [
-        { name: 'Phụ Nữ', href: '/cua-hang?cat=women' },
-        { name: 'Nam Giới', href: '/cua-hang?cat=men' },
-        { name: 'Đồ Da', href: '/cua-hang?cat=leather' },
-        { name: 'Trang Sức', href: '/cua-hang?cat=jewelry' },
-        { name: 'Phụ Kiện', href: '/cua-hang?cat=accessories' },
+        { name: 'Phụ Nữ', href: '/women' },
+        { name: 'Nam Giới', href: '/men' },
+        { name: 'Đồ Da', href: '/leather' },
+        { name: 'Trang Sức', href: '/jewelry' },
+        { name: 'Phụ Kiện', href: '/accessories' },
         { name: 'Tin Tức', href: '/tin-tuc' },
-        { name: 'Sale', href: '/cua-hang?cat=sale', isSale: true },
+        { name: 'Sale', href: '/sale', isSale: true },
         { name: 'Về XX.II', href: '/lien-he' },
     ];
 
@@ -103,17 +104,22 @@ export function Navbar() {
                                 <span className="text-[9px] tracking-[0.4em] text-white/70 mt-0.5 font-bold">Collective</span>
                             </Link>
                         ) : (
-                            <nav className="hidden lg:flex items-center gap-6">
+                            <nav className="hidden lg:flex items-center gap-10">
                                 {navLinks.map((link) => (
                                     <Link
                                         key={link.name}
                                         href={link.href}
-                                        className={`group relative text-[11px] font-medium tracking-[0.15em] transition-all hover:opacity-60 ${link.isSale
-                                                ? 'text-red-600 dark:text-red-500'
-                                                : (isScrolled || !isTransparentPage ? 'text-luxury-midnight dark:text-luxury-alabaster' : 'text-luxury-alabaster')
-                                            }`}
+                                        className={cn(
+                                            "text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-300 relative group py-2",
+                                            link.isSale ? "text-red-500" : "text-[#1d1d1f] hover:text-[#0071e3]",
+                                            isActive(link.href) ? "text-[#0071e3]" : ""
+                                        )}
                                     >
                                         {link.name}
+                                        <span className={cn(
+                                            "absolute bottom-0 left-0 w-full h-[1.5px] bg-[#0071e3] origin-left transition-transform duration-500",
+                                            isActive(link.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                                        )} />
                                     </Link>
                                 ))}
                             </nav>
@@ -166,11 +172,11 @@ export function Navbar() {
             {/* Mobile Menu Overlay */}
             <div className={`fixed inset-0 z-40 bg-[#fdf8f4] transform transition-transform duration-500 lg:hidden pt-32 px-10 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <nav className="flex flex-col gap-8">
-                    <Link href="/cua-hang?cat=women" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Phụ Nữ</Link>
-                    <Link href="/cua-hang?cat=men" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Nam Giới</Link>
-                    <Link href="/cua-hang?cat=leather" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Đồ Da</Link>
-                    <Link href="/cua-hang?cat=jewelry" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Trang Sức</Link>
-                    <Link href="/cam-hung" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Cảm Hứng</Link>
+                    <Link href="/women" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Phụ Nữ</Link>
+                    <Link href="/men" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Nam Giới</Link>
+                    <Link href="/leather" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Đồ Da</Link>
+                    <Link href="/jewelry" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Trang Sức</Link>
+                    <Link href="/tin-tuc" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Tin Tức</Link>
                     <Link href="/ho-so" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Hồ Sơ</Link>
                     <div className="mt-4 flex gap-6">
                         <Link href="/gio-hang" onClick={() => setIsMenuOpen(false)} className="text-xs font-bold uppercase tracking-widest text-black underline">Giỏ hàng</Link>

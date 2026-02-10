@@ -37,7 +37,7 @@ export default async function HomePage() {
                         <div className="h-1 w-20 bg-primary mt-4" />
                     </div>
                     <Link
-                        href="/shop"
+                        href="/cua-hang"
                         className="text-sm font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors flex items-center group"
                     >
                         Xem tất cả

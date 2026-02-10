@@ -1,4 +1,4 @@
-// app/thanhtoan/page.tsx
+// app/thanh-toan/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -48,7 +48,7 @@ export default function CheckoutPage() {
             toast.success('Đặt hàng thành công!');
 
             // Navigate to success page or profile
-            router.push(`/profile/orders/${res.data._id}`);
+            router.push(`/ho-so`);
         } catch (error: any) {
             toast.error(error.message || 'Lỗi khi đặt hàng');
         } finally {
@@ -60,7 +60,7 @@ export default function CheckoutPage() {
         return (
             <div className="min-h-screen pt-40 flex flex-col items-center justify-center">
                 <p className="text-muted-text mb-6">Giỏ hàng của bạn đang trống.</p>
-                <Link href="/shop" className="luxury-gradient text-white px-8 py-3 rounded-full uppercase text-xs font-bold">Quay lại cửa hàng</Link>
+                <Link href="/cua-hang" className="luxury-gradient text-white px-8 py-3 rounded-full uppercase text-xs font-bold">Quay lại cửa hàng</Link>
             </div>
         );
     }
@@ -220,7 +220,7 @@ export default function CheckoutPage() {
                                     disabled={isProcessing}
                                     className="w-full luxury-gradient text-white py-5 rounded-full font-bold uppercase tracking-widest text-xs flex items-center justify-center space-x-3 shadow-premium transition-all hover:-translate-y-1 active:scale-95 disabled:opacity-50"
                                 >
-                                    {isProcessing ? 'Đang lý đơn hàng...' : (
+                                    {isProcessing ? 'Đang xử lý đơn hàng...' : (
                                         <>
                                             <span>Xác nhận Đặt hàng</span>
                                             <CheckCircle size={18} />

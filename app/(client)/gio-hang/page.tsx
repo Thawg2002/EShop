@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/lib/use-cart';
 import { formatCurrency, getImageUrl } from '@/lib/utils';
-import { Minus, Plus, X, ShoppingBag, ArrowRight, Trash2, Heart } from 'lucide-react';
+import { Minus, Plus, X, ShoppingBag, ArrowRight, Trash2, Heart, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 
@@ -36,7 +36,7 @@ export default function CartPage() {
                     <p className="text-muted-text max-w-sm mx-auto">Hãy khám phá các sản phẩm tuyệt vời của chúng tôi và thêm chúng vào giỏ hàng.</p>
                 </div>
                 <Link
-                    href="/shop"
+                    href="/cua-hang"
                     className="luxury-gradient text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs"
                 >
                     Quay lại cửa hàng
@@ -82,7 +82,7 @@ export default function CartPage() {
                                             </div>
                                             <div className="space-y-1">
                                                 <h3 className="text-lg font-serif font-bold hover:text-primary transition-colors">
-                                                    <Link href={`/shop/${item.product.slug}`}>{item.product.name}</Link>
+                                                    <Link href={`/cua-hang/${item.product._id}`}>{item.product.name}</Link>
                                                 </h3>
                                                 {item.variant && (
                                                     <p className="text-xs text-muted-text">
@@ -173,7 +173,7 @@ export default function CartPage() {
                             </div>
 
                             <Link
-                                href="/thanhtoan"
+                                href="/thanh-toan"
                                 className="w-full luxury-gradient text-white py-5 rounded-full font-bold uppercase tracking-widest text-xs flex items-center justify-center space-x-3 shadow-premium transition-all hover:-translate-y-1 active:scale-95"
                             >
                                 <span>Tiến hành thanh toán</span>

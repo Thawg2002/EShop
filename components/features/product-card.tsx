@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Product } from '@/types';
-import { formatPrice, cn } from '@/lib/utils';
+import { formatCurrency, cn } from '@/lib/utils';
 import { MagicCard } from '@/components/magicui/magic-card';
 import { ShineBorder } from '@/components/magicui/shine-border';
 
@@ -34,7 +34,7 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
                 {/* Image Container */}
                 <div className="relative aspect-[4/5] w-full mb-3 overflow-hidden bg-gray-50 dark:bg-dark-bg">
                     <img
-                        src={product.image}
+                        src={product.thumbnail || product.images?.[0]}
                         alt={product.name}
                         className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
@@ -50,8 +50,8 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
                 {/* Info Container */}
                 <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500 italic">
-                            {product.category}
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+                            {typeof product.category === 'string' ? product.category : product.category.name}
                         </span>
                         <div className="flex gap-1.5">
                             {['#000000', '#71717a', '#d4d4d8'].map((color, i) => (
@@ -63,8 +63,8 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
                             ))}
                         </div>
                     </div>
-                    <Link href={`/cua-hang/${product.id}`} className="block group/link">
-                        <h3 className="font-serif text-xl font-medium text-zinc-950 dark:text-zinc-50 group-hover/link:text-zinc-600 dark:group-hover/link:text-zinc-400 transition-colors mb-2 tracking-tight">
+                    <Link href={`/${product.slug}`} className="block group/link">
+                        <h3 className="font-sans text-lg font-semibold text-zinc-950 dark:text-zinc-50 group-hover/link:text-primary transition-colors mb-2 tracking-tight">
                             {product.name}
                         </h3>
                     </Link>
@@ -73,7 +73,7 @@ export function ProductCard({ product, className = '' }: ProductCardProps) {
                             {product.description}
                         </p>
                         <Link
-                            href={`/cua-hang/${product.id}`}
+                            href={`/${product.slug}`}
                             className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-50 transition-colors border-b border-zinc-100 dark:border-zinc-800 pb-0.5"
                         >
                             Details

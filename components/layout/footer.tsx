@@ -18,7 +18,7 @@ export function Footer() {
                             XX.II<span className="text-primary italic">.</span>
                         </h2>
                         <p className="text-muted-text max-w-xs leading-relaxed">
-                            Elevating your lifestyle through curated fashion and timeless design. Join our collective journey.
+                            Nâng tầm phong cách sống qua thời trang được tuyển chọn và thiết kế vượt thời gian.
                         </p>
                         <div className="flex space-x-5">
                             <Link href="#" className="hover:text-primary transition-colors"><Facebook size={20} /></Link>
@@ -32,10 +32,10 @@ export function Footer() {
                     <div className="space-y-6">
                         <h4 className="text-sm uppercase tracking-widest font-bold text-primary">Khám phá</h4>
                         <ul className="space-y-4">
-                            <li><Link href="/shop" className="text-muted-text hover:text-off-white transition-colors">Cửa hàng</Link></li>
-                            <li><Link href="/collections" className="text-muted-text hover:text-off-white transition-colors">Bộ sưu tập</Link></li>
-                            <li><Link href="/blog" className="text-muted-text hover:text-off-white transition-colors">Nhật ký</Link></li>
-                            <li><Link href="/about" className="text-muted-text hover:text-off-white transition-colors">Về chúng tôi</Link></li>
+                            <li><Link href="/cua-hang" className="text-muted-text hover:text-off-white transition-colors">Cửa hàng</Link></li>
+                            <li><Link href="/tin-tuc" className="text-muted-text hover:text-off-white transition-colors">Tin tức</Link></li>
+                            <li><Link href="/nhat-ky" className="text-muted-text hover:text-off-white transition-colors">Nhật ký</Link></li>
+                            <li><Link href="/cam-hung" className="text-muted-text hover:text-off-white transition-colors">Cảm hứng</Link></li>
                         </ul>
                     </div>
 
@@ -43,10 +43,10 @@ export function Footer() {
                     <div className="space-y-6">
                         <h4 className="text-sm uppercase tracking-widest font-bold text-primary">Hỗ trợ</h4>
                         <ul className="space-y-4">
-                            <li><Link href="/contact" className="text-muted-text hover:text-off-white transition-colors">Liên hệ</Link></li>
-                            <li><Link href="/shipping" className="text-muted-text hover:text-off-white transition-colors">Giao hàng & Trả hàng</Link></li>
-                            <li><Link href="/privacy" className="text-muted-text hover:text-off-white transition-colors">Chính sách bảo mật</Link></li>
-                            <li><Link href="/faq" className="text-muted-text hover:text-off-white transition-colors">Câu hỏi thường gặp</Link></li>
+                            <li><Link href="/lien-he" className="text-muted-text hover:text-off-white transition-colors">Liên hệ</Link></li>
+                            <li><Link href="/lien-he" className="text-muted-text hover:text-off-white transition-colors">Giao hàng & Trả hàng</Link></li>
+                            <li><Link href="/chinh-sach-bao-mat" className="text-muted-text hover:text-off-white transition-colors">Chính sách bảo mật</Link></li>
+                            <li><Link href="/lien-he" className="text-muted-text hover:text-off-white transition-colors">Câu hỏi thường gặp</Link></li>
                         </ul>
                     </div>
 
