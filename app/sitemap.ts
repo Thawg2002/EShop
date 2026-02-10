@@ -6,7 +6,7 @@ const baseUrl =
 async function getProducts() {
   try {
     const apiUrl =
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+      process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
     const res = await fetch(`${apiUrl}/products?limit=500&status=active`, {
       next: { revalidate: 3600 },
     });
@@ -21,7 +21,7 @@ async function getProducts() {
 async function getBlogPosts() {
   try {
     const apiUrl =
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+      process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
     const res = await fetch(`${apiUrl}/posts?limit=100`, {
       next: { revalidate: 3600 },
     });

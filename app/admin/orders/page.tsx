@@ -93,89 +93,106 @@ export default function AdminOrdersPage() {
     };
 
     return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Đơn hàng</h1>
-                    <p className="text-zinc-500">Theo dõi và quản lý đơn đặt hàng từ khách hàng</p>
+        <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="space-y-1">
+                    <h1 className="text-4xl font-black tracking-tighter">Đơn hàng</h1>
+                    <p className="text-zinc-500 font-medium">Theo dõi và quản lý các giao dịch từ khách hàng</p>
+                </div>
+                <div className="flex gap-2">
+                    <Button variant="outline" className="rounded-2xl border-zinc-200 font-bold h-12 px-6">Báo cáo đơn</Button>
+                    <Button className="rounded-2xl bg-black text-white hover:bg-zinc-800 font-bold h-12 px-6 shadow-lg shadow-black/10 transition-all active:scale-95">Xuất Excel</Button>
                 </div>
             </div>
 
             {/* Filters */}
             <div className="flex flex-col md:flex-row gap-4">
-                <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={18} />
+                <div className="relative flex-1 group">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors" size={20} />
                     <Input
                         placeholder="Tìm theo mã đơn hoặc tên khách..."
-                        className="pl-10"
+                        className="pl-12 h-12 bg-white border-none shadow-sm rounded-2xl focus-visible:ring-black transition-all"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
-                    <SelectTrigger className="w-full md:w-[200px]">
+                    <SelectTrigger className="w-full md:w-[240px] h-12 rounded-2xl border-none shadow-sm bg-white font-bold px-6 focus:ring-black">
                         <SelectValue placeholder="Tất cả trạng thái" />
                     </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="all">Tất cả trạng thái</SelectItem>
-                        <SelectItem value="pending">Chờ xử lý</SelectItem>
-                        <SelectItem value="processing">Đang xử lý</SelectItem>
-                        <SelectItem value="shipped">Đang giao</SelectItem>
-                        <SelectItem value="delivered">Thành công</SelectItem>
-                        <SelectItem value="cancelled">Đã hủy</SelectItem>
+                    <SelectContent className="rounded-2xl border-none shadow-2xl p-1 bg-white/95 backdrop-blur-xl">
+                        <SelectItem value="all" className="rounded-xl p-3 font-medium">Tất cả trạng thái</SelectItem>
+                        <SelectItem value="pending" className="rounded-xl p-3 font-medium text-orange-600">Chờ xử lý</SelectItem>
+                        <SelectItem value="processing" className="rounded-xl p-3 font-medium text-blue-600">Đang xử lý</SelectItem>
+                        <SelectItem value="shipped" className="rounded-xl p-3 font-medium text-purple-600">Đang giao</SelectItem>
+                        <SelectItem value="delivered" className="rounded-xl p-3 font-medium text-green-600">Thành công</SelectItem>
+                        <SelectItem value="cancelled" className="rounded-xl p-3 font-medium text-red-600">Đã hủy</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
 
             {/* Table */}
-            <div className="bg-white border rounded-lg overflow-hidden">
+            <div className="bg-white border-none shadow-sm rounded-[2rem] overflow-hidden">
                 <Table>
-                    <TableHeader className="bg-zinc-50">
-                        <TableRow>
-                            <TableHead>Mã đơn</TableHead>
-                            <TableHead>Khách hàng</TableHead>
-                            <TableHead>Ngày đặt</TableHead>
-                            <TableHead>Tổng tiền</TableHead>
-                            <TableHead>Trạng thái</TableHead>
-                            <TableHead className="text-right">Thao tác</TableHead>
+                    <TableHeader className="bg-zinc-50/50">
+                        <TableRow className="hover:bg-transparent border-none">
+                            <TableHead className="pl-8 h-14 uppercase text-[10px] font-black tracking-widest text-zinc-400">Mã đơn</TableHead>
+                            <TableHead className="h-14 uppercase text-[10px] font-black tracking-widest text-zinc-400">Khách hàng</TableHead>
+                            <TableHead className="h-14 uppercase text-[10px] font-black tracking-widest text-zinc-400">Ngày đặt</TableHead>
+                            <TableHead className="h-14 uppercase text-[10px] font-black tracking-widest text-zinc-400">Tổng tiền</TableHead>
+                            <TableHead className="h-14 uppercase text-[10px] font-black tracking-widest text-zinc-400">Trạng thái</TableHead>
+                            <TableHead className="pr-8 h-14 uppercase text-[10px] font-black tracking-widest text-zinc-400 text-right">Thao tác</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {ordersLoading ? (
                             <TableRow>
-                                <TableCell colSpan={6} className="text-center py-10 text-zinc-500">Đang tải...</TableCell>
+                                <TableCell colSpan={6} className="text-center py-20 text-zinc-400 italic font-medium">Đang tải...</TableCell>
                             </TableRow>
                         ) : filteredOrders.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={6} className="text-center py-10 text-zinc-500">Không tìm thấy đơn hàng</TableCell>
+                                <TableCell colSpan={6} className="text-center py-20 text-zinc-400 italic font-medium">Không tìm thấy đơn hàng</TableCell>
                             </TableRow>
                         ) : (
                             filteredOrders.map((order) => {
                                 const statusInfo = getStatusInfo(order.status);
                                 return (
-                                    <TableRow key={order._id} className="hover:bg-zinc-50">
-                                        <TableCell className="font-mono text-xs font-bold uppercase">
-                                            #{order._id.slice(-6)}
+                                    <TableRow key={order._id} className="hover:bg-zinc-50/50 border-zinc-50 transition-colors duration-200 group">
+                                        <TableCell className="pl-8">
+                                            <Badge variant="outline" className="font-mono text-[10px] font-black border-zinc-200 bg-white shadow-sm uppercase">
+                                                #{order._id.slice(-6).toUpperCase()}
+                                            </Badge>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="font-medium">{(order.user as any)?.name || 'Khách vãng lai'}</div>
-                                            <div className="text-xs text-zinc-500">{(order.user as any)?.email}</div>
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-2xl bg-zinc-100 flex items-center justify-center text-xs font-black shadow-inner border border-zinc-50">
+                                                    {(order.user as any)?.name?.slice(0, 1).toUpperCase() || 'K'}
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold text-zinc-900 group-hover:text-black transition-colors">{(order.user as any)?.name || 'Khách vãng lai'}</div>
+                                                    <div className="text-[10px] font-bold text-zinc-400 tracking-tight">{(order.user as any)?.email}</div>
+                                                </div>
+                                            </div>
                                         </TableCell>
-                                        <TableCell className="text-zinc-500">
-                                            {order.createdAt ? new Date(order.createdAt).toLocaleDateString('vi-VN') : 'N/A'}
+                                        <TableCell className="text-zinc-500 font-bold text-xs uppercase">
+                                            {order.createdAt ? new Date(order.createdAt).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—'}
                                         </TableCell>
-                                        <TableCell className="font-bold text-black">
+                                        <TableCell className="font-black text-black">
                                             {formatCurrency(order.pricing?.total)}
                                         </TableCell>
                                         <TableCell>
-                                            <Badge className={cn("gap-1.5", statusInfo.color)}>
-                                                <statusInfo.icon size={12} />
+                                            <Badge className={cn(
+                                                "gap-1.5 px-3 py-1 rounded-full font-bold text-[10px] uppercase tracking-wider shadow-sm",
+                                                statusInfo.color.replace('bg-', 'border-').replace('100', '200'),
+                                                statusInfo.color
+                                            )}>
+                                                <statusInfo.icon size={12} strokeWidth={3} />
                                                 {statusInfo.label}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell className="text-right">
-                                            <Button variant="ghost" size="icon" onClick={() => handleViewOrder(order)}>
-                                                <Eye size={18} />
+                                        <TableCell className="pr-8 text-right">
+                                            <Button variant="ghost" size="icon" className="rounded-xl hover:bg-zinc-100 transition-colors" onClick={() => handleViewOrder(order)}>
+                                                <Eye size={20} className="text-zinc-400 hover:text-black transition-colors" />
                                             </Button>
                                         </TableCell>
                                     </TableRow>
@@ -188,125 +205,181 @@ export default function AdminOrdersPage() {
 
             {/* Order Detail Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="max-w-4xl max-h-[90dvh] overflow-y-auto">
-                    <DialogHeader>
-                        <DialogTitle className="flex items-center gap-2">
-                            Chi tiết đơn hàng <span className="text-zinc-400 font-mono">#{selectedOrder?._id.slice(-8).toUpperCase()}</span>
-                        </DialogTitle>
-                        <DialogDescription>
-                            Xem thông tin chi tiết và cập nhật trạng thái đơn hàng.
-                        </DialogDescription>
+                <DialogContent className="max-w-6xl p-0 overflow-hidden bg-white border-none shadow-2xl rounded-[3rem] max-h-[90dvh]">
+                    <DialogHeader className="px-10 pt-10 pb-6 border-b border-zinc-50 flex flex-row items-center justify-between">
+                        <div>
+                            <DialogTitle className="flex items-center gap-3 text-3xl font-black tracking-tighter">
+                                Chi tiết đơn hàng
+                                <span className="text-zinc-400 font-mono text-xl opacity-50 tracking-normal">#{selectedOrder?._id.slice(-8).toUpperCase()}</span>
+                            </DialogTitle>
+                            <DialogDescription className="text-zinc-400 font-medium text-base mt-1">
+                                Xem thông tin vận chuyển, sản phẩm và cập nhật trạng thái đơn hàng.
+                            </DialogDescription>
+                        </div>
+                        {selectedOrder && (
+                            <Badge className={cn(
+                                "px-6 py-2 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg",
+                                getStatusInfo(selectedOrder.status).color
+                            )}>
+                                {getStatusInfo(selectedOrder.status).label}
+                            </Badge>
+                        )}
                     </DialogHeader>
 
                     {selectedOrder && (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-4">
-                            {/* Items List */}
-                            <div className="md:col-span-2 space-y-4">
-                                <div className="border rounded-lg overflow-hidden">
-                                    <div className="bg-zinc-50 px-4 py-2 border-b font-medium text-sm">Sản phẩm đã đặt</div>
-                                    <div className="divide-y">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-y-auto max-h-[calc(90dvh-140px)]">
+                            {/* Items List - Column 1 (Large) */}
+                            <div className="lg:col-span-7 p-10 space-y-8 bg-zinc-50/30 border-r border-zinc-50">
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between px-2">
+                                        <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400">Danh mục sản phẩm</h3>
+                                        <span className="text-xs font-bold text-zinc-500 bg-white px-3 py-1 rounded-full shadow-sm">
+                                            {selectedOrder.items?.length} sản phẩm
+                                        </span>
+                                    </div>
+                                    <div className="space-y-4">
                                         {selectedOrder.items?.map((item: any, idx: number) => (
-                                            <div key={idx} className="p-4 flex gap-4">
-                                                <div className="w-16 h-20 bg-zinc-100 rounded overflow-hidden flex-shrink-0">
+                                            <div key={idx} className="p-4 bg-white rounded-3xl flex gap-6 shadow-sm border border-zinc-50 hover:shadow-md transition-shadow">
+                                                <div className="w-20 h-24 bg-zinc-100 rounded-2xl overflow-hidden flex-shrink-0 shadow-inner border border-zinc-50">
                                                     <img
                                                         src={getImageUrl(item.product?.thumbnail || item.product?.images?.[0])}
                                                         alt={item.product?.name}
                                                         className="w-full h-full object-cover"
                                                     />
                                                 </div>
-                                                <div className="flex-1 min-w-0">
-                                                    <p className="font-bold text-sm truncate">{item.product?.name}</p>
-                                                    <div className="flex gap-2 mt-1">
-                                                        {item.color && <Badge variant="outline" className="text-[10px]">{item.color}</Badge>}
-                                                        {item.size && <Badge variant="outline" className="text-[10px]">{item.size}</Badge>}
+                                                <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                                    <p className="font-black text-lg text-zinc-900 leading-tight truncate">{item.product?.name}</p>
+                                                    <div className="flex gap-2 mt-2">
+                                                        {item.color && (
+                                                            <Badge variant="outline" className="text-[10px] font-bold border-zinc-100 bg-zinc-50/50 uppercase">
+                                                                Màu: {item.color}
+                                                            </Badge>
+                                                        )}
+                                                        {item.size && (
+                                                            <Badge variant="outline" className="text-[10px] font-bold border-zinc-100 bg-zinc-50/50 uppercase">
+                                                                Size: {item.size}
+                                                            </Badge>
+                                                        )}
                                                     </div>
-                                                    <div className="flex justify-between items-center mt-2">
-                                                        <span className="text-zinc-500 text-sm">Số lượng: {item.quantity}</span>
-                                                        <span className="font-bold">{formatCurrency(item.price)}</span>
+                                                    <div className="flex justify-between items-end mt-4">
+                                                        <span className="text-zinc-400 font-bold text-xs uppercase tracking-wider">Số lượng: <span className="text-black">{item.quantity}</span></span>
+                                                        <span className="font-black text-lg text-black">{formatCurrency(item.price)}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="bg-zinc-50 p-4 space-y-2">
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-zinc-500">Tạm tính</span>
-                                            <span>{formatCurrency(selectedOrder.pricing?.subtotal)}</span>
+                                </div>
+
+                                {/* Pricing Summary */}
+                                <div className="bg-white p-8 rounded-[2.5rem] space-y-4 border border-zinc-50 shadow-sm relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform">
+                                        <CreditCard size={100} />
+                                    </div>
+                                    <div className="flex justify-between text-sm font-bold text-zinc-500">
+                                        <span>Tổng giá sản phẩm</span>
+                                        <span className="text-zinc-900">{formatCurrency(selectedOrder.pricing?.subtotal)}</span>
+                                    </div>
+                                    <div className="flex justify-between text-sm font-bold text-zinc-500">
+                                        <span>Phí giao hàng</span>
+                                        <span className="text-zinc-900">{formatCurrency(selectedOrder.pricing?.shippingFee)}</span>
+                                    </div>
+                                    {selectedOrder.pricing?.discount > 0 && (
+                                        <div className="flex justify-between text-sm font-bold text-red-500 bg-red-50 p-3 rounded-2xl">
+                                            <span>Ưu đãi giảm giá</span>
+                                            <span>-{formatCurrency(selectedOrder.pricing?.discount)}</span>
                                         </div>
-                                        <div className="flex justify-between text-sm">
-                                            <span className="text-zinc-500">Phí vận chuyển</span>
-                                            <span>{formatCurrency(selectedOrder.pricing?.shippingFee)}</span>
-                                        </div>
-                                        {selectedOrder.pricing?.discount > 0 && (
-                                            <div className="flex justify-between text-sm text-red-500">
-                                                <span>Giảm giá</span>
-                                                <span>-{formatCurrency(selectedOrder.pricing?.discount)}</span>
-                                            </div>
-                                        )}
-                                        <div className="flex justify-between font-bold text-lg pt-2 border-t">
-                                            <span>Tổng cộng</span>
-                                            <span className="text-black">{formatCurrency(selectedOrder.pricing?.total)}</span>
-                                        </div>
+                                    )}
+                                    <div className="flex justify-between font-black text-2xl pt-4 border-t border-zinc-50">
+                                        <span className="tracking-tighter uppercase text-zinc-900">Tổng thanh toán</span>
+                                        <span className="text-black font-black">{formatCurrency(selectedOrder.pricing?.total)}</span>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Sidebar Info */}
-                            <div className="space-y-6">
-                                {/* Status Update */}
-                                <div className="space-y-2">
-                                    <Label>Trạng thái đơn hàng</Label>
+                            {/* Info Sidebar - Column 2 (Small) */}
+                            <div className="lg:col-span-5 p-10 space-y-10 bg-white scrollbar-hide">
+                                {/* Status Update Section */}
+                                <div className="space-y-4">
+                                    <Label className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400 ml-1">Cập nhật trạng thái</Label>
                                     <Select
                                         value={selectedOrder.status}
                                         onValueChange={handleStatusChange}
                                     >
-                                        <SelectTrigger className={cn("font-bold", getStatusInfo(selectedOrder.status).color)}>
+                                        <SelectTrigger className={cn(
+                                            "h-14 rounded-2xl border-none shadow-lg text-base font-black px-6 focus:ring-black",
+                                            getStatusInfo(selectedOrder.status).color
+                                        )}>
                                             <SelectValue />
                                         </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="pending">Chờ xử lý</SelectItem>
-                                            <SelectItem value="processing">Đang xử lý</SelectItem>
-                                            <SelectItem value="shipped">Đang giao</SelectItem>
-                                            <SelectItem value="delivered">Thành công</SelectItem>
-                                            <SelectItem value="cancelled">Hủy đơn</SelectItem>
+                                        <SelectContent className="rounded-2xl border-none shadow-2xl p-2 bg-white/95 backdrop-blur-xl">
+                                            <SelectItem value="pending" className="rounded-xl p-3 font-bold text-orange-600">CHỜ XỬ LÝ</SelectItem>
+                                            <SelectItem value="processing" className="rounded-xl p-3 font-bold text-blue-600">ĐANG XỬ LÝ</SelectItem>
+                                            <SelectItem value="shipped" className="rounded-xl p-3 font-bold text-purple-600">ĐANG GIAO</SelectItem>
+                                            <SelectItem value="delivered" className="rounded-xl p-3 font-bold text-green-600">THÀNH CÔNG</SelectItem>
+                                            <SelectItem value="cancelled" className="rounded-xl p-3 font-bold text-red-600">YÊU CẦU HỦY</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
 
                                 {/* Customer Info */}
-                                <div className="border rounded-lg p-4 space-y-3">
-                                    <div className="flex items-center gap-2 font-bold text-sm">
-                                        <User size={16} /> Thông tin khách hàng
-                                    </div>
-                                    <div className="text-sm space-y-1">
-                                        <p className="font-medium">{(selectedOrder.user as any)?.name}</p>
-                                        <p className="text-zinc-500">{(selectedOrder.user as any)?.email}</p>
-                                        <p className="text-zinc-500">{(selectedOrder.user as any)?.phone}</p>
+                                <div className="space-y-4">
+                                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400 ml-1 flex items-center gap-2">
+                                        <User size={14} className="text-zinc-300" /> Thông tin khách
+                                    </h3>
+                                    <div className="bg-zinc-50/50 p-6 rounded-3xl border border-zinc-50 space-y-4">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-xl font-black">
+                                                {(selectedOrder.user as any)?.name?.slice(0, 1).toUpperCase()}
+                                            </div>
+                                            <div>
+                                                <p className="font-black text-lg">{(selectedOrder.user as any)?.name}</p>
+                                                <p className="text-xs font-bold text-zinc-400">Thành viên đối tác</p>
+                                            </div>
+                                        </div>
+                                        <div className="space-y-2 pt-2 border-t border-white">
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-zinc-500 font-bold">Email</span>
+                                                <span className="font-bold">{(selectedOrder.user as any)?.email}</span>
+                                            </div>
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-zinc-500 font-bold">Số điện thoại</span>
+                                                <span className="font-bold">{(selectedOrder.user as any)?.phone || '—'}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* Shipping Info */}
-                                <div className="border rounded-lg p-4 space-y-3">
-                                    <div className="flex items-center gap-2 font-bold text-sm">
-                                        <Truck size={16} /> Địa chỉ giao hàng
-                                    </div>
-                                    <div className="text-sm">
-                                        <p className="font-medium">{selectedOrder.shippingAddress?.fullName}</p>
-                                        <p className="text-zinc-500 mt-1">
-                                            {selectedOrder.shippingAddress?.street}, {selectedOrder.shippingAddress?.ward}, {selectedOrder.shippingAddress?.district}, {selectedOrder.shippingAddress?.province}
+                                <div className="space-y-4">
+                                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400 ml-1 flex items-center gap-2">
+                                        <Truck size={14} className="text-zinc-300" /> Giao hàng đến
+                                    </h3>
+                                    <div className="bg-zinc-50/50 p-6 rounded-3xl border border-zinc-50">
+                                        <p className="font-black text-black">🏠 {selectedOrder.shippingAddress?.fullName}</p>
+                                        <p className="text-sm font-bold text-zinc-500 mt-3 leading-relaxed">
+                                            {selectedOrder.shippingAddress?.street}, <br />
+                                            {selectedOrder.shippingAddress?.ward}, {selectedOrder.shippingAddress?.district}, <br />
+                                            <span className="text-black font-black uppercase tracking-tight">{selectedOrder.shippingAddress?.province}</span>
                                         </p>
                                     </div>
                                 </div>
 
-                                {/* Payment Info */}
-                                <div className="border rounded-lg p-4 space-y-3">
-                                    <div className="flex items-center gap-2 font-bold text-sm">
-                                        <CreditCard size={16} /> Thanh toán
-                                    </div>
-                                    <div className="text-sm flex justify-between items-center">
-                                        <span className="capitalize">{selectedOrder.payment?.method || 'COD'}</span>
-                                        <Badge variant={selectedOrder.payment?.status === 'paid' ? 'secondary' : 'outline'} className={selectedOrder.payment?.status === 'paid' ? 'bg-green-100 text-green-700' : ''}>
-                                            {selectedOrder.payment?.status === 'paid' ? 'Đã trả' : 'Chờ thu'}
+                                {/* Payment Status */}
+                                <div className="space-y-4">
+                                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400 ml-1 flex items-center gap-2">
+                                        <CreditCard size={14} className="text-zinc-300" /> Thanh toán
+                                    </h3>
+                                    <div className="bg-zinc-900 p-6 rounded-3xl flex items-center justify-between text-white shadow-xl shadow-black/10">
+                                        <div>
+                                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Phương thức</p>
+                                            <p className="font-black uppercase">{selectedOrder.payment?.method || 'COD'}</p>
+                                        </div>
+                                        <Badge variant="outline" className={cn(
+                                            "rounded-xl px-4 py-1 font-black",
+                                            selectedOrder.payment?.status === 'paid' ? "bg-green-500 text-white border-none" : "border-zinc-700 text-zinc-500"
+                                        )}>
+                                            {selectedOrder.payment?.status === 'paid' ? 'ĐÃ TRẢ' : 'KHI NHẬN HÀNG'}
                                         </Badge>
                                     </div>
                                 </div>
@@ -314,8 +387,10 @@ export default function AdminOrdersPage() {
                         </div>
                     )}
 
-                    <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Đóng</Button>
+                    <DialogFooter className="px-10 py-6 bg-zinc-50 border-t border-zinc-100">
+                        <Button variant="outline" onClick={() => setIsDialogOpen(false)} className="rounded-2xl h-12 px-8 font-black border-zinc-200 bg-white hover:bg-zinc-100 transition-all">
+                            Đóng cửa sổ
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

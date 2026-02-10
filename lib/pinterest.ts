@@ -65,7 +65,7 @@ export async function exchangeCodeForToken(
   const clientSecret = process.env.PINTEREST_APP_SECRET;
   const redirectUri =
     process.env.PINTEREST_REDIRECT_URI ||
-    "http://localhost:3000/api/auth/pinterest/callback";
+    "http://localhost:5173/api/auth/pinterest/callback";
 
   const response = await fetch("https://api.pinterest.com/v5/oauth/token", {
     method: "POST",

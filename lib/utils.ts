@@ -15,7 +15,8 @@ export function formatCurrency(amount: number) {
 export function getImageUrl(path: string | undefined): string {
   if (!path) return "/placeholder-image.png"; // Make sure this exists or use a better default
   if (path.startsWith("http")) return path;
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
   return `${baseUrl}${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
