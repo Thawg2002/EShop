@@ -4,8 +4,12 @@ import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 
 export const metadata: Metadata = {
-    title: 'Nhật Ký | XX.II Collective',
-    description: 'Stories of craftsmanship, heritage, and the art of modern living.',
+    title: 'Nhật Ký',
+    description: 'Stories of craftsmanship, heritage, and the art of modern living. Câu chuyện về nghệ thuật thời trang, quá trình sáng tạo và cảm hứng đằng sau mỗi thiết kế của XX.II Collective.',
+    openGraph: {
+        title: 'Nhật Ký | XX.II Collective',
+        description: 'Câu chuyện về nghệ thuật thời trang và quá trình sáng tạo.',
+    },
 };
 
 const articles = [

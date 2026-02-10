@@ -18,3 +18,11 @@ export function getImageUrl(path: string | undefined): string {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
   return `${baseUrl}${path.startsWith("/") ? "" : "/"}${path}`;
 }
+
+export function getStaggerDelay(
+  index: number,
+  step: number = 0.1,
+  base: number = 0,
+) {
+  return base + index * step;
+}

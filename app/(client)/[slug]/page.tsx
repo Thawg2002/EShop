@@ -30,6 +30,20 @@ export async function generateMetadata(
     const { type, data } = resolved;
     const previousImages = (await parent).openGraph?.images || [];
 
+    if (slug === 'cua-hang') {
+        return {
+            title: 'Cửa Hàng',
+            description: 'Khám phá bộ sưu tập thời trang cao cấp XX.II Collective. Chất lượng vượt trội, thiết kế vượt thời gian cho phong cách sống hiện đại.',
+            openGraph: {
+                title: 'Cửa Hàng | XX.II Collective',
+                description: 'Khám phá bộ sưu tập thời trang cao cấp XX.II Collective.',
+            },
+            alternates: {
+                canonical: '/cua-hang',
+            },
+        };
+    }
+
     if (type === 'product') {
         const product = data;
         return {
@@ -109,6 +123,29 @@ export async function generateMetadata(
 
 export default async function DynamicSlugPage({ params }: Props) {
     const { slug } = await params;
+
+    if (slug === 'cua-hang') {
+        let products = [];
+        let categories = [];
+        try {
+            const prodRes = await apiClient.get('/products', { params: { limit: 50 } });
+            products = prodRes.data.products || [];
+            const catRes = await apiClient.get('/categories');
+            categories = catRes.data || [];
+        } catch (error) {
+            console.error("Failed to fetch shop data:", error);
+        }
+
+        const shopCategory = {
+            name: 'Tất Cả Sản Phẩm',
+            description: 'Bộ sưu tập mới nhất',
+            slug: 'cua-hang',
+            children: categories.filter((c: any) => !c.parent)
+        };
+
+        return <ProductListingView category={shopCategory as any} products={products} />;
+    }
+
     const resolved = await getSlugData(slug);
 
     if (!resolved) {

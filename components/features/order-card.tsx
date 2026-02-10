@@ -10,16 +10,16 @@ interface OrderCardProps {
 export function OrderCard({ order }: OrderCardProps) {
     const getStatusStyles = (status: Order['status']) => {
         switch (status) {
-            case 'Delivered':
+            case 'delivered':
                 return 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20';
-            case 'Processing':
+            case 'processing':
                 return 'bg-amber-500/10 text-amber-600 border-amber-500/20';
-            case 'Shipped':
+            case 'shipped':
                 return 'bg-blue-500/10 text-blue-600 border-blue-500/20';
-            case 'Cancelled':
+            case 'cancelled':
                 return 'bg-rose-500/10 text-rose-600 border-rose-500/20';
-            case 'Returned':
-                return 'bg-slate-500/10 text-slate-600 border-slate-500/20';
+            case 'pending':
+                return 'bg-gray-500/10 text-gray-600 border-gray-500/20';
             default:
                 return 'bg-gray-500/10 text-gray-600 border-gray-500/20';
         }
@@ -27,11 +27,11 @@ export function OrderCard({ order }: OrderCardProps) {
 
     const getStatusText = (status: Order['status']) => {
         switch (status) {
-            case 'Processing': return 'Đang xử lý';
-            case 'Shipped': return 'Đang giao hàng';
-            case 'Delivered': return 'Giao thành công';
-            case 'Cancelled': return 'Đã hủy';
-            case 'Returned': return 'Hoàn trả';
+            case 'processing': return 'Đang xử lý';
+            case 'shipped': return 'Đang giao hàng';
+            case 'delivered': return 'Giao thành công';
+            case 'cancelled': return 'Đã hủy';
+            case 'pending': return 'Chờ chờ xử lý';
             default: return status;
         }
     };
@@ -43,17 +43,17 @@ export function OrderCard({ order }: OrderCardProps) {
                 <div className="flex items-center gap-8">
                     <div className="flex flex-col">
                         <span className="text-[10px] font-bold text-luxury-slate-grey/40 uppercase tracking-widest mb-1">Đơn hàng</span>
-                        <span className="text-sm font-bold text-dark-text dark:text-dark-text-primary tracking-tight font-mono">{order.id}</span>
+                        <span className="text-sm font-bold text-dark-text dark:text-dark-text-primary tracking-tight font-mono">{order.orderNumber}</span>
                     </div>
                     <div className="hidden md:flex flex-col border-l border-black/[0.05] dark:border-white/[0.05] pl-8">
                         <span className="text-[10px] font-bold text-luxury-slate-grey/40 uppercase tracking-widest mb-1">Ngày mua</span>
-                        <span className="text-sm font-medium text-dark-text/80 dark:text-dark-text-secondary">{order.date}</span>
+                        <span className="text-sm font-medium text-dark-text/80 dark:text-dark-text-secondary">{new Date(order.createdAt).toLocaleDateString('vi-VN')}</span>
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
                     <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${getStatusStyles(order.status)} animate-in fade-in zoom-in duration-500`}>
                         <span className="relative flex h-2 w-2">
-                            {(order.status === 'Processing' || order.status === 'Shipped') && (
+                            {(order.status === 'processing' || order.status === 'shipped') && (
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-current opacity-75"></span>
                             )}
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-current"></span>
@@ -80,8 +80,8 @@ export function OrderCard({ order }: OrderCardProps) {
                                         }}
                                     >
                                         <Image
-                                            src={item.image}
-                                            alt={item.name}
+                                            src={item.snapshot.image || '/placeholder-product.png'}
+                                            alt={item.snapshot.name}
                                             fill
                                             className="object-cover"
                                         />
@@ -102,13 +102,13 @@ export function OrderCard({ order }: OrderCardProps) {
 
                     <div className="flex flex-col">
                         <h3 className="text-xl font-bold text-dark-text dark:text-dark-text-primary tracking-tight mb-2">
-                            {order.items.length > 0 ? order.items[0].name : 'Đơn hàng trống'}
+                            {order.items.length > 0 ? order.items[0].snapshot.name : 'Đơn hàng trống'}
                             {order.items.length > 1 && <span className="text-luxury-slate-grey/40 font-medium ml-2">& {order.items.length - 1} sản phẩm khác</span>}
                         </h3>
                         <div className="flex items-center gap-4 text-xs font-medium text-luxury-slate-grey/60">
                             <span className="flex items-center gap-1">
                                 <span className="material-symbols-outlined text-sm">payments</span>
-                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.total)}
+                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.pricing.total)}
                             </span>
                             <span className="w-1 h-1 rounded-full bg-black/10"></span>
                             <span>{order.status === 'Processing' ? 'Dự kiến 2-3 ngày' : 'Giao qua Express'}</span>
