@@ -42,26 +42,26 @@ export function AdminHeader() {
                 {/* User Profile */}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <div className="flex items-center gap-3 cursor-pointer pl-2">
+                        <div className="flex items-center gap-3 cursor-pointer pl-2 group">
                             <div className="text-right hidden sm:block">
-                                <p className="text-sm font-semibold text-zinc-900 leading-none">Thomas Anree</p>
-                                <p className="text-xs text-zinc-500 mt-1">UX Designer</p>
+                                <p className="text-sm font-semibold text-zinc-900 leading-none group-hover:text-primary transition-colors">Thomas Anree</p>
+                                <p className="text-xs text-zinc-500 mt-1 uppercase tracking-widest font-bold">Admin</p>
                             </div>
                             <Avatar>
                                 <AvatarImage src="https://github.com/shadcn.png" />
-                                <AvatarFallback>TA</AvatarFallback>
+                                <AvatarFallback>AD</AvatarFallback>
                             </Avatar>
-                            <span className="material-symbols-outlined text-zinc-400 text-lg">expand_more</span>
+                            <span className="material-symbols-outlined text-zinc-400 text-lg group-hover:text-zinc-600 transition-colors">expand_more</span>
                         </div>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-56">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuContent align="end" className="w-56 bg-white border-zinc-200">
+                        <DropdownMenuLabel className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest">My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem>Billing</DropdownMenuItem>
-                        <DropdownMenuItem>Settings</DropdownMenuItem>
+                        <DropdownMenuItem className="focus:bg-zinc-50 cursor-pointer">Profile</DropdownMenuItem>
+                        <DropdownMenuItem className="focus:bg-zinc-50 cursor-pointer">Billing</DropdownMenuItem>
+                        <DropdownMenuItem className="focus:bg-zinc-50 cursor-pointer">Settings</DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-red-500">Log out</DropdownMenuItem>
+                        <DropdownMenuItem className="text-red-500 focus:bg-red-50 focus:text-red-600 cursor-pointer">Log out</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>

@@ -125,13 +125,7 @@ export default function RootLayout({
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased text-[#1d1d1f] bg-white`}>
                 <Providers>
-                    <div className="flex flex-col min-h-screen">
-                        <Navbar />
-                        <main className="flex-grow">
-                            {children}
-                        </main>
-                        <Footer />
-                    </div>
+                    {children}
                 </Providers>
             </body>
         </html>

@@ -89,14 +89,14 @@ export function AdminSidebar({ className }: AdminSidebarProps) {
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed lg:sticky top-0 left-0 z-50 h-[100dvh] bg-zinc-950 text-white transition-all duration-300 border-r border-zinc-800",
+                    "fixed lg:sticky top-0 left-0 z-50 h-[100dvh] bg-black text-white transition-all duration-300 border-r border-white/5 shadow-2xl",
                     collapsed ? "w-[70px]" : "w-[260px]",
                     mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
                     className
                 )}
             >
                 {/* Header */}
-                <div className="flex items-center justify-between h-16 px-4 border-b border-zinc-800">
+                <div className="flex items-center justify-between h-16 px-4 border-b border-white/5">
                     {!collapsed && (
                         <Link href="/admin" className="flex items-center gap-2">
                             <div className="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold font-serif text-xl">
@@ -141,10 +141,10 @@ export function AdminSidebar({ className }: AdminSidebarProps) {
                                 href={item.href}
                                 onClick={() => setMobileOpen(false)}
                                 className={cn(
-                                    "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative",
+                                    "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 group relative",
                                     pathname === item.href
-                                        ? "bg-zinc-800 text-white font-medium shadow-sm"
-                                        : "text-zinc-400 hover:text-white hover:bg-zinc-900"
+                                        ? "bg-gradient-to-r from-blue-600/20 to-transparent text-white font-medium shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-8 before:bg-blue-500 before:rounded-r-full before:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                                        : "text-zinc-500 hover:text-white hover:bg-white/5"
                                 )}
                             >
                                 <item.icon
@@ -168,7 +168,7 @@ export function AdminSidebar({ className }: AdminSidebarProps) {
                 </ScrollArea>
 
                 {/* Footer */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-zinc-800 bg-zinc-950">
+                <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/5 bg-black">
                     <button className={cn(
                         "flex items-center gap-3 w-full text-zinc-400 hover:text-red-400 transition-colors",
                         collapsed ? "justify-center" : "px-2"
