@@ -123,9 +123,9 @@ export default function AdminBrandsPage() {
 
     // Filters...
 
-    const filteredBrands = brands.filter(b =>
-        b.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleSearch = () => {
+        fetchBrands({ search: searchTerm || undefined });
+    };
 
     return (
         <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -146,12 +146,17 @@ export default function AdminBrandsPage() {
             {/* Filters */}
             <div className="flex gap-4">
                 <div className="relative flex-1 max-w-md group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors" size={20} />
+                    <Search
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors cursor-pointer hover:scale-110 active:scale-95"
+                        size={20}
+                        onClick={handleSearch}
+                    />
                     <Input
                         placeholder="Tìm kiếm thương hiệu..."
                         className="pl-12 h-12 bg-white border-none shadow-sm rounded-2xl focus-visible:ring-black transition-all"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                     />
                 </div>
             </div>
@@ -173,12 +178,12 @@ export default function AdminBrandsPage() {
                             <TableRow>
                                 <TableCell colSpan={5} className="text-center py-20 text-zinc-400 italic font-medium">Đang tải...</TableCell>
                             </TableRow>
-                        ) : filteredBrands.length === 0 ? (
+                        ) : brands.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={5} className="text-center py-20 text-zinc-400 italic font-medium">Không tìm thấy thương hiệu</TableCell>
                             </TableRow>
                         ) : (
-                            filteredBrands.map((brand) => (
+                            brands.map((brand) => (
                                 <TableRow key={brand._id} className="hover:bg-zinc-50/50 border-zinc-50 transition-colors duration-200">
                                     <TableCell className="pl-8 py-4 flex justify-center">
                                         <div className="w-16 h-12 bg-white border border-zinc-50 rounded-xl flex items-center justify-center overflow-hidden p-1 shadow-sm group-hover:scale-105 transition-transform">

@@ -53,7 +53,10 @@ apiClient.interceptors.response.use(
         // Refresh token expired or invalid -> logout
         if (typeof window !== "undefined") {
           localStorage.removeItem("access_token");
-          window.location.href = "/login";
+          const currentPath = window.location.pathname;
+          if (currentPath !== "/dang-nhap" && currentPath !== "/dang-ky") {
+            window.location.href = "/dang-nhap";
+          }
         }
         return Promise.reject(refreshError);
       }

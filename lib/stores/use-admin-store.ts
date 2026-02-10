@@ -15,7 +15,7 @@ interface AdminState {
   // Categories
   categories: Category[];
   categoriesLoading: boolean;
-  fetchCategories: () => Promise<void>;
+  fetchCategories: (params?: any) => Promise<void>;
   createCategory: (data: any) => Promise<void>;
   updateCategory: (id: string, data: any) => Promise<void>;
   deleteCategory: (id: string) => Promise<void>;
@@ -29,7 +29,7 @@ interface AdminState {
   // Brands
   brands: Brand[];
   brandsLoading: boolean;
-  fetchBrands: () => Promise<void>;
+  fetchBrands: (params?: any) => Promise<void>;
   createBrand: (data: any) => Promise<void>;
   updateBrand: (id: string, data: any) => Promise<void>;
   deleteBrand: (id: string) => Promise<void>;
@@ -37,7 +37,7 @@ interface AdminState {
   // Banners
   banners: Banner[];
   bannersLoading: boolean;
-  fetchBanners: () => Promise<void>;
+  fetchBanners: (params?: any) => Promise<void>;
   createBanner: (data: any) => Promise<void>;
   updateBanner: (id: string, data: any) => Promise<void>;
   deleteBanner: (id: string) => Promise<void>;
@@ -45,7 +45,7 @@ interface AdminState {
   // Users
   users: User[];
   usersLoading: boolean;
-  fetchUsers: () => Promise<void>;
+  fetchUsers: (params?: any) => Promise<void>;
 
   // Utils
   uploadImage: (file: File, folder?: string) => Promise<string>;
@@ -252,13 +252,14 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   // Banners
   banners: [],
   bannersLoading: false,
-  fetchBanners: async () => {
+  fetchBanners: async (params?: any) => {
     set({ bannersLoading: true });
     try {
-      const res = await apiClient.get("/banners");
+      const res = await apiClient.get("/banners", { params });
       set({ banners: res.data });
     } catch (error) {
       console.error("Failed to fetch banners", error);
+      toast.error("Không thể tải banners");
     } finally {
       set({ bannersLoading: false });
     }

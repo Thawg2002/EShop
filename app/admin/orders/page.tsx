@@ -74,13 +74,6 @@ export default function AdminOrdersPage() {
         }
     };
 
-    const filteredOrders = orders.filter(o => {
-        const matchesSearch = o._id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            (o.user as any)?.name?.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesStatus = statusFilter === 'all' || o.status === statusFilter;
-        return matchesSearch && matchesStatus;
-    });
-
     const getStatusInfo = (status: string) => {
         switch (status) {
             case 'pending': return { label: 'Chờ xử lý', color: 'bg-orange-100 text-orange-700', icon: Clock };
@@ -108,12 +101,17 @@ export default function AdminOrdersPage() {
             {/* Filters */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1 group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors" size={20} />
+                    <Search
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors cursor-pointer hover:scale-110 active:scale-95"
+                        size={20}
+                        onClick={handleSearch}
+                    />
                     <Input
                         placeholder="Tìm theo mã đơn hoặc tên khách..."
                         className="pl-12 h-12 bg-white border-none shadow-sm rounded-2xl focus-visible:ring-black transition-all"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                     />
                 </div>
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -147,14 +145,21 @@ export default function AdminOrdersPage() {
                     <TableBody>
                         {ordersLoading ? (
                             <TableRow>
-                                <TableCell colSpan={6} className="text-center py-20 text-zinc-400 italic font-medium">Đang tải...</TableCell>
+                                <TableCell colSpan={7} className="text-center py-20">
+                                    <div className="flex flex-col items-center gap-3">
+                                        <div className="size-8 border-4 border-zinc-200 border-t-black rounded-full animate-spin"></div>
+                                        <span className="text-sm font-medium text-zinc-500">Đang tải dữ liệu...</span>
+                                    </div>
+                                </TableCell>
                             </TableRow>
-                        ) : filteredOrders.length === 0 ? (
+                        ) : orders.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={6} className="text-center py-20 text-zinc-400 italic font-medium">Không tìm thấy đơn hàng</TableCell>
+                                <TableCell colSpan={7} className="text-center py-20 text-zinc-400">
+                                    Không có đơn hàng nào
+                                </TableCell>
                             </TableRow>
                         ) : (
-                            filteredOrders.map((order) => {
+                            orders.map((order) => {
                                 const statusInfo = getStatusInfo(order.status);
                                 return (
                                     <TableRow key={order._id} className="hover:bg-zinc-50/50 border-zinc-50 transition-colors duration-200 group">

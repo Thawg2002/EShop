@@ -117,9 +117,9 @@ export default function AdminCategoriesPage() {
         }
     };
 
-    const filteredCategories = categories.filter(c =>
-        c.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleSearch = () => {
+        fetchCategories({ search: searchTerm || undefined });
+    };
 
     return (
         <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -140,12 +140,17 @@ export default function AdminCategoriesPage() {
             {/* Filters */}
             <div className="flex gap-4">
                 <div className="relative flex-1 max-w-md group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors" size={20} />
+                    <Search
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors cursor-pointer hover:scale-110 active:scale-95"
+                        size={20}
+                        onClick={handleSearch}
+                    />
                     <Input
                         placeholder="Tìm kiếm danh mục..."
                         className="pl-12 h-12 bg-white border-none shadow-sm rounded-2xl focus-visible:ring-black transition-all"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                     />
                 </div>
             </div>
@@ -165,14 +170,21 @@ export default function AdminCategoriesPage() {
                     <TableBody>
                         {categoriesLoading ? (
                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-20 text-zinc-400 italic font-medium">Đang tải...</TableCell>
+                                <TableCell colSpan={5} className="text-center py-20">
+                                    <div className="flex flex-col items-center gap-3">
+                                        <div className="size-8 border-4 border-zinc-200 border-t-black rounded-full animate-spin"></div>
+                                        <span className="text-sm font-medium text-zinc-500">Đang tải dữ liệu...</span>
+                                    </div>
+                                </TableCell>
                             </TableRow>
-                        ) : filteredCategories.length === 0 ? (
+                        ) : categories.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-20 text-zinc-400 italic font-medium">Không tìm thấy danh mục</TableCell>
+                                <TableCell colSpan={5} className="text-center py-10 text-zinc-500 italic">
+                                    Không tìm thấy danh mục
+                                </TableCell>
                             </TableRow>
                         ) : (
-                            filteredCategories.map((category) => (
+                            categories.map((category) => (
                                 <TableRow key={category._id} className="hover:bg-zinc-50/50 border-zinc-50 transition-colors duration-200">
                                     <TableCell className="pl-8 flex justify-center py-4">
                                         <div className="w-12 h-12 bg-zinc-100 rounded-2xl overflow-hidden flex items-center justify-center text-zinc-400 shadow-inner group-hover:scale-105 transition-transform duration-300">

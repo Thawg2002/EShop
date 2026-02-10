@@ -80,10 +80,15 @@ export default function AdminBannersPage() {
         isActive: true,
         type: 'main'
     });
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         fetchBanners();
     }, []);
+
+    const handleSearch = () => {
+        fetchBanners({ search: searchTerm || undefined });
+    };
 
     const handleOpenDialog = (mode: CRUDMode, banner?: Banner) => {
         setMode(mode);
@@ -146,6 +151,24 @@ export default function AdminBannersPage() {
                     <Plus size={20} strokeWidth={2.5} />
                     <span className="font-bold">Thêm banner mới</span>
                 </Button>
+            </div>
+
+            {/* Filters */}
+            <div className="flex gap-4">
+                <div className="relative flex-1 max-w-md group">
+                    <Search
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-hover:text-black transition-colors cursor-pointer hover:scale-110 active:scale-95"
+                        size={20}
+                        onClick={handleSearch}
+                    />
+                    <Input
+                        placeholder="Tìm kiếm banner..."
+                        className="pl-12 h-12 bg-white border-none shadow-sm rounded-2xl focus-visible:ring-black transition-all"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                    />
+                </div>
             </div>
 
             {/* Table */}

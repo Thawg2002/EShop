@@ -17,6 +17,7 @@ interface AuthState {
   isLoading: boolean;
   setUser: (user: User | null) => void;
   login: (credentials: any) => Promise<void>;
+  register: (data: any) => Promise<void>;
   logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
 }
@@ -32,6 +33,19 @@ export const useAuth = create<AuthState>()(
         set({ isLoading: true });
         try {
           const res: any = await apiClient.post("/auth/login", credentials);
+          // apiClient already returns response.data, so res is { success, message, data: { user, accessToken } }
+          const { user, accessToken } = res.data;
+          localStorage.setItem("access_token", accessToken);
+          set({ user, isAuthenticated: true, isLoading: false });
+        } catch (error) {
+          set({ isLoading: false });
+          throw error;
+        }
+      },
+      register: async (data) => {
+        set({ isLoading: true });
+        try {
+          const res: any = await apiClient.post("/auth/register", data);
           const { user, accessToken } = res.data;
           localStorage.setItem("access_token", accessToken);
           set({ user, isAuthenticated: true, isLoading: false });
@@ -49,6 +63,12 @@ export const useAuth = create<AuthState>()(
         }
       },
       checkAuth: async () => {
+        const token = localStorage.getItem("access_token");
+        if (!token) {
+          set({ user: null, isAuthenticated: false, isLoading: false });
+          return;
+        }
+
         set({ isLoading: true });
         try {
           const res: any = await apiClient.get("/auth/me");

@@ -6,7 +6,6 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle
 } from '@/components/ui/dialog';
@@ -26,7 +25,6 @@ import {
     SelectTrigger,
     SelectValue
 } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
 import {
     Table,
     TableBody,
@@ -35,24 +33,24 @@ import {
     TableHeader,
     TableRow
 } from '@/components/ui/table';
-import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Textarea } from '@/components/ui/textarea';
 import { useAdminStore } from '@/lib/stores/use-admin-store';
 import { cn, formatCurrency, getImageUrl } from '@/lib/utils';
 import { Product } from '@/types';
 import {
+    BarChart3,
+    Boxes,
     Check,
     Edit,
     Eye,
+    Image as ImageIcon,
+    Info,
     MoreHorizontal,
     Plus,
     Search,
-    Trash2,
-    Image as ImageIcon,
-    Info,
     Tag,
-    Boxes,
-    BarChart3
+    Trash2
 } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -110,10 +108,20 @@ export default function AdminProductsPage() {
     });
 
     useEffect(() => {
-        fetchProducts();
+        fetchProducts({
+            category: categoryFilter === 'all' ? undefined : categoryFilter,
+            search: searchTerm || undefined
+        });
         fetchCategories();
         fetchBrands();
-    }, []);
+    }, [categoryFilter]);
+
+    const handleSearch = () => {
+        fetchProducts({
+            search: searchTerm || undefined,
+            category: categoryFilter === 'all' ? undefined : categoryFilter
+        });
+    };
 
     const handleOpenDialog = (mode: CRUDMode, product?: Product) => {
         setMode(mode);
@@ -142,8 +150,14 @@ export default function AdminProductsPage() {
                 images: [],
                 thumbnail: ''
             });
+            setSelectedProduct(null);
         } else {
-            setFormData(product || {});
+            const data: any = product || {};
+            setFormData({
+                ...data,
+                category: typeof data.category === 'object' ? (data.category as any)?._id : data.category,
+                brand: typeof data.brand === 'object' ? (data.brand as any)?._id : data.brand,
+            });
             setSelectedProduct(product || null);
         }
         setIsDialogOpen(true);
@@ -153,31 +167,36 @@ export default function AdminProductsPage() {
         try {
             if (mode === 'create') {
                 await createProduct(formData);
+                toast.success('Đã tạo sản phẩm thành công');
             } else if (mode === 'edit' && selectedProduct?._id) {
                 await updateProduct(selectedProduct._id, formData);
+                toast.success('Đã cập nhật sản phẩm thành công');
             }
             setIsDialogOpen(false);
+            handleSearch();
         } catch (error) {
             console.error(error);
+            toast.error('Thao tác thất bại');
         }
     };
 
     const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
 
         setIsUploading(true);
         try {
-            const url = await uploadImage(file, 'products');
-            const currentImages = formData.images || [];
+            const url = await uploadImage(files[0], 'products');
+            const newImages = [...(formData.images || []), url];
             setFormData({
                 ...formData,
-                images: [...currentImages, url],
+                images: newImages,
                 thumbnail: formData.thumbnail || url
             });
-            toast.success("Tải ảnh lên thành công");
+            toast.success('Đã tải ảnh lên');
         } catch (error) {
             console.error(error);
+            toast.error('Không thể tải ảnh');
         } finally {
             setIsUploading(false);
         }
@@ -185,22 +204,21 @@ export default function AdminProductsPage() {
 
     const removeImage = (index: number) => {
         const newImages = [...(formData.images || [])];
+        const removedImage = newImages[index];
         newImages.splice(index, 1);
-        setFormData({ ...formData, images: newImages });
+
+        let newThumbnail = formData.thumbnail;
+        if (removedImage === formData.thumbnail) {
+            newThumbnail = newImages.length > 0 ? newImages[0] : '';
+        }
+
+        setFormData({ ...formData, images: newImages, thumbnail: newThumbnail });
     };
 
     const setAsThumbnail = (url: string) => {
         setFormData({ ...formData, thumbnail: url });
-        toast.success("Đã đặt làm ảnh đại diện");
+        toast.success('Đã đặt làm ảnh đại diện');
     };
-
-    const filteredProducts = products.filter(p => {
-        const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            p.sku?.toLowerCase().includes(searchTerm.toLowerCase());
-        const categoryId = typeof p.category === 'string' ? p.category : (p.category as any)?._id;
-        const matchesCategory = categoryFilter === 'all' || categoryId === categoryFilter;
-        return matchesSearch && matchesCategory;
-    });
 
     return (
         <div className="space-y-6">
@@ -218,12 +236,17 @@ export default function AdminProductsPage() {
             {/* Filters */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1 group">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-zinc-900 transition-colors" size={18} />
+                    <Search
+                        className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-zinc-900 transition-colors cursor-pointer hover:scale-110 active:scale-95"
+                        size={18}
+                        onClick={handleSearch}
+                    />
                     <Input
                         placeholder="Tìm theo tên hoặc SKU..."
-                        className="pl-10 h-11 rounded-xl bg-white border-zinc-200 focus:ring-zinc-900 focus:border-zinc-900 transition-all"
+                        className="pl-10 h-11 rounded-xl bg-white border-zinc-200 focus:ring-zinc-900 focus:border-zinc-900 transition-all font-medium"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                     />
                 </div>
                 <Select value={categoryFilter} onValueChange={setCategoryFilter}>
@@ -262,7 +285,7 @@ export default function AdminProductsPage() {
                                     </div>
                                 </TableCell>
                             </TableRow>
-                        ) : filteredProducts.length === 0 ? (
+                        ) : products.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={6} className="text-center py-20">
                                     <div className="flex flex-col items-center gap-2 opacity-40">
@@ -272,7 +295,7 @@ export default function AdminProductsPage() {
                                 </TableCell>
                             </TableRow>
                         ) : (
-                            filteredProducts.map((product) => (
+                            products.map((product) => (
                                 <TableRow key={product._id} className="hover:bg-zinc-50/50 transition-colors border-b border-zinc-50 last:border-0 group">
                                     <TableCell>
                                         <div className="w-12 h-16 bg-zinc-100 rounded-lg overflow-hidden border border-zinc-100 group-hover:border-zinc-200 transition-all">

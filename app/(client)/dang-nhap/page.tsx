@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 import { AuthView } from '@/components/views/auth-view';
 
 export const metadata: Metadata = {
-    title: 'Đăng Ký',
-    description: 'Trở thành thành viên của gia đình XX.II Collective. Nhận ưu đãi độc quyền và cập nhật những xu hướng thời trang mới nhất sớm nhất.',
+    title: 'Đăng Nhập',
+    description: 'Đăng nhập vào tài khoản XX.II Collective của bạn để quản lý đơn hàng và nhận ưu đãi đặc quyền.',
     openGraph: {
-        title: 'Đăng Ký | XX.II Collective',
-        description: 'Tạo tài khoản mới.',
+        title: 'Đăng Nhập | XX.II Collective',
+        description: 'Đăng nhập thành viên.',
     },
 };
 
-export default function RegisterPage() {
-    return <AuthView defaultMode="register" />;
+export default function LoginPage() {
+    return <AuthView defaultMode="login" />;
 }

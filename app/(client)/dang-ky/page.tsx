@@ -1,10 +1,15 @@
-'use client';
+import { Metadata } from 'next';
+import { AuthView } from '@/components/views/auth-view';
 
-import LoginPage from '../dang-nhap/page';
+export const metadata: Metadata = {
+    title: 'Đăng Ký',
+    description: 'Trở thành thành viên của gia đình XX.II Collective. Nhận ưu đãi độc quyền và cập nhật những xu hướng thời trang mới nhất sớm nhất.',
+    openGraph: {
+        title: 'Đăng Ký | XX.II Collective',
+        description: 'Tạo tài khoản mới.',
+    },
+};
 
 export default function RegisterPage() {
-    // We can reuse the LoginPage component but we need it to default to register mode.
-    // Since LoginPage doesn't accept props for default mode, I'll just copy-paste and adjust
-    // or better, I'll modify LoginPage to accept a defaultMode prop.
-    return <LoginPage defaultMode="register" />;
+    return <AuthView defaultMode="register" />;
 }
