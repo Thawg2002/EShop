@@ -1,6 +1,10 @@
+// app/layout.tsx
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google';
 import './globals.css';
+import { Providers } from '@/components/providers';
+import { Navbar } from '@/components/layout/navbar';
+import { Footer } from '@/components/layout/footer';
 
 const geistSans = Geist({
     subsets: ['latin'],
@@ -42,19 +46,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-}: Readonly<{
+}: {
     children: React.ReactNode;
-}>) {
+}) {
     return (
-        <html lang="vi" className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable}`} suppressHydrationWarning>
+        <html lang="vi" suppressHydrationWarning>
             <head>
                 <link
-                    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
                     rel="stylesheet"
+                    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
                 />
             </head>
-            <body className="min-h-screen flex flex-col font-sans text-dark-text dark:text-dark-text-primary antialiased selection:bg-primary/20 bg-white dark:bg-dark-bg transition-colors">
-                {children}
+            <body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} font-sans antialiased`}>
+                <Providers>
+                    <div className="flex flex-col min-h-screen">
+                        <Navbar />
+                        <main className="flex-grow">
+                            {children}
+                        </main>
+                        <Footer />
+                    </div>
+                </Providers>
             </body>
         </html>
     );

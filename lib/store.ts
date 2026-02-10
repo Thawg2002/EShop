@@ -8,8 +8,8 @@ interface CartStore {
     selectedSize?: string,
     selectedColor?: string,
   ) => void;
-  removeItem: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
+  removeItem: (productId: string) => void;
+  updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   getItemCount: () => number;
   getTotal: () => number;
@@ -20,12 +20,14 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
   addItem: (product, selectedSize = "M", selectedColor) => {
     set((state) => {
-      const existing = state.items.find((item) => item.id === product.id);
+      const existing = state.items.find(
+        (item) => item.product._id === product._id,
+      );
 
       if (existing) {
         return {
           items: state.items.map((item) =>
-            item.id === product.id
+            item.product._id === product._id
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           ),
@@ -35,7 +37,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
       return {
         items: [
           ...state.items,
-          { ...product, quantity: 1, selectedSize, selectedColor },
+          { product, quantity: 1, selectedSize, selectedColor },
         ],
       };
     });
@@ -43,7 +45,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
   removeItem: (productId) => {
     set((state) => ({
-      items: state.items.filter((item) => item.id !== productId),
+      items: state.items.filter((item) => item.product._id !== productId),
     }));
   },
 
@@ -55,7 +57,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
     set((state) => ({
       items: state.items.map((item) =>
-        item.id === productId ? { ...item, quantity } : item,
+        item.product._id === productId ? { ...item, quantity } : item,
       ),
     }));
   },
@@ -70,7 +72,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
 
   getTotal: () => {
     return get().items.reduce(
-      (acc, item) => acc + item.price * item.quantity,
+      (acc, item) => acc + item.product.price * item.quantity,
       0,
     );
   },

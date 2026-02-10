@@ -1,63 +1,79 @@
+// components/layout/Footer.tsx
+'use client';
+
+import React from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Facebook, Instagram, Twitter, Youtube, Mail, MapPin, Phone } from 'lucide-react';
 
 export function Footer() {
+    const currentYear = new Date().getFullYear();
+
     return (
-        <footer className="bg-[#050505] text-white pt-20 pb-10 transition-colors border-t border-white/5">
-            <div className="mx-auto max-w-7xl px-6 lg:px-12">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-                    <div className="lg:col-span-5">
-                        <Link href="/" className="text-3xl font-bold tracking-tighter text-white inline-block mb-6 uppercase">
-                            XX.II
-                        </Link>
-                        <p className="text-sm text-zinc-400 max-w-sm leading-relaxed font-normal">
-                            Nâng tầm phong cách hàng ngày với chất lượng, bền vững và thiết kế vượt thời gian. Tham gia cùng chúng tôi để nhận những cập nhật mới nhất.
+        <footer className="bg-secondary text-off-white pt-20 pb-10">
+            <div className="container mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                    {/* Logo & About */}
+                    <div className="space-y-6">
+                        <h2 className="text-3xl font-serif font-bold tracking-tighter">
+                            XX.II<span className="text-primary italic">.</span>
+                        </h2>
+                        <p className="text-muted-text max-w-xs leading-relaxed">
+                            Elevating your lifestyle through curated fashion and timeless design. Join our collective journey.
                         </p>
-                        <div className="mt-10">
-                            <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] mb-4 text-zinc-200">Giảm 10% Cho Đơn Hàng Đầu Tiên</h3>
-                            <div className="flex gap-0 max-w-sm">
-                                <input
-                                    type="email"
-                                    placeholder="Email của bạn"
-                                    className="flex-1 bg-transparent border border-white/20 px-4 py-3 text-sm focus:outline-none focus:border-white transition-colors placeholder:text-zinc-600"
-                                />
-                                <Button className="bg-white text-black hover:bg-zinc-200 px-8 py-3 text-[11px] font-bold uppercase tracking-[0.3em] rounded-none h-auto">Đăng Ký</Button>
-                            </div>
+                        <div className="flex space-x-5">
+                            <Link href="#" className="hover:text-primary transition-colors"><Facebook size={20} /></Link>
+                            <Link href="#" className="hover:text-primary transition-colors"><Instagram size={20} /></Link>
+                            <Link href="#" className="hover:text-primary transition-colors"><Twitter size={20} /></Link>
+                            <Link href="#" className="hover:text-primary transition-colors"><Youtube size={20} /></Link>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:col-span-7 pt-2">
-                        <div>
-                            <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] mb-6 text-zinc-500">Mua Sắm</h3>
-                            <ul className="space-y-4 text-xs tracking-widest text-zinc-300 font-bold uppercase">
-                                <li><Link href="/cua-hang" className="hover:text-white transition-colors">Sản Phẩm Mới</Link></li>
-                                <li><Link href="/cua-hang" className="hover:text-white transition-colors">Bán Chạy</Link></li>
-                                <li><Link href="/cua-hang" className="hover:text-white transition-colors">Phụ Kiện</Link></li>
-                                <li><Link href="/cua-hang" className="hover:text-white transition-colors">Sale</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] mb-6 text-zinc-500">Công Ty</h3>
-                            <ul className="space-y-4 text-xs tracking-widest text-zinc-300 font-bold uppercase">
-                                <li><Link href="/lien-he" className="hover:text-white transition-colors">Về Chúng Tôi</Link></li>
-                                <li><Link href="#" className="hover:text-white transition-colors">Tuyển Dụng</Link></li>
-                                <li><Link href="#" className="hover:text-white transition-colors">Phát Triển Bền Vững</Link></li>
-                                <li><Link href="#" className="hover:text-white transition-colors">Press</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] mb-6 text-zinc-500">Pháp Lý</h3>
-                            <ul className="space-y-4 text-xs tracking-widest text-zinc-300 font-bold uppercase">
-                                <li><Link href="#" className="hover:text-white transition-colors">Điều Khoản</Link></li>
-                                <li><Link href="/chinh-sach-bao-mat" className="hover:text-white transition-colors">Quyền Riêng Tư</Link></li>
-                                <li><Link href="#" className="hover:text-white transition-colors">Đổi Trả</Link></li>
-                            </ul>
-                        </div>
+                    {/* Quick Links */}
+                    <div className="space-y-6">
+                        <h4 className="text-sm uppercase tracking-widest font-bold text-primary">Khám phá</h4>
+                        <ul className="space-y-4">
+                            <li><Link href="/shop" className="text-muted-text hover:text-off-white transition-colors">Cửa hàng</Link></li>
+                            <li><Link href="/collections" className="text-muted-text hover:text-off-white transition-colors">Bộ sưu tập</Link></li>
+                            <li><Link href="/blog" className="text-muted-text hover:text-off-white transition-colors">Nhật ký</Link></li>
+                            <li><Link href="/about" className="text-muted-text hover:text-off-white transition-colors">Về chúng tôi</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Customer Support */}
+                    <div className="space-y-6">
+                        <h4 className="text-sm uppercase tracking-widest font-bold text-primary">Hỗ trợ</h4>
+                        <ul className="space-y-4">
+                            <li><Link href="/contact" className="text-muted-text hover:text-off-white transition-colors">Liên hệ</Link></li>
+                            <li><Link href="/shipping" className="text-muted-text hover:text-off-white transition-colors">Giao hàng & Trả hàng</Link></li>
+                            <li><Link href="/privacy" className="text-muted-text hover:text-off-white transition-colors">Chính sách bảo mật</Link></li>
+                            <li><Link href="/faq" className="text-muted-text hover:text-off-white transition-colors">Câu hỏi thường gặp</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Newsletter */}
+                    <div className="space-y-6">
+                        <h4 className="text-sm uppercase tracking-widest font-bold text-primary">Bản tin</h4>
+                        <p className="text-muted-text text-sm">Đăng ký để nhận thông tin về các bộ sưu tập mới nhất.</p>
+                        <form className="relative group">
+                            <input
+                                type="email"
+                                placeholder="Email của bạn"
+                                className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                            />
+                            <button className="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-off-white transition-colors">
+                                <Mail size={18} />
+                            </button>
+                        </form>
                     </div>
                 </div>
 
-                <div className="mt-20 pt-8 border-t border-white/5 text-center">
-                    <p className="text-[11px] uppercase tracking-[0.4em] font-bold text-zinc-500">© 2026 XX.II FASHION. BẢN QUYỀN THUỘC VỀ XX.II.</p>
+                <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p className="text-xs text-muted-text">
+                        © {currentYear} XX.II Collective. All rights reserved.
+                    </p>
+                    <div className="flex space-x-6 text-xs text-muted-text">
+                        <span>Powered by Next.js & Antigravity</span>
+                    </div>
                 </div>
             </div>
         </footer>

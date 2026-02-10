@@ -1,26 +1,67 @@
 'use client';
 
-import { useState, use } from 'react';
+import { useState, use, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { PRODUCTS } from '@/lib/data';
 import { useCartStore } from '@/lib/store';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { ProductSection } from '@/components/features/product-section';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { formatPrice } from '@/lib/utils';
+import { formatCurrency, getImageUrl, cn } from '@/lib/utils';
+import apiClient from '@/lib/api-client';
+import { Product } from '@/types';
+import { toast } from 'react-hot-toast';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
     const router = useRouter();
     const addItem = useCartStore((state) => state.addItem);
+
+    const [product, setProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+
     const [selectedSize, setSelectedSize] = useState('M');
     const [selectedColor, setSelectedColor] = useState(0);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
-    const product = PRODUCTS.find(p => p.id === parseInt(id));
+    useEffect(() => {
+        const fetchProductData = async () => {
+            setLoading(true);
+            try {
+                const res: any = await apiClient.get(`/products/${id}`);
+                setProduct(res.data);
+
+                // Fetch related products
+                const relatedRes: any = await apiClient.get(`/products/${id}/related`);
+                setRelatedProducts(relatedRes.data || []);
+            } catch (error) {
+                console.error("Failed to fetch product:", error);
+                toast.error("Không thể tải thông tin sản phẩm");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProductData();
+    }, [id]);
+
+    if (loading) {
+        return (
+            <>
+                <Navbar />
+                <div className="min-h-screen flex items-center justify-center bg-white dark:bg-dark-bg transition-colors pt-32">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-sm font-medium uppercase tracking-widest text-zinc-400">Đang tải tuyệt tác...</p>
+                    </div>
+                </div>
+                <Footer />
+            </>
+        );
+    }
 
     if (!product) {
         return (
@@ -37,37 +78,38 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         );
     }
 
-    const images = Array(6).fill(product.image);
+    const images = product.images && product.images.length > 0
+        ? product.images
+        : [product.thumbnail || '/placeholder-image.png'];
+
     const colors = [
-        { name: 'Beige', hex: '#d2b48c' },
-        { name: 'Navy', hex: '#1c2841' },
-        { name: 'White', hex: '#ffffff' }
+        { name: 'Default', hex: '#ccc' }
+    ];
+
+    const breadcrumbItems = [
+        { label: 'Cửa Hàng', href: '/cua-hang' },
+        { label: typeof product.category === 'string' ? product.category : product.category.name, href: `/cua-hang?cat=${typeof product.category === 'string' ? product.category : product.category.slug}` },
+        { label: product.name }
     ];
 
     const handleAddToCart = () => {
         addItem(product, selectedSize, colors[selectedColor].name);
-        router.push('/gio-hang');
+        toast.success("Đã thêm vào giỏ hàng");
     };
 
     const sections = [
         {
             title: 'Mô Tả Sản Phẩm',
-            content: product.description
+            content: product.description || "Đang cập nhật..."
         },
         {
             title: 'Kích Thước & Phom Dáng',
-            content: 'Người mẫu cao 175cm mặc size S. Phom dáng suông rộng thoải mái. Đường may tỉ mỉ theo tiêu chuẩn cao cấp.'
+            content: product.specifications?.origin ? `Xuất xứ: ${product.specifications.origin}. Phom dáng suông rộng thoải mái.` : 'Người mẫu cao 175cm mặc size S. Phom dáng suông rộng thoải mái.'
         },
         {
             title: 'Chất Liệu & Bảo Quản',
-            content: '100% Cotton Ý. Giặt máy ở nhiệt độ thấp. Không sử dụng chất tẩy. Phơi khô tự nhiên. Là ở nhiệt độ trung bình.'
+            content: product.specifications?.careInstructions || 'Giặt máy ở nhiệt độ thấp. Không sử dụng chất tẩy. Phơi khô tự nhiên. Là ở nhiệt độ trung bình.'
         }
-    ];
-
-    const breadcrumbItems = [
-        { label: 'Cửa Hàng', href: '/cua-hang' },
-        { label: product.category, href: `/cua-hang?cat=${product.category.toLowerCase()}` },
-        { label: product.name }
     ];
 
     return (
@@ -95,7 +137,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                                 : 'border-transparent opacity-60 hover:opacity-100 hover:border-black/10'
                                                 }`}
                                         >
-                                            <img src={img} alt="" className="w-full h-full object-cover transition-all duration-700" />
+                                            <img src={getImageUrl(img)} alt="" className="w-full h-full object-cover transition-all duration-700" />
                                         </div>
                                     ))}
                                 </div>
@@ -104,7 +146,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                                 <div className="order-1 lg:order-2 flex-1 relative group">
                                     <div className="relative aspect-square bg-off-white dark:bg-dark-card overflow-hidden">
                                         <img
-                                            src={images[selectedImageIndex]}
+                                            src={getImageUrl(images[selectedImageIndex])}
                                             alt={product.name}
                                             className="w-full h-full object-cover transition-all duration-[1.5s]"
                                         />
@@ -134,16 +176,22 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
                         {/* Product Info - 5 columns */}
                         <div className="lg:col-span-5">
-                            <span className="block text-xs font-bold uppercase tracking-[0.3em] text-primary mb-2">{product.category}</span>
+                            <span className="block text-xs font-bold uppercase tracking-[0.3em] text-primary mb-2">
+                                {typeof product.category === 'string' ? product.category : product.category.name}
+                            </span>
                             <h1 className="text-5xl md:text-6xl font-serif-display italic text-dark-text dark:text-dark-text-primary leading-[0.95] mb-6">
                                 {product.name}
                             </h1>
 
                             <div className="flex items-baseline gap-4 mb-8">
-                                <span className="text-4xl font-bold text-dark-text dark:text-dark-text-primary">{formatPrice(product.price)}</span>
+                                <span className="text-4xl font-bold text-dark-text dark:text-dark-text-primary">
+                                    {formatCurrency(product.price)}
+                                </span>
                                 <div className="flex items-center gap-1">
-                                    {[1, 2, 3, 4, 5].map(i => <span key={i} className="text-primary text-sm">★</span>)}
-                                    <span className="text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary ml-2">(124)</span>
+                                    {[1, 2, 3, 4, 5].map(i => (
+                                        <span key={i} className={cn("text-sm", (product.rating?.average || 5) >= i ? "text-primary" : "text-zinc-300")}>★</span>
+                                    ))}
+                                    <span className="text-xs font-medium text-luxury-slate-grey dark:text-dark-text-secondary ml-2">({product.rating?.count || 0})</span>
                                 </div>
                             </div>
 
@@ -232,7 +280,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     {/* Related Products (Common Component) */}
                     <ProductSection
                         title="Có Thể Bạn Thích"
-                        products={PRODUCTS.filter(p => p.id !== product.id).slice(0, 8)}
+                        products={relatedProducts}
                         className="mt-32"
                         mode="slider"
                     />
