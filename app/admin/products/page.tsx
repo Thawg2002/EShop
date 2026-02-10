@@ -1,43 +1,7 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
-import { useAdminStore } from '@/lib/stores/use-admin-store';
-import { toast } from 'react-hot-toast';
-import {
-    Plus,
-    Search,
-    Filter,
-    MoreHorizontal,
-    Edit,
-    Trash2,
-    Eye,
-    Copy,
-    ArrowUpDown,
-    Check,
-    X,
-    Globe,
-    Link as LinkIcon,
-    Image as ImageIcon
-} from 'lucide-react';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow
-} from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 import {
     Dialog,
     DialogContent,
@@ -46,8 +10,15 @@ import {
     DialogHeader,
     DialogTitle
 } from '@/components/ui/dialog';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
     Select,
     SelectContent,
@@ -56,8 +27,29 @@ import {
     SelectValue
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { formatCurrency, getImageUrl, cn } from '@/lib/utils';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow
+} from '@/components/ui/table';
+import { Textarea } from '@/components/ui/textarea';
+import { useAdminStore } from '@/lib/stores/use-admin-store';
+import { cn, formatCurrency, getImageUrl } from '@/lib/utils';
 import { Product } from '@/types';
+import {
+    Check,
+    Edit,
+    Eye,
+    MoreHorizontal,
+    Plus,
+    Search,
+    Trash2
+} from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 // Tự dưng thông minh: Một Dialog xử lý cả Create, Edit và View
 type CRUDMode = 'create' | 'edit' | 'view';
