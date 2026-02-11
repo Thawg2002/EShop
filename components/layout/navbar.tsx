@@ -35,13 +35,15 @@ export function Navbar() {
 
     // Lock scroll when menu is open
     useEffect(() => {
+        const body = document.body;
         if (isMenuOpen) {
-            document.body.style.overflow = 'hidden';
+            body.style.overflow = 'hidden';
         } else {
-            document.body.style.overflow = 'unset';
+            body.style.overflow = '';
         }
+
         return () => {
-            document.body.style.overflow = 'unset';
+            body.style.overflow = '';
         };
     }, [isMenuOpen]);
 
@@ -141,23 +143,6 @@ export function Navbar() {
 
                     {/* Right: Actions */}
                     <div className={`flex items-center justify-end gap-5 transition-all duration-700 ${(isScrolled || !isTransparentPage) ? 'w-auto' : 'flex-1'}`}>
-                        {/* Theme Toggle */}
-                        <button
-                            onClick={toggleDarkMode}
-                            className={`p-1.5 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${(isScrolled || !isTransparentPage) ? 'text-luxury-onyx dark:text-dark-text' : 'text-white'
-                                }`}
-                            title={isDarkMode ? "Chuyển sang chế độ sáng" : "Chuyển sang chế độ tối"}
-                        >
-                            <span className="material-symbols-outlined text-[20px]">
-                                {isDarkMode ? 'light_mode' : 'dark_mode'}
-                            </span>
-                        </button>
-
-                        <Link href="/ho-so" className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:opacity-60 transition-all ${(isScrolled || !isTransparentPage) ? 'text-black dark:text-white' : 'text-white'
-                            }`}>
-                            <span className="material-symbols-outlined text-[20px]">person</span>
-                            <span className={(isScrolled || !isTransparentPage) ? 'hidden xl:inline' : 'hidden lg:inline'}>Tài khoản</span>
-                        </Link>
 
                         <Link href="/gio-hang" className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:opacity-60 transition-all ${(isScrolled || !isTransparentPage) ? 'text-black dark:text-white' : 'text-white'
                             }`}>
@@ -172,6 +157,24 @@ export function Navbar() {
                             </span>
                             <span className={(isScrolled || !isTransparentPage) ? 'hidden xl:inline' : 'hidden lg:inline'}>Giỏ hàng</span>
                         </Link>
+
+                        <Link href="/ho-so" className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:opacity-60 transition-all ${(isScrolled || !isTransparentPage) ? 'text-black dark:text-white' : 'text-white'
+                            }`}>
+                            <span className="material-symbols-outlined text-[20px]">person</span>
+                            <span className={(isScrolled || !isTransparentPage) ? 'hidden xl:inline' : 'hidden lg:inline'}>Tài khoản</span>
+                        </Link>
+
+                        {/* Theme Toggle */}
+                        <button
+                            onClick={toggleDarkMode}
+                            className={`p-1.5 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors ${(isScrolled || !isTransparentPage) ? 'text-luxury-onyx dark:text-dark-text' : 'text-white'
+                                }`}
+                            title={isDarkMode ? "Chuyển sang chế độ sáng" : "Chuyển sang chế độ tối"}
+                        >
+                            <span className="material-symbols-outlined text-[20px]">
+                                {isDarkMode ? 'light_mode' : 'dark_mode'}
+                            </span>
+                        </button>
 
                         {/* Mobile Menu Toggle */}
                         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className={`lg:hidden p-2 transition-colors ${(isScrolled || !isTransparentPage) ? 'text-black dark:text-white' : 'text-white'
