@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useCartStore } from '@/lib/store';
 
 export function Navbar() {
@@ -31,6 +32,18 @@ export function Navbar() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Lock scroll when menu is open
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMenuOpen]);
 
     const toggleDarkMode = () => {
         const newMode = !isDarkMode;
@@ -110,7 +123,7 @@ export function Navbar() {
                                         key={link.name}
                                         href={link.href}
                                         className={cn(
-                                            "text-[11px] font-bold uppercase tracking-[0.14em] transition-all duration-300 relative group py-2",
+                                            "text-[11px] text-nowrap font-bold uppercase tracking-[0.14em] transition-all duration-300 relative group py-2",
                                             link.isSale ? "text-red-500" : "text-[#1d1d1f] hover:text-[#0071e3]",
                                             isActive(link.href) ? "text-[#0071e3]" : ""
                                         )}
@@ -170,20 +183,121 @@ export function Navbar() {
             </header>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 z-40 bg-[#fdf8f4] transform transition-transform duration-500 lg:hidden pt-32 px-10 ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-                <nav className="flex flex-col gap-8">
-                    <Link href="/women" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Phụ Nữ</Link>
-                    <Link href="/men" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Nam Giới</Link>
-                    <Link href="/leather" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Đồ Da</Link>
-                    <Link href="/jewelry" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Trang Sức</Link>
-                    <Link href="/tin-tuc" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Tin Tức</Link>
-                    <Link href="/ho-so" onClick={() => setIsMenuOpen(false)} className="text-2xl font-bold uppercase tracking-tighter border-b border-black/5 pb-2">Hồ Sơ</Link>
-                    <div className="mt-4 flex gap-6">
-                        <Link href="/gio-hang" onClick={() => setIsMenuOpen(false)} className="text-xs font-bold uppercase tracking-widest text-black underline">Giỏ hàng</Link>
-                        <Link href="/lien-he" onClick={() => setIsMenuOpen(false)} className="text-xs font-bold uppercase tracking-widest text-gray-500 underline">Liên hệ</Link>
-                    </div>
-                </nav>
-            </div>
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                        className="fixed inset-0 z-40 bg-white dark:bg-[#0a0a0a] lg:hidden flex flex-col"
+                    >
+                        {/* Custom Header for Mobile Menu */}
+                        <div className="flex items-center justify-between px-6 h-14 border-b border-black/[0.03] dark:border-white/[0.03]">
+                            <span className="font-serif text-xl tracking-tight text-black dark:text-white">XX.II</span>
+                            <button onClick={() => setIsMenuOpen(false)} className="p-2 -mr-2 text-black dark:text-white">
+                                <span className="material-symbols-outlined text-2xl">close</span>
+                            </button>
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto px-10 py-12 flex flex-col justify-between scrollbar-hide">
+                            <motion.nav
+                                className="space-y-1"
+                                variants={{
+                                    visible: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } },
+                                    hidden: { transition: { staggerChildren: 0.03, staggerDirection: -1 } }
+                                }}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                                {/* Mobile Search */}
+                                <motion.div
+                                    variants={{
+                                        visible: { opacity: 1, x: 0 },
+                                        hidden: { opacity: 0, x: -10 }
+                                    }}
+                                    className="mb-10 relative group"
+                                >
+                                    <span className="absolute left-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-zinc-400 text-lg">search</span>
+                                    <input
+                                        type="text"
+                                        placeholder="TÌM KIẾM SẢN PHẨM"
+                                        className="w-full bg-transparent border-b border-black/10 dark:border-white/10 py-3 pl-8 text-[9px] font-black tracking-[0.3em] uppercase outline-none focus:border-black dark:focus:border-white transition-colors placeholder:text-zinc-300"
+                                    />
+                                </motion.div>
+
+                                {navLinks.map((link) => (
+                                    <motion.div
+                                        key={link.name}
+                                        variants={{
+                                            visible: { opacity: 1, x: 0 },
+                                            hidden: { opacity: 0, x: -10 }
+                                        }}
+                                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                    >
+                                        <Link
+                                            href={link.href}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className={cn(
+                                                "block py-3.5 text-[15px] font-light tracking-[0.15em] uppercase transition-all duration-300",
+                                                link.isSale ? "text-red-500" : "text-black dark:text-white",
+                                                isActive(link.href) ? "opacity-100 font-medium" : "opacity-60"
+                                            )}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </motion.div>
+                                ))}
+
+                                <motion.div
+                                    variants={{
+                                        visible: { opacity: 1 },
+                                        hidden: { opacity: 0 }
+                                    }}
+                                    className="pt-10 space-y-5"
+                                >
+                                    <div className="h-[1px] w-full bg-black/[0.05] dark:bg-white/[0.05]" />
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <Link
+                                            href="/ho-so"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="text-[10px] font-bold tracking-[0.2em] uppercase text-black/40 dark:text-white/40"
+                                        >
+                                            Hồ Sơ
+                                        </Link>
+                                        <Link
+                                            href="/gio-hang"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="text-[10px] font-bold tracking-[0.2em] uppercase text-black/40 dark:text-white/40"
+                                        >
+                                            Giỏ Hàng ({itemCount})
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            </motion.nav>
+
+                            {/* Mobile Menu Footer Info */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6 }}
+                                className="mt-20 pt-8 border-t border-black/[0.03] dark:border-white/[0.03] flex justify-between items-end"
+                            >
+                                <div className="space-y-2">
+                                    <div className="flex gap-4">
+                                        <a href="#" className="text-[9px] font-bold tracking-widest uppercase opacity-40 hover:opacity-100 transition-opacity">Instagram</a>
+                                        <a href="#" className="text-[9px] font-bold tracking-widest uppercase opacity-40 hover:opacity-100 transition-opacity">Facebook</a>
+                                    </div>
+                                    <p className="text-[8px] tracking-[0.3em] uppercase text-black/20 dark:text-white/20 font-medium">
+                                        XX.II / TOKYO - PARIS - HN
+                                    </p>
+                                </div>
+                                <span className="text-[14px] font-serif italic text-black/10 dark:text-white/10">Collective</span>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }

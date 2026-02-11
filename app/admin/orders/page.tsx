@@ -56,9 +56,16 @@ export default function AdminOrdersPage() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
+    const handleSearch = () => {
+        fetchOrders({
+            search: searchTerm,
+            status: statusFilter !== 'all' ? statusFilter : undefined
+        });
+    };
+
     useEffect(() => {
-        fetchOrders();
-    }, []);
+        handleSearch();
+    }, [statusFilter]);
 
     const handleViewOrder = (order: Order) => {
         setSelectedOrder(order);
