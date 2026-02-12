@@ -56,226 +56,246 @@ export function AuthView({ defaultMode = 'login' }: { defaultMode?: 'login' | 'r
     };
 
     return (
-        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black font-sans selection:bg-white selection:text-black">
-            {/* Cinematic Background with Parallax */}
-            <motion.div
-                className="absolute inset-0 z-0 opacity-60 scale-110"
-                animate={{
-                    x: mousePos.x,
-                    y: mousePos.y,
-                }}
-                transition={{ type: 'spring', damping: 50, stiffness: 200 }}
-                style={{
-                    backgroundImage: 'url(https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-            />
-            {/* Deep Overlays */}
-            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/80 via-black/40 to-black/90"></div>
-            <div className="absolute inset-0 z-[1] backdrop-blur-[2px]"></div>
+        <div className="relative h-screen w-full flex flex-col md:flex-row bg-white selection:bg-black selection:text-white font-sans overflow-hidden">
+            {/* --- Left Side: Editorial Banner --- */}
+            <div className="relative w-full md:w-1/2 h-[40vh] md:h-full overflow-hidden group bg-neutral-100">
+                <motion.div
+                    className="absolute inset-0 z-0"
+                    animate={{
+                        x: mousePos.x * 0.5,
+                        y: mousePos.y * 0.5,
+                        scale: 1.05
+                    }}
+                    transition={{ type: 'spring', damping: 50, stiffness: 200 }}
+                >
+                    <div
+                        className="w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110"
+                        style={{
+                            backgroundImage: 'url(https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920)',
+                        }}
+                    />
+                </motion.div>
 
-            {/* Back Button */}
-            <Link
-                href="/"
-                className="fixed top-12 left-12 z-50 flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-white/50 hover:text-white transition-all group"
-            >
-                <div className="w-8 h-[1px] bg-white/20 group-hover:w-12 group-hover:bg-white transition-all"></div>
-                Quay lại
-            </Link>
+                {/* Image Overlays */}
+                <div className="absolute inset-0 bg-black/10 transition-colors group-hover:bg-black/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
 
-            {/* Editorial Decoration (Vertical Text) */}
-            <div className="fixed right-12 bottom-12 z-50 hidden xl:flex flex-col items-end gap-4 pointer-events-none">
-                <span className="text-[100px] font-black leading-none text-white/5 select-none origin-bottom-right">01</span>
-                <span className="text-[10px] font-black uppercase tracking-[1em] text-white/20 [writing-mode:vertical-rl]">EST. 2024 / XX.II</span>
+                {/* Left Side Content (Editorial) */}
+                <div className="absolute inset-0 z-10 flex flex-col justify-between p-12 md:p-20 pointer-events-none">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                    >
+                        <h2 className="text-4xl md:text-6xl font-light tracking-[0.2em] text-white uppercase leading-tight">
+                            XX.II<br />
+                            <span className="font-extrabold text-white/50">Collective</span>
+                        </h2>
+                    </motion.div>
+
+                    <motion.div
+                        className="flex flex-col gap-6"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, delay: 0.4 }}
+                    >
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-[1px] bg-white/40"></div>
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/80">
+                                2024 Collection / Limited Edition
+                            </span>
+                        </div>
+                        <p className="text-white/60 text-xs max-w-xs leading-relaxed font-light italic">
+                            Experience the intersection of modern art and contemporary fashion. Built for the elite, designed for the bold.
+                        </p>
+                    </motion.div>
+                </div>
+
+                {/* Branding Detail */}
+                <div className="absolute top-1/2 -right-4 -translate-y-1/2 rotate-90 hidden xl:block">
+                    <span className="text-[120px] font-black text-white/5 cursor-default select-none pointer-events-none">EST. 2024</span>
+                </div>
             </div>
 
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 w-full max-w-[480px] px-6 py-20"
-            >
-                {/* Brand Identity */}
-                <div className="text-center mb-12">
-                    <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                        className="inline-block mb-6 opacity-80"
-                    >
-                        <Sparkles className="w-10 h-10 text-white" strokeWidth={1} />
-                    </motion.div>
-                    <h1 className="text-5xl font-extralight tracking-[0.3em] text-white uppercase mb-4 leading-none">
-                        XX.II
-                    </h1>
-                    <div className="flex items-center justify-center gap-4">
-                        <div className="h-[1px] w-8 bg-white/20"></div>
-                        <p className="text-white/40 text-[9px] font-black uppercase tracking-[0.4em]">
-                            Luxury Collective
-                        </p>
-                        <div className="h-[1px] w-8 bg-white/20"></div>
-                    </div>
-                </div>
+            {/* --- Right Side: Minimalist Form --- */}
+            <div className="relative w-full md:w-1/2 flex items-center justify-center p-8 md:p-20 bg-white">
+                {/* Floating "Back" Navigation */}
+                <Link
+                    href="/"
+                    className="absolute top-12 right-12 flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-black/30 hover:text-black transition-all group"
+                >
+                    <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" strokeWidth={3} />
+                    Quay lại cửa hàng
+                </Link>
 
-                {/* The Refractive Glass Card */}
-                <div className="relative">
-                    {/* Glowing highlight */}
-                    <div className="absolute -top-[10%] -left-[10%] w-[120%] h-[120%] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
-
-                    <div className="relative bg-white/[0.03] backdrop-blur-[40px] border border-white/10 rounded-[40px] p-10 md:p-12 shadow-[0_40px_100px_rgba(0,0,0,0.8)] overflow-hidden">
-                        {/* Glass Reflections */}
-                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                        <div className="absolute bottom-0 right-0 w-[1px] h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
-
-                        {/* Mode Switcher */}
-                        <div className="flex gap-8 mb-12 border-b border-white/5">
-                            <button
-                                onClick={() => setIsSignIn(true)}
-                                className={`pb-4 text-[10px] font-black uppercase tracking-[0.3em] transition-all relative ${isSignIn ? 'text-white' : 'text-white/20 hover:text-white/40'
-                                    }`}
-                            >
-                                Đăng nhập
-                                {isSignIn && <motion.div layoutId="elite-tab" className="absolute bottom-0 left-0 w-full h-[1px] bg-white"></motion.div>}
-                            </button>
-                            <button
-                                onClick={() => setIsSignIn(false)}
-                                className={`pb-4 text-[10px] font-black uppercase tracking-[0.3em] transition-all relative ${!isSignIn ? 'text-white' : 'text-white/20 hover:text-white/40'
-                                    }`}
-                            >
-                                Đăng ký
-                                {!isSignIn && <motion.div layoutId="elite-tab" className="absolute bottom-0 left-0 w-full h-[1px] bg-white"></motion.div>}
-                            </button>
+                <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full max-w-[400px] py-10"
+                >
+                    {/* Header */}
+                    <div className="mb-12">
+                        <div className="flex items-center gap-2 mb-4">
+                            <div className="w-6 h-[1px] bg-black/10"></div>
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-black/40">
+                                {isSignIn ? 'Quyền truy cập thành viên' : 'Đăng ký thành viên'}
+                            </span>
                         </div>
+                        <h1 className="text-3xl font-light tracking-tight text-black flex items-center gap-4">
+                            {isSignIn ? 'Đăng nhập' : 'Tạo tài khoản'}
+                        </h1>
+                    </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-8">
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={isSignIn ? 'signin' : 'signup'}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                    className="space-y-8"
-                                >
-                                    {!isSignIn && (
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div className="space-y-3">
-                                                <Label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/30 ml-1">Danh tính</Label>
-                                                <Input
-                                                    id="name"
-                                                    placeholder="NAME"
-                                                    required
-                                                    value={name}
-                                                    onChange={(e) => setName(e.target.value)}
-                                                    className="h-14 bg-white/5 border-white/5 focus:border-white/20 focus:ring-0 rounded-2xl text-white placeholder:text-white/10 text-xs tracking-widest uppercase"
-                                                />
-                                            </div>
-                                            <div className="space-y-3">
-                                                <Label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/30 ml-1">Liên lạc</Label>
-                                                <Input
-                                                    id="phone"
-                                                    type="tel"
-                                                    placeholder="PHONE"
-                                                    required
-                                                    value={phone}
-                                                    onChange={(e) => setPhone(e.target.value)}
-                                                    className="h-14 bg-white/5 border-white/5 focus:border-white/20 focus:ring-0 rounded-2xl text-white placeholder:text-white/10 text-xs tracking-widest uppercase"
-                                                />
-                                            </div>
+                    {/* Form Toggle Tabs (Minimal) */}
+                    <div className="flex gap-10 mb-10 border-b border-black/5">
+                        <button
+                            onClick={() => setIsSignIn(true)}
+                            className={`pb-4 text-[11px] font-bold uppercase tracking-widest transition-all relative ${isSignIn ? 'text-black' : 'text-black/20 hover:text-black/40'
+                                }`}
+                        >
+                            Đăng nhập
+                            {isSignIn && <motion.div layoutId="auth-tab" className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-black"></motion.div>}
+                        </button>
+                        <button
+                            onClick={() => setIsSignIn(false)}
+                            className={`pb-4 text-[11px] font-bold uppercase tracking-widest transition-all relative ${!isSignIn ? 'text-black' : 'text-black/20 hover:text-black/40'
+                                }`}
+                        >
+                            Đăng ký
+                            {!isSignIn && <motion.div layoutId="auth-tab" className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-black"></motion.div>}
+                        </button>
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={isSignIn ? 'login' : 'register'}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.4 }}
+                                className="space-y-6"
+                            >
+                                {!isSignIn && (
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label className="text-[9px] font-bold uppercase tracking-widest text-black/40 ml-1">Họ tên</Label>
+                                            <Input
+                                                placeholder="FULL NAME"
+                                                required
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                className="h-12 bg-neutral-50 border-transparent focus:bg-white focus:border-black/10 rounded-xl text-black text-xs tracking-wider uppercase font-medium px-4 transition-all"
+                                            />
                                         </div>
-                                    )}
+                                        <div className="space-y-2">
+                                            <Label className="text-[9px] font-bold uppercase tracking-widest text-black/40 ml-1">Số điện thoại</Label>
+                                            <Input
+                                                placeholder="PHONE"
+                                                required
+                                                value={phone}
+                                                onChange={(e) => setPhone(e.target.value)}
+                                                className="h-12 bg-neutral-50 border-transparent focus:bg-white focus:border-black/10 rounded-xl text-black text-xs tracking-wider uppercase font-medium px-4 transition-all"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
 
-                                    <div className="space-y-3">
-                                        <Label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/30 ml-1">Tài khoản (Email)</Label>
+                                <div className="space-y-2">
+                                    <Label className="text-[9px] font-bold uppercase tracking-widest text-black/40 ml-1">Địa chỉ Email</Label>
+                                    <Input
+                                        type="email"
+                                        placeholder="EMAIL ADDRESS"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="h-12 bg-neutral-50 border-transparent focus:bg-white focus:border-black/10 rounded-xl text-black text-xs tracking-wider uppercase font-medium px-4 transition-all"
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <div className="flex items-center justify-between ml-1">
+                                        <Label className="text-[9px] font-bold uppercase tracking-widest text-black/40">Mật khẩu</Label>
+                                        {isSignIn && (
+                                            <Link href="/quen-mat-khau" className="text-[9px] font-bold uppercase tracking-widest text-black/20 hover:text-black transition-colors">
+                                                Quên mật khẩu?
+                                            </Link>
+                                        )}
+                                    </div>
+                                    <div className="relative group">
                                         <Input
-                                            id="email"
-                                            type="email"
-                                            placeholder="EMAIL ADDRESS"
+                                            type={showPassword ? 'text' : 'password'}
+                                            placeholder="PASSWORD"
                                             required
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            className="h-14 bg-white/5 border-white/5 focus:border-white/20 focus:ring-0 rounded-2xl text-white placeholder:text-white/10 text-xs tracking-widest uppercase"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className="h-12 bg-neutral-50 border-transparent focus:bg-white focus:border-black/10 rounded-xl text-black text-xs tracking-widest uppercase font-medium px-4 pr-12 transition-all"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-black/10 hover:text-black transition-colors"
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">
+                                                {showPassword ? 'visibility' : 'visibility_off'}
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {!isSignIn && (
+                                    <div className="space-y-2">
+                                        <Label className="text-[9px] font-bold uppercase tracking-widest text-black/40 ml-1">Xác nhận mật khẩu</Label>
+                                        <Input
+                                            type={showPassword ? 'text' : 'password'}
+                                            placeholder="CONFIRM PASSWORD"
+                                            required
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            className="h-12 bg-neutral-50 border-transparent focus:bg-white focus:border-black/10 rounded-xl text-black text-xs tracking-widest uppercase font-medium px-4 transition-all"
                                         />
                                     </div>
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
 
-                                    <div className="space-y-3">
-                                        <div className="flex items-center justify-between ml-1">
-                                            <Label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/30">Mật mã bảo mật</Label>
-                                        </div>
-                                        <div className="relative">
-                                            <Input
-                                                id="password"
-                                                type={showPassword ? 'text' : 'password'}
-                                                placeholder="PASSWORD"
-                                                required
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                className="h-14 bg-white/5 border-white/5 focus:border-white/20 focus:ring-0 rounded-2xl text-white placeholder:text-white/10 text-xs tracking-widest uppercase pr-12"
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={() => setShowPassword(!showPassword)}
-                                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 hover:text-white transition-colors"
-                                            >
-                                                <span className="material-symbols-outlined text-[18px]">
-                                                    {showPassword ? 'visibility' : 'visibility_off'}
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
+                        <div className="pt-6">
+                            <Button
+                                type="submit"
+                                disabled={isLoading}
+                                className="w-full h-14 bg-black text-white hover:bg-neutral-800 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] transition-all group relative overflow-hidden active:scale-[0.98]"
+                            >
+                                {isLoading ? (
+                                    <Loader2 className="w-5 h-5 animate-spin" strokeWidth={3} />
+                                ) : (
+                                    <span className="flex items-center justify-center gap-2">
+                                        {isSignIn ? 'Đăng nhập ngay' : 'Tạo tài khoản'}
+                                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </span>
+                                )}
+                            </Button>
+                        </div>
+                    </form>
 
-                                    {!isSignIn && (
-                                        <div className="space-y-3">
-                                            <Label className="text-[9px] font-black uppercase tracking-[0.3em] text-white/30 ml-1">Xác nhận mật mã</Label>
-                                            <div className="relative">
-                                                <Input
-                                                    id="confirmPassword"
-                                                    type={showPassword ? 'text' : 'password'}
-                                                    placeholder="CONFIRM PASSWORD"
-                                                    required
-                                                    value={confirmPassword}
-                                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                                    className="h-14 bg-white/5 border-white/5 focus:border-white/20 focus:ring-0 rounded-2xl text-white placeholder:text-white/10 text-xs tracking-widest uppercase pr-12"
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
-                                </motion.div>
-                            </AnimatePresence>
-
-                            <div className="pt-4">
-                                <Button
-                                    type="submit"
-                                    className="relative w-full h-16 bg-white text-black hover:bg-neutral-200 rounded-2xl font-black tracking-[0.4em] uppercase text-[11px] transition-all active:scale-[0.98] group overflow-hidden"
-                                    disabled={isLoading}
-                                >
-                                    {isLoading ? (
-                                        <Loader2 className="h-6 w-6 animate-spin" strokeWidth={3} />
-                                    ) : (
-                                        <span className="flex items-center gap-2">
-                                            {isSignIn ? 'XÁC NHẬN TRUY CẬP' : 'TẠO TÀI KHOẢN MỚI'}
-                                            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                        </span>
-                                    )}
-                                </Button>
-                            </div>
-                        </form>
-
-                        {/* Elite Footer */}
-                        <div className="mt-12 pt-8 border-t border-white/5 text-center">
-                            <p className="text-[8px] font-black uppercase tracking-[0.5em] text-white/20 leading-relaxed italic">
-                                Built for the modern aesthetic. Powered by XX.II.
-                            </p>
+                    {/* Social Auth (Coming soon placeholder aesthetic) */}
+                    <div className="mt-10 pt-10 border-t border-black/5">
+                        <p className="text-center text-[8px] font-black uppercase tracking-[0.3em] text-black/20 mb-6">Hoặc tiếp tục với</p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <button className="flex items-center justify-center gap-3 h-12 border border-black/5 rounded-xl hover:bg-neutral-50 transition-colors">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-black/60">Google</span>
+                            </button>
+                            <button className="flex items-center justify-center gap-3 h-12 border border-black/5 rounded-xl hover:bg-neutral-50 transition-colors">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-black/60">Apple</span>
+                            </button>
                         </div>
                     </div>
-                </div>
-            </motion.div>
 
-            <style jsx global>{`
-                @keyframes shimmer {
-                    100% { transform: translateX(100%); }
-                }
-            `}</style>
+                    <p className="mt-10 text-center text-[9px] leading-relaxed text-black/30 font-medium">
+                        Bằng cách đăng nhập, bạn đồng ý với <Link href="/terms" className="underline hover:text-black">Điều khoản</Link> & <Link href="/privacy" className="underline hover:text-black">Chính sách</Link> của chúng tôi.
+                    </p>
+                </motion.div>
+            </div>
         </div>
     );
 }
